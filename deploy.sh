@@ -8,3 +8,6 @@ cp -Rf emacs/config/* ~/.config/emacs
 
 # Shells deployment
 cp bashrc ~/.bashrc
+cp zshrc ~/.zshrc
+cp zshrc.pre ~/.zshrc.pre
+cp zshrc.local ~/.zshrc.local
