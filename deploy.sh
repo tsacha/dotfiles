@@ -21,3 +21,6 @@ cp Xresources ~/.Xresources
 
 # xorg
 cp xinitrc ~/.xinitrc
+
+# compton
+cp compton.conf ~/.compton.conf
