@@ -15,3 +15,9 @@ cp zshrc.local ~/.zshrc.local
 # i3
 cp -Rf i3/ ~/.i3
 cp i3/i3status.conf ~/.i3status.conf
+
+# urxvt
+cp Xresources ~/.Xresources
+
+# xorg
+cp xinitrc ~/.xinitrc
