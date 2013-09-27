@@ -52,12 +52,14 @@
 
 (defun markdown-custom ()
     "markdown-mode-hook"
-      (setq markdown-command "pandoc -s -B /home/sacha/Documents/Miscellaneous/markdown.css"))
+      (setq markdown-command "pandoc -s -B /home/sacha/Documents/Technology/Miscellaneous/markdown.css"))
+
+
 (add-hook 'markdown-mode-hook
-          '(lambda()
-             (markdown-custom)
-             (local-set-key (kbd "M-n") 'yank)
-             ))
+	  '(lambda()
+	     (markdown-custom)
+	     (local-set-key (kbd "M-n") 'yank)
+	     ))
 
 
 ;; PHP

@@ -6,6 +6,3 @@
 (global-undo-tree-mode)
 
 
-(require 'notmuch)
-
-
