@@ -10,6 +10,10 @@
 (global-set-key [?\M-i] 'next-line)
 (global-set-key [?\M-u] 'previous-line)
 (global-set-key [?\M-e] 'forward-char)
+(define-key isearch-mode-map (kbd "M-a") 'isearch-other-control-char)
+(define-key isearch-mode-map (kbd "M-i") 'isearch-other-control-char)
+(define-key isearch-mode-map (kbd "M-u") 'isearch-other-control-char)
+(define-key isearch-mode-map (kbd "M-e") 'isearch-other-control-char)
 
 (global-set-key [?\C-a] 'backward-word)
 (global-set-key [?\C-e] 'forward-word)
