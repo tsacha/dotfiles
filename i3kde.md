@@ -32,5 +32,5 @@ In these both files : add `Hidden=true` at the end.
 Then, we have to remove the Status Notifier Manager to have notifications icons in i3 bar. In `systemsettings` :
 
 ```
-System Settings > Startup and Shutdown > Service Manager > Désactiver Status Notifier Manager
+System Settings > Startup and Shutdown > Service Manager > Uncheck "Status Notifier Manager"
 ```
