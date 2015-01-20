@@ -1,0 +1,26 @@
+[general]
+accounts = main
+pythonfile = ~/.offlineimap.py
+
+[Account main]
+localrepository = main-local
+remoterepository = main-remote
+
+[Repository main-local]
+type = Maildir
+localfolders = ~/Mails
+
+[Repository main-remote]
+type = IMAP
+ssl = yes
+remoteport = 993
+cert_fingerprint = 055c678a3349179dd918e7cc3d78df8536fd23d5
+maxconnections = 10
+holdconnectionopen = yes
+keepalive = 60
+remotehost = imap.beastie.eu
+remoteuser = sacha@tremoureux.fr
+# don't forget in gpg.conf : use-agent
+# don't forget in gpg-agent.conf : pinentry-program /usr/bin/pinentry-qt4
+remotepasseval = get_password_emacs("imap.beastie.eu", "sacha@tremoureux.fr", "993")
+folderfilter = lambda folder: folder not in ['dovecot.sieve']
