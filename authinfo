@@ -1,0 +1,2 @@
+machine imap.domain.tld login user@domain.tld port port_imap password password_imap
+machine smtp.domain.tld login user@domain.tld port port_smtp password password_smtp
