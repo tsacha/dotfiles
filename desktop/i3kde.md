@@ -22,7 +22,7 @@ We have to hide Plasma and KRunner :
 
 ```
 mkdir ~/.config/autostart/
-cp /etc/xdg/autostart/plasma-desktop.desktop ~/.config/autostart/
+cp /etc/xdg/autostart/krunner.desktop ~/.config/autostart/
 cp /etc/xdg/autostart/plasmashell.desktop ~/.config/autostart/
 ```
 
