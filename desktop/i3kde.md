@@ -1,8 +1,7 @@
 # KDE and i3 association
-Tested in Fedora 21/KDE
+Tested in Fedora 22/KDE5
 
-In /usr/share/kde4/apps/ksmserver/windowmanagers/i3.desktop :
-
+In /usr/share/ksmserver/windowmanagers/i3.desktop :
 ```
 [Desktop Entry]
 Encoding=UTF-8 
@@ -16,15 +15,15 @@ TryExec=i3
 Then in `systemsettings` :
 
 ```
-System Settings > Default Applications > Window Manager > Use a different window manager: > i3
+System Settings > Applications > Window Manager > Use a different window manager: > i3
 ```
 
 We have to hide Plasma and KRunner :
 
 ```
 mkdir ~/.config/autostart/
-cp /usr/share/autostart/plasma-desktop.desktop ~/.config/autostart/
-cp /usr/share/autostart/krunner.desktop ~/.config/autostart/
+cp /etc/xdg/autostart/plasma-desktop.desktop ~/.config/autostart/
+cp /etc/xdg/autostart/plasmashell.desktop ~/.config/autostart/
 ```
 
 In these both files : add `Hidden=true` at the end.
