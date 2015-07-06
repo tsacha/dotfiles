@@ -1,0 +1,14 @@
+[Unit]
+Description=GPG Agent service
+IgnoreOnIsolate=true
+Before=default.target
+
+[Service]
+Type=forking
+Environment="SSH_AUTH_SOCK=/home/sacha/.gnupg/S.gpg-agent.ssh"
+ExecStart=/usr/bin/gpg-agent --enable-ssh-support --use-standard-socket --daemon --homedir=%h/.gnupg
+ExecStop=/usr/bin/pkill gpg-agent
+Restart=on-abort
+
+[Install]
+WantedBy=default.target
