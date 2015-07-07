@@ -1,0 +1,55 @@
+! Background color
+URxvt*background: black
+
+! Font color
+URxvt*foreground: white
+
+! Other colors
+URxvt*color0: black
+URxvt*color1: red3
+URxvt*color2: green3
+URxvt*color3: yellow3
+URxvt*color4: blue2
+URxvt*color5: magenta3
+URxvt*color6: cyan3
+URxvt*color7: gray90
+URxvt*color8: grey50
+URxvt*color9: red
+URxvt*color10: green
+URxvt*color11: yellow
+URxvt*color12: blue
+URxvt*color13: magenta
+URxvt*color14: cyan
+URxvt*color15: white
+
+!urxvt fonts: 
+
+URxvt*font: xft:DejaVu Sans Mono:pixelsize=24
+URxvt*boldFont: xft:DejaVu Sans Mono:pixelsize=24
+
+!urxvt extensions:
+
+URxvt.perl-ext-common:  default,selection-to-clipboard,matcher
+URxvt.iso14755: False
+URxvt.keysym.Shift-Control-V: eval:paste_clipboard
+
+!enabling clickable links:
+
+URxvt.url-select.launcher: /usr/bin/firefox
+URxvt.matcher.button: 1
+URxvt.url-select.underline: true
+URxvt.keysym.C-Delete: perl:matcher:last
+URxvt.keysym.M-Delete: perl:matcher:list
+
+!urxvt scrolling options and cursor style:
+
+URxvt*saveLines: 12000
+URxvt*scrollstyle:plain
+URxvt*scrollBar: false
+URxvt*cursorBlink: false
+URxvt*cursorUnderline: false
+
+URxvt.keysym.Home: \033[1~
+URxvt.keysym.End: \033[4~
+
+URxvt.termName: xterm
