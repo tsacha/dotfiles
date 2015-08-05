@@ -177,8 +177,8 @@ urgent_workspace   #ffffff #900000
 }
 }
 
-bindsym XF86AudioRaiseVolume exec amixer -q set Master 2dB+ unmute
-bindsym XF86AudioLowerVolume exec amixer -q set Master 2dB- unmute
+bindsym XF86AudioRaiseVolume exec amixer -q sset Master 3%+ unmute
+bindsym XF86AudioLowerVolume exec amixer -q sset Master 3%- unmute
 bindsym XF86AudioMute exec amixer -q set Master toggle
 
 bindsym XF86MonBrightnessUp exec xbacklight -inc 20 # increase screen brightness
