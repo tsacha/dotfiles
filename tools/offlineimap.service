@@ -1,7 +1,10 @@
 [Unit]
 Description=offlineimap
+Wants=muindex.service
+Before=muindex.service
 After=r2e.service
 
 [Service]
+Environment="SSH_AUTH_SOCK=/home/sacha/.gnupg/S.gpg-agent.ssh"
 ExecStart=/usr/bin/offlineimap
 Type=oneshot

@@ -1,9 +1,9 @@
 [Unit]
-Description=Launch r2e run every 10 minutes
+Description=Launch r2e run every 5 minutes
 
 [Timer]
-OnBootSec=3m
-OnUnitActiveSec=10min
+OnBootSec=2min
+OnUnitActiveSec=5min
 
 [Install]
 WantedBy=timers.target
