@@ -183,8 +183,12 @@ bindsym XF86AudioMute exec amixer -q set Master toggle
 
 bindsym XF86MonBrightnessUp exec xbacklight -inc 20 # increase screen brightness
 bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightness
+bindsym XF86AudioPlay exec echo "toggle" | netcat localhost 6602 -c
+bindsym XF86AudioStop exec echo "stop" | netcat localhost 6602 -c
+bindsym XF86AudioPrev exec echo "prev" | netcat localhost 6602 -c
+bindsym XF86AudioNext exec echo "next" | netcat localhost 6602 -c
 
-
+bindsym $mod+p exec /usr/bin/dspop
 
 exec compton -b
 exec feh --bg-fill /home/sacha/Pictures/wallpaper.jpg
