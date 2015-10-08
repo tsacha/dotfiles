@@ -1,5 +1,0 @@
-export ALTERNATE_EDITOR='emacs -nw'
-export EDITOR='emacsclient -c -nw -s '$(whoami)' -a ""'
-export VISUAL='emacsclient -nw -c -s '$(whoami)' -a ""'
-export GIT_EDITOR='emacsclient -nw -c -s '$(whoami)' -a ""'
-alias e=$EDITOR
