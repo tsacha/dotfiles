@@ -96,6 +96,12 @@ ln -s ~/Git\ repositories/dotfiles/desktop/i3config ~/.i3/config
 rm -f .compton.conf
 ln -s ~/Git\ repositories/dotfiles/desktop/compton.conf ~/.compton.conf
 
+rm -f .bashrc
+ln -s ~/Git\ repositories/dotfiles/shell/bashrc ~/.bashrc
+
+rm -f .mpd.conf
+ln -s ~/Git\ repositories/dotfiles/tools/mpd.conf ~/.mpd.conf
+
 rm -f .i3status.conf
 ln -s ~/Git\ repositories/dotfiles/desktop/i3status.conf ~/.i3status.conf
 
