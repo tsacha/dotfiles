@@ -1,1 +1,1 @@
-media-video/vlc qt4 xml shout sftp rtsp mtp modplug matroska live httpd cdda lua xv faad
+media-video/vlc qt4 xml shout sftp rtsp faad mtp modplug live httpd cdda lua xv

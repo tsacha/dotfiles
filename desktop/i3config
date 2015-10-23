@@ -182,7 +182,7 @@ bar {
      status_command py3status -c ~/.i3status.conf
      workspace_buttons yes
      strip_workspace_numbers yes
-     separator_symbol "〉"
+     separator_symbol " 〉"
 colors {
      separator #586e75 
      background #2d2d2d
@@ -205,7 +205,7 @@ bindsym XF86AudioStop exec echo "stop" | netcat localhost 6602 -c
 bindsym XF86AudioPrev exec echo "prev" | netcat localhost 6602 -c
 bindsym XF86AudioNext exec echo "next" | netcat localhost 6602 -c
 
-bindsym $mod+p exec /usr/bin/dspop
+bindsym $mod+p exec /usr/bin/dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause
 
 exec compton -b
 exec feh --bg-fill /home/sacha/Pictures/wallpaper.jpg

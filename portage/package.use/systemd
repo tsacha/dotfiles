@@ -1,1 +1,3 @@
-sys-apps/systemd gudev
+sys-apps/systemd
+sys-apps/systemd gudev audit
+
