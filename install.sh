@@ -101,6 +101,9 @@ ln -s ~/Git\ repositories/dotfiles/shell/bashrc ~/.bashrc
 
 rm -f .mpd.conf
 ln -s ~/Git\ repositories/dotfiles/tools/mpd.conf ~/.mpd.conf
+ln ~/Git\ repositories/dotfiles/tools/mpd.service ~/.config/systemd/user/mpd.service
+systemctl --user enable mpd
+systemctl --user start mpd
 
 rm -f .i3status.conf
 ln -s ~/Git\ repositories/dotfiles/desktop/i3status.conf ~/.i3status.conf

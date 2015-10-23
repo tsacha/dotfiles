@@ -1,0 +1,9 @@
+[Unit]
+Description=mpd
+
+[Service]
+ExecStart=/usr/bin/mpd %h/.mpd.conf
+Type=forking
+
+[Install]
+WantedBy=defalut.target
