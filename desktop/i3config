@@ -198,8 +198,8 @@ bindsym XF86AudioRaiseVolume exec amixer -q sset Master 3%+ unmute
 bindsym XF86AudioLowerVolume exec amixer -q sset Master 3%- unmute
 bindsym XF86AudioMute exec amixer -q set Master toggle
 
-bindsym XF86MonBrightnessUp exec xbacklight -inc 20 # increase screen brightness
-bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightness
+bindsym XF86MonBrightnessUp exec xbacklight -inc 5 # increase screen brightness
+bindsym XF86MonBrightnessDown exec xbacklight -dec 5 # decrease screen brightness
 bindsym XF86AudioPlay exec echo "toggle" | netcat localhost 6602 -c
 bindsym XF86AudioStop exec echo "stop" | netcat localhost 6602 -c
 bindsym XF86AudioPrev exec echo "prev" | netcat localhost 6602 -c
@@ -215,4 +215,6 @@ exec xinput set-prop "TPPS/2 IBM TrackPoint" "Evdev Wheel Emulation Button" 2
 exec xinput set-prop "TPPS/2 IBM TrackPoint" "Evdev Wheel Emulation Timeout" 200
 exec xinput set-int-prop "TPPS/2 IBM TrackPoint" "Evdev Wheel Emulation Axes" 8 6 7 4 5
 exec xinput set-int-prop "TPPS/2 IBM TrackPoint" "Evdev Middle Button Emulation" 8 1
+
+exec systemctl --user start redshift
 
