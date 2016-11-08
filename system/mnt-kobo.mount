@@ -1,9 +1,0 @@
-[Unit]
-SourcePath=/etc/fstab
-After=dev-disk-by\x2dlabel-KOBOeReader.device
-
-[Mount]
-What=/dev/disk/by-label/KOBOeReader
-Where=/mnt/kobo
-Type=vfat
-Options=auto,x-systemd.automount,utf8,uid=1000,gid=1000,nofail
