@@ -191,7 +191,7 @@ new_float pixel 1
 exec systemctl --user start compton
 exec systemctl --user start gpg-agent
 exec systemctl --user import-environment DISPLAY XAUTHORITY SSH_AUTH_SOCK
-exec feh --bg-fill /home/sacha/Pictures/wall3.jpg
+exec feh --bg-fill /home/{{ user.name }}/Pictures/wall3.jpg
 exec xinput set-prop "TPPS/2 IBM TrackPoint" "Evdev Wheel Emulation" 1
 exec xinput set-prop "TPPS/2 IBM TrackPoint" "Evdev Wheel Emulation Button" 2
 exec xinput set-prop "TPPS/2 IBM TrackPoint" "Evdev Wheel Emulation Timeout" 200

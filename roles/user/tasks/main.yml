@@ -55,6 +55,8 @@
     - { 'src': 'shell/bashrc', 'dest': '.bashrc' }
     - { 'src': 'gnupg/gpg-agent.conf', 'dest': '.gnupg/gpg-agent.conf' }
     - { 'src': 'gnupg/gpg.conf', 'dest': '.gnupg/gpg.conf' }
+    - { 'src': 'gnupg/sshcontrol', 'dest': '.gnupg/sshcontrol' }
+    - { 'src': 'git/config', 'dest': '.gitconfig' }
 
 - name: conky-i3bar perms
   file:
