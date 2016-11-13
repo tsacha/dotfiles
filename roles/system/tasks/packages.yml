@@ -1,0 +1,17 @@
+- name: install archlinux packages
+  pacman: name={{ item }} state=latest update_cache=yes
+  with_items:
+    - base
+    - base-devel
+    - emacs-nox
+    - vim
+    - tmux
+    - gdisk
+    - btrfs-progs
+    - grub
+    - efibootmgr
+    - w3m
+    - ansible
+    - git
+    - openssh
+  tags: pkgs

@@ -1,0 +1,27 @@
+- name: create networkd directory
+  file:
+    path: /etc/systemd/network
+    state: directory
+  when: network.networkd == True
+
+- name: create {{ network.interface }} interface conf
+  template:
+    src: network.j2
+    dest: /etc/systemd/network/{{ network.interface }}.network
+  notify: restart systemd-networkd
+  when: network.networkd == True
+
+- name: dns resolvers
+  template:
+    src: resolv.conf.j2
+    dest: /etc/resolv.conf
+  when: network.networkd == True
+
+- name: start networkd
+  service:
+    name: systemd-networkd
+    state: started
+    enabled: yes
+  when: network.networkd == True
+
+- meta: flush_handlers

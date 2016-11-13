@@ -1,0 +1,82 @@
+- name: set hostname
+  template:
+    src: hostname.j2
+    dest: /etc/hostname
+
+- name: set hosts
+  template:
+    src: hosts.j2
+    dest: /etc/hosts
+
+- name: set default locale
+  template:
+    src: locale.conf.j2
+    dest: /etc/locale.conf
+
+- name: set locales
+  template:
+    src: locale.gen.j2
+    dest: /etc/locale.gen
+  notify:
+    - reload locales
+
+- meta: flush_handlers
+
+- name: set timezone
+  file:
+    src: /usr/share/zoneinfo/Europe/Paris
+    dest: /etc/localtime
+    state: link
+
+- name: set vconsole
+  template:
+    src: vconsole.conf.j2
+    dest: /etc/vconsole.conf
+
+- name: create local user
+  user:
+    uid: "{{ user.uid }}"
+    name: "{{ user.name }}"
+    group: "{{ user.group }}"
+    home: "{{ user.home }}"
+    groups: wheel,http,log,sys,rfkill
+
+- name: makepkg configuration file
+  template:
+    src: makepkg.conf.j2
+    dest: /etc/makepkg.conf
+
+- name: Allow 'wheel' group to have passwordless sudo
+  lineinfile:
+    dest: /etc/sudoers
+    state: present
+    regexp: '^%wheel'
+    line: '%wheel ALL=(ALL) NOPASSWD: ALL'
+  tags: pkgs
+
+- name: install package-query
+  include: pkg.yml
+  vars:
+    pkg_name: package-query
+  tags: pkgs
+
+- name: install yaourt
+  include: pkg.yml
+  vars:
+    pkg_name: yaourt
+  tags: pkgs
+
+- name: install aur packages
+  include: pkg.yml
+  vars:
+    pkg_name: "{{ item }}"
+  with_items:
+    - nextcloud-client
+  tags: pkgs
+
+- name: Disable 'wheel' group to have passwordless sudo
+  lineinfile:
+    dest: /etc/sudoers
+    state: absent
+    regexp: '^%wheel'
+    line: '%wheel ALL=(ALL) NOPASSWD: ALL'

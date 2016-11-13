@@ -1,0 +1,76 @@
+- name: create user arborescence
+  file:
+    owner: "{{ user.name }}"
+    group: users
+    state: directory
+    path: "{{ user.home }}/{{ item }}"
+  with_items:
+    - Cloud
+    - Big-Cloud
+    - Downloads
+    - Git
+    - Public
+    - .config
+    - .config/systemd
+    - .config/systemd/user
+    - .config/compton
+    - .config/i3
+    - .config/conky
+    - .gnupg
+
+- name: create cloud links
+  file:
+    src: "{{ user.home }}/Cloud/{{ item }}"
+    dest: "{{ user.home }}/{{ item }}"
+    state: link
+    force: yes
+  with_items:
+    - Documents
+
+- name: create big-cloud links
+  file:
+    src: "{{ user.home }}/Big-Cloud/{{ item }}"
+    dest: "{{ user.home }}/{{ item }}"
+    state: link
+    force: yes
+  with_items:
+    - Music
+    - Pictures
+    - Videos
+
+#- name: pull dotfiles configuration
+#  git:
+#    repo: https://github.com/tsacha/dotfiles
+#    dest: {{ user.home }}/Git/dotfiles
+
+- name: software configuration
+  template:
+    src: "{{ item.src }}.j2"
+    dest: "{{ user.home }}/{{ item.dest }}"
+  with_items:
+    - { 'src': 'i3/config', 'dest': '.config/i3/config' }
+    - { 'src': 'compton/compton.conf', 'dest': '.config/compton/compton.conf' }
+    - { 'src': 'conky/conkyrc', 'dest': '.config/conky/conkyrc' }
+    - { 'src': 'conky/conky-i3bar', 'dest': '.config/conky/conky-i3bar' }
+    - { 'src': 'shell/bashrc', 'dest': '.bashrc' }
+    - { 'src': 'gnupg/gpg-agent.conf', 'dest': '.gnupg/gpg-agent.conf' }
+    - { 'src': 'gnupg/gpg.conf', 'dest': '.gnupg/gpg.conf' }
+
+- name: conky-i3bar perms
+  file:
+    path: "{{ user.home }}/.config/conky/conky-i3bar"
+    mode: '0755'
+
+- name: gnupg
+  file:
+    path: "{{ user.home }}/.gnupg"
+    mode: '0700'
+ 
+- name: systemd user configuration
+  template:
+    src: systemd/{{ item }}.j2
+    dest: "{{ user.home }}/.config/systemd/user/{{ item }}"
+  notify: reload user systemd
+  with_items:
+    - compton.service
+    - gpg-agent.service

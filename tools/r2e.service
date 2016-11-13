@@ -1,9 +1,0 @@
-[Unit]
-Description=r2e run
-Wants=offlineimap.service
-Before=offlineimap.service
-
-[Service]
-Environment="SSH_AUTH_SOCK=/home/sacha/.gnupg/S.gpg-agent.ssh"
-ExecStart=/usr/bin/r2e run
-Type=oneshot

@@ -1,5 +1,0 @@
-# in .bashrc / .zshrc
-export SSH_AUTH_SOCK=/home/sacha/.gnupg/S.gpg-agent.ssh
-
-# hack - how to move this line in a systemd unit?
-/bin/echo UPDATESTARTUPTTY | gpg-connect-agent > /dev/null

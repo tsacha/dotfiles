@@ -1,0 +1,40 @@
+---
+- name: install desktop packages
+  pacman: name={{ item }} state=latest update_cache=yes
+  with_items:
+    - xorg-server
+    - mesa-libgl
+    - xf86-input-libinput
+    - xf86-video-intel
+    - i3-wm
+    - i3lock
+    - i3status
+    - dmenu
+    - conky
+    - sddm
+    - konsole
+    - pulseaudio
+    - pavucontrol
+    - compton
+    - ttf-dejavu
+    - adobe-source-code-pro-fonts
+    - gajim
+    - feh
+    - sxiv
+  tags: pkgs
+
+- name: set x11 layout
+  template:
+    src: xorg/keyboard-layout.conf.j2
+    dest: /etc/X11/xorg.conf.d/10-keyboard-layout.conf
+
+- name: sddm configuration
+  template:
+    src: sddm/xsetup.j2
+    dest: /usr/share/sddm/scripts/Xsetup
+    mode: 0755
+
+- name: enable sddm
+  service:
+    name: sddm
+    enabled: true

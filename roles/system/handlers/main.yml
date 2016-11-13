@@ -1,0 +1,8 @@
+---
+- name: reload locales
+  command: locale-gen
+
+- name: restart systemd-networkd
+  service:
+    name: systemd-networkd
+    state: restarted
