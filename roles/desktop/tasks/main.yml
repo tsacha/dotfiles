@@ -20,6 +20,8 @@
     - adobe-source-code-pro-fonts
     - gajim
     - feh
+    - firefox
+    - thunderbird
     - sxiv
   tags: pkgs
 

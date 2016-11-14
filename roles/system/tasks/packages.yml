@@ -14,4 +14,5 @@
     - ansible
     - git
     - openssh
+    - wpa_supplicant
   tags: pkgs
