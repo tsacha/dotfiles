@@ -15,4 +15,15 @@
     - git
     - openssh
     - wpa_supplicant
+    - bash-completion
   tags: pkgs
+
+- name: remove vi
+  pacman: name=vi state=absent
+
+- name: link vim to vi
+  file:
+    src: /usr/bin/vim
+    dest: /usr/bin/vi
+    state: link
+    force: yes

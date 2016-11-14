@@ -190,6 +190,9 @@ new_float pixel 1
 
 exec systemctl --user start compton
 exec systemctl --user start gpg-agent
+{% if network.network_manager %}
+exec systemctl --user start nm-applet
+{% endif %}
 exec systemctl --user import-environment DISPLAY XAUTHORITY SSH_AUTH_SOCK
 exec feh --bg-fill /home/{{ user.name }}/Pictures/wall3.jpg
 exec xinput set-prop "TPPS/2 IBM TrackPoint" "Evdev Wheel Emulation" 1

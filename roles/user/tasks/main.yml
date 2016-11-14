@@ -80,3 +80,10 @@
   with_items:
     - compton.service
     - gpg-agent.service
+
+- name: network manager applet
+  template:
+    src: systemd/nm-applet.service.j2
+    dest: "{{ user.home }}/.config/systemd/user/nm-applet.service"
+  notify: reload user systemd
+  when: network.network_manager == True
