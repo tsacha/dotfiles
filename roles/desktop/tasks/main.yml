@@ -6,13 +6,15 @@
     - mesa-libgl
     - xf86-input-libinput
     - xf86-video-intel
+    - xorg-xbacklight
     - i3-wm
     - i3lock
     - i3status
     - dmenu
     - conky
     - sddm
-    - konsole
+    - st
+    - xfce4-terminal
     - pulseaudio
     - pavucontrol
     - compton

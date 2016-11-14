@@ -16,7 +16,8 @@
     - .config/compton
     - .config/i3
     - .config/conky
-    - .local/share/konsole
+    - .config/xfce4
+    - .config/xfce4/terminal
     - .gnupg
 
 - name: create cloud links
@@ -54,13 +55,11 @@
     - { 'src': 'conky/conkyrc', 'dest': '.config/conky/conkyrc' }
     - { 'src': 'conky/conky-i3bar', 'dest': '.config/conky/conky-i3bar' }
     - { 'src': 'shell/bashrc', 'dest': '.bashrc' }
+    - { 'src': 'terminal/terminalrc', 'dest': '.config/xfce4/terminal/terminalrc' }
     - { 'src': 'gnupg/gpg-agent.conf', 'dest': '.gnupg/gpg-agent.conf' }
     - { 'src': 'gnupg/gpg.conf', 'dest': '.gnupg/gpg.conf' }
     - { 'src': 'gnupg/sshcontrol', 'dest': '.gnupg/sshcontrol' }
     - { 'src': 'git/config', 'dest': '.gitconfig' }
-    - { 'src': 'konsole/konsolerc', 'dest': '.config/konsolerc' }
-    - { 'src': 'konsole/light.profile', 'dest': '.local/share/konsole/light.profile' }
-    - { 'src': 'konsole/dark.profile', 'dest': '.local/share/konsole/dark.profile' }
 
 - name: conky-i3bar perms
   file:
