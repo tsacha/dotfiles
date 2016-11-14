@@ -16,6 +16,7 @@
     - .config/compton
     - .config/i3
     - .config/conky
+    - .local/share/konsole
     - .gnupg
 
 - name: create cloud links
@@ -57,6 +58,9 @@
     - { 'src': 'gnupg/gpg.conf', 'dest': '.gnupg/gpg.conf' }
     - { 'src': 'gnupg/sshcontrol', 'dest': '.gnupg/sshcontrol' }
     - { 'src': 'git/config', 'dest': '.gitconfig' }
+    - { 'src': 'konsole/konsolerc', 'dest': '.config/konsolerc' }
+    - { 'src': 'konsole/light.profile', 'dest': '.local/share/konsole/light.profile' }
+    - { 'src': 'konsole/dark.profile', 'dest': '.local/share/konsole/dark.profile' }
 
 - name: conky-i3bar perms
   file:
