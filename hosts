@@ -1,2 +1,2 @@
 [localhost]
-laptop ansible_connection=local
+secondary-pc ansible_connection=local
