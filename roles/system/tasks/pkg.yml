@@ -31,8 +31,8 @@
   register: aur_tarball
 
 - name: AUR | {{ pkg_name }} | upload tarball to host and extract it
-  become: yes
   when: version_check_result.changed
+  become: yes
   become_user: "{{ user.name }}"
   unarchive: >
     src={{ aur_tarball.dest }}
@@ -41,17 +41,14 @@
 
 # This will break if run as root. Set user to use with makepkg with 'makepkg_user' var
 - name: AUR | {{ pkg_name }} | build package, including missing dependencies
-  when: extracted_pkg | changed
   become: yes
-  become_user: "{{ user.name }}"
-  command: >
-    makepkg --noconfirm --noprogressbar -mfs
-    chdir=/tmp/{{ pkg_name }}
+  become_user: sacha
+  shell: makepkg --noconfirm --noprogressbar -mfs chdir=/tmp/{{ pkg_name }}
+  when: extracted_pkg | changed
   register: aur_makepkg_result
 
 - name: AUR | {{ pkg_name }} | install newly-built aur package with pacman
   when: aur_makepkg_result | changed
-  become: yes
   shell: >
     pacman --noconfirm --noprogressbar --needed -U *.pkg.tar.xz
     chdir=/tmp/{{ pkg_name }}

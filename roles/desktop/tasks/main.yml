@@ -26,10 +26,35 @@
     - firefox
     - thunderbird
     - sxiv
+    - phonon-qt4-gstreamer
+    - kdegraphics-okular
     - transmission-qt
     - qt4
     - vlc
   tags: pkgs
+
+- name: Allow 'wheel' group to have passwordless sudo
+  lineinfile:
+    dest: /etc/sudoers
+    state: present
+    regexp: '^%wheel'
+    line: '%wheel ALL=(ALL) NOPASSWD: ALL'
+  tags: pkgs
+
+- name: install aur desktop packages
+  include: pkg.yml
+  vars:
+    pkg_name: "{{ item }}"
+  with_items:
+    - nextcloud-client
+  tags: pkgs
+
+- name: Disable 'wheel' group to have passwordless sudo
+  lineinfile:
+    dest: /etc/sudoers
+    state: absent
+    regexp: '^%wheel'
+    line: '%wheel ALL=(ALL) NOPASSWD: ALL'
 
 - name: set x11 layout
   template:

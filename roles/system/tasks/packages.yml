@@ -21,4 +21,44 @@
     - openssh
     - wpa_supplicant
     - bash-completion
+    - irssi
+    - python-yaml
   tags: pkgs
+
+- name: Allow 'wheel' group to have passwordless sudo
+  lineinfile:
+    dest: /etc/sudoers
+    state: present
+    regexp: '^%wheel'
+    line: '%wheel ALL=(ALL) NOPASSWD: ALL'
+  tags: pkgs
+
+- name: install package-query
+  include: pkg.yml
+  vars:
+    pkg_name: package-query
+  tags: pkgs
+
+- name: install yaourt
+  include: pkg.yml
+  vars:
+    pkg_name: yaourt
+  tags: pkgs
+
+- name: install aur system packages
+  include: pkg.yml
+  vars:
+    pkg_name: "{{ item }}"
+  with_items:
+    - python-pycares
+    - python-aiodns
+    - python-slixmpp-git
+    - poezio-git
+  tags: pkgs
+
+- name: Disable 'wheel' group to have passwordless sudo
+  lineinfile:
+    dest: /etc/sudoers
+    state: absent
+    regexp: '^%wheel'
+    line: '%wheel ALL=(ALL) NOPASSWD: ALL'
