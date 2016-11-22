@@ -3,7 +3,7 @@
   pacman: name={{ item }} state=latest
   with_items:
     - xorg-server
-    - mesa-libgl
+    - "{{ libgl }}"
     - xf86-input-libinput
     - xf86-video-intel
     - xorg-xbacklight
