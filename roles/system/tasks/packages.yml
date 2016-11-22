@@ -16,13 +16,20 @@
     - grub
     - efibootmgr
     - w3m
+    - rsync
     - ansible
     - git
     - openssh
+    - net-tools
+    - reflector
+    - parallel
+    - the_silver_searcher
     - wpa_supplicant
     - bash-completion
     - irssi
     - python-yaml
+    - texlive-most
+    - texlive-lang
   tags: pkgs
 
 - name: Allow 'wheel' group to have passwordless sudo

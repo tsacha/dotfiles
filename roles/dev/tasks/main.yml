@@ -1,0 +1,14 @@
+- name: install servers packages
+  pacman: name={{ item }} state=latest
+  with_items:
+    - apache
+    - nginx
+    - php
+    - php-apache
+    - hiredis
+    - redis
+
+- name: apache configuration
+  template:
+    src: httpd.conf.j2
+    dest: /etc/httpd/conf/httpd.conf

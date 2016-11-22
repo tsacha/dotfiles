@@ -8,6 +8,7 @@
     - xf86-video-intel
     - xorg-xbacklight
     - emacs
+    - auctex
     - i3-wm
     - i3lock
     - i3status
@@ -16,6 +17,10 @@
     - sddm
     - st
     - xfce4-terminal
+    - thunar
+    - thunar-archive-plugin
+    - thunar-media-tags-plugin
+    - thunar-volman
     - pulseaudio
     - pavucontrol
     - compton
@@ -25,12 +30,18 @@
     - feh
     - firefox
     - thunderbird
+    - libreoffice-fresh
     - sxiv
     - phonon-qt4-gstreamer
     - kdegraphics-okular
     - transmission-qt
+    - ncmpcpp
+    - gmpc
+    - mopidy
     - qt4
     - vlc
+    - evince
+    - atom
   tags: pkgs
 
 - name: Allow 'wheel' group to have passwordless sudo
@@ -46,6 +57,12 @@
   vars:
     pkg_name: "{{ item }}"
   with_items:
+    - libspotify
+    - python2-pyspotify
+    - python2-spotipy
+    - mopidy-spotify
+    - mopidy-spotify-web
+    - google-chrome
     - nextcloud-client
   tags: pkgs
 

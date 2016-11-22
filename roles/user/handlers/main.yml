@@ -3,7 +3,7 @@
   shell: systemctl --user daemon-reload
   become: yes
   become_method: su
-  become_user: "{{ user.name }}"
+  become_user: "{{ local_user }}"
   environment:
-    XDG_RUNTIME_DIR: "/run/user/{{ user.uid }}"
+    XDG_RUNTIME_DIR: "/run/user/{{ users[local_user].uid }}"
     DBUS_SESSION_BUS_ADDRESS: "unix:path=${XDG_RUNTIME_DIR}/bus"

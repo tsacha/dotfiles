@@ -1,4 +1,6 @@
 [user]
-  signingkey = {{ user.gpg_signkey }}
-  name = {{ user.firstname }} {{ user.surname }}
-  email = {{ user.mail }}
+{% if users[ansible_user].gpg_signkey is defined %}
+  signingkey = {{ users[ansible_user].gpg_signkey }}
+{% endif %}
+  name = {{ users[ansible_user].firstname }} {{ users[ansible_user].surname }}
+  email = {{ users[ansible_user].mail }}

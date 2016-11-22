@@ -33,13 +33,14 @@
     src: vconsole.conf.j2
     dest: /etc/vconsole.conf
 
-- name: create local user
+- name: create local users
   user:
-    uid: "{{ user.uid }}"
-    name: "{{ user.name }}"
-    group: "{{ user.group }}"
-    home: "{{ user.home }}"
+    uid: "{{ users[item].uid }}"
+    name: "{{ users[item].name }}"
+    group: "{{ users[item].group }}"
+    home: "{{ users[item].home }}"
     groups: wheel,http,log,sys,rfkill
+  with_items: '{{ users }}'
 
 - name: makepkg configuration file
   template:

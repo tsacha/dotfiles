@@ -1,9 +1,13 @@
+- name: set local user
+  vars:
+    local_user: "{{ ansible_user }}"
+
 - name: create user arborescence
   file:
-    owner: "{{ user.name }}"
+    owner: "{{ users[ansible_user].name }}"
     group: users
     state: directory
-    path: "{{ user.home }}/{{ item }}"
+    path: "{{ users[ansible_user].home }}/{{ item }}"
   with_items:
     - Cloud
     - Big-Cloud
@@ -22,8 +26,8 @@
 
 - name: create cloud links
   file:
-    src: "{{ user.home }}/Cloud/{{ item }}"
-    dest: "{{ user.home }}/{{ item }}"
+    src: "{{ users[ansible_user].home }}/Cloud/{{ item }}"
+    dest: "{{ users[ansible_user].home }}/{{ item }}"
     state: link
     force: yes
   with_items:
@@ -31,8 +35,8 @@
 
 - name: create big-cloud links
   file:
-    src: "{{ user.home }}/Big-Cloud/{{ item }}"
-    dest: "{{ user.home }}/{{ item }}"
+    src: "{{ users[ansible_user].home }}/Big-Cloud/{{ item }}"
+    dest: "{{ users[ansible_user].home }}/{{ item }}"
     state: link
     force: yes
   with_items:
@@ -43,12 +47,12 @@
 #- name: pull dotfiles configuration
 #  git:
 #    repo: https://github.com/tsacha/dotfiles
-#    dest: {{ user.home }}/Git/dotfiles
+#    dest: {{ users[ansible_user].home }}/Git/dotfiles
 
 - name: software configuration
   template:
     src: "{{ item.src }}.j2"
-    dest: "{{ user.home }}/{{ item.dest }}"
+    dest: "{{ users[ansible_user].home }}/{{ item.dest }}"
   with_items:
     - { 'src': 'i3/config', 'dest': '.config/i3/config' }
     - { 'src': 'compton/compton.conf', 'dest': '.config/compton/compton.conf' }
@@ -63,18 +67,18 @@
 
 - name: conky-i3bar perms
   file:
-    path: "{{ user.home }}/.config/conky/conky-i3bar"
+    path: "{{ users[ansible_user].home }}/.config/conky/conky-i3bar"
     mode: '0755'
 
 - name: gnupg
   file:
-    path: "{{ user.home }}/.gnupg"
+    path: "{{ users[ansible_user].home }}/.gnupg"
     mode: '0700'
  
 - name: systemd user configuration
   template:
     src: systemd/{{ item }}.j2
-    dest: "{{ user.home }}/.config/systemd/user/{{ item }}"
+    dest: "{{ users[ansible_user].home }}/.config/systemd/user/{{ item }}"
   notify: reload user systemd
   with_items:
     - compton.service
@@ -83,6 +87,6 @@
 - name: network manager applet
   template:
     src: systemd/nm-applet.service.j2
-    dest: "{{ user.home }}/.config/systemd/user/nm-applet.service"
+    dest: "{{ users[ansible_user].home }}/.config/systemd/user/nm-applet.service"
   notify: reload user systemd
   when: network.network_manager == True
