@@ -32,8 +32,12 @@
     - thunderbird
     - libreoffice-fresh
     - sxiv
+    - redshift
+    - okular
+    - vinagre
+    - freerdp
+    - spice
     - phonon-qt4-gstreamer
-    - kdegraphics-okular
     - transmission-qt
     - qt4
     - vlc
