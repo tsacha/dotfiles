@@ -41,10 +41,10 @@
     - Pictures
     - Videos
 
-#- name: pull dotfiles configuration
-#  git:
-#    repo: https://github.com/tsacha/dotfiles
-#    dest: {{ users[ansible_user].home }}/Git/dotfiles
+- name: clone build-emacs
+  git:
+    repo: https://github.com/tsacha/build-emacs
+    dest: ~/Git/build-emacs
 
 - name: software configuration
   template:
