@@ -1,0 +1,25 @@
+IMAPAccount sacha
+Host mx.mkfs.fr
+User sacha@tremoureux.fr
+PassCmd "gpg -q -d ~/Documents/Security/mails/pass.gpg"
+AuthMechs LOGIN
+SSLType IMAPS
+SSLVersions TLSv1.2
+
+IMAPStore imapremote
+Account sacha
+
+MaildirStore imaplocal
+Path ~/Mails/
+Inbox ~/Mails/INBOX
+
+Channel imap-inbox
+Master :imapremote:
+Slave :imaplocal:
+Patterns * !*sieve* !*Draft*
+Create Both
+Expunge Both
+SyncState *
+
+Group imap
+Channel imap-inbox

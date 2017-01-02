@@ -1,4 +1,6 @@
 ---
+- include: packages.yml
+
 - name: create user arborescence
   file:
     owner: "{{ users[ansible_user].name }}"
@@ -11,6 +13,10 @@
     - Downloads
     - Git
     - Public
+    - Mails
+    - Mails/Sent
+    - Mails/Drafts
+    - Mails/Trash
     - .config
     - .config/systemd
     - .config/systemd/user
@@ -61,6 +67,7 @@
     - { 'src': 'gnupg/gpg.conf', 'dest': '.gnupg/gpg.conf' }
     - { 'src': 'gnupg/sshcontrol', 'dest': '.gnupg/sshcontrol' }
     - { 'src': 'git/config', 'dest': '.gitconfig' }
+    - { 'src': 'mbsync/mbsyncrc', 'dest': '.mbsyncrc' }
 
 - name: conky-i3bar perms
   file:

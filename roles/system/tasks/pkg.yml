@@ -33,6 +33,7 @@
 - name: AUR | {{ pkg_name }} | upload tarball to host and extract it
   when: version_check_result.changed
   become: yes
+  become_method: su
   become_user: "{{ user }}"
   unarchive: >
     src={{ aur_tarball.dest }}
@@ -42,6 +43,7 @@
 # This will break if run as root. Set user to use with makepkg with 'makepkg_user' var
 - name: AUR | {{ pkg_name }} | build package, including missing dependencies
   become: yes
+  become_method: su
   become_user: "{{ user }}"
   shell: makepkg --noconfirm --noprogressbar -mfs chdir=/tmp/{{ pkg_name }}
   when: extracted_pkg | changed

@@ -31,6 +31,7 @@
     - texlive-most
     - texlive-lang
     - rsync
+    - isync
     - docker
     - jre8-openjdk
     - icedtea-web
