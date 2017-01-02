@@ -38,7 +38,7 @@
     - freerdp
     - spice
     - jre8-openjdk
-    - ided-tea
+    - icedtea-web
     - bind-tools
     - gnuplot
     - inkscape
