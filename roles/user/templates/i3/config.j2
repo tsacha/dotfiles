@@ -38,7 +38,7 @@ bindsym $mod+Shift+Q kill
 
 # start dmenu (a program launcher)
 #bindsym $mod+d exec dmenu_run
-bindsym $mod+d exec --no-startup-id LANG="en_US.UTF-8" i3-dmenu-desktop --dmenu="/usr/bin/dmenu -i -nf '#cf6a4c' -nb '#1e1e1e' -sf '#ffffff' -sb '#444444'"
+bindsym $mod+d exec --no-startup-id LANG="en_US.UTF-8" i3-dmenu-desktop --dmenu="/usr/bin/dmenu_run -i -nf '#cf6a4c' -nb '#1e1e1e' -sf '#ffffff' -sb '#444444'"
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
@@ -116,7 +116,7 @@ bindsym $mod+Shift+6 move container to workspace 6
 bindsym $mod+Shift+7 move container to workspace 7
 bindsym $mod+Shift+8 move container to workspace 8
 bindsym $mod+Shift+9 move container to workspace 9
-bindsym $mod+Shift+0 move container to workspace 9
+bindsym $mod+Shift+0 move container to workspace 10
 
 bindsym $mod+x move workspace to output right
 bindsym $mod+y move container to output right
@@ -193,11 +193,9 @@ new_float pixel 1
 
 exec systemctl --user start compton
 exec systemctl --user start gpg-agent
-{% if network.network_manager %}
 exec systemctl --user start nm-applet
-{% endif %}
 exec systemctl --user import-environment DISPLAY XAUTHORITY SSH_AUTH_SOCK
-exec feh --bg-fill /home/{{ users[ansible_user].name }}/Pictures/wallpaper.jpg
+exec feh --bg-fill /home/sacha/Pictures/wall3.jpg
 exec xinput set-prop "TPPS/2 IBM TrackPoint" "Evdev Wheel Emulation" 1
 exec xinput set-prop "TPPS/2 IBM TrackPoint" "Evdev Wheel Emulation Button" 2
 exec xinput set-prop "TPPS/2 IBM TrackPoint" "Evdev Wheel Emulation Timeout" 200
