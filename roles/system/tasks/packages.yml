@@ -30,6 +30,23 @@
     - python-yaml
     - texlive-most
     - texlive-lang
+    - rsync
+    - docker
+    - redshift
+    - okular
+    - vinagre
+    - freerdp
+    - spice
+    - jre8-openjdk
+    - ided-tea
+    - bind-tools
+    - gnuplot
+    - inkscape
+    - pandoc
+    - ttf-liberation
+    - ttf-dejavu
+    - ttf-linux-libertine
+    - ttf-linux-libertine-g
   tags: pkgs
 
 - name: Allow 'wheel' group to have passwordless sudo

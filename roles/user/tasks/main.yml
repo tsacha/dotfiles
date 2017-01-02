@@ -1,7 +1,4 @@
-- name: set local user
-  vars:
-    local_user: "{{ ansible_user }}"
-
+---
 - name: create user arborescence
   file:
     owner: "{{ users[ansible_user].name }}"

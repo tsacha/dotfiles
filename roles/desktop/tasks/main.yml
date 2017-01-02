@@ -35,13 +35,11 @@
     - phonon-qt4-gstreamer
     - kdegraphics-okular
     - transmission-qt
-    - ncmpcpp
-    - gmpc
-    - mopidy
     - qt4
     - vlc
     - evince
     - atom
+    - inkscape
   tags: pkgs
 
 - name: Allow 'wheel' group to have passwordless sudo
@@ -57,11 +55,6 @@
   vars:
     pkg_name: "{{ item }}"
   with_items:
-    - libspotify
-    - python2-pyspotify
-    - python2-spotipy
-    - mopidy-spotify
-    - mopidy-spotify-web
     - google-chrome
     - nextcloud-client
   tags: pkgs
