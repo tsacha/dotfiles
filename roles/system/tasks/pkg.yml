@@ -1,5 +1,6 @@
 ---
 - name: AUR | get metadata from AurJson api
+  environment: "{{ proxy_env }}"
   uri: >
     url=https://aur.archlinux.org/rpc.php?type=info&arg={{ pkg_name | mandatory }}
     return_content=yes
@@ -25,6 +26,7 @@
 
 - name: AUR | {{ pkg_name }} | download tarball
   when: version_check_result.changed
+  environment: "{{ proxy_env }}"
   get_url: >
     url='https://aur.archlinux.org{{ api_info.json.results.URLPath }}'
     dest='/tmp/'
@@ -41,11 +43,12 @@
   register: extracted_pkg
 
 # This will break if run as root. Set user to use with makepkg with 'makepkg_user' var
-- name: AUR | {{ pkg_name }} | build package, including missing dependencies
+- name: AUR | {{ pkg_name }} | build package
   become: yes
   become_method: su
   become_user: "{{ user }}"
-  shell: makepkg --noconfirm --noprogressbar -mfs chdir=/tmp/{{ pkg_name }}
+  environment: "{{ proxy_env }}"
+  shell: makepkg --noconfirm --noprogressbar -mf chdir=/tmp/{{ pkg_name }}
   when: extracted_pkg | changed
   register: aur_makepkg_result
 

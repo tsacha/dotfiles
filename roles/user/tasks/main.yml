@@ -1,6 +1,31 @@
 ---
 - include: packages.yml
 
+- name: set x11 layout
+  become: yes
+  become_user: root
+  become_method: su
+  template:
+    src: xorg/keyboard-layout.conf.j2
+    dest: /etc/X11/xorg.conf.d/10-keyboard-layout.conf
+
+- name: sddm configuration
+  become: yes
+  become_user: root
+  become_method: su
+  template:
+    src: sddm/xsetup.j2
+    dest: /usr/share/sddm/scripts/Xsetup
+    mode: 0755
+
+- name: enable sddm
+  become: yes
+  become_user: root
+  become_method: su
+  service:
+    name: sddm
+    enabled: true
+
 - name: create user arborescence
   file:
     owner: "{{ users[ansible_user].name }}"
@@ -48,6 +73,7 @@
     - Videos
 
 - name: clone build-emacs
+  environment: "{{ proxy_env }}"
   git:
     repo: https://github.com/tsacha/build-emacs
     dest: ~/Git/build-emacs

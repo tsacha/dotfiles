@@ -6,9 +6,11 @@
 
 - name: install system packages
   pacman: name={{ item }} state=latest
+  environment: "{{ proxy_env }}"
   with_items:
     - base
     - base-devel
+    - yajl    
     - vim
     - tmux
     - gdisk
@@ -28,8 +30,6 @@
     - bash-completion
     - irssi
     - python-yaml
-    - texlive-most
-    - texlive-lang
     - rsync
     - isync
     - docker
@@ -37,12 +37,6 @@
     - icedtea-web
     - bind-tools
     - gnuplot
-    - inkscape
-    - pandoc
-    - ttf-liberation
-    - ttf-dejavu
-    - ttf-linux-libertine
-    - ttf-linux-libertine-g
   tags: pkgs
 
 - name: Allow 'wheel' group to have passwordless sudo
@@ -65,16 +59,16 @@
     pkg_name: yaourt
   tags: pkgs
 
-- name: install aur system packages
-  include: pkg.yml
-  vars:
-    pkg_name: "{{ item }}"
-  with_items:
-    - python-pycares
-    - python-aiodns
-    - python-slixmpp-git
-    - poezio-git
-  tags: pkgs
+# - name: install aur system packages
+#  include: pkg.yml
+#  vars:
+#    pkg_name: "{{ item }}"
+#  with_items:
+#    - python-pycares
+#    - python-aiodns
+#    - python-slixmpp-git
+#    - poezio-git
+#  tags: pkgs
 
 - name: Disable 'wheel' group to have passwordless sudo
   lineinfile:

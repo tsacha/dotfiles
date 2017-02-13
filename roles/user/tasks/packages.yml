@@ -4,6 +4,7 @@
   become_user: root
   become_method: su
   pacman: name={{ item }} state=latest
+  environment: "{{ proxy_env }}"
   with_items:
     - xorg-server
     - "{{ libgl }}"
@@ -47,17 +48,26 @@
     - vlc
     - evince
     - atom
+    - texlive-most
+    - texlive-lang
     - inkscape
+    - pandoc
+    - ttf-liberation
+    - ttf-dejavu
+    - ttf-linux-libertine
+    - ttf-linux-libertine-g
+    - arandr
   tags: pkgs
 
-- name: install aur desktop packages
-  include: pkg.yml
-  become: yes
-  become_user: root
-  become_method: su
-  vars:
-    pkg_name: "{{ item }}"
-  with_items:
-    - google-chrome
-    - nextcloud-client
-  tags: pkgs
+# - name: install aur desktop packages
+#   include: pkg.yml
+#   become: yes
+#   become_user: root
+#   become_method: su
+#   environment: "{{ proxy_env }}"  
+#   vars:
+#     pkg_name: "{{ item }}"
+#   with_items:
+#     - google-chrome
+#     - nextcloud-client
+#   tags: pkgs
