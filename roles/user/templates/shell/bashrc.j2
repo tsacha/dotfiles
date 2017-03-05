@@ -1,7 +1,14 @@
 alias vi="/usr/bin/vim"
 
-export SSH_AUTH_SOCK=/run/user/{{ users[ansible_user].uid }}/gnupg/S.gpg-agent.ssh
+export SSH_AUTH_SOCK=/run/user/1000/gnupg/S.gpg-agent.ssh
 export CHROMIUM_FLAGS="--force-device-scale-factor=1.75"
 
-# hack - how to move this line in a systemd unit?
-/bin/echo UPDATESTARTUPTTY | gpg-connect-agent > /dev/null
+if [ -z "$DISPLAY" ] && [ -n "$XDG_VTNR" ] && [ "$XDG_VTNR" -eq 1 ]; then
+  exec startx
+fi
+
+# Set GPG TTY
+export GPG_TTY=$(tty)
+
+# Refresh gpg-agent tty in case user switches into an X session
+gpg-connect-agent updatestartuptty /bye >/dev/null

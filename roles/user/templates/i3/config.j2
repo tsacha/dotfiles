@@ -38,7 +38,8 @@ bindsym $mod+Shift+Q kill
 
 # start dmenu (a program launcher)
 #bindsym $mod+d exec dmenu_run
-bindsym $mod+d exec --no-startup-id LANG="en_US.UTF-8" i3-dmenu-desktop --dmenu="/usr/bin/dmenu_run -i -nf '#cf6a4c' -nb '#1e1e1e' -sf '#ffffff' -sb '#444444'"
+bindsym $mod+l exec e
+bindsym $mod+d exec rofi -show run
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
@@ -132,26 +133,26 @@ bindsym $mod+Shift+P exec "i3-nagbar -t warning -m 'You pressed the exit shortcu
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
-        # These bindings trigger as soon as you enter the resize mode
+	# These bindings trigger as soon as you enter the resize mode
 
-        # Pressing left will shrink the window’s width.
-        # Pressing right will grow the window’s width.
-        # Pressing up will shrink the window’s height.
-        # Pressing down will grow the window’s height.
-        bindsym t resize shrink width 10 px or 10 ppt
-        bindsym s resize grow height 10 px or 10 ppt
-        bindsym r resize shrink height 10 px or 10 ppt
-        bindsym n resize grow width 10 px or 10 ppt
+	# Pressing left will shrink the window’s width.
+	# Pressing right will grow the window’s width.
+	# Pressing up will shrink the window’s height.
+	# Pressing down will grow the window’s height.
+	bindsym t resize shrink width 10 px or 10 ppt
+	bindsym s resize grow height 10 px or 10 ppt
+	bindsym r resize shrink height 10 px or 10 ppt
+	bindsym n resize grow width 10 px or 10 ppt
 
-        # same bindings, but for the arrow keys
-        bindsym Left resize shrink width 10 px or 10 ppt
-        bindsym Down resize grow height 10 px or 10 ppt
-        bindsym Up resize shrink height 10 px or 10 ppt
-        bindsym Right resize grow width 10 px or 10 ppt
+	# same bindings, but for the arrow keys
+	bindsym Left resize shrink width 10 px or 10 ppt
+	bindsym Down resize grow height 10 px or 10 ppt
+	bindsym Up resize shrink height 10 px or 10 ppt
+	bindsym Right resize grow width 10 px or 10 ppt
 
-        # back to normal: Enter or Escape
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
+	# back to normal: Enter or Escape
+	bindsym Return mode "default"
+	bindsym Escape mode "default"
 }
 
 bindsym $mod+o mode "resize"
@@ -168,12 +169,12 @@ bar {
     background #1e1e1e
     statusline #ffffff
     separator  #1e1e1e
-  
+
     # Type             border  background font
-    focused_workspace  #1e1e1e #1e1e1e #cf6a4c
-    active_workspace   #1e1e1e #222222 #cf6a4c
+    focused_workspace  #1e1e1e #273238 #c1c1c1
+    active_workspace   #1e1e1e #1e2529 #273238
     inactive_workspace #1e1e1e #1e1e1e #888888
-    urgent_workspace   #aa0000 #990000 #ffffff
+    urgent_workspace   #aa0000 #990000 #c1c1c1
   }
 }
 
@@ -201,5 +202,3 @@ exec xinput set-prop "TPPS/2 IBM TrackPoint" "Evdev Wheel Emulation Button" 2
 exec xinput set-prop "TPPS/2 IBM TrackPoint" "Evdev Wheel Emulation Timeout" 200
 exec xinput set-int-prop "TPPS/2 IBM TrackPoint" "Evdev Wheel Emulation Axes" 8 6 7 4 5
 exec xinput set-int-prop "TPPS/2 IBM TrackPoint" "Evdev Middle Button Emulation" 8 1
-
-

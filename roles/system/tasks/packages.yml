@@ -10,7 +10,7 @@
   with_items:
     - base
     - base-devel
-    - yajl    
+    - yajl
     - vim
     - tmux
     - gdisk
@@ -58,17 +58,6 @@
   vars:
     pkg_name: yaourt
   tags: pkgs
-
-# - name: install aur system packages
-#  include: pkg.yml
-#  vars:
-#    pkg_name: "{{ item }}"
-#  with_items:
-#    - python-pycares
-#    - python-aiodns
-#    - python-slixmpp-git
-#    - poezio-git
-#  tags: pkgs
 
 - name: Disable 'wheel' group to have passwordless sudo
   lineinfile:

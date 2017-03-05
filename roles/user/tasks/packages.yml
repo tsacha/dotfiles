@@ -11,6 +11,7 @@
     - xf86-input-libinput
     - xf86-video-intel
     - xorg-xbacklight
+    - xorg-xinit
     - emacs
     - auctex
     - i3-wm
@@ -18,7 +19,6 @@
     - i3status
     - dmenu
     - conky
-    - sddm
     - st
     - xfce4-terminal
     - thunar
@@ -58,16 +58,3 @@
     - ttf-linux-libertine-g
     - arandr
   tags: pkgs
-
-# - name: install aur desktop packages
-#   include: pkg.yml
-#   become: yes
-#   become_user: root
-#   become_method: su
-#   environment: "{{ proxy_env }}"  
-#   vars:
-#     pkg_name: "{{ item }}"
-#   with_items:
-#     - google-chrome
-#     - nextcloud-client
-#   tags: pkgs
