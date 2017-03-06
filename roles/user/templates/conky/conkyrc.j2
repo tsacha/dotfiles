@@ -15,11 +15,8 @@ conky.config = {
 
 conky.text = [[
 [
-{"full_text": "cpu: ${cpu}% ${if_existing /sys/devices/platform/coretemp.0/hwmon/hwmon1/temp2_input}(${execi 1200 echo $(($(cat /sys/devices/platform/coretemp.0/hwmon/hwmon1/temp2_input) / 1000))} C)${endif}${if_existing /sys/devices/platform/coretemp.0/hwmon/hwmon2/temp2_input}(${execi 1200 echo $(($(cat /sys/devices/platform/coretemp.0/hwmon/hwmon2/temp2_input) / 1000))} C)${endif}${if_existing /sys/devices/platform/coretemp.0/hwmon/hwmon3/temp2_input}(${execi 1200 echo $(($(cat /sys/devices/platform/coretemp.0/hwmon/hwmon3/temp2_input) / 1000))} C)${endif}", "color":"\#cf6a4c"},
-{"full_text": "${if_up {{ network.interface }}}${if_match "${addr {{ network.interface }}}" != "No IPv4"}e: ${addrs {{ network.interface }}}${endif}, ${v6addrs -n {{ network.interface }}} ${endif}","color":"\#89b859"},
-{"full_text": "ram: $mem","color":"\#cda869"},
-${if_existing /sys/class/power_supply/BAT0}{"full_text": "bat: ${battery_percent BAT0}%", "color":"\#838184"},${endif}
-{"full_text": "${time %a, %d.%m.%Y}", "color":"\#afc4db"}, 
-{"full_text": "${time %H:%M}", "color":"\#8f9d6a"}
+${if_existing /sys/class/power_supply/BAT0}{"full_text": "bat: ${battery_percent BAT0}%", "color":"\#c1c1c1"},${endif}
+{"full_text": "${time %a, %d.%m.%Y}", "color":"\#818181"},
+{"full_text": "${time %H:%M}", "color":"\#818181"}
 ],
 ]]

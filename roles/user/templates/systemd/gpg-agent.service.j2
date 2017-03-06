@@ -7,3 +7,6 @@ Type=forking
 ExecStart=/usr/bin/gpg-agent --enable-ssh-support --daemon --homedir=%h/.gnupg
 Restart=always
 RestartSec=5s
+
+[Install]
+WantedBy=default.target
