@@ -1,0 +1,23 @@
+---
+hostname: laptop-name
+suffix_dns: suffix_dns
+libgl: mesa-libgl
+network:
+  networkd: False
+  network_manager: True
+  interface: enp1s0f1
+  dhcp: True
+user: sacha
+emacsdesktop: True
+proxy_env:
+users:
+  sacha:
+    uid: 1000
+    name: sacha
+    firstname: Sacha
+    surname: Trémoureux
+    mail: sacha@tremoureux.fr
+    group: users
+    home: /home/sacha
+    gpg_authkey: 'hey'
+    gpg_signkey: 'hoy'
