@@ -1,5 +1,4 @@
 #!/bin/bash
-
 mountpoint /mnt/boot > /dev/null
 if [ $? -eq 0 ]; then
     echo -n "Umount /mnt/boot… "
@@ -211,7 +210,7 @@ EOF
     arch-chroot /mnt systemctl enable systemd-networkd
 fi
 
-arch-chroot /mnt pacman -S --noconfirm base-devel yajl vim tmux gdisk btrfs-progs efibootmgr w3m rsync ansible git openssh net-tools reflector parallel the_silver_searcher wpa_supplicant bash-completion irssi python-yaml rsync isync docker jre8-openjdk icedtea-web bind-tools gnuplot
+arch-chroot /mnt pacman -S --noconfirm base-devel yajl vim tmux gdisk btrfs-progs efibootmgr w3m rsync ansible git openssh net-tools reflector parallel the_silver_searcher wpa_supplicant bash-completion irssi python-yaml rsync isync docker jre8-openjdk icedtea-web bind-tools gnuplot zbar davf2s cadaver gmime xapian-core xtrans autoconf-archive
 
 cat /mnt/etc/pacman.conf | grep archlinuxfr > /dev/null
 if [ ! -z $? ]; then
@@ -228,7 +227,7 @@ arch-chroot /mnt pacman -Sy --noconfirm yaourt
 read -r -p "Install desktop environment y/N? : " desktop
 echo
 if [ "$desktop" == "y" ]; then
-    arch-chroot /mnt pacman -S --noconfirm xorg-server mesa xf86-input-libinput xf86-video-intel xorg-xbacklight xorg-xinit emacs auctex i3-wm i3lock i3status dmenu conky st xfce4-terminal thunar thunar-archive-plugin thunar-media-tags-plugin thunar-volman pulseaudio pavucontrol compton ttf-dejavu adobe-source-code-pro-fonts gajim feh firefox thunderbird libreoffice-fresh sxiv redshift okular vinagre freerdp spice phonon-qt4-gstreamer transmission-qt qt4 xfce4-notifyd vlc evince atom texlive-most texlive-lang inkscape pandoc ttf-liberation ttf-dejavu ttf-linux-libertine ttf-linux-libertine-g arandr sway network-manager-applet sddm
+    arch-chroot /mnt pacman -S --noconfirm xorg-server mesa xf86-input-libinput xf86-input-synaptics xf86-video-intel xorg-xbacklight xorg-xinit emacs auctex i3-wm i3lock i3status rofi dmenu conky st xfce4-terminal thunar thunar-archive-plugin thunar-media-tags-plugin thunar-volman pulseaudio pavucontrol compton ttf-dejavu adobe-source-code-pro-fonts gajim feh firefox thunderbird libreoffice-fresh sxiv redshift okular vinagre freerdp spice phonon-qt4-gstreamer transmission-qt qt4 xfce4-notifyd vlc evince atom texlive-most texlive-lang inkscape pandoc ttf-liberation ttf-dejavu ttf-linux-libertine ttf-linux-libertine-g arandr sway network-manager-applet sddm keybase ttf-fira-sans ttf-fira-mono
     arch-chroot /mnt systemctl enable sddm
 
     if [ "$vmware" == "y" ]; then
@@ -247,6 +246,19 @@ if [ "$desktop" == "y" ]; then
 	arch-chroot /mnt pacman -S --noconfirm plasma plasma-meta
     fi
 
+    read -r -p "Install laptop packages y/N? : " laptop
+    echo
+    if [ "$laptop" == "y" ]; then
+	arch-chroot /mnt pacman -S --noconfirm acpi
+	cat <<EOF > /mnt/etc/X11/xorg.conf/30-touchpad.conf
+Section "InputClass"
+    Identifier "devname"
+    Driver "libinput"
+    Option "Tapping" "on"
+EndSection
+EOF
+    fi
+
     arch-chroot /mnt mkdir /home/sacha/Cloud
     arch-chroot /mnt mkdir /home/sacha/Big-Cloud
     arch-chroot /mnt mkdir /home/sacha/Downloads
@@ -262,9 +274,9 @@ if [ "$desktop" == "y" ]; then
     arch-chroot /mnt mkdir /home/sacha/.config/compton/
     arch-chroot /mnt mkdir /home/sacha/.config/i3
     arch-chroot /mnt mkdir /home/sacha/.config/conky
+    arch-chroot /mnt mkdir /home/sacha/.config/rofi
     arch-chroot /mnt mkdir /home/sacha/.config/xfce4
     arch-chroot /mnt mkdir /home/sacha/.config/xfce4/terminal
-    arch-chroot /mnt mkdir /home/sacha/.gnupg
     arch-chroot /mnt ln -s /home/sacha/Cloud/Documents/ /home/sacha/Documents
     arch-chroot /mnt ln -s /home/sacha/Big-Cloud/Music /home/sacha/Music
     arch-chroot /mnt ln -s /home/sacha/Big-Cloud/Pictures /home/sacha/Pictures
@@ -279,6 +291,7 @@ if [ "$desktop" == "y" ]; then
     arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/shell/bashrc /home/sacha/.bashrc
     arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/terminal/terminalrc /home/sacha/.config/xfce4/terminal/terminalrc
     arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/mbsync/mbsyncrc /home/sacha/.mbsyncrc
+    arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/rofi/config /home/sacha/.config/rofi/config
     arch-chroot /mnt chmod 755 /home/sacha/.config/conky/conky-i3bar
 
     arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/systemd/compton.service /home/sacha/.config/systemd/user/compton.service
