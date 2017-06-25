@@ -20,7 +20,6 @@ if [ -b "/dev/mapper/encrypted_disk" ]; then
 fi
 
 read -r -p "Disk to use? " disk
-
 read -r -p "Auto partitioning? (y/N) : " auto_p
 if [ "$auto_p" == "y" ]; then
     boot_size_mb=512
@@ -95,20 +94,28 @@ pacstrap /mnt base
 
 arch-chroot /mnt bootctl install
 
+read -r -p "Fix Razer sleep y/N? : " razer
+echo
+if [ "$razer" == "y" ]; then
+    razer_fix_sleep=" button.lid_init_state=open"
+else
+    razer_fix_sleep=""
+fi
+
 echo 'default arch' > /mnt/boot/loader/loader.conf
 if [ "$luks" == "y" ]; then
     cat <<EOF > /mnt/boot/loader/entries/arch.conf
 title   Arch Linux
 linux   /vmlinuz-linux
 initrd  /initramfs-linux.img
-options cryptdevice=UUID=$data_uuid:encrypted_disk root=$data_disk rootfstype=$fs_type add_efi_memmap
+options cryptdevice=UUID=$data_uuid:encrypted_disk root=$data_disk rootfstype=$fs_type add_efi_memmap$razer
 EOF
 else
     cat <<EOF > /mnt/boot/loader/entries/arch.conf
 title   Arch Linux
 linux   /vmlinuz-linux
 initrd  /initramfs-linux.img
-options root=$data_disk rootfstype=$fs_type add_efi_memmap
+options root=$data_disk rootfstype=$fs_type add_efi_memmap$razer
 EOF
 fi
 
@@ -128,7 +135,7 @@ if [ "$nvme" == "y" ]; then
     modules_nvme="nvme"
 fi
 
-cat <<EOF > /boot/etc/mkinitcpio.conf
+cat <<EOF > /mnt/boot/etc/mkinitcpio.conf
 MODULES="$modules_vmware $modules_nvme"
 BINARIES=""
 FILES=""
@@ -171,7 +178,7 @@ arch-chroot /mnt /bin/bash -c "echo sacha:$user_passwd | chpasswd"
 read -r -p "Install NetworkManager y/N? : " nm_install
 echo
 if [ "$nm_install" == "y" ]; then
-    arch-chroot /mnt pacman -S --noconfirm networkmanager
+    arch-chroot /mnt pacman -S --noconfirm networkmanager networkmanager-openvpn
     arch-chroot /mnt systemctl enable NetworkManager
 fi
 
@@ -210,7 +217,7 @@ EOF
     arch-chroot /mnt systemctl enable systemd-networkd
 fi
 
-arch-chroot /mnt pacman -S --noconfirm base-devel yajl vim tmux gdisk btrfs-progs efibootmgr w3m rsync ansible git openssh net-tools reflector parallel the_silver_searcher wpa_supplicant bash-completion irssi python-yaml rsync isync docker jre8-openjdk icedtea-web bind-tools gnuplot zbar davf2s cadaver gmime xapian-core xtrans autoconf-archive
+arch-chroot /mnt pacman -S --noconfirm base-devel yajl vim tmux gdisk btrfs-progs efibootmgr w3m rsync ansible git openssh net-tools reflector parallel the_silver_searcher wpa_supplicant bash-completion irssi python-yaml rsync isync docker jre8-openjdk icedtea-web bind-tools gnuplot zbar davfs2 cadaver gmime xapian-core xtrans autoconf-archive openvpn
 
 cat /mnt/etc/pacman.conf | grep archlinuxfr > /dev/null
 if [ ! -z $? ]; then
@@ -227,13 +234,19 @@ arch-chroot /mnt pacman -Sy --noconfirm yaourt
 read -r -p "Install desktop environment y/N? : " desktop
 echo
 if [ "$desktop" == "y" ]; then
-    arch-chroot /mnt pacman -S --noconfirm xorg-server mesa xf86-input-libinput xf86-input-synaptics xf86-video-intel xorg-xbacklight xorg-xinit emacs auctex i3-wm i3lock i3status rofi dmenu conky st xfce4-terminal thunar thunar-archive-plugin thunar-media-tags-plugin thunar-volman pulseaudio pavucontrol compton ttf-dejavu adobe-source-code-pro-fonts gajim feh firefox thunderbird libreoffice-fresh sxiv redshift okular vinagre freerdp spice phonon-qt4-gstreamer transmission-qt qt4 xfce4-notifyd vlc evince atom texlive-most texlive-lang inkscape pandoc ttf-liberation ttf-dejavu ttf-linux-libertine ttf-linux-libertine-g arandr sway network-manager-applet sddm keybase ttf-fira-sans ttf-fira-mono
+    arch-chroot /mnt pacman -S --noconfirm xorg-server mesa xf86-input-libinput xf86-input-synaptics xf86-video-intel xorg-xbacklight xorg-xinit emacs auctex i3-wm i3lock i3status rofi dmenu conky st xfce4-terminal thunar thunar-archive-plugin thunar-media-tags-plugin thunar-volman pulseaudio pavucontrol compton ttf-dejavu adobe-source-code-pro-fonts gajim feh firefox thunderbird libreoffice-fresh sxiv redshift okular vinagre freerdp spice phonon-qt4-gstreamer transmission-qt qt4 xfce4-notifyd vlc evince atom texlive-most texlive-lang inkscape pandoc ttf-liberation ttf-dejavu ttf-linux-libertine ttf-linux-libertine-g arandr sway network-manager-applet sddm keybase ttf-fira-sans ttf-fira-mono pass
     arch-chroot /mnt systemctl enable sddm
 
     if [ "$vmware" == "y" ]; then
 	arch-chroot /mnt pacman -S xf86-input-vmmouse xf86-video-vmware
 	echo 'needs_root_rights=yes' > /mnt/X11/Xwrapper.config
     fi
+
+
+    cat <<EOF >> /etc/pam.d/sddm
+auth            optional        pam_gnome_keyring.so
+session         optional        pam_gnome_keyring.so auto_start
+EOF
 
     read -r -p "Install Gnome environment y/N? : " gnome
     echo
@@ -250,7 +263,7 @@ if [ "$desktop" == "y" ]; then
     echo
     if [ "$laptop" == "y" ]; then
 	arch-chroot /mnt pacman -S --noconfirm acpi
-	cat <<EOF > /mnt/etc/X11/xorg.conf/30-touchpad.conf
+	cat <<EOF > /mnt/etc/X11/xorg.conf.d/30-touchpad.conf
 Section "InputClass"
     Identifier "devname"
     Driver "libinput"
@@ -294,10 +307,11 @@ EOF
     arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/rofi/config /home/sacha/.config/rofi/config
     arch-chroot /mnt chmod 755 /home/sacha/.config/conky/conky-i3bar
 
+    arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/systemd/xfce4-notifyd.service /home/sacha/.config/systemd/user/xfce4-notifyd.service
     arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/systemd/compton.service /home/sacha/.config/systemd/user/compton.service
     arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/systemd/nm-applet.service /home/sacha/.config/systemd/user/nm-applet.service
     arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/systemd/redshift.service /home/sacha/.config/systemd/user/redshift.service
 
     arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/xorg/keyboard-layout.conf /etc/X11/xorg.conf.d/10-keyboard-layout.conf
-    chown sacha.users -Rf /mnt/home/sacha
+    arch-chroot /mnt chown sacha.users -Rf /home/sacha
 fi

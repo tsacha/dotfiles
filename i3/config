@@ -193,6 +193,7 @@ bindsym XF86AudioPlay exec /usr/bin/dbus-send --print-reply --dest=org.mpris.Med
 new_window pixel 1
 new_float pixel 1
 
+exec systemctl --user start xfce4-notifyd
 exec systemctl --user start compton
 exec systemctl --user start gpg-agent-ssh.socket
 exec systemctl --user start nm-applet
