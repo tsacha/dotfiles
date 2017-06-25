@@ -242,12 +242,6 @@ if [ "$desktop" == "y" ]; then
 	echo 'needs_root_rights=yes' > /mnt/X11/Xwrapper.config
     fi
 
-
-    cat <<EOF >> /etc/pam.d/sddm
-auth            optional        pam_gnome_keyring.so
-session         optional        pam_gnome_keyring.so auto_start
-EOF
-
     read -r -p "Install Gnome environment y/N? : " gnome
     echo
     if [ "$gnome" == "y" ]; then
