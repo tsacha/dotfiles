@@ -217,7 +217,7 @@ EOF
     arch-chroot /mnt systemctl enable systemd-networkd
 fi
 
-arch-chroot /mnt pacman -S --noconfirm base-devel yajl vim tmux gdisk btrfs-progs efibootmgr w3m rsync ansible git openssh net-tools reflector parallel the_silver_searcher wpa_supplicant bash-completion irssi python-yaml rsync isync docker jre8-openjdk icedtea-web bind-tools gnuplot zbar davfs2 cadaver gmime xapian-core xtrans autoconf-archive openvpn
+arch-chroot /mnt pacman -S --noconfirm base-devel yajl vim tmux gdisk btrfs-progs efibootmgr w3m rsync ansible git openssh net-tools reflector parallel the_silver_searcher wpa_supplicant bash-completion irssi python-yaml rsync isync docker jre8-openjdk icedtea-web bind-tools gnuplot zbar davfs2 cadaver gmime xapian-core xtrans autoconf-archive openvpn lsof sshfs arch-install-scripts ntfs-3g
 
 cat /mnt/etc/pacman.conf | grep archlinuxfr > /dev/null
 if [ ! -z $? ]; then
@@ -267,7 +267,6 @@ EOF
     fi
 
     arch-chroot /mnt mkdir /home/sacha/Cloud
-    arch-chroot /mnt mkdir /home/sacha/Big-Cloud
     arch-chroot /mnt mkdir /home/sacha/Downloads
     arch-chroot /mnt mkdir /home/sacha/Git
     arch-chroot /mnt mkdir /home/sacha/Public
@@ -285,9 +284,9 @@ EOF
     arch-chroot /mnt mkdir /home/sacha/.config/xfce4
     arch-chroot /mnt mkdir /home/sacha/.config/xfce4/terminal
     arch-chroot /mnt ln -s /home/sacha/Cloud/Documents/ /home/sacha/Documents
-    arch-chroot /mnt ln -s /home/sacha/Big-Cloud/Music /home/sacha/Music
-    arch-chroot /mnt ln -s /home/sacha/Big-Cloud/Pictures /home/sacha/Pictures
-    arch-chroot /mnt ln -s /home/sacha/Big-Cloud/Videos /home/sacha/Videos
+    arch-chroot /mnt ln -s /home/sacha/Cloud/Music /home/sacha/Music
+    arch-chroot /mnt ln -s /home/sacha/Cloud/Pictures /home/sacha/Pictures
+    arch-chroot /mnt ln -s /home/sacha/Cloud/Videos /home/sacha/Videos
     rm -Rf /home/sacha/Git/dotfiles/
     arch-chroot /mnt git clone https://github.com/tsacha/dotfiles /home/sacha/Git/dotfiles
 

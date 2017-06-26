@@ -5,3 +5,6 @@ Description=XFCE notifications service
 Type=dbus
 BusName=org.freedesktop.Notifications
 ExecStart=/usr/lib/xfce4/notifyd/xfce4-notifyd
+Restart=always
+RestartSec=5s
+
