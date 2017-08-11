@@ -217,7 +217,7 @@ EOF
     arch-chroot /mnt systemctl enable systemd-networkd
 fi
 
-arch-chroot /mnt pacman -S --noconfirm base-devel yajl vim tmux gdisk btrfs-progs efibootmgr w3m rsync ansible git openssh net-tools reflector parallel the_silver_searcher wpa_supplicant bash-completion irssi python-yaml rsync isync docker jre8-openjdk icedtea-web bind-tools gnuplot zbar davfs2 cadaver gmime xapian-core xtrans autoconf-archive openvpn lsof sshfs arch-install-scripts ntfs-3g tcpdump go go-tools
+arch-chroot /mnt pacman -S --noconfirm base-devel yajl vim tmux gdisk btrfs-progs efibootmgr w3m rsync ansible git openssh net-tools reflector parallel the_silver_searcher wpa_supplicant bash-completion irssi python-yaml rsync isync docker jre8-openjdk icedtea-web bind-tools gnuplot zbar davfs2 cadaver gmime xapian-core xtrans autoconf-archive openvpn lsof sshfs arch-install-scripts ntfs-3g tcpdump go go-tools zsh
 
 cat /mnt/etc/pacman.conf | grep archlinuxfr > /dev/null
 if [ ! -z $? ]; then
@@ -297,12 +297,16 @@ EOF
     arch-chroot /mnt ln -s /home/sacha/Cloud/Videos /home/sacha/Videos
     rm -Rf /home/sacha/Git/dotfiles/
     arch-chroot /mnt git clone https://github.com/tsacha/dotfiles /home/sacha/Git/dotfiles
+    arch-chroot /mnt git clone https://github.com/robbyrussell/oh-my-zsh.git /home/sacha/.oh-my-zsh/
+    arch-chroot /mnt git clone https://github.com/robbyrussell/oh-my-zsh.git /root/.oh-my-zsh/
 
     arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/i3/config /home/sacha/.config/i3/config
     arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/compton/compton.conf /home/sacha/.config/compton/compton.conf
     arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/conky/conkyrc /home/sacha/.config/conky/conkyrc
     arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/conky/conky-i3bar /home/sacha/.config/conky/conky-i3bar
     arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/shell/bashrc /home/sacha/.bashrc
+    arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/shell/zshrc /home/sacha/.zshrc
+    arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/shell/zshrc /root/.zshrc
     arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/terminal/terminalrc /home/sacha/.config/xfce4/terminal/terminalrc
     arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/mbsync/mbsyncrc /home/sacha/.mbsyncrc
     arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/rofi/config /home/sacha/.config/rofi/config
@@ -315,4 +319,6 @@ EOF
 
     arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/xorg/keyboard-layout.conf /etc/X11/xorg.conf.d/10-keyboard-layout.conf
     arch-chroot /mnt chown sacha.users -Rf /home/sacha
+    arch-chroot /mnt usermod -s /usr/bin/zsh sacha
+    arch-chroot /mnt usermod -s /bin/zsh root
 fi
