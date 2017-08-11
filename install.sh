@@ -306,7 +306,7 @@ EOF
     arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/conky/conky-i3bar /home/sacha/.config/conky/conky-i3bar
     arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/shell/bashrc /home/sacha/.bashrc
     arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/shell/zshrc /home/sacha/.zshrc
-    arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/shell/zshrc /root/.zshrc
+    arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/shell/zshrc-root /root/.zshrc
     arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/terminal/terminalrc /home/sacha/.config/xfce4/terminal/terminalrc
     arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/mbsync/mbsyncrc /home/sacha/.mbsyncrc
     arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/rofi/config /home/sacha/.config/rofi/config
