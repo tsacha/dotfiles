@@ -318,6 +318,10 @@ EOF
     arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/systemd/redshift.service /home/sacha/.config/systemd/user/redshift.service
 
     arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/xorg/keyboard-layout.conf /etc/X11/xorg.conf.d/10-keyboard-layout.conf
+    arch-chroot /mnt mkdir /home/sacha/.config/systemd/user/default.target.wants
+    arch-chroot /mnt mkdir /home/sacha/.config/systemd/user/emacs.service.d
+    arch-chroot /mnt ln -f -s /usr/lib/systemd/user/emacs.service /home/sacha/.config/systemd/user/default.target.wants/emacs.service
+    arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/override-emacs-unit.conf /home/sacha/.config/systemd/user/emacs.service.d/override.conf
     arch-chroot /mnt chown sacha.users -Rf /home/sacha
     arch-chroot /mnt usermod -s /usr/bin/zsh sacha
     arch-chroot /mnt usermod -s /bin/zsh root
