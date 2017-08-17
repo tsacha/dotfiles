@@ -136,7 +136,7 @@ if [ "$nvme" == "y" ]; then
 fi
 
 cat <<EOF > /mnt/boot/etc/mkinitcpio.conf
-MODULES="$modules_vmware $modules_nvme"
+MODULES="$modules_vmware $modules_nvme atkbd"
 BINARIES=""
 FILES=""
 HOOKS="base udev autodetect modconf block keyboard keymap $encrypt_hook filesystems fsck"
