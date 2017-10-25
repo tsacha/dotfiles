@@ -1,4 +1,6 @@
 #!/bin/bash
+read -r -p "Encrypted disk name? " cryptname
+
 mountpoint /mnt/boot > /dev/null
 if [ $? -eq 0 ]; then
     echo -n "Umount /mnt/boot… "
@@ -13,9 +15,9 @@ if [ $? -eq 0 ]; then
     echo "Done."
 fi
 
-if [ -b "/dev/mapper/encrypted_disk" ]; then
+if [ -b "/dev/mapper/"$cryptname ]; then
     echo -n "Close existing luks device… "
-    cryptsetup luksClose /dev/mapper/encrypted_disk
+    cryptsetup luksClose /dev/mapper/$cryptname
     echo "Done."
 fi
 
@@ -57,10 +59,10 @@ if [ "$luks" == "y" ]; then
     echo
     echo -n $luks_password | cryptsetup -q luksFormat $data_disk -
     echo "Luks created."
-    echo -n $luks_password | cryptsetup luksOpen $data_disk encrypted_disk -
+    echo -n $luks_password | cryptsetup luksOpen $data_disk $cryptname -
     echo "Luks opened."
     data_uuid=`blkid $data_disk -s UUID -o value`
-    data_disk=/dev/mapper/encrypted_disk
+    data_disk=/dev/mapper/$cryptname
 fi
 
 read -r -p "Format boot partition? y/N " format_boot
@@ -108,7 +110,7 @@ if [ "$luks" == "y" ]; then
 title   Arch Linux
 linux   /vmlinuz-linux
 initrd  /initramfs-linux.img
-options cryptdevice=UUID=$data_uuid:encrypted_disk root=$data_disk rootfstype=$fs_type add_efi_memmap$razer
+options cryptdevice=UUID=$data_uuid:$cryptname root=$data_disk rootfstype=$fs_type add_efi_memmap$razer
 EOF
 else
     cat <<EOF > /mnt/boot/loader/entries/arch.conf
@@ -135,11 +137,11 @@ if [ "$nvme" == "y" ]; then
     modules_nvme="nvme"
 fi
 
-cat <<EOF > /mnt/boot/etc/mkinitcpio.conf
+cat <<EOF > /mnt/etc/mkinitcpio.conf
 MODULES="$modules_vmware $modules_nvme atkbd"
 BINARIES=""
 FILES=""
-HOOKS="base udev autodetect modconf block keyboard keymap $encrypt_hook filesystems fsck"
+HOOKS="base udev modconf block keyboard keymap $encrypt_hook filesystems fsck"
 EOF
 
 arch-chroot /mnt mkinitcpio -p linux
@@ -217,7 +219,7 @@ EOF
     arch-chroot /mnt systemctl enable systemd-networkd
 fi
 
-arch-chroot /mnt pacman -S --noconfirm base-devel yajl vim tmux gdisk btrfs-progs efibootmgr w3m rsync ansible git openssh net-tools reflector parallel the_silver_searcher wpa_supplicant bash-completion irssi python-yaml rsync isync docker jre8-openjdk icedtea-web bind-tools gnuplot zbar davfs2 cadaver gmime xapian-core xtrans autoconf-archive openvpn lsof sshfs arch-install-scripts ntfs-3g tcpdump go go-tools zsh
+arch-chroot /mnt pacman -S --noconfirm base-devel yajl vim tmux gdisk btrfs-progs efibootmgr w3m rsync ansible git openssh net-tools reflector parallel the_silver_searcher wpa_supplicant bash-completion irssi python-yaml rsync isync docker jre8-openjdk icedtea-web bind-tools gnuplot zbar davfs2 cadaver gmime xapian-core xtrans autoconf-archive openvpn lsof sshfs arch-install-scripts ntfs-3g tcpdump go go-tools zsh firewalld dnsmasq
 
 cat /mnt/etc/pacman.conf | grep archlinuxfr > /dev/null
 if [ ! -z $? ]; then
@@ -234,7 +236,7 @@ arch-chroot /mnt pacman -Sy --noconfirm yaourt
 read -r -p "Install desktop environment y/N? : " desktop
 echo
 if [ "$desktop" == "y" ]; then
-    arch-chroot /mnt pacman -S --noconfirm xorg-server mesa xf86-input-libinput xf86-input-synaptics xf86-video-intel xorg-xbacklight xorg-xinit emacs auctex i3-wm i3lock i3status rofi dmenu conky st xfce4-terminal thunar thunar-archive-plugin thunar-media-tags-plugin thunar-volman pulseaudio pavucontrol compton ttf-dejavu adobe-source-code-pro-fonts gajim feh firefox thunderbird libreoffice-fresh sxiv redshift okular vinagre freerdp spice phonon-qt4-gstreamer transmission-qt qt4 xfce4-notifyd vlc evince atom texlive-most texlive-lang inkscape pandoc ttf-liberation ttf-dejavu ttf-linux-libertine ttf-linux-libertine-g arandr sway network-manager-applet sddm keybase ttf-fira-sans ttf-fira-mono pass ipcalc virt-manager openssh-askpass virt-viewer qemu qemu-arch-extra qemu-guest-agent  samba cups a2ps wireshark-gtk vnstat scrot gimp
+    arch-chroot /mnt pacman -S --noconfirm xorg-server mesa xf86-input-libinput xf86-input-synaptics xf86-video-intel xorg-xbacklight xorg-xinit emacs auctex i3-wm i3lock i3status rofi dmenu conky st xfce4-terminal thunar thunar-archive-plugin thunar-media-tags-plugin thunar-volman pulseaudio pavucontrol compton ttf-dejavu adobe-source-code-pro-fonts gajim feh firefox thunderbird libreoffice-fresh sxiv redshift okular vinagre freerdp spice phonon-qt4-gstreamer transmission-qt qt4 xfce4-notifyd vlc evince atom texlive-most texlive-lang inkscape pandoc ttf-liberation ttf-dejavu ttf-linux-libertine ttf-linux-libertine-g arandr sway network-manager-applet sddm keybase ttf-fira-sans ttf-fira-mono pass ipcalc virt-manager openssh-askpass virt-viewer qemu qemu-arch-extra qemu-guest-agent  samba cups a2ps wireshark-gtk vnstat scrot gimp markdown gnome-alsamixer alsa-utils pamixer
 
     arch-chroot systemctl enable org.cups.cupsd
     arch-chroot systemctl enable cups-browsed.service
@@ -249,16 +251,27 @@ if [ "$desktop" == "y" ]; then
 	arch-chroot /mnt pacman -S xf86-input-vmmouse xf86-video-vmware
 	echo 'needs_root_rights=yes' > /mnt/X11/Xwrapper.config
     fi
-
+    cat <<EOF > /mnt/etc/modprobe.d/nobeep.conf
+blacklist pcspkr
+EOF
     read -r -p "Install Gnome environment y/N? : " gnome
     echo
     if [ "$gnome" == "y" ]; then
 	arch-chroot /mnt pacman -S --noconfirm gnome gnome-extra
     fi
+
+    read -r -p "Install Nvidia proprietary drivers y/N? : " nvidia
+    echo
+    if [ "$nvidia" == "y" ]; then
+	arch-chroot /mnt pacman -S --noconfirm nvidia libva-vdpau-driver
+	cat <<EOF > /mnt/etc/modprobe.d/nvidia.conf
+blacklist nouveau
+EOF
+    fi
     read -r -p "Install KDE environment y/N? : " kde
     echo
     if [ "$kde" == "y" ]; then
-	arch-chroot /mnt pacman -S --noconfirm plasma plasma-meta
+	arch-chroot /mnt pacman -S --noconfirm plasma plasma-meta kde-applications
     fi
 
     read -r -p "Install laptop packages y/N? : " laptop
@@ -295,7 +308,7 @@ EOF
     arch-chroot /mnt ln -s /home/sacha/Cloud/Music /home/sacha/Music
     arch-chroot /mnt ln -s /home/sacha/Cloud/Pictures /home/sacha/Pictures
     arch-chroot /mnt ln -s /home/sacha/Cloud/Videos /home/sacha/Videos
-    rm -Rf /home/sacha/Git/dotfiles/
+    rm -Rf /mnt/home/sacha/Git/dotfiles/
     arch-chroot /mnt git clone https://github.com/tsacha/dotfiles /home/sacha/Git/dotfiles
     arch-chroot /mnt git clone https://github.com/robbyrussell/oh-my-zsh.git /home/sacha/.oh-my-zsh/
     arch-chroot /mnt git clone https://github.com/robbyrussell/oh-my-zsh.git /root/.oh-my-zsh/
@@ -321,6 +334,7 @@ EOF
     arch-chroot /mnt mkdir /home/sacha/.config/systemd/user/default.target.wants
     arch-chroot /mnt mkdir /home/sacha/.config/systemd/user/emacs.service.d
     arch-chroot /mnt ln -f -s /usr/lib/systemd/user/emacs.service /home/sacha/.config/systemd/user/default.target.wants/emacs.service
+    arch-chroot /mnt ln -f -s /home/sacha/.config/systemd/user/default.target.wants/redshift.service /home/sacha/.config/systemd/user/default.target.wants/redshift.service
     arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/override-emacs-unit.conf /home/sacha/.config/systemd/user/emacs.service.d/override.conf
     arch-chroot /mnt chown sacha.users -Rf /home/sacha
     arch-chroot /mnt usermod -s /usr/bin/zsh sacha
