@@ -236,12 +236,13 @@ arch-chroot /mnt pacman -Sy --noconfirm yaourt
 read -r -p "Install desktop environment y/N? : " desktop
 echo
 if [ "$desktop" == "y" ]; then
-    arch-chroot /mnt pacman -S --noconfirm xorg-server mesa xf86-input-libinput xf86-input-synaptics xf86-video-intel xorg-xbacklight xorg-xinit emacs auctex i3-wm i3lock i3status rofi dmenu conky xfce4-terminal thunar thunar-archive-plugin thunar-media-tags-plugin thunar-volman pulseaudio pavucontrol compton ttf-dejavu adobe-source-code-pro-fonts gajim feh firefox thunderbird libreoffice-fresh sxiv redshift okular vinagre freerdp spice phonon-qt4-gstreamer transmission-qt qt4 xfce4-notifyd vlc evince atom texlive-most inkscape pandoc ttf-liberation ttf-dejavu ttf-linux-libertine ttf-linux-libertine-g arandr sway network-manager-applet sddm keybase ttf-fira-sans ttf-fira-mono pass ipcalc virt-manager openssh-askpass virt-viewer qemu qemu-arch-extra qemu-guest-agent  samba cups a2ps wireshark-gtk vnstat scrot gimp markdown gnome-alsamixer alsa-utils pamixer
+    arch-chroot /mnt pacman -S --noconfirm xorg-server mesa xf86-input-libinput xf86-input-synaptics xf86-video-intel xorg-xbacklight xorg-xinit emacs auctex i3-wm i3lock i3status rofi dmenu conky xfce4-terminal thunar thunar-archive-plugin thunar-media-tags-plugin thunar-volman pulseaudio pavucontrol compton ttf-dejavu adobe-source-code-pro-fonts gajim feh firefox thunderbird libreoffice-fresh sxiv redshift okular vinagre freerdp spice phonon-qt4-gstreamer transmission-qt qt4 xfce4-notifyd vlc evince atom texlive-most inkscape pandoc ttf-liberation ttf-dejavu ttf-linux-libertine ttf-linux-libertine-g arandr sway network-manager-applet sddm keybase ttf-fira-sans ttf-fira-mono pass ipcalc virt-manager openssh-askpass virt-viewer qemu qemu-arch-extra qemu-guest-agent  samba cups a2ps wireshark-gtk vnstat scrot gimp markdown gnome-alsamixer alsa-utils pamixer nextcloud-client termite
 
     arch-chroot /mnt systemctl enable org.cups.cupsd
     arch-chroot /mnt systemctl enable cups-browsed.service
     arch-chroot /mnt systemctl enable samba.service
     arch-chroot /mnt systemctl enable nscd.service
+    arch-chroot /mnt systemctl enable libvirtd.service
     arch-chroot /mnt usermod -G lp -a sacha
     arch-chroot /mnt usermod -G libvirt -a sacha
     arch-chroot /mnt usermod -G kvm -a sacha
@@ -336,6 +337,8 @@ EOF
     arch-chroot /mnt ln -f -s /usr/lib/systemd/user/emacs.service /home/sacha/.config/systemd/user/default.target.wants/emacs.service
     arch-chroot /mnt ln -f -s /home/sacha/.config/systemd/user/default.target.wants/redshift.service /home/sacha/.config/systemd/user/default.target.wants/redshift.service
     arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/override-emacs-unit.conf /home/sacha/.config/systemd/user/emacs.service.d/override.conf
+    arch-chroot /mnt mkdir /home/sacha/.config/termite
+    arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/termite/config /home/sacha/.config/.config/termite/config
     arch-chroot /mnt chown sacha.users -Rf /home/sacha
     arch-chroot /mnt usermod -s /usr/bin/zsh sacha
     arch-chroot /mnt usermod -s /bin/zsh root

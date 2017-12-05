@@ -2,6 +2,7 @@ alias vi="/usr/bin/vim"
 
 export SSH_AUTH_SOCK=/run/user/1000/gnupg/S.gpg-agent.ssh
 export CHROMIUM_FLAGS="--force-device-scale-factor=1.75"
+export TERMINAL=termite
 
 if [ -z "$DISPLAY" ] && [ -n "$XDG_VTNR" ] && [ "$XDG_VTNR" -eq 1 ]; then
   exec startx
