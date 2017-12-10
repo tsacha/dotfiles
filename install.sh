@@ -240,7 +240,7 @@ if [ "$desktop" == "y" ]; then
 
     arch-chroot /mnt systemctl enable org.cups.cupsd
     arch-chroot /mnt systemctl enable cups-browsed.service
-    arch-chroot /mnt systemctl enable samba.service
+    echo "a4" > /mnt/etc/papersize
     arch-chroot /mnt systemctl enable nscd.service
     arch-chroot /mnt systemctl enable libvirtd.service
     arch-chroot /mnt usermod -G lp -a sacha
