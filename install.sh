@@ -219,7 +219,7 @@ EOF
     arch-chroot /mnt systemctl enable systemd-networkd
 fi
 
-arch-chroot /mnt pacman -S --noconfirm base-devel yajl vim tmux gdisk btrfs-progs efibootmgr w3m rsync ansible git openssh net-tools reflector parallel the_silver_searcher wpa_supplicant bash-completion irssi python-yaml rsync isync docker jre8-openjdk icedtea-web bind-tools gnuplot zbar davfs2 cadaver gmime xapian-core xtrans autoconf-archive openvpn lsof sshfs arch-install-scripts ntfs-3g tcpdump go go-tools zsh firewalld dnsmasq
+arch-chroot /mnt pacman -S --noconfirm base-devel yajl vim tmux gdisk btrfs-progs efibootmgr w3m rsync ansible git openssh net-tools reflector parallel the_silver_searcher wpa_supplicant bash-completion irssi python-yaml rsync isync docker jre8-openjdk icedtea-web bind-tools gnuplot zbar davfs2 cadaver gmime xapian-core xtrans autoconf-archive openvpn lsof sshfs arch-install-scripts ntfs-3g tcpdump go go-tools zsh firewalld dnsmasq rdesktop
 
 cat /mnt/etc/pacman.conf | grep archlinuxfr > /dev/null
 if [ ! -z $? ]; then
@@ -236,7 +236,7 @@ arch-chroot /mnt pacman -Sy --noconfirm yaourt
 read -r -p "Install desktop environment y/N? : " desktop
 echo
 if [ "$desktop" == "y" ]; then
-    arch-chroot /mnt pacman -S --noconfirm xorg-server mesa xf86-input-libinput xf86-input-synaptics xf86-video-intel xorg-xbacklight xorg-xinit emacs auctex i3-wm i3lock i3status rofi dmenu conky xfce4-terminal thunar thunar-archive-plugin thunar-media-tags-plugin thunar-volman pulseaudio pavucontrol compton ttf-dejavu adobe-source-code-pro-fonts gajim feh firefox thunderbird libreoffice-fresh sxiv redshift okular vinagre freerdp spice phonon-qt4-gstreamer transmission-qt qt4 xfce4-notifyd vlc evince atom texlive-most inkscape pandoc ttf-liberation ttf-dejavu ttf-linux-libertine ttf-linux-libertine-g arandr sway network-manager-applet sddm keybase ttf-fira-sans ttf-fira-mono pass ipcalc virt-manager openssh-askpass virt-viewer qemu qemu-arch-extra qemu-guest-agent  samba cups a2ps wireshark-gtk vnstat scrot gimp markdown gnome-alsamixer alsa-utils pamixer nextcloud-client termite
+    arch-chroot /mnt pacman -S --noconfirm xorg-server mesa xf86-input-libinput xf86-input-synaptics xf86-video-intel xorg-xbacklight xorg-xinit emacs auctex i3-wm i3lock i3status rofi dmenu conky xfce4-terminal thunar thunar-archive-plugin thunar-media-tags-plugin thunar-volman pulseaudio pavucontrol compton ttf-dejavu adobe-source-code-pro-fonts gajim feh firefox thunderbird libreoffice-fresh sxiv redshift okular vinagre freerdp spice phonon-qt4-gstreamer transmission-qt qt4 xfce4-notifyd vlc evince atom texlive-most inkscape pandoc ttf-liberation ttf-dejavu ttf-linux-libertine ttf-linux-libertine-g arandr sway network-manager-applet sddm keybase ttf-fira-sans ttf-fira-mono pass ipcalc virt-manager openssh-askpass virt-viewer qemu qemu-arch-extra qemu-guest-agent  samba cups a2ps wireshark-gtk vnstat scrot gimp markdown gnome-alsamixer alsa-utils pamixer nextcloud-client termite noto-fonts noto-fonts-emoji llvm
 
     arch-chroot /mnt systemctl enable org.cups.cupsd
     arch-chroot /mnt systemctl enable cups-browsed.service
@@ -303,6 +303,7 @@ EOF
     arch-chroot /mnt mkdir /home/sacha/.config/i3
     arch-chroot /mnt mkdir /home/sacha/.config/conky
     arch-chroot /mnt mkdir /home/sacha/.config/rofi
+    arch-chroot /mnt mkdir /home/sacha/.config/rofi-pass
     arch-chroot /mnt mkdir /home/sacha/.config/xfce4
     arch-chroot /mnt mkdir /home/sacha/.config/xfce4/terminal
     arch-chroot /mnt ln -s /home/sacha/Cloud/Documents/ /home/sacha/Documents
@@ -324,6 +325,7 @@ EOF
     arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/terminal/terminalrc /home/sacha/.config/xfce4/terminal/terminalrc
     arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/mbsync/mbsyncrc /home/sacha/.mbsyncrc
     arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/rofi/config /home/sacha/.config/rofi/config
+    arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/rofi-pass/config /home/sacha/.config/rofi-pass/config
     arch-chroot /mnt chmod 755 /home/sacha/.config/conky/conky-i3bar
 
     arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/systemd/xfce4-notifyd.service /home/sacha/.config/systemd/user/xfce4-notifyd.service
