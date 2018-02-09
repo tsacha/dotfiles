@@ -58,6 +58,9 @@ if [ "$gpgrdy" == "y" ]; then
   signingkey = $signingkey
   name = Sacha Trémoureux
   email = sacha@tremoureux.fr
+
+[commit]
+  gpgsign = true
 EOF
     chown sacha.users /home/sacha/.gitconfig
  fi
