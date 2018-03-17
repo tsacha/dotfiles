@@ -15,7 +15,7 @@ conky.config = {
 
 conky.text = [[
 [
-${if_existing /sys/class/power_supply/BAT0}{"full_text": "bat: ${battery_percent BAT0}%", "color":"\#c1c1c1"},${endif}
-{"full_text": "${time %a, %d.%m.%Y %H:%M}", "color":"\#bbbbbb"}
+{"full_text": "🌈 ${time %a, %d.%m.%Y %H:%M} 🦄", "color":"\#d285b1"}
+${if_existing /sys/class/power_supply/BAT0},{"full_text": "🔋${battery_percent BAT0}%", "color":"\#d285b1"}${endif}
 ],
 ]]

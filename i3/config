@@ -174,7 +174,7 @@ set $yellow      #fabd2f
 set $darkblue    #458588
 set $blue        #83a598
 set $darkmagenta #b16286
-set $magenta     #d3869b
+set $magenta     #d285b1
 set $darkcyan    #689d6a
 set $cyan        #8ec07c
 set $lightgrey   #a89984
@@ -190,13 +190,15 @@ bar {
   status_command ~/.config/conky/conky-i3bar
   workspace_buttons yes
   strip_workspace_numbers yes
+  separator_symbol " "
+
 
   colors {
     background $background
     statusline $fg0
-    separator  $darkgrey
+    separator  $magenta
 
-    focused_workspace  $magenta    $magenta    $fg0
+    focused_workspace  $magenta    $magenta    $black
     active_workspace   $background $background $fg0
     inactive_workspace $background $background $darkgrey
     urgent_workspace   $red        $red        $fg0
@@ -205,7 +207,7 @@ bar {
 }
 
 # class                 border      backgr.     text        indicator   child_border
-client.focused          $magenta    $magenta    $fg0        $fg0
+client.focused          $magenta    $magenta    $black      $black
 client.focused_inactive $bg1        $black      $fg0        $darkgrey
 client.unfocused        $bg1        $bg1        $fg0        $darkgrey
 client.urgent           $red        $red        $background $red
