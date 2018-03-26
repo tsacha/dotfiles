@@ -191,11 +191,11 @@ if [ "$ntwkd_install" == "y" ]; then
     read -r -p "Network interface ? " interface
     read -r -p "DHCP ? Y/n : " dhcp
     if [ "$dhcp" == "n" ]; then
-	read -r -p "IPv4 ? " ipv4
-	read -r -p "CIDR ? " cidr4
-	read -r -p "Gateway ? " gateway4
-	read -r -p "DNS ? " dns
-	cat <<EOF > /mnt/etc/systemd/network/$interface.network
+        read -r -p "IPv4 ? " ipv4
+        read -r -p "CIDR ? " cidr4
+        read -r -p "Gateway ? " gateway4
+        read -r -p "DNS ? " dns
+        cat <<EOF > /mnt/etc/systemd/network/$interface.network
 [Match]
 Name=$interface
 
@@ -207,7 +207,7 @@ DNS=$dns
 IPv6AcceptRA=true
 EOF
     else
-	cat <<EOF > /mnt/etc/systemd/network/$interface.network
+        cat <<EOF > /mnt/etc/systemd/network/$interface.network
 [Match]
 Name=$interface
 
@@ -236,7 +236,7 @@ arch-chroot /mnt pacman -Sy --noconfirm yaourt
 read -r -p "Install desktop environment y/N? : " desktop
 echo
 if [ "$desktop" == "y" ]; then
-    arch-chroot /mnt pacman -S --noconfirm xorg-server mesa xf86-input-libinput xf86-input-synaptics xf86-video-intel xorg-xbacklight xorg-xinit emacs auctex i3-wm i3lock i3status rofi dmenu conky xfce4-terminal thunar thunar-archive-plugin thunar-media-tags-plugin thunar-volman pulseaudio pavucontrol compton ttf-dejavu adobe-source-code-pro-fonts gajim feh firefox thunderbird libreoffice-fresh sxiv redshift okular vinagre freerdp spice phonon-qt4-gstreamer transmission-qt qt4 xfce4-notifyd vlc evince atom texlive-most inkscape pandoc ttf-liberation ttf-dejavu ttf-linux-libertine ttf-linux-libertine-g arandr sway network-manager-applet sddm keybase ttf-fira-sans ttf-fira-mono pass ipcalc virt-manager openssh-askpass virt-viewer qemu qemu-arch-extra qemu-guest-agent  samba cups a2ps wireshark-gtk vnstat scrot gimp markdown gnome-alsamixer alsa-utils pamixer nextcloud-client termite noto-fonts noto-fonts-emoji llvm
+    arch-chroot /mnt pacman -S --noconfirm xorg-server mesa xf86-input-libinput xf86-input-synaptics xf86-video-intel xorg-xbacklight xorg-xinit emacs auctex i3-wm i3lock i3status rofi dmenu conky xfce4-terminal thunar thunar-archive-plugin thunar-media-tags-plugin thunar-volman pulseaudio pavucontrol compton ttf-dejavu adobe-source-code-pro-fonts gajim feh firefox thunderbird libreoffice-fresh sxiv redshift okular vinagre freerdp spice phonon-qt4-gstreamer transmission-qt qt4 xfce4-notifyd vlc evince atom texlive-most inkscape pandoc ttf-liberation ttf-dejavu ttf-linux-libertine ttf-linux-libertine-g arandr sway network-manager-applet sddm keybase ttf-fira-sans ttf-fira-mono pass ipcalc virt-manager openssh-askpass virt-viewer qemu qemu-arch-extra qemu-guest-agent  samba cups a2ps wireshark-gtk vnstat scrot gimp markdown gnome-alsamixer alsa-utils pamixer nextcloud-client termite noto-fonts noto-fonts-emoji llvm lxappearance-gtk3 system-config-printer hplip
 
     arch-chroot /mnt systemctl enable org.cups.cupsd
     arch-chroot /mnt systemctl enable cups-browsed.service
@@ -249,8 +249,8 @@ if [ "$desktop" == "y" ]; then
     arch-chroot /mnt systemctl enable sddm
 
     if [ "$vmware" == "y" ]; then
-	arch-chroot /mnt pacman -S xf86-input-vmmouse xf86-video-vmware
-	echo 'needs_root_rights=yes' > /mnt/X11/Xwrapper.config
+        arch-chroot /mnt pacman -S xf86-input-vmmouse xf86-video-vmware
+        echo 'needs_root_rights=yes' > /mnt/X11/Xwrapper.config
     fi
     cat <<EOF > /mnt/etc/modprobe.d/nobeep.conf
 blacklist pcspkr
@@ -258,28 +258,28 @@ EOF
     read -r -p "Install Gnome environment y/N? : " gnome
     echo
     if [ "$gnome" == "y" ]; then
-	arch-chroot /mnt pacman -S --noconfirm gnome gnome-extra
+        arch-chroot /mnt pacman -S --noconfirm gnome gnome-extra
     fi
 
     read -r -p "Install Nvidia proprietary drivers y/N? : " nvidia
     echo
     if [ "$nvidia" == "y" ]; then
-	arch-chroot /mnt pacman -S --noconfirm nvidia libva-vdpau-driver
-	cat <<EOF > /mnt/etc/modprobe.d/nvidia.conf
+        arch-chroot /mnt pacman -S --noconfirm nvidia libva-vdpau-driver
+        cat <<EOF > /mnt/etc/modprobe.d/nvidia.conf
 blacklist nouveau
 EOF
     fi
     read -r -p "Install KDE environment y/N? : " kde
     echo
     if [ "$kde" == "y" ]; then
-	arch-chroot /mnt pacman -S --noconfirm plasma plasma-meta kde-applications
+        arch-chroot /mnt pacman -S --noconfirm plasma plasma-meta kde-applications
     fi
 
     read -r -p "Install laptop packages y/N? : " laptop
     echo
     if [ "$laptop" == "y" ]; then
-	arch-chroot /mnt pacman -S --noconfirm acpi
-	cat <<EOF > /mnt/etc/X11/xorg.conf.d/30-touchpad.conf
+        arch-chroot /mnt pacman -S --noconfirm acpi
+        cat <<EOF > /mnt/etc/X11/xorg.conf.d/30-touchpad.conf
 Section "InputClass"
     Identifier "devname"
     Driver "libinput"
