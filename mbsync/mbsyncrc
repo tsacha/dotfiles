@@ -1,5 +1,5 @@
 IMAPAccount sacha
-Host mx.mkfs.fr
+Host mx.duches.se
 User sacha@tremoureux.fr
 PassCmd "gpg -q -d ~/Documents/Security/mails/pass.gpg"
 AuthMechs LOGIN
