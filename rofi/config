@@ -12,3 +12,4 @@ rofi.hide-scrollbar: true
 rofi.ssh-command:          rofi-sensible-terminal -t "SSH > {host}" -e "/bin/zsh -c 'source /home/sacha/.zshrc; {ssh-client} {host}'"
 rofi.parse-known-hosts: false
 rofi.disable-history: true
+rofi.theme: /home/sacha/Git/dotfiles/rofi/sidebar-pink.rasi
