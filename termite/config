@@ -9,6 +9,7 @@ urgent_on_bell = true
 clickable_url = true
 font = Noto Emoji 14
 font = Noto Sans Symbols 14
+font = Droid Sans Fallback 14
 font = Source Code Pro Regular 14
 scrollback_lines = 10000
 search_wrap = true
