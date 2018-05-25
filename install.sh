@@ -342,6 +342,7 @@ EOF
     arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/override-emacs-unit.conf /home/sacha/.config/systemd/user/emacs.service.d/override.conf
     arch-chroot /mnt mkdir /home/sacha/.config/termite
     arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/termite/config /home/sacha/.config/termite/config
+    arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/mime/mimeapps.list /home/sacha/.config/mimeapps.list
     arch-chroot /mnt chown sacha.users -Rf /home/sacha
     arch-chroot /mnt usermod -s /usr/bin/zsh sacha
     arch-chroot /mnt usermod -s /bin/zsh root
