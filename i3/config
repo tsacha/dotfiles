@@ -225,6 +225,7 @@ bindsym XF86AudioLowerVolume exec pamixer -d 3
 bindsym $mod+F11 exec pamixer -d 3
 bindsym XF86AudioMute exec pamixer -t
 bindsym $mod+F10 exec pamixer -t
+bindsym $mod+F7 exec exec /home/sacha/Git/dotfiles/termite/termite-theme-switcher.sh
 bindsym XF86AudioPlay exec /usr/bin/dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause
 
 new_window none

@@ -35,53 +35,53 @@ filter_unmatched_urls = true
 #modify_other_keys = false
 
 [colors]
-# Base16 Google Dark
-# Author: Seth Wright (http://sethawright.com)
+# Base16 Solarized Dark
+# Author: Ethan Schoonover (http://ethanschoonover.com/solarized)
 
-foreground      = #c5c8c6
-foreground_bold = #e0e0e0
-cursor          = #e0e0e0
-background      = #1d1f21
+foreground      = #93a1a1
+foreground_bold = #eee8d5
+cursor          = #eee8d5
+background      = #002b36
 
 # 16 color space
 
 # Black, Gray, Silver, White
-color0  = #1d1f21
-color8  = #969896
-color7  = #c5c8c6
-color15 = #ffffff
+color0  = #002b36
+color8  = #657b83
+color7  = #93a1a1
+color15 = #fdf6e3
 
 # Red
-color1  = #CC342B
-color9  = #CC342B
+color1  = #dc322f
+color9  = #dc322f
 
 # Green
-color2  = #198844
-color10 = #198844
+color2  = #859900
+color10 = #859900
 
 # Yellow
-color3  = #FBA922
-color11 = #FBA922
+color3  = #b58900
+color11 = #b58900
 
 # Blue
-color4  = #3971ED
-color12 = #3971ED
+color4  = #268bd2
+color12 = #268bd2
 
 # Purple
-color5  = #A36AC7
-color13 = #A36AC7
+color5  = #6c71c4
+color13 = #6c71c4
 
 # Teal
-color6  = #3971ED
-color14 = #3971ED
+color6  = #2aa198
+color14 = #2aa198
 
 # Extra colors
-color16 = #F96A38
-color17 = #3971ED
-color18 = #282a2e
-color19 = #373b41
-color20 = #b4b7b4
-color21 = #e0e0e0
+color16 = #cb4b16
+color17 = #d33682
+color18 = #073642
+color19 = #586e75
+color20 = #839496
+color21 = #eee8d5
 
 [hints]
 #font = Monospace 12
