@@ -4,7 +4,7 @@ conky.config = {
   out_to_console = true,
   background = false,
   max_text_width = 0,
-  update_interval = 2.0,
+  update_interval = 2,
   total_run_times = 0,
   short_units = true,
   if_up_strictness = address,
@@ -15,7 +15,8 @@ conky.config = {
 
 conky.text = [[
 [
-{"full_text": "🌈 ${time %a, %d.%m.%Y %H:%M} 🦄", "color":"\#d285b1"}
-${if_existing /sys/class/power_supply/BAT0},{"full_text": "🔋${battery_percent BAT0}%", "color":"\#d285b1"}${endif}
+{"full_text": "${execi 5 /home/sacha/Git/dotfiles/conky/spotify_getinfo.py}", "color":"\#d285b1"},
+{"full_text": "🌈 ${time %a, %d.%m.%Y %l:%M%P} 🦄", "color":"\#d285b1"}
+${if_existing /sys/class/power_supply/BAT0},{"full_text": "${battery_percent BAT0}%🔋", "color":"\#d285b1"}${endif}
 ],
 ]]
