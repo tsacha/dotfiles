@@ -197,21 +197,21 @@ bar {
   colors {
     background $background
     statusline $fg0
-    separator  $magenta
+    separator  $darkorange
 
-    focused_workspace  $magenta    $magenta    $black
-    active_workspace   $background $background $fg0
-    inactive_workspace $background $background $darkgrey
-    urgent_workspace   $red        $red        $fg0
+    focused_workspace  $darkorange     $darkorange     $black
+    active_workspace   $background     $background     $fg0
+    inactive_workspace $background     $background     $darkgrey
+    urgent_workspace   $red            $red            $fg0
     binding_mode       #2f343a     #900000     #fdf6e3
   }
 }
 
-# class                 border      backgr.     text        indicator   child_border
-client.focused          $magenta    $magenta    $black      $black
-client.focused_inactive $bg1        $black      $fg0        $darkgrey
-client.unfocused        $bg1        $bg1        $fg0        $darkgrey
-client.urgent           $red        $red        $background $red
+# class                 border          backgr.         text        indicator   child_border
+client.focused          $darkorange     $darkorange     $black      $black
+client.focused_inactive $bg1            $black          $fg0        $darkgrey
+client.unfocused        $bg1            $bg1            $fg0        $darkgrey
+client.urgent           $red            $red            $background $red
 client.placeholder      #000000     #0c0c0c     #fdf6e3     #000000     #0c0c0c
 client.background       #ffffff
 
