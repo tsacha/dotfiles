@@ -161,7 +161,7 @@ mode "resize" {
 
 bindsym $mod+o mode "resize"
 
-set $background  #1d2021
+set $background  #303030
 set $foreground  #ebdbb2
 set $fg0         #ffffff
 set $black       #282828
@@ -180,7 +180,7 @@ set $darkcyan    #689d6a
 set $cyan        #8ec07c
 set $lightgrey   #a89984
 set $white       #ebdbb2
-set $darkorange  #d65d0e
+set $darkorange  #ff5f00
 set $orange      #fe8019
 set $bg1         #3c3836
 

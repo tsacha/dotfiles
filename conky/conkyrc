@@ -15,8 +15,8 @@ conky.config = {
 
 conky.text = [[
 [
-{"full_text": "${execi 5 /home/sacha/Git/dotfiles/conky/spotify_getinfo.py}", "color":"\#d65d0e"},
-{"full_text": "${time %a, %d.%m.%Y %l:%M%P}", "color":"\#d65d0e"}
-${if_existing /sys/class/power_supply/BAT0},{"full_text": "${battery_percent BAT0}%🔋", "color":"\#d65d0e"}${endif}
+{"full_text": "${execi 5 /home/sacha/Git/dotfiles/conky/spotify_getinfo.py}", "color":"\#ff5f00"},
+{"full_text": "${time %a, %d.%m.%Y %l:%M%P}", "color":"\#ff5f00"}
+${if_existing /sys/class/power_supply/BAT0},{"full_text": "${battery_percent BAT0}%🔋", "color":"\#ff5f00"}${endif}
 ],
 ]]
