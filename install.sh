@@ -132,13 +132,8 @@ if [ "$vmware" == "y" ]; then
     arch-chroot /mnt systemctl enable vmtoolsd
 fi
 
-read -r -p "NVMe support? (y/N) : " nvme
-if [ "$nvme" == "y" ]; then
-    modules_nvme="nvme"
-fi
-
 cat <<EOF > /mnt/etc/mkinitcpio.conf
-MODULES="$modules_vmware $modules_nvme atkbd"
+MODULES="$modules_vmware nvme atkbd"
 BINARIES=""
 FILES=""
 HOOKS="base udev modconf block keyboard keymap $encrypt_hook filesystems fsck"
@@ -176,6 +171,7 @@ echo
 
 arch-chroot /mnt /bin/bash -c "echo root:$root_passwd | chpasswd"
 arch-chroot /mnt /bin/bash -c "echo sacha:$user_passwd | chpasswd"
+arch-chroot /mnt /usr/bin/sed -i '# %wheel ALL=(ALL) ALL/wheel ALL=(ALL) ALL/g' /etc/sudoers
 
 read -r -p "Install NetworkManager y/N? : " nm_install
 echo
@@ -219,7 +215,7 @@ EOF
     arch-chroot /mnt systemctl enable systemd-networkd
 fi
 
-arch-chroot /mnt pacman -S --noconfirm base-devel yajl vim tmux gdisk btrfs-progs efibootmgr w3m rsync ansible git subversion bzr openssh net-tools reflector parallel the_silver_searcher wpa_supplicant bash-completion irssi python-yaml rsync isync docker jre8-openjdk icedtea-web bind-tools gnuplot zbar davfs2 cadaver gmime xapian-core xtrans autoconf-archive openvpn lsof sshfs arch-install-scripts ntfs-3g tcpdump go go-tools zsh firewalld dnsmasq ntpd htop openbsd-netcat jq wget ipcalc llvm yapf
+arch-chroot /mnt pacman -S --noconfirm base-devel yajl vim tmux gdisk btrfs-progs efibootmgr w3m rsync ansible git subversion bzr openssh net-tools reflector parallel the_silver_searcher wpa_supplicant bash-completion irssi python-yaml rsync isync docker jre8-openjdk icedtea-web bind-tools gnuplot zbar davfs2 cadaver gmime xapian-core xtrans autoconf-archive openvpn lsof sshfs arch-install-scripts ntfs-3g tcpdump go go-tools zsh firewalld dnsmasq ntp htop openbsd-netcat jq wget ipcalc llvm yapf
 arch-chroot /mnt systemctl enable ntpd
 
 cat /mnt/etc/pacman.conf | grep archlinuxfr > /dev/null
@@ -234,117 +230,104 @@ fi
 
 arch-chroot /mnt pacman -Sy --noconfirm yaourt
 
-read -r -p "Install desktop environment y/N? : " desktop
-echo
-if [ "$desktop" == "y" ]; then
-    arch-chroot /mnt pacman -S --noconfirm xorg-server mesa xf86-input-libinput xf86-input-synaptics xf86-video-intel xorg-xbacklight xorg-xinit emacs auctex i3-wm i3lock i3status rofi dmenu conky xfce4-terminal thunar thunar-archive-plugin thunar-media-tags-plugin thunar-volman pulseaudio pavucontrol compton ttf-dejavu ttf-droid adobe-source-code-pro-fonts gajim feh firefox thunderbird libreoffice-fresh sxiv redshift okular vinagre freerdp spice phonon-qt4-gstreamer transmission-qt qt4 xfce4-notifyd vlc evince atom texlive-most inkscape pandoc ttf-liberation ttf-dejavu ttf-linux-libertine ttf-linux-libertine-g arandr sway network-manager-applet sddm keybase ttf-fira-sans ttf-fira-mono pass virt-manager openssh-askpass virt-viewer qemu qemu-arch-extra qemu-guest-agent samba cups a2ps wireshark-gtk vnstat scrot gimp markdown gnome-alsamixer alsa-utils pamixer termite noto-fonts noto-fonts-emoji lxappearance-gtk3 system-config-printer hplip lxc rdesktop playerctl
+arch-chroot /mnt pacman -S --noconfirm xorg-server mesa xf86-input-libinput xf86-input-synaptics xf86-video-intel xorg-xbacklight xorg-xinit emacs auctex i3-wm i3lock i3status rofi dmenu conky xfce4-terminal thunar thunar-archive-plugin thunar-media-tags-plugin thunar-volman pulseaudio pavucontrol compton ttf-dejavu ttf-droid adobe-source-code-pro-fonts gajim feh firefox thunderbird libreoffice-fresh sxiv redshift okular vinagre freerdp spice phonon-qt4-gstreamer transmission-qt qt4 xfce4-notifyd vlc evince atom texlive-most inkscape pandoc ttf-liberation ttf-dejavu ttf-linux-libertine ttf-linux-libertine-g arandr sway network-manager-applet sddm keybase ttf-fira-sans ttf-fira-mono pass virt-manager openssh-askpass virt-viewer qemu qemu-arch-extra qemu-guest-agent samba cups a2ps wireshark-gtk vnstat scrot gimp markdown gnome-alsamixer alsa-utils pamixer termite noto-fonts noto-fonts-emoji lxappearance-gtk3 system-config-printer hplip lxc rdesktop playerctl acpi
 
-    arch-chroot /mnt systemctl enable org.cups.cupsd
-    arch-chroot /mnt systemctl enable cups-browsed.service
-    echo "a4" > /mnt/etc/papersize
-    arch-chroot /mnt systemctl enable nscd.service
-    arch-chroot /mnt systemctl enable libvirtd.service
-    arch-chroot /mnt usermod -G lp -a sacha
-    arch-chroot /mnt usermod -G libvirt -a sacha
-    arch-chroot /mnt usermod -G kvm -a sacha
-    arch-chroot /mnt systemctl enable sddm
+arch-chroot /mnt systemctl enable org.cups.cupsd
+arch-chroot /mnt systemctl enable cups-browsed.service
+echo "a4" > /mnt/etc/papersize
+arch-chroot /mnt systemctl enable nscd.service
+arch-chroot /mnt systemctl enable libvirtd.service
+arch-chroot /mnt usermod -G lp -a sacha
+arch-chroot /mnt usermod -G libvirt -a sacha
+arch-chroot /mnt usermod -G kvm -a sacha
+arch-chroot /mnt systemctl enable sddm
 
-    if [ "$vmware" == "y" ]; then
-        arch-chroot /mnt pacman -S xf86-input-vmmouse xf86-video-vmware
-        echo 'needs_root_rights=yes' > /mnt/X11/Xwrapper.config
-    fi
-    cat <<EOF > /mnt/etc/modprobe.d/nobeep.conf
+if [ "$vmware" == "y" ]; then
+    arch-chroot /mnt pacman -S xf86-input-vmmouse xf86-video-vmware
+    echo 'needs_root_rights=yes' > /mnt/X11/Xwrapper.config
+fi
+cat <<EOF > /mnt/etc/modprobe.d/nobeep.conf
 blacklist pcspkr
 EOF
-    read -r -p "Install Gnome environment y/N? : " gnome
-    echo
-    if [ "$gnome" == "y" ]; then
-        arch-chroot /mnt pacman -S --noconfirm gnome gnome-extra
-    fi
 
-    read -r -p "Install Nvidia proprietary drivers y/N? : " nvidia
-    echo
-    if [ "$nvidia" == "y" ]; then
-        arch-chroot /mnt pacman -S --noconfirm nvidia libva-vdpau-driver
-        cat <<EOF > /mnt/etc/modprobe.d/nvidia.conf
+arch-chroot /mnt pacman -S --noconfirm gnome gnome-extra
+arch-chroot /mnt pacman -S --noconfirm plasma plasma-meta kde-applications
+
+read -r -p "Install Nvidia proprietary drivers y/N? : " nvidia
+echo
+if [ "$nvidia" == "y" ]; then
+    arch-chroot /mnt pacman -S --noconfirm nvidia libva-vdpau-driver
+    cat <<EOF > /mnt/etc/modprobe.d/nvidia.conf
 blacklist nouveau
 EOF
-    fi
-    read -r -p "Install KDE environment y/N? : " kde
-    echo
-    if [ "$kde" == "y" ]; then
-        arch-chroot /mnt pacman -S --noconfirm plasma plasma-meta kde-applications
-    fi
-
-    read -r -p "Install laptop packages y/N? : " laptop
-    echo
-    if [ "$laptop" == "y" ]; then
-        arch-chroot /mnt pacman -S --noconfirm acpi
-        cat <<EOF > /mnt/etc/X11/xorg.conf.d/30-touchpad.conf
+fi
+read -r -p "Laptop configuration y/N? : " laptop
+echo
+if [ "$laptop" == "y" ]; then
+    cat <<EOF > /mnt/etc/X11/xorg.conf.d/30-touchpad.conf
 Section "InputClass"
     Identifier "devname"
     Driver "libinput"
     Option "Tapping" "on"
 EndSection
 EOF
-    fi
-
-    arch-chroot /mnt mkdir /home/sacha/Cloud
-    arch-chroot /mnt mkdir /home/sacha/Downloads
-    arch-chroot /mnt mkdir /home/sacha/Git
-    arch-chroot /mnt mkdir /home/sacha/Public
-    arch-chroot /mnt mkdir /home/sacha/Mails
-    arch-chroot /mnt mkdir /home/sacha/Mails/Sent/
-    arch-chroot /mnt mkdir /home/sacha/Mails/Drafts/
-    arch-chroot /mnt mkdir /home/sacha/Mails/Trash/
-    arch-chroot /mnt mkdir /home/sacha/.config
-    arch-chroot /mnt mkdir /home/sacha/.config/systemd/
-    arch-chroot /mnt mkdir /home/sacha/.config/systemd/user
-    arch-chroot /mnt mkdir /home/sacha/.config/compton/
-    arch-chroot /mnt mkdir /home/sacha/.config/i3
-    arch-chroot /mnt mkdir /home/sacha/.config/conky
-    arch-chroot /mnt mkdir /home/sacha/.config/rofi
-    arch-chroot /mnt mkdir /home/sacha/.config/rofi-pass
-    arch-chroot /mnt mkdir /home/sacha/.config/xfce4
-    arch-chroot /mnt mkdir /home/sacha/.config/xfce4/terminal
-    arch-chroot /mnt ln -s /home/sacha/Cloud/Documents/ /home/sacha/Documents
-    arch-chroot /mnt ln -s /home/sacha/Cloud/Music /home/sacha/Music
-    arch-chroot /mnt ln -s /home/sacha/Cloud/Pictures /home/sacha/Pictures
-    arch-chroot /mnt ln -s /home/sacha/Cloud/Videos /home/sacha/Videos
-    rm -Rf /mnt/home/sacha/Git/dotfiles/
-    arch-chroot /mnt git clone https://github.com/tsacha/dotfiles /home/sacha/Git/dotfiles
-    arch-chroot /mnt git clone https://github.com/robbyrussell/oh-my-zsh.git /home/sacha/.oh-my-zsh/
-    arch-chroot /mnt git clone https://github.com/robbyrussell/oh-my-zsh.git /root/.oh-my-zsh/
-
-    arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/i3/config /home/sacha/.config/i3/config
-    arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/compton/compton.conf /home/sacha/.config/compton/compton.conf
-    arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/conky/conkyrc /home/sacha/.config/conky/conkyrc
-    arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/conky/conky-i3bar /home/sacha/.config/conky/conky-i3bar
-    arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/shell/bashrc /home/sacha/.bashrc
-    arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/shell/zshrc /home/sacha/.zshrc
-    arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/shell/zshrc-root /root/.zshrc
-    arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/terminal/terminalrc /home/sacha/.config/xfce4/terminal/terminalrc
-    arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/mbsync/mbsyncrc /home/sacha/.mbsyncrc
-    arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/rofi/config /home/sacha/.config/rofi/config
-    arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/rofi-pass/config /home/sacha/.config/rofi-pass/config
-    arch-chroot /mnt chmod 755 /home/sacha/.config/conky/conky-i3bar
-
-    arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/systemd/xfce4-notifyd.service /home/sacha/.config/systemd/user/xfce4-notifyd.service
-    arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/systemd/compton.service /home/sacha/.config/systemd/user/compton.service
-    arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/systemd/nm-applet.service /home/sacha/.config/systemd/user/nm-applet.service
-    arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/systemd/redshift.service /home/sacha/.config/systemd/user/redshift.service
-
-    arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/xorg/keyboard-layout.conf /etc/X11/xorg.conf.d/10-keyboard-layout.conf
-    arch-chroot /mnt mkdir /home/sacha/.config/systemd/user/default.target.wants
-    arch-chroot /mnt mkdir /home/sacha/.config/systemd/user/emacs.service.d
-    arch-chroot /mnt ln -f -s /usr/lib/systemd/user/emacs.service /home/sacha/.config/systemd/user/default.target.wants/emacs.service
-    arch-chroot /mnt ln -f -s /home/sacha/.config/systemd/user/default.target.wants/redshift.service /home/sacha/.config/systemd/user/default.target.wants/redshift.service
-    arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/override-emacs-unit.conf /home/sacha/.config/systemd/user/emacs.service.d/override.conf
-    arch-chroot /mnt mkdir /home/sacha/.config/termite
-    arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/termite/config.dark /home/sacha/.config/termite/config
-    arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/mime/mimeapps.list /home/sacha/.config/mimeapps.list
-    arch-chroot /mnt ln -f -s /home/sacha/Documents/Security /home/sacha/.password-store
-    arch-chroot /mnt chown sacha.users -Rf /home/sacha
-    arch-chroot /mnt usermod -s /usr/bin/zsh sacha
-    arch-chroot /mnt usermod -s /bin/zsh root
 fi
+
+arch-chroot /mnt mkdir /home/sacha/Cloud
+arch-chroot /mnt mkdir /home/sacha/Downloads
+arch-chroot /mnt mkdir /home/sacha/Git
+arch-chroot /mnt mkdir /home/sacha/Public
+arch-chroot /mnt mkdir /home/sacha/Mails
+arch-chroot /mnt mkdir /home/sacha/Mails/Sent/
+arch-chroot /mnt mkdir /home/sacha/Mails/Drafts/
+arch-chroot /mnt mkdir /home/sacha/Mails/Trash/
+arch-chroot /mnt mkdir /home/sacha/.config
+arch-chroot /mnt mkdir /home/sacha/.config/systemd/
+arch-chroot /mnt mkdir /home/sacha/.config/systemd/user
+arch-chroot /mnt mkdir /home/sacha/.config/compton/
+arch-chroot /mnt mkdir /home/sacha/.config/i3
+arch-chroot /mnt mkdir /home/sacha/.config/conky
+arch-chroot /mnt mkdir /home/sacha/.config/rofi
+arch-chroot /mnt mkdir /home/sacha/.config/rofi-pass
+arch-chroot /mnt mkdir /home/sacha/.config/xfce4
+arch-chroot /mnt mkdir /home/sacha/.config/xfce4/terminal
+arch-chroot /mnt ln -s /home/sacha/Cloud/Documents/ /home/sacha/Documents
+arch-chroot /mnt ln -s /home/sacha/Cloud/Music /home/sacha/Music
+arch-chroot /mnt ln -s /home/sacha/Cloud/Pictures /home/sacha/Pictures
+arch-chroot /mnt ln -s /home/sacha/Cloud/Videos /home/sacha/Videos
+rm -Rf /mnt/home/sacha/Git/dotfiles/
+arch-chroot /mnt git clone https://github.com/tsacha/dotfiles /home/sacha/Git/dotfiles
+arch-chroot /mnt git clone https://github.com/robbyrussell/oh-my-zsh.git /home/sacha/.oh-my-zsh/
+arch-chroot /mnt git clone https://github.com/robbyrussell/oh-my-zsh.git /root/.oh-my-zsh/
+
+arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/i3/config /home/sacha/.config/i3/config
+arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/compton/compton.conf /home/sacha/.config/compton/compton.conf
+arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/conky/conkyrc /home/sacha/.config/conky/conkyrc
+arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/conky/conky-i3bar /home/sacha/.config/conky/conky-i3bar
+arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/shell/bashrc /home/sacha/.bashrc
+arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/shell/zshrc /home/sacha/.zshrc
+arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/shell/zshrc-root /root/.zshrc
+arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/terminal/terminalrc /home/sacha/.config/xfce4/terminal/terminalrc
+arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/mbsync/mbsyncrc /home/sacha/.mbsyncrc
+arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/rofi/config /home/sacha/.config/rofi/config
+arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/rofi-pass/config /home/sacha/.config/rofi-pass/config
+arch-chroot /mnt chmod 755 /home/sacha/.config/conky/conky-i3bar
+
+arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/systemd/xfce4-notifyd.service /home/sacha/.config/systemd/user/xfce4-notifyd.service
+arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/systemd/compton.service /home/sacha/.config/systemd/user/compton.service
+arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/systemd/nm-applet.service /home/sacha/.config/systemd/user/nm-applet.service
+arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/systemd/redshift.service /home/sacha/.config/systemd/user/redshift.service
+
+arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/xorg/keyboard-layout.conf /etc/X11/xorg.conf.d/10-keyboard-layout.conf
+arch-chroot /mnt mkdir /home/sacha/.config/systemd/user/default.target.wants
+arch-chroot /mnt mkdir /home/sacha/.config/systemd/user/emacs.service.d
+arch-chroot /mnt ln -f -s /usr/lib/systemd/user/emacs.service /home/sacha/.config/systemd/user/default.target.wants/emacs.service
+arch-chroot /mnt ln -f -s /home/sacha/.config/systemd/user/default.target.wants/redshift.service /home/sacha/.config/systemd/user/default.target.wants/redshift.service
+arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/override-emacs-unit.conf /home/sacha/.config/systemd/user/emacs.service.d/override.conf
+arch-chroot /mnt mkdir /home/sacha/.config/termite
+arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/termite/config.dark /home/sacha/.config/termite/config
+arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/mime/mimeapps.list /home/sacha/.config/mimeapps.list
+arch-chroot /mnt ln -f -s /home/sacha/Documents/Security /home/sacha/.password-store
+arch-chroot /mnt chown sacha.users -Rf /home/sacha
+arch-chroot /mnt usermod -s /usr/bin/zsh sacha
+arch-chroot /mnt usermod -s /bin/zsh root
