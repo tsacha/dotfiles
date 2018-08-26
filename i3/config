@@ -227,6 +227,7 @@ bindsym XF86AudioMute exec pamixer -t
 bindsym $mod+F10 exec pamixer -t
 bindsym --release  $mod+Shift+S exec flameshot gui
 bindsym $mod+F7 exec /home/sacha/Git/dotfiles/termite/termite-theme-switcher.sh
+bindsym $mod+F8 exec /home/sacha/Git/dotfiles/pulseaudio/switch_headphones_speakers.sh
 bindsym XF86AudioPlay exec /usr/bin/dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause
 
 new_window none
