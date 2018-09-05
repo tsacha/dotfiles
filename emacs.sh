@@ -15,17 +15,6 @@ if [ ! -d ~/.emacs.d/elisp ]; then
     mkdir ~/.emacs.d/elisp
 fi
 
-if [ ! -d ~/.emacs.d/elisp/org-mode ]; then
-    git clone git://orgmode.org/org-mode.git ~/.emacs.d/elisp/org-mode
-else
-    pushd ~/.emacs.d/elisp/org-mode
-    git pull
-    popd
-fi
-pushd ~/.emacs.d/elisp/org-mode
-make autoloads
-popd
-
 if [ ! -d ~/.emacs.d/elisp/use-package ]; then
     git clone https://github.com/jwiegley/use-package ~/.emacs.d/elisp/use-package
 else
@@ -36,6 +25,8 @@ fi
 
 pushd ~/.emacs.d
 emacs --batch -l org sacha.org -f org-babel-tangle or emacs --batch -l org --eval '(org-babel-tangle-file "sacha.org")'
+emacs --batch -l org sacha.org -f org-babel-tangle or emacs --batch -l org --eval '(package-initialize)'
+
 popd
 
 if [ ! -L ~/.emacs.d/init.el ]; then
