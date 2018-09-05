@@ -26,18 +26,6 @@ pushd ~/.emacs.d/elisp/org-mode
 make autoloads
 popd
 
-if [ ! -d ~/.emacs.d/elisp/mu ]; then
-    git clone https://github.com/djcb/mu ~/.emacs.d/elisp/mu
-else
-    pushd ~/.emacs.d/elisp/mu
-    git pull
-    popd
-fi
-pushd ~/.emacs.d/elisp/mu
-./autogen.sh
-make -j4
-popd
-
 if [ ! -d ~/.emacs.d/elisp/use-package ]; then
     git clone https://github.com/jwiegley/use-package ~/.emacs.d/elisp/use-package
 else
