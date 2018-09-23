@@ -7,4 +7,5 @@ xrandr \
 	--output DP-5 --off \
 	--output DP-4 --off \
 	--output DP-3 --off \
-	--output DP-1 --off \
+	--output DP-1 --off
+feh --bg-fill /home/sacha/Pictures/wall1.png --bg-fill /home/sacha/Pictures/wall2.jpg
