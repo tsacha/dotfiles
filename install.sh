@@ -215,7 +215,14 @@ EOF
     arch-chroot /mnt systemctl enable systemd-networkd
 fi
 
-arch-chroot /mnt pacman -S --noconfirm base-devel yajl vim tmux gdisk btrfs-progs efibootmgr w3m rsync ansible git subversion bzr openssh net-tools reflector parallel the_silver_searcher wpa_supplicant bash-completion irssi python-yaml rsync isync docker jre8-openjdk icedtea-web bind-tools gnuplot zbar davfs2 cadaver gmime xapian-core xtrans autoconf-archive openvpn lsof sshfs arch-install-scripts ntfs-3g tcpdump go go-tools zsh firewalld dnsmasq ntp htop openbsd-netcat jq wget ipcalc llvm yapf nfs-utils virtualbox linux-headers xorg-server mesa xf86-input-libinput xf86-input-synaptics xf86-video-intel xorg-xbacklight xorg-xinit emacs auctex i3-wm i3lock i3status rofi dmenu conky xfce4-terminal thunar thunar-archive-plugin thunar-media-tags-plugin thunar-volman pulseaudio pavucontrol compton ttf-dejavu ttf-droid adobe-source-code-pro-fonts gajim feh firefox thunderbird libreoffice-fresh sxiv redshift okular vinagre freerdp spice phonon-qt5-gstreamer transmission-qt xfce4-notifyd vlc evince atom texlive-most inkscape pandoc ttf-liberation ttf-dejavu ttf-linux-libertine ttf-linux-libertine-g arandr sway network-manager-applet sddm keybase ttf-fira-sans ttf-fira-mono pass virt-manager openssh-askpass virt-viewer qemu qemu-arch-extra qemu-guest-agent samba cups a2ps wireshark-gtk vnstat scrot gimp markdown gnome-alsamixer alsa-utils pamixer termite noto-fonts noto-fonts-emoji noto-fonts-extra lxappearance-gtk3 system-config-printer hplip lxc rdesktop playerctl acpi flameshot vagrant terraform vault exa fd bat rclone
+arch-chroot /mnt pacman -S --noconfirm base-devel yajl vim tmux gdisk btrfs-progs efibootmgr w3m rsync ansible git subversion bzr openssh net-tools reflector parallel the_silver_searcher wpa_supplicant bash-completion irssi python-yaml rsync isync docker jre8-openjdk icedtea-web bind-tools gnuplot zbar davfs2 cadaver gmime xapian-core xtrans autoconf-archive openvpn lsof sshfs arch-install-scripts ntfs-3g tcpdump go go-tools zsh firewalld dnsmasq ntp htop openbsd-netcat jq wget ipcalc llvm yapf nfs-utils virtualbox linux-headers xorg-server mesa xf86-input-libinput xf86-input-synaptics xf86-video-intel xorg-xbacklight xorg-xinit emacs auctex i3-wm i3lock i3status rofi dmenu conky xfce4-terminal thunar thunar-archive-plugin thunar-media-tags-plugin thunar-volman pulseaudio pavucontrol compton ttf-dejavu ttf-droid adobe-source-code-pro-fonts gajim feh firefox thunderbird libreoffice-fresh sxiv redshift okular vinagre freerdp spice phonon-qt5-gstreamer transmission-qt xfce4-notifyd vlc evince atom texlive-most inkscape pandoc ttf-liberation ttf-dejavu ttf-linux-libertine ttf-linux-libertine-g arandr sway network-manager-applet sddm keybase ttf-fira-sans ttf-fira-mono pass virt-manager openssh-askpass virt-viewer qemu qemu-arch-extra qemu-guest-agent samba cups a2ps wireshark-gtk vnstat scrot gimp markdown gnome-alsamixer alsa-utils pamixer termite noto-fonts noto-fonts-emoji noto-fonts-extra lxappearance-gtk3 system-config-printer hplip lxc rdesktop playerctl acpi flameshot vagrant terraform vault exa fd bat rclone flatpak
+
+arch-chroot /mnt flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+arch-chroot /mnt flatpak install -y flathub com.spotify.Client
+arch-chroot /mnt flatpak install -y flathub org.telegram.desktop
+arch-chroot /mnt flatpak install -y flathub com.visualstudio.code
+arch-chroot /mnt flatpak install -y flathub com.dropbox.Client
+
 
 arch-chroot /mnt systemctl enable org.cups.cupsd
 arch-chroot /mnt systemctl enable ntpd
@@ -259,14 +266,13 @@ EndSection
 EOF
 fi
 
-arch-chroot /mnt mkdir /home/sacha/Cloud
+arch-chroot /mnt ln -f -s /home/sacha/Dropbox/Documents/ /home/sacha/Documents
+arch-chroot /mnt ln -f -s /home/sacha/Dropbox/Documents/Work/iRaiser /home/sacha/Work
+arch-chroot /mnt ln -f -s /home/sacha/Dropbox/Pictures/ /home/sacha/Pictures
 arch-chroot /mnt mkdir /home/sacha/Downloads
 arch-chroot /mnt mkdir /home/sacha/Git
-arch-chroot /mnt mkdir /home/sacha/Public
-arch-chroot /mnt mkdir /home/sacha/Mails
-arch-chroot /mnt mkdir /home/sacha/Mails/Sent/
-arch-chroot /mnt mkdir /home/sacha/Mails/Drafts/
-arch-chroot /mnt mkdir /home/sacha/Mails/Trash/
+arch-chroot /mnt mkdir /home/sacha/Git/Work
+arch-chroot /mnt mkdir /home/sacha/Work
 arch-chroot /mnt mkdir /home/sacha/.config
 arch-chroot /mnt mkdir /home/sacha/.config/systemd/
 arch-chroot /mnt mkdir /home/sacha/.config/systemd/user
@@ -277,10 +283,6 @@ arch-chroot /mnt mkdir /home/sacha/.config/rofi
 arch-chroot /mnt mkdir /home/sacha/.config/rofi-pass
 arch-chroot /mnt mkdir /home/sacha/.config/xfce4
 arch-chroot /mnt mkdir /home/sacha/.config/xfce4/terminal
-arch-chroot /mnt ln -s /home/sacha/Cloud/Documents/ /home/sacha/Documents
-arch-chroot /mnt ln -s /home/sacha/Cloud/Music /home/sacha/Music
-arch-chroot /mnt ln -s /home/sacha/Cloud/Pictures /home/sacha/Pictures
-arch-chroot /mnt ln -s /home/sacha/Cloud/Videos /home/sacha/Videos
 rm -Rf /mnt/home/sacha/Git/dotfiles/
 arch-chroot /mnt git clone https://github.com/tsacha/dotfiles /home/sacha/Git/dotfiles
 arch-chroot /mnt git clone https://github.com/robbyrussell/oh-my-zsh.git /home/sacha/.oh-my-zsh/
@@ -313,7 +315,10 @@ arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/override-emacs-unit.conf /hom
 arch-chroot /mnt mkdir /home/sacha/.config/termite
 arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/termite/config.dark /home/sacha/.config/termite/config
 arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/mime/mimeapps.list /home/sacha/.config/mimeapps.list
-arch-chroot /mnt ln -f -s /home/sacha/Documents/Security /home/sacha/.password-store
+arch-chroot /mnt ln -f -s /home/sacha/Security/Store /home/sacha/.password-store
+arch-chroot /mnt mkdir /home/sacha/.config/rclone
+arch-chroot /mnt ln -f -s /home/sacha/Security/Configuration/rclone.conf /home/sacha/.config/rclone/rclone.conf
+arch-chroot /mnt ln -f -s /home/sacha/Security/Work/Ansible/ansible_credentials.json ~/.ansible_credentials.json
 arch-chroot /mnt chown sacha.users -Rf /home/sacha
 arch-chroot /mnt usermod -s /usr/bin/zsh sacha
 arch-chroot /mnt usermod -s /bin/zsh root
