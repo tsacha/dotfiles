@@ -319,6 +319,8 @@ arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/termite/config.dark /home/sac
 arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/mime/mimeapps.list /home/sacha/.config/mimeapps.list
 arch-chroot /mnt ln -f -s /home/sacha/Security/Store /home/sacha/.password-store
 arch-chroot /mnt ln -f -s /home/sacha/Security/Work/Ansible/ansible_credentials.json /home/sacha/.ansible_credentials.json
+arch-chroot /mnt ln -f -s /home/sacha/Security/Work/AWS/credentials /home/sacha/.aws/credentials
+arch-chroot /mnt ln -f -s /home/sacha/Security/Work/AWS/config /home/sacha/.aws/config
 arch-chroot /mnt chown sacha.users -Rf /home/sacha
 arch-chroot /mnt usermod -s /usr/bin/zsh sacha
 arch-chroot /mnt usermod -s /bin/zsh root
