@@ -1,4 +1,5 @@
 [Default Applications]
+inode/directory=nautilus.desktop
 x-scheme-handler/mailto=thunderbird.desktop
 message/rfc822=thunderbird.desktop
 x-scheme-handler/http=firefox.desktop
