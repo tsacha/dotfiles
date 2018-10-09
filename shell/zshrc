@@ -85,7 +85,7 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 alias ls="exa --long --header --git"
-alias cat="bat"
+alias cat="bat --paging never --decorations never"
 source "/home/sacha/Git/dotfiles/shell/current.zsh"
 
 export SSH_AUTH_SOCK=/run/user/1000/gnupg/S.gpg-agent.ssh
