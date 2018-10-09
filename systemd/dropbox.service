@@ -2,12 +2,13 @@
 Description=Dropbox
 After=local-fs.target network.target
 
-
 [Service]
 Type=simple
 ExecStart=/var/lib/flatpak/exports/bin/com.dropbox.Client
 Restart=always
 RestartSec=5s
+Environment=DISPLAY=:0
 
 [Install]
 WantedBy=default.target
+
