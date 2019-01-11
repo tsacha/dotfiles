@@ -291,7 +291,8 @@ arch-chroot /mnt git clone https://github.com/robbyrussell/oh-my-zsh.git /root/.
 
 arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/i3/config /home/sacha/.config/i3/config
 arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/compton/compton.conf /home/sacha/.config/compton/compton.conf
-arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/conky/conkyrc /home/sacha/.config/conky/conkyrc
+rch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/conky/conkyrc /home/sacha/.config/conky/conkyrc
+arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/conky/conkyrc-i3bar /home/sacha/.config/conky/conkyrc-i3bar
 arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/conky/conky-i3bar /home/sacha/.config/conky/conky-i3bar
 arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/shell/bashrc /home/sacha/.bashrc
 arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/shell/zshrc /home/sacha/.zshrc
@@ -306,6 +307,7 @@ arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/systemd/xfce4-notifyd.service
 arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/systemd/compton.service /home/sacha/.config/systemd/user/compton.service
 arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/systemd/nm-applet.service /home/sacha/.config/systemd/user/nm-applet.service
 arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/systemd/redshift.service /home/sacha/.config/systemd/user/redshift.service
+arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/systemd/conky.service /home/sacha/.config/systemd/user/conky.service
 arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/systemd/dropbox.service /home/sacha/.config/systemd/user/dropbox.service
 arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/systemd/systemd /home/sacha/.config/systemd/user/systemd
 arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/xorg/keyboard-layout.conf /etc/X11/xorg.conf.d/10-keyboard-layout.conf

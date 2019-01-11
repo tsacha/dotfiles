@@ -2,4 +2,4 @@
 echo '{"version":1}'
 echo '['
 echo '[],'
-exec conky -c ~/.config/conky/conkyrc
+exec conky -c ~/.config/conky/conkyrc-i3bar

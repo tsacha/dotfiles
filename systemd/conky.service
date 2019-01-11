@@ -1,0 +1,11 @@
+[Unit]
+Description=Compton X11 compositor
+Requires=dbus.socket
+
+[Service]
+ExecStart=/usr/bin/conky -c %h/.config/conky/conkyrc
+Restart=always
+RestartSec=5s
+
+[Install]
+WantedBy=default.target
