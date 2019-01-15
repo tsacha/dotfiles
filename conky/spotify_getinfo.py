@@ -10,7 +10,6 @@ workdir = Path(Path.home(), ".config/conky")
 saved_artist = Path(workdir, ".saved_artist")
 saved_song = Path(workdir, ".saved_song")
 saved_album = Path(workdir, ".saved_album")
-saved_cover = Path(workdir, ".saved_cover")
 cover_file = Path(workdir, "cover.jpg")
 
 
@@ -19,6 +18,14 @@ def perfect_length(str, max_length=23):
         return str[:max_length] + "…"
     else:
         return str
+
+
+def is_different_track(artist, album, song):
+    return (
+        (not saved_artist.is_file() or saved_artist.read_text() != artist)
+        or (not saved_album.is_file() or saved_album.read_text() != album)
+        or (not saved_song.is_file() or saved_song.read_text() != song)
+    )
 
 
 def purge():
@@ -58,22 +65,17 @@ if __name__ == "__main__":
             purge()
             exit(0)
 
-        if (
-            not cover_file.is_file()
-            or not saved_cover.is_file()
-            or saved_cover.read_text() != cover
-        ):
-            saved_cover.write_text(cover)
+        if is_different_track(artist, album, song):
+            saved_artist.write_text(artist)
+            saved_song.write_text(song)
+            saved_album.write_text(album)
+
             req = urllib.request.urlopen(cover)
             cover_file.write_bytes(req.read())
 
-            cmd = f"convert -border 3 -bordercolor '#ff5f00' {cover_file} {cover_file}"
+            cmd = f"convert -border 3 -bordercolor white {cover_file} {cover_file}"
             proc = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE)
             proc.wait()
-
-        saved_artist.write_text(artist)
-        saved_song.write_text(song)
-        saved_album.write_text(album)
 
     if sys.argv[1] == "i3bar":
         try:

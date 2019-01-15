@@ -27,11 +27,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 conky.config = {
     uppercase = false,
     override_utf8_locale = true,
-    default_color = '#ff5f00',
+    default_color = '#ffffff',
     default_shade_color	= '#282828',
     default_outline_color = '#282828',
 
     alignment = 'top_left',
+    xinerama_head = 1,
     gap_x = 35,
     gap_y = 35,
 
