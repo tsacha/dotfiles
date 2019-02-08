@@ -52,18 +52,15 @@ data_disk=/dev/disk/by-partuuid/$data_guid
 boot_disk=/dev/disk/by-partuuid/$boot_guid
 
 encrypt_hook=""
-read -r -p "Create LUKS device? (y/N) : " luks
-if [ "$luks" == "y" ]; then
-    encrypt_hook="encrypt"
-    read -s -p "Luks password: " luks_password
-    echo
-    echo -n $luks_password | cryptsetup -q luksFormat $data_disk -
-    echo "Luks created."
-    echo -n $luks_password | cryptsetup luksOpen $data_disk $cryptname -
-    echo "Luks opened."
-    data_uuid=`blkid $data_disk -s UUID -o value`
-    data_disk=/dev/mapper/$cryptname
-fi
+encrypt_hook="encrypt"
+read -s -p "Luks password: " luks_password
+echo
+echo -n $luks_password | cryptsetup -q luksFormat $data_disk -
+echo "Luks created."
+echo -n $luks_password | cryptsetup luksOpen $data_disk $cryptname -
+echo "Luks opened."
+data_uuid=`blkid $data_disk -s UUID -o value`
+data_disk=/dev/mapper/$cryptname
 
 read -r -p "Format boot partition? y/N " format_boot
 if [ "$format_boot" == "y" ]; then
@@ -97,21 +94,12 @@ pacstrap /mnt base
 arch-chroot /mnt bootctl install
 
 echo 'default arch' > /mnt/boot/loader/loader.conf
-if [ "$luks" == "y" ]; then
-    cat <<EOF > /mnt/boot/loader/entries/arch.conf
+cat <<EOF > /mnt/boot/loader/entries/arch.conf
 title   Arch Linux
 linux   /vmlinuz-linux
 initrd  /initramfs-linux.img
 options cryptdevice=UUID=$data_uuid:$cryptname root=$data_disk rootfstype=$fs_type add_efi_memmap
 EOF
-else
-    cat <<EOF > /mnt/boot/loader/entries/arch.conf
-title   Arch Linux
-linux   /vmlinuz-linux
-initrd  /initramfs-linux.img
-options root=$data_disk rootfstype=$fs_type add_efi_memmap
-EOF
-fi
 
 arch-chroot /mnt bootctl update
 genfstab -U /mnt > /mnt/etc/fstab
@@ -165,56 +153,7 @@ arch-chroot /mnt /bin/bash -c "echo root:$root_passwd | chpasswd"
 arch-chroot /mnt /bin/bash -c "echo sacha:$user_passwd | chpasswd"
 arch-chroot /mnt /usr/bin/sed -i '# %wheel ALL=(ALL) ALL/wheel ALL=(ALL) ALL/g' /etc/sudoers
 
-read -r -p "Install NetworkManager y/N? : " nm_install
-echo
-if [ "$nm_install" == "y" ]; then
-    arch-chroot /mnt pacman -S --noconfirm networkmanager networkmanager-openvpn
-    arch-chroot /mnt systemctl enable NetworkManager
-fi
-
-read -r -p "Install systemd-networkd y/N? : " ntwkd_install
-echo
-if [ "$ntwkd_install" == "y" ]; then
-    mkdir -p /mnt/etc/systemd/network
-    read -r -p "Network interface ? " interface
-    read -r -p "DHCP ? Y/n : " dhcp
-    if [ "$dhcp" == "n" ]; then
-        read -r -p "IPv4 ? " ipv4
-        read -r -p "CIDR ? " cidr4
-        read -r -p "Gateway ? " gateway4
-        read -r -p "DNS ? " dns
-        cat <<EOF > /mnt/etc/systemd/network/$interface.network
-[Match]
-Name=$interface
-
-[Network]
-Address=$ipv4/$cidr4
-Gateway=$gateway4
-DNS=$dns
-
-IPv6AcceptRA=true
-EOF
-    else
-        cat <<EOF > /mnt/etc/systemd/network/$interface.network
-[Match]
-Name=$interface
-
-[Network]
-DHCP=ipv4
-IPv6AcceptRA=true
-EOF
-    fi
-    arch-chroot /mnt systemctl enable systemd-networkd
-fi
-
 arch-chroot /mnt pacman -S --noconfirm base-devel yajl vim tmux gdisk btrfs-progs efibootmgr w3m rsync ansible git subversion bzr openssh net-tools reflector parallel the_silver_searcher wpa_supplicant bash-completion irssi python-yaml rsync isync docker jre8-openjdk icedtea-web bind-tools gnuplot zbar davfs2 cadaver gmime xapian-core xtrans autoconf-archive openvpn lsof sshfs arch-install-scripts ntfs-3g tcpdump go go-tools zsh firewalld dnsmasq ntp htop openbsd-netcat jq wget ipcalc llvm yapf nfs-utils linux-headers xorg-server mesa xf86-input-libinput xf86-input-synaptics xf86-video-intel xorg-xbacklight xorg-xinit emacs auctex i3-wm i3lock i3status rofi dmenu conky xfce4-terminal thunar thunar-archive-plugin thunar-media-tags-plugin thunar-volman pulseaudio pavucontrol compton ttf-dejavu ttf-droid adobe-source-code-pro-fonts gajim feh firefox thunderbird libreoffice-fresh sxiv redshift okular vinagre freerdp spice phonon-qt5-gstreamer transmission-qt xfce4-notifyd vlc evince atom texlive-most inkscape pandoc ttf-liberation ttf-dejavu ttf-linux-libertine ttf-linux-libertine-g arandr sway network-manager-applet sddm keybase ttf-fira-sans ttf-fira-mono pass virt-manager openssh-askpass virt-viewer qemu qemu-arch-extra qemu-guest-agent samba cups a2ps wireshark-gtk vnstat scrot gimp markdown gnome-alsamixer alsa-utils pamixer termite noto-fonts noto-fonts-emoji noto-fonts-extra lxappearance-gtk3 system-config-printer hplip lxc rdesktop playerctl acpi flameshot vagrant terraform vault exa fd bat flatpak httpie libvirt firewalld ebtables
-
-arch-chroot /mnt flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
-arch-chroot /mnt flatpak install -y flathub com.spotify.Client
-arch-chroot /mnt flatpak install -y flathub org.telegram.desktop
-arch-chroot /mnt flatpak install -y flathub com.visualstudio.code
-arch-chroot /mnt flatpak install -y flathub com.dropbox.Client
-
 
 arch-chroot /mnt systemctl enable org.cups.cupsd
 arch-chroot /mnt systemctl enable ntpd
@@ -227,6 +166,11 @@ arch-chroot /mnt usermod -G lp -a sacha
 arch-chroot /mnt usermod -G libvirt -a sacha
 arch-chroot /mnt usermod -G kvm -a sacha
 arch-chroot /mnt systemctl enable sddm
+
+arch-chroot /mnt flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+arch-chroot /mnt flatpak install -y flathub com.spotify.Client
+arch-chroot /mnt flatpak install -y flathub org.telegram.desktop
+arch-chroot /mnt flatpak install -y flathub com.dropbox.Client
 
 if [ "$vmware" == "y" ]; then
     arch-chroot /mnt pacman -S xf86-input-vmmouse xf86-video-vmware
@@ -283,7 +227,7 @@ arch-chroot /mnt git clone https://github.com/robbyrussell/oh-my-zsh.git /root/.
 
 arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/i3/config /home/sacha/.config/i3/config
 arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/compton/compton.conf /home/sacha/.config/compton/compton.conf
-rch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/conky/conkyrc /home/sacha/.config/conky/conkyrc
+arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/conky/conkyrc /home/sacha/.config/conky/conkyrc
 arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/conky/conkyrc-i3bar /home/sacha/.config/conky/conkyrc-i3bar
 arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/conky/conky-i3bar /home/sacha/.config/conky/conky-i3bar
 arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/shell/bashrc /home/sacha/.bashrc
