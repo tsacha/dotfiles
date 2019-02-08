@@ -24,7 +24,7 @@ fi
 read -r -p "Disk to use? " disk
 read -r -p "Auto partitioning? (y/N) : " auto_p
 if [ "$auto_p" == "y" ]; then
-    boot_size_mb=512
+    boot_size_mb=4096
     sgdisk -og $disk
     start_sector=$(sgdisk -F $disk)
     sector_size=$(cat /sys/block/$(basename $disk)/queue/physical_block_size)
