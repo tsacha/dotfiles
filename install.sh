@@ -96,28 +96,20 @@ pacstrap /mnt base
 
 arch-chroot /mnt bootctl install
 
-read -r -p "Fix Razer sleep y/N? : " razer
-echo
-if [ "$razer" == "y" ]; then
-    razer_fix_sleep=" button.lid_init_state=open"
-else
-    razer_fix_sleep=""
-fi
-
 echo 'default arch' > /mnt/boot/loader/loader.conf
 if [ "$luks" == "y" ]; then
     cat <<EOF > /mnt/boot/loader/entries/arch.conf
 title   Arch Linux
 linux   /vmlinuz-linux
 initrd  /initramfs-linux.img
-options cryptdevice=UUID=$data_uuid:$cryptname root=$data_disk rootfstype=$fs_type add_efi_memmap$razer_fix_sleep
+options cryptdevice=UUID=$data_uuid:$cryptname root=$data_disk rootfstype=$fs_type add_efi_memmap
 EOF
 else
     cat <<EOF > /mnt/boot/loader/entries/arch.conf
 title   Arch Linux
 linux   /vmlinuz-linux
 initrd  /initramfs-linux.img
-options root=$data_disk rootfstype=$fs_type add_efi_memmap$razer_fix_sleep
+options root=$data_disk rootfstype=$fs_type add_efi_memmap
 EOF
 fi
 
