@@ -1,1 +1,1 @@
-/home/sacha/Git/dotfiles/shell/dark.zsh
+/home/sacha/Git/dotfiles/shell/light.zsh
