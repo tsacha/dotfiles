@@ -228,6 +228,8 @@ arch-chroot /mnt git clone https://github.com/robbyrussell/oh-my-zsh.git /root/.
 arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/i3/config /home/sacha/.config/i3/config
 arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/compton/compton.conf /home/sacha/.config/compton/compton.conf
 arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/conky/conkyrc /home/sacha/.config/conky/conkyrc
+arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/conky/conkyrc-mainscreen /home/sacha/.config/conky/conkyrc-mainscreen
+arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/conky/conkyrc-secondscreen /home/sacha/.config/conky/conkyrc-secondscreen
 arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/conky/conkyrc-i3bar /home/sacha/.config/conky/conkyrc-i3bar
 arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/conky/conky-i3bar /home/sacha/.config/conky/conky-i3bar
 arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/shell/bashrc /home/sacha/.bashrc

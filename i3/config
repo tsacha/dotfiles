@@ -239,7 +239,7 @@ exec systemctl --user start compton
 exec systemctl --user start gpg-agent-ssh.socket
 exec systemctl --user start nm-applet
 exec systemctl --user import-environment DISPLAY XAUTHORITY SSH_AUTH_SOCK
-exec feh --bg-fill /home/sacha/Pictures/Wallpapers/gris1.jpg --bg-fill /home/sacha/Pictures/Wallpapers/gerst1.jpg 
+exec feh --bg-fill /home/sacha/Pictures/Wallpapers/gris/14.png --bg-fill /home/sacha/Pictures/Wallpapers/gris/02.png
 exec xinput set-prop "TPPS/2 IBM TrackPoint" "Evdev Wheel Emulation" 1
 exec xinput set-prop "TPPS/2 IBM TrackPoint" "Evdev Wheel Emulation Button" 2
 exec xinput set-prop "TPPS/2 IBM TrackPoint" "Evdev Wheel Emulation Timeout" 200

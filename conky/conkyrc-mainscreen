@@ -32,7 +32,7 @@ conky.config = {
     default_outline_color = '#282828',
 
     alignment = 'top_left',
-    xinerama_head = 1,
+    xinerama_head = 2,
     gap_x = 35,
     gap_y = 35,
 
@@ -68,8 +68,8 @@ conky.config = {
 }
 
 conky.text = [[
-${if_running spotify}${voffset 0}${goto 280}${font DejaVu Sans Monospace:Bold:size=30}${exec ~/Git/dotfiles/conky/spotify_getinfo.py song}
-${voffset 0}${goto 280}${font DejaVuSans Monospace:size=28}${exec ~/Git/dotfiles/conky/spotify_getinfo.py artist} - ${exec ~/Git/dotfiles/conky/spotify_getinfo.py album}
+${if_running spotify}${voffset 0}${goto 280}${font DejaVu Sans Monospace:Bold:size=30}${cat /home/sacha/.config/conky/.saved_song}
+${voffset 0}${goto 280}${font DejaVuSans Monospace:size=28}${exec cat /home/sacha/.config/conky/.saved_artist} - ${exec cat /home/sacha/.config/conky/.saved_album}
 # --- Get Spotify Cover ---
 ${if_running spotify}
   ${exec ~/Git/dotfiles/conky/spotify_getinfo.py make_cache}

@@ -10,6 +10,7 @@ workdir = Path(Path.home(), ".config/conky")
 saved_artist = Path(workdir, ".saved_artist")
 saved_song = Path(workdir, ".saved_song")
 saved_album = Path(workdir, ".saved_album")
+saved_cover_id = Path(workdir, ".saved_cover_id")
 cover_file = Path(workdir, "cover.jpg")
 
 
@@ -20,11 +21,12 @@ def perfect_length(str, max_length=23):
         return str
 
 
-def is_different_track(artist, album, song):
+def is_different_track(artist, album, song, cover_id):
     return (
         (not saved_artist.is_file() or saved_artist.read_text() != artist)
         or (not saved_album.is_file() or saved_album.read_text() != album)
         or (not saved_song.is_file() or saved_song.read_text() != song)
+        or (not saved_cover_id.is_file() or saved_cover_id.read_text() != cover_id)
     )
 
 
@@ -35,8 +37,8 @@ def purge():
         saved_artist.unlink()
     if saved_song.is_file():
         saved_song.unlink()
-    if saved_cover.is_file():
-        saved_cover.unlink()
+    if saved_cover_id.is_file():
+        saved_cover_id.unlink()
     if cover_file.is_file():
         cover_file.unlink()
 
@@ -60,15 +62,17 @@ if __name__ == "__main__":
             song = metadata["xesam:title"]
             artist = metadata["xesam:artist"][0]
             cover = metadata["mpris:artUrl"]
+            cover_id = cover.split("/")[4]
 
         except Exception:
             purge()
             exit(0)
 
-        if is_different_track(artist, album, song):
+        if is_different_track(artist, album, song, cover_id):
             saved_artist.write_text(artist)
             saved_song.write_text(song)
             saved_album.write_text(album)
+            saved_cover_id.write_text(cover_id)
 
             req = urllib.request.urlopen(cover)
             cover_file.write_bytes(req.read())

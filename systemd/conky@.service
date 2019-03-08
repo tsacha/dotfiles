@@ -3,7 +3,7 @@ Description=Compton X11 compositor
 Requires=dbus.socket
 
 [Service]
-ExecStart=/usr/bin/conky -c %h/.config/conky/conkyrc
+ExecStart=/usr/bin/conky -c %h/.config/conky/%i
 Restart=always
 RestartSec=5s
 
