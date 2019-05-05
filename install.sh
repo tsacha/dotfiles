@@ -147,6 +147,7 @@ echo "a4" > /mnt/etc/papersize
 arch-chroot /mnt systemctl enable nscd.service
 arch-chroot /mnt systemctl enable firewalld.service
 arch-chroot /mnt systemctl enable libvirtd.service
+arch-chroot /mnt systemctl enable NetworkManager.service
 usermod -R /mnt -G lp -a sacha
 usermod -R /mnt -G libvirt -a sacha
 usermod -R /mnt -G kvm -a sacha
