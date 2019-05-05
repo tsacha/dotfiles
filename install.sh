@@ -136,7 +136,7 @@ echo
 
 echo root:$root_passwd | chpasswd -R /mnt
 echo sacha:$user_passwd | chpasswd -R /mnt
-arch-chroot /mnt /usr/bin/sed -i '# %wheel ALL=(ALL) ALL/wheel ALL=(ALL) ALL/g' /etc/sudoers
+arch-chroot /mnt /usr/bin/sed -i 's/# %wheel ALL=(ALL) ALL/wheel ALL=(ALL) ALL/g' /etc/sudoers
 
 usermod -R /mnt -G wheel -a sacha
 usermod -R /mnt -G kvm -a sacha
