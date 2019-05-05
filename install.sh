@@ -70,18 +70,8 @@ if [ "$format_boot" == "y" ]; then
     echo "Done."
 fi
 
-fs_options=""
-read -r -p "Filesystem for data partition? (ext4 by default) " fs_type
-if [ -z "$fs_type" ]; then
-    fs_type="ext4"
-fi
-
-if [ "$fs_type" == "btrfs" ]; then
-    fs_options=" -f"
-fi;
-
 echo -n "Format data partition… "
-mkfs -t $fs_type $fs_options $data_disk > /dev/null 2> /dev/null
+mkfs -t ext4 $data_disk > /dev/null 2> /dev/null
 echo "Done."
 
 mount $data_disk /mnt
@@ -90,7 +80,7 @@ if [ ! -e /mnt/boot ]; then
     mkdir /mnt/boot
 fi
 mount $boot_disk /mnt/boot
-pacstrap /mnt base
+pacstrap /mnt base base-devel
 
 arch-chroot /mnt bootctl install
 
@@ -99,19 +89,11 @@ cat <<EOF > /mnt/boot/loader/entries/arch.conf
 title   Arch Linux
 linux   /vmlinuz-linux
 initrd  /initramfs-linux.img
-options cryptdevice=UUID=$data_uuid:$cryptname root=$data_disk rootfstype=$fs_type add_efi_memmap
+options cryptdevice=UUID=$data_uuid:$cryptname root=$data_disk rootfstype=ext4 add_efi_memmap
 EOF
 
 arch-chroot /mnt bootctl update
 genfstab -U /mnt > /mnt/etc/fstab
-
-
-read -r -p "VMWare guest? (y/N) : " vmware
-if [ "$vmware" == "y" ]; then
-    arch-chroot /mnt pacman -S --noconfirm open-vm-tools
-    modules_vmware="vmw_balloon vmw_pvscsi vsock vmw_vsock_vmci_transport"
-    arch-chroot /mnt systemctl enable vmtoolsd
-fi
 
 cat <<EOF > /mnt/etc/mkinitcpio.conf
 MODULES="$modules_vmware nvme atkbd"
@@ -119,8 +101,6 @@ BINARIES=""
 FILES=""
 HOOKS="base udev modconf block keyboard keymap $encrypt_hook filesystems fsck"
 EOF
-
-arch-chroot /mnt mkinitcpio -p linux
 
 read -r -p "Hostname ? " hostname
 
@@ -137,25 +117,29 @@ fr_FR.UTF-8 UTF-8
 EOF
 arch-chroot /mnt locale-gen
 
+arch-chroot /mnt pacman -S --noconfirm yajl vim tmux gdisk btrfs-progs efibootmgr w3m rsync ansible git subversion bzr openssh net-tools reflector parallel the_silver_searcher wpa_supplicant bash-completion irssi python-yaml rsync isync docker jre8-openjdk icedtea-web bind-tools gnuplot zbar davfs2 cadaver gmime xapian-core xtrans autoconf-archive openvpn lsof sshfs arch-install-scripts ntfs-3g tcpdump go go-tools zsh firewalld dnsmasq ntp htop openbsd-netcat jq wget ipcalc llvm yapf nfs-utils linux-headers xorg-server mesa xf86-input-libinput xf86-input-synaptics xf86-video-intel xorg-xbacklight xorg-xinit emacs i3-wm i3lock i3status rofi dmenu conky xfce4-terminal thunar thunar-archive-plugin thunar-media-tags-plugin thunar-volman pulseaudio pavucontrol compton ttf-dejavu ttf-droid adobe-source-code-pro-fonts gajim feh firefox thunderbird libreoffice-fresh sxiv redshift okular vinagre freerdp spice phonon-qt5-gstreamer transmission-qt xfce4-notifyd vlc evince atom texlive-most inkscape pandoc ttf-liberation ttf-dejavu ttf-linux-libertine ttf-linux-libertine-g arandr sway network-manager-applet sddm keybase ttf-fira-sans ttf-fira-mono pass virt-manager openssh-askpass virt-viewer qemu qemu-arch-extra qemu-guest-agent samba cups a2ps wireshark-qt vnstat scrot gimp markdown alsa-utils pamixer termite noto-fonts noto-fonts-emoji noto-fonts-extra lxappearance-gtk3 system-config-printer hplip lxc rdesktop playerctl acpi flameshot vagrant terraform vault exa fd bat flatpak httpie libvirt firewalld ebtables
+
 rm -f /mnt/etc/localtime
 ln -s /usr/share/zoneinfo/Europe/Paris /mnt/etc/localtime
 
 nb_cpus=$(cat /proc/cpuinfo | grep processor | wc -l)
 sed -i -E "s/^#MAKEFLAGS=.*/MAKEFLAGS=\"-j $nb_cpus\"/g" /mnt/etc/makepkg.conf
-arch-chroot /mnt userdel sacha
-arch-chroot /mnt useradd sacha -c "Sacha Trémoureux" -g users -G wheel,network,video,audio,optical,floppy,storage,scanner,input,power,http,log,sys,rfkill -m
+userdel -R /mnt -r sacha
+groupdel -R /mnt users
+groupadd -R /mnt users
+useradd -c "Sacha Trémoureux" -g users -m -R /mnt sacha
 
 read -r -s -p "Root passwd? " root_passwd
 echo
 read -r -s -p "User passwd? " user_passwd
 echo
 
-arch-chroot /mnt /bin/bash -c "echo root:$root_passwd | chpasswd"
-arch-chroot /mnt /bin/bash -c "echo sacha:$user_passwd | chpasswd"
+echo root:$root_passwd | chpasswd -R /mnt
+echo sacha:$user_passwd | chpasswd -R /mnt
 arch-chroot /mnt /usr/bin/sed -i '# %wheel ALL=(ALL) ALL/wheel ALL=(ALL) ALL/g' /etc/sudoers
 
-arch-chroot /mnt pacman -S --noconfirm base-devel yajl vim tmux gdisk btrfs-progs efibootmgr w3m rsync ansible git subversion bzr openssh net-tools reflector parallel the_silver_searcher wpa_supplicant bash-completion irssi python-yaml rsync isync docker jre8-openjdk icedtea-web bind-tools gnuplot zbar davfs2 cadaver gmime xapian-core xtrans autoconf-archive openvpn lsof sshfs arch-install-scripts ntfs-3g tcpdump go go-tools zsh firewalld dnsmasq ntp htop openbsd-netcat jq wget ipcalc llvm yapf nfs-utils linux-headers xorg-server mesa xf86-input-libinput xf86-input-synaptics xf86-video-intel xorg-xbacklight xorg-xinit emacs auctex i3-wm i3lock i3status rofi dmenu conky xfce4-terminal thunar thunar-archive-plugin thunar-media-tags-plugin thunar-volman pulseaudio pavucontrol compton ttf-dejavu ttf-droid adobe-source-code-pro-fonts gajim feh firefox thunderbird libreoffice-fresh sxiv redshift okular vinagre freerdp spice phonon-qt5-gstreamer transmission-qt xfce4-notifyd vlc evince atom texlive-most inkscape pandoc ttf-liberation ttf-dejavu ttf-linux-libertine ttf-linux-libertine-g arandr sway network-manager-applet sddm keybase ttf-fira-sans ttf-fira-mono pass virt-manager openssh-askpass virt-viewer qemu qemu-arch-extra qemu-guest-agent samba cups a2ps wireshark-gtk vnstat scrot gimp markdown gnome-alsamixer alsa-utils pamixer termite noto-fonts noto-fonts-emoji noto-fonts-extra lxappearance-gtk3 system-config-printer hplip lxc rdesktop playerctl acpi flameshot vagrant terraform vault exa fd bat flatpak httpie libvirt firewalld ebtables
-
+usermod -R /mnt -G wheel -a sacha
+usermod -R /mnt -G kvm -a sacha
 arch-chroot /mnt systemctl enable org.cups.cupsd
 arch-chroot /mnt systemctl enable ntpd
 arch-chroot /mnt systemctl enable cups-browsed.service
@@ -163,9 +147,9 @@ echo "a4" > /mnt/etc/papersize
 arch-chroot /mnt systemctl enable nscd.service
 arch-chroot /mnt systemctl enable firewalld.service
 arch-chroot /mnt systemctl enable libvirtd.service
-arch-chroot /mnt usermod -G lp -a sacha
-arch-chroot /mnt usermod -G libvirt -a sacha
-arch-chroot /mnt usermod -G kvm -a sacha
+usermod -R /mnt -G lp -a sacha
+usermod -R /mnt -G libvirt -a sacha
+usermod -R /mnt -G kvm -a sacha
 arch-chroot /mnt systemctl enable sddm
 
 arch-chroot /mnt flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
@@ -265,5 +249,5 @@ arch-chroot /mnt mkdir /home/sacha/.aws
 arch-chroot /mnt ln -f -s /home/sacha/Security/Work/AWS/credentials /home/sacha/.aws/credentials
 arch-chroot /mnt ln -f -s /home/sacha/Security/Work/AWS/config /home/sacha/.aws/config
 arch-chroot /mnt chown sacha.users -Rf /home/sacha
-arch-chroot /mnt usermod -s /usr/bin/zsh sacha
-arch-chroot /mnt usermod -s /bin/zsh root
+usermod -R /mnt -s /usr/bin/zsh sacha
+usermod -R /mnt -s /bin/zsh root
