@@ -244,7 +244,7 @@ arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/override-emacs-unit.conf /hom
 arch-chroot /mnt mkdir /home/sacha/.config/termite
 arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/termite/config.dark /home/sacha/.config/termite/config
 arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/mime/mimeapps.list /home/sacha/.config/mimeapps.list
-arch-chroot /mnt ln -f -s /home/sacha/Security/Store /home/sacha/.password-store
+arch-chroot /mnt ln -f -s /home/sacha/Git/Passwords /home/sacha/.password-store
 arch-chroot /mnt ln -f -s /home/sacha/Security/Work/Ansible/ansible_credentials.json /home/sacha/.ansible_credentials.json
 arch-chroot /mnt mkdir /home/sacha/.aws
 arch-chroot /mnt ln -f -s /home/sacha/Security/Work/AWS/credentials /home/sacha/.aws/credentials
