@@ -33,6 +33,7 @@ if [ "$auto_p" == "y" ]; then
     let end_boot_sector="(($boot_size_mb * 1024 * 1024 / $sector_size) + $alignment - 1)"
 
     echo "Create partitions…"
+    sgdisk -o $disk > /dev/null
     sgdisk -n 1:$start_sector:$end_boot_sector -c 1:"EFI System Partition" -t 1:ef00 $disk > /dev/null
     sgdisk -n 2:$(($end_boot_sector + 1)):$end_sector -c 2:"Linux partition" -t 2:8304 $disk > /dev/null
     echo "Done."
