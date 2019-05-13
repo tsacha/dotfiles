@@ -68,8 +68,8 @@ conky.config = {
 }
 
 conky.text = [[
-${if_running spotify}${voffset 0}${goto 280}${font DejaVu Sans Monospace:Bold:size=30}${cat /home/sacha/.config/conky/.saved_song 2> /dev/null}
-${voffset 0}${goto 280}${font DejaVuSans Monospace:size=28}${exec cat /home/sacha/.config/conky/.saved_artist 2> /dev/null} - ${exec cat /home/sacha/.config/conky/.saved_album 2> /dev/null}
+${if_running spotify}${voffset 0}${goto 280}${font DejaVu Sans Monospace:Bold:size=30}${cat /home/sacha/.config/conky/.saved_song}
+${voffset 0}${goto 280}${font DejaVuSans Monospace:size=28}${exec cat /home/sacha/.config/conky/.saved_artist} - ${exec cat /home/sacha/.config/conky/.saved_album}
 ${image ~/.config/conky/cover.jpg -p 0,0 -s 256x256}
 ${voffset 100}${endif}
 ]]
