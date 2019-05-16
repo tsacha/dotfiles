@@ -53,7 +53,7 @@ data_disk=/dev/disk/by-partuuid/$data_guid
 boot_disk=/dev/disk/by-partuuid/$boot_guid
 
 encrypt_hook=""
-encrypt_hook="encrypt"
+encrypt_hook="sd-encrypt"
 read -s -p "Luks password: " luks_password
 echo
 echo -n $luks_password | cryptsetup -q luksFormat $data_disk -
@@ -89,7 +89,7 @@ cat <<EOF > /mnt/boot/loader/entries/arch.conf
 title   Arch Linux
 linux   /vmlinuz-linux
 initrd  /initramfs-linux.img
-options cryptdevice=UUID=$data_uuid:$cryptname root=$data_disk rootfstype=ext4 add_efi_memmap
+options rd.luks.name=$data_uuid=$cryptname root=$data_disk rootfstype=ext4 add_efi_memmap
 EOF
 
 arch-chroot /mnt bootctl update
@@ -99,7 +99,7 @@ cat <<EOF > /mnt/etc/mkinitcpio.conf
 MODULES="$modules_vmware nvme atkbd"
 BINARIES=""
 FILES=""
-HOOKS="base udev modconf block keyboard keymap $encrypt_hook filesystems fsck"
+HOOKS="base systemd autodetect keyboard sd-vconsole modconf block $encrypt_hook filesystems fsck"
 EOF
 
 read -r -p "Hostname ? " hostname
@@ -117,7 +117,7 @@ fr_FR.UTF-8 UTF-8
 EOF
 arch-chroot /mnt locale-gen
 
-arch-chroot /mnt pacman -S --noconfirm yajl vim tmux gdisk btrfs-progs efibootmgr w3m rsync ansible git subversion bzr openssh net-tools reflector parallel the_silver_searcher wpa_supplicant bash-completion irssi python-yaml rsync isync docker jre8-openjdk icedtea-web bind-tools gnuplot zbar davfs2 cadaver gmime xapian-core xtrans autoconf-archive openvpn lsof sshfs arch-install-scripts ntfs-3g tcpdump go go-tools zsh firewalld dnsmasq ntp htop openbsd-netcat jq wget ipcalc llvm yapf nfs-utils linux-headers xorg-server mesa xf86-input-libinput xf86-input-synaptics xf86-video-intel xorg-xbacklight xorg-xinit emacs i3-wm i3lock i3status rofi dmenu conky xfce4-terminal thunar thunar-archive-plugin thunar-media-tags-plugin thunar-volman pulseaudio pavucontrol compton ttf-dejavu ttf-droid adobe-source-code-pro-fonts gajim feh firefox thunderbird libreoffice-fresh sxiv redshift okular vinagre freerdp spice phonon-qt5-gstreamer transmission-qt xfce4-notifyd vlc evince atom texlive-most inkscape pandoc ttf-liberation ttf-dejavu ttf-linux-libertine ttf-linux-libertine-g arandr sway network-manager-applet sddm keybase ttf-fira-sans ttf-fira-mono pass virt-manager openssh-askpass virt-viewer qemu qemu-arch-extra qemu-guest-agent samba cups a2ps wireshark-qt vnstat scrot gimp markdown alsa-utils pamixer termite noto-fonts noto-fonts-emoji noto-fonts-extra lxappearance-gtk3 system-config-printer hplip lxc rdesktop playerctl acpi flameshot vagrant terraform vault exa fd bat flatpak httpie libvirt firewalld ebtables
+arch-chroot /mnt pacman -S --noconfirm yajl vim tmux gdisk btrfs-progs efibootmgr w3m rsync ansible git subversion bzr openssh net-tools reflector parallel the_silver_searcher wpa_supplicant bash-completion irssi python-yaml rsync isync docker jre8-openjdk icedtea-web bind-tools gnuplot zbar davfs2 cadaver gmime xapian-core xtrans autoconf-archive openvpn lsof sshfs arch-install-scripts ntfs-3g tcpdump go go-tools zsh firewalld dnsmasq ntp htop openbsd-netcat jq wget ipcalc llvm yapf nfs-utils linux-headers xorg-server mesa xf86-input-libinput xf86-input-synaptics xf86-video-intel xorg-xbacklight xorg-xinit emacs i3-wm i3lock i3status rofi dmenu conky xfce4-terminal thunar thunar-archive-plugin thunar-media-tags-plugin thunar-volman pulseaudio pavucontrol compton ttf-dejavu ttf-droid adobe-source-code-pro-fonts gajim feh firefox thunderbird libreoffice-fresh sxiv redshift okular vinagre freerdp spice phonon-qt5-gstreamer transmission-qt xfce4-notifyd vlc evince atom texlive-most inkscape pandoc ttf-liberation ttf-dejavu ttf-linux-libertine ttf-linux-libertine-g arandr sway network-manager-applet networkmanager-openvpn sddm keybase ttf-fira-sans ttf-fira-mono pass virt-manager openssh-askpass virt-viewer qemu qemu-arch-extra qemu-guest-agent samba cups a2ps wireshark-qt vnstat scrot gimp markdown alsa-utils pamixer termite noto-fonts noto-fonts-emoji noto-fonts-extra lxappearance-gtk3 system-config-printer hplip lxc rdesktop playerctl acpi flameshot vagrant terraform vault exa fd bat flatpak httpie libvirt firewalld ebtables
 
 rm -f /mnt/etc/localtime
 ln -s /usr/share/zoneinfo/Europe/Paris /mnt/etc/localtime
@@ -245,10 +245,9 @@ arch-chroot /mnt mkdir /home/sacha/.config/termite
 arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/termite/config.dark /home/sacha/.config/termite/config
 arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/mime/mimeapps.list /home/sacha/.config/mimeapps.list
 arch-chroot /mnt ln -f -s /home/sacha/Git/Passwords /home/sacha/.password-store
-arch-chroot /mnt ln -f -s /home/sacha/Security/Work/Ansible/ansible_credentials.json /home/sacha/.ansible_credentials.json
 arch-chroot /mnt mkdir /home/sacha/.aws
-arch-chroot /mnt ln -f -s /home/sacha/Security/Work/AWS/credentials /home/sacha/.aws/credentials
-arch-chroot /mnt ln -f -s /home/sacha/Security/Work/AWS/config /home/sacha/.aws/config
+arch-chroot /mnt ln -f -s /home/sacha/Git/Security/Work/AWS/credentials /home/sacha/.aws/credentials
+arch-chroot /mnt ln -f -s /home/sacha/Git/Security/Work/AWS/config /home/sacha/.aws/config
 arch-chroot /mnt chown sacha.users -Rf /home/sacha
 usermod -R /mnt -s /usr/bin/zsh sacha
 usermod -R /mnt -s /bin/zsh root
