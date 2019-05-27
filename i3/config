@@ -226,6 +226,7 @@ bindsym $mod+F11 exec pamixer -d 3
 bindsym XF86AudioMute exec pamixer -t
 bindsym $mod+F10 exec pamixer -t
 bindsym --release  $mod+Shift+S exec flameshot gui
+bindsym $mod+F6 exec /home/sacha/Git/dotfiles/work/calendar.sh
 bindsym $mod+F7 exec /home/sacha/Git/dotfiles/termite/termite-theme-switcher.sh
 bindsym $mod+F8 exec /home/sacha/Git/dotfiles/pulseaudio/switch_headphones_speakers.sh
 bindsym XF86AudioPlay exec /usr/bin/dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause
@@ -239,7 +240,7 @@ exec systemctl --user start compton
 exec systemctl --user start gpg-agent-ssh.socket
 exec systemctl --user start nm-applet
 exec systemctl --user import-environment DISPLAY XAUTHORITY SSH_AUTH_SOCK
-exec feh --bg-fill /home/sacha/Pictures/wallpapers/gris/01.png --bg-fill /home/sacha/Pictures/wallpapers/gris/02.png --bg-fill /home/sacha/Pictures/wallpapers/gris/03.png
+exec feh --bg-fill /home/sacha/Pictures/Wallpapers/gris/01.png --bg-fill /home/sacha/Pictures/Wallpapers/gris/02.png --bg-fill /home/sacha/Pictures/Wallpapers/gris/03.png
 exec xinput set-prop "TPPS/2 IBM TrackPoint" "Evdev Wheel Emulation" 1
 exec xinput set-prop "TPPS/2 IBM TrackPoint" "Evdev Wheel Emulation Button" 2
 exec xinput set-prop "TPPS/2 IBM TrackPoint" "Evdev Wheel Emulation Timeout" 200
