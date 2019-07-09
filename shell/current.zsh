@@ -1,1 +1,0 @@
-/home/sacha/Git/dotfiles/shell/dark.zsh

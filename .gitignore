@@ -4,3 +4,4 @@ host_vars*
 group_vars*
 *~
 #*#
+shell/current.zsh
