@@ -118,7 +118,7 @@ EOF
 arch-chroot /mnt locale-gen
 
 
-arch-chroot /mnt pacman -S --noconfirm yajl vim tmux gdisk btrfs-progs efibootmgr w3m rsync ansible git subversion bzr openssh net-tools reflector parallel the_silver_searcher wpa_supplicant bash-completion irssi python-yaml rsync isync docker jre8-openjdk icedtea-web bind-tools gnuplot zbar davfs2 cadaver gmime xapian-core xtrans autoconf-archive openvpn lsof sshfs arch-install-scripts ntfs-3g tcpdump go go-tools zsh firewalld dnsmasq ntp htop openbsd-netcat jq wget ipcalc llvm yapf nfs-utils linux-headers xorg-server mesa xf86-input-libinput xf86-input-synaptics xf86-video-intel xorg-xbacklight xorg-xinit emacs i3-wm i3lock i3status rofi dmenu conky xfce4-terminal thunar thunar-archive-plugin thunar-media-tags-plugin thunar-volman pulseaudio pavucontrol compton ttf-dejavu ttf-droid adobe-source-code-pro-fonts gajim feh chromium firefox thunderbird libreoffice-fresh sxiv redshift okular vinagre freerdp spice phonon-qt5-gstreamer transmission-qt xfce4-notifyd vlc evince atom texlive-most inkscape pandoc ttf-liberation ttf-dejavu ttf-linux-libertine ttf-linux-libertine-g arandr sway network-manager-applet networkmanager-openvpn sddm keybase ttf-fira-sans ttf-fira-mono pass virt-manager openssh-askpass virt-viewer qemu qemu-arch-extra qemu-guest-agent samba cups a2ps wireshark-qt vnstat scrot gimp markdown alsa-utils pamixer termite noto-fonts noto-fonts-emoji noto-fonts-extra lxappearance-gtk3 system-config-printer hplip lxc rdesktop playerctl acpi flameshot vagrant terraform vault exa fd bat flatpak httpie libvirt firewalld ebtables python-black
+arch-chroot /mnt pacman -S --noconfirm yajl vim tmux gdisk btrfs-progs efibootmgr w3m rsync ansible git subversion bzr openssh net-tools reflector parallel the_silver_searcher wpa_supplicant bash-completion irssi python-yaml rsync isync docker jre8-openjdk icedtea-web bind-tools gnuplot zbar davfs2 cadaver gmime xapian-core xtrans autoconf-archive openvpn lsof sshfs arch-install-scripts ntfs-3g tcpdump go go-tools zsh firewalld dnsmasq ntp htop openbsd-netcat jq wget ipcalc llvm yapf nfs-utils linux-headers xorg-server mesa xf86-input-libinput xf86-input-synaptics xf86-video-intel xorg-xbacklight xorg-xinit emacs i3-wm i3lock i3status rofi dmenu conky xfce4-terminal thunar thunar-archive-plugin thunar-media-tags-plugin thunar-volman pulseaudio pavucontrol compton ttf-dejavu ttf-droid adobe-source-code-pro-fonts gajim feh chromium firefox thunderbird libreoffice-fresh sxiv redshift okular vinagre freerdp spice phonon-qt5-gstreamer transmission-qt xfce4-notifyd vlc evince atom texlive-most inkscape pandoc ttf-liberation ttf-dejavu ttf-linux-libertine ttf-linux-libertine-g arandr sway network-manager-applet networkmanager-openvpn lightdm lightdm-gtk-greeter keybase ttf-fira-sans ttf-fira-mono pass virt-manager openssh-askpass virt-viewer qemu qemu-arch-extra qemu-guest-agent samba cups a2ps wireshark-qt vnstat scrot gimp markdown alsa-utils pamixer termite noto-fonts noto-fonts-emoji noto-fonts-extra lxappearance-gtk3 system-config-printer hplip lxc rdesktop playerctl acpi flameshot vagrant terraform vault exa fd bat flatpak httpie libvirt firewalld ebtables python-black
 
 rm -f /mnt/etc/localtime
 ln -s /usr/share/zoneinfo/Europe/Paris /mnt/etc/localtime
@@ -138,6 +138,8 @@ echo
 echo root:$root_passwd | chpasswd -R /mnt
 echo sacha:$user_passwd | chpasswd -R /mnt
 arch-chroot /mnt /usr/bin/sed -i 's/# %wheel ALL=(ALL) ALL/wheel ALL=(ALL) ALL/g' /etc/sudoers
+arch-chroot /mnt /usr/bin/sed -Ei 's/^#greeter-session.*/greeter-session=lightdm-gtk-greeter/g' /etc/lightdm/lightdm.conf
+arch-chroot /mnt /usr/bin/sed -Ei 's/^#?background=.*/background=\/var\/cache\/background/g' /etc/lightdm/lightdm-gtk-greeter.conf
 
 usermod -R /mnt -G wheel -a sacha
 usermod -R /mnt -G kvm -a sacha
@@ -152,7 +154,7 @@ arch-chroot /mnt systemctl enable NetworkManager.service
 usermod -R /mnt -G lp -a sacha
 usermod -R /mnt -G libvirt -a sacha
 usermod -R /mnt -G kvm -a sacha
-arch-chroot /mnt systemctl enable sddm
+arch-chroot /mnt systemctl enable lightdm
 
 arch-chroot /mnt flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 arch-chroot /mnt flatpak install -y flathub com.spotify.Client
