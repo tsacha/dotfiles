@@ -37,7 +37,7 @@ bindsym $mod+Shift+Q kill
 
 # start dmenu (a program launcher)
 #bindsym $mod+d exec dmenu_run
-bindsym $mod+l exec /home/sacha/.oh-my-zsh/plugins/emacs/emacsclient.sh --no-wait
+bindsym $mod+l exec emacs
 bindsym $mod+j exec firefox
 bindsym $mod+p exec rofi-pass
 bindsym $mod+d exec rofi -show run
