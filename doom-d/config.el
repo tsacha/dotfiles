@@ -67,7 +67,7 @@
 
 ;;;; Fonts
 (setq doom-font (font-spec :family "Noto Sans Mono" :size 14 :weight 'semi-light)
-      doom-variable-pitch-font (font-spec :family "Fira Sans") ; inherits `doom-font''s :size
+      doom-variable-pitch-font (font-spec :family "Noto Sans Mono") ; inherits `doom-font''s :size
       doom-unicode-font (font-spec :family "Noto Sans Mono" :size 14)
       doom-big-font (font-spec :family "Noto Sans Mono" :size 21))
 
@@ -86,3 +86,6 @@
 
 (after! ivy
   (setq ivy-extra-directories '("../" "./")))
+
+(add-hook! python-mode
+  (blacken-mode))
