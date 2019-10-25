@@ -63,7 +63,12 @@
 ;;;; Themes
 (setq custom-safe-themes t)
 (setq doom-theme 'doom-solarized-light)
-;; Place your private configuration here
+(map! "<f7>" #' (lambda () (interactive)
+                  (setq doom-theme 'doom-solarized-light)
+                  (doom/reload-theme)))
+(map! "<f8>" #' (lambda () (interactive)
+                  (setq doom-theme 'doom-solarized-dark)
+                  (doom/reload-theme)))
 
 ;;;; Fonts
 (setq doom-font (font-spec :family "Noto Sans Mono" :size 14 :weight 'semi-light)
