@@ -71,9 +71,9 @@
                   (doom/reload-theme)))
 
 ;;;; Fonts
-(setq doom-font (font-spec :family "Noto Sans Mono" :size 14 :weight 'semi-light)
+(setq doom-font (font-spec :family "Noto Sans Mono" :size 16 :weight 'semi-light)
       doom-variable-pitch-font (font-spec :family "Noto Sans Mono") ; inherits `doom-font''s :size
-      doom-unicode-font (font-spec :family "Noto Sans Mono" :size 14)
+      doom-unicode-font (font-spec :family "Noto Sans Mono" :size 16)
       doom-big-font (font-spec :family "Noto Sans Mono" :size 21))
 
 ;;; Keybinds
