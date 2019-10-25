@@ -6,4 +6,4 @@ rofi.hide-scrollbar: true
 rofi.ssh-command:          termite -t "SSH > {host}" -e "/bin/zsh -c 'source /home/sacha/.zshrc; {ssh-client} {host}'"
 rofi.parse-known-hosts: false
 rofi.disable-history: true
-rofi.theme: /home/sacha/Git/dotfiles/rofi/sidebar-orange.rasi
+rofi.theme: /home/sacha/Git/dotfiles/rofi/sidebar-blue.rasi
