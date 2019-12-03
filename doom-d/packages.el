@@ -7,3 +7,4 @@
 ;; (package! builtin-package :disable t)
 
 (package! blacken)
+(package! jinja2-mode :disable t)

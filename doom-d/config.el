@@ -88,6 +88,7 @@
 (map! "C-S-c" #'clipboard-kill-ring-save)
 (map! "C-S-x" #'clipboard-kill-region)
 (map! "C-S-v" #'clipboard-yank)
+(map! "C-x b" #'list-buffers)
 
 (after! ivy
   (setq ivy-extra-directories '("../" "./")))
