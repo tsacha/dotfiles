@@ -13,3 +13,9 @@ cd yay
 makepkg -si
 
 yay -S --noconfirm --noedit rofi-pass
+
+
+rm -Rf ~/.emacs.d
+git clone https://github.com/hlissner/doom-emacs ~/.emacs.d
+ln -s ~/Git/dotfiles/doom-d ~/.doom.d
+~/.emacs.d/bin/doom install
