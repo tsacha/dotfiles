@@ -137,7 +137,7 @@ echo
 
 echo root:$root_passwd | chpasswd -R /mnt
 echo sacha:$user_passwd | chpasswd -R /mnt
-arch-chroot /mnt /usr/bin/sed -i 's/# %wheel ALL=(ALL) ALL/wheel ALL=(ALL) ALL/g' /etc/sudoers
+arch-chroot /mnt /usr/bin/sed -i 's/# %wheel ALL=(ALL) ALL/%wheel ALL=(ALL) ALL/g' /etc/sudoers
 arch-chroot /mnt /usr/bin/sed -Ei 's/^#greeter-session.*/greeter-session=lightdm-gtk-greeter/g' /etc/lightdm/lightdm.conf
 arch-chroot /mnt /usr/bin/sed -Ei 's/^#?background=.*/background=\/var\/cache\/background/g' /etc/lightdm/lightdm-gtk-greeter.conf
 
@@ -175,7 +175,7 @@ arch-chroot /mnt pacman -S --noconfirm plasma plasma-meta kde-applications
 read -r -p "Install Nvidia proprietary drivers y/N? : " nvidia
 echo
 if [ "$nvidia" == "y" ]; then
-    arch-chroot /mnt pacman -S --noconfirm nvidia libva-vdpau-driver
+    arch-chroot /mnt pacman -S --noconfirm nvidia libva-vdpau-driver nvidia-settings
     cat <<EOF > /mnt/etc/modprobe.d/nvidia.conf
 blacklist nouveau
 EOF
