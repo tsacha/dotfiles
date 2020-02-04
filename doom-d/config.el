@@ -95,3 +95,6 @@
 
 (add-hook! python-mode
   (blacken-mode))
+
+(after! smartparens
+  (smartparens-global-mode -1))
