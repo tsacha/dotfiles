@@ -92,6 +92,10 @@ initrd  /initramfs-linux.img
 options rd.luks.name=$data_uuid=$cryptname root=$data_disk rootfstype=ext4 add_efi_memmap
 EOF
 
+vendor=$(grep "model name" /proc/cpuinfo | awk '{ print $4 }'  | sed 's/(R)//g' | tr '[:upper:]' '[:lower:]' | head -n 1)
+arch-chroot /mnt pacman -S --noconfirm $vendor-ucode
+sed -i "/^linux.*/a initrd  /$vendor-ucode.img" /mnt/boot/loader/entries/arch.conf
+
 arch-chroot /mnt bootctl update
 genfstab -U /mnt > /mnt/etc/fstab
 
