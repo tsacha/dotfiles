@@ -44,7 +44,7 @@ bindsym $mod+p exec rofi-pass
 bindsym $mod+d exec rofi -show run
 bindsym $mod+Shift+D exec i3-dmenu-desktop --dmenu='rofi -dmenu -i'
 bindsym $mod+u exec rofi -show ssh
-bindsym $mod+c exec python /home/sacha/Git/rofimoji/rofimoji.py
+bindsym $mod+c exec rofimoji
 
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
@@ -232,6 +232,8 @@ bindsym $mod+F6 exec /home/sacha/Git/dotfiles/work/calendar.sh
 bindsym $mod+F7 exec /home/sacha/Git/dotfiles/termite/termite-theme-switcher.sh
 bindsym $mod+F8 exec /home/sacha/Git/dotfiles/pulseaudio/switch_headphones_speakers.sh
 bindsym XF86AudioPlay exec /usr/bin/dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause
+bindsym XF86AudioPrev exec /usr/bin/dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous
+bindsym XF86AudioNext exec /usr/bin/dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next
 
 new_window none
 new_float none
