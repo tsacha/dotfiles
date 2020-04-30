@@ -15,7 +15,6 @@ conky.config = {
 
 conky.text = [[
 [
-{"full_text": "${execi 5 ~/Git/dotfiles/conky/spotify_getinfo.py i3bar}", "color":"\#6495ed"},
 {"full_text": "${time %a, %d.%m.%Y %l:%M%P}", "color":"\#6495ed"}
 ${if_existing /sys/class/power_supply/BAT0},{"full_text": "${battery_percent BAT0}%🔋", "color":"\#6495ed"}${endif}
 ],

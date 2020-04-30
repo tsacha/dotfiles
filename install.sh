@@ -122,7 +122,7 @@ EOF
 arch-chroot /mnt locale-gen
 
 
-arch-chroot /mnt pacman -S --noconfirm yajl vim tmux gdisk btrfs-progs efibootmgr w3m rsync ansible git subversion bzr openssh net-tools reflector parallel the_silver_searcher wpa_supplicant bash-completion irssi python-yaml rsync isync docker jre8-openjdk icedtea-web bind-tools gnuplot zbar davfs2 cadaver gmime xapian-core xtrans autoconf-archive openvpn lsof sshfs arch-install-scripts ntfs-3g tcpdump go go-tools zsh firewalld dnsmasq ntp htop openbsd-netcat jq wget ipcalc llvm yapf nfs-utils linux-headers xorg-server mesa xf86-input-libinput xf86-input-synaptics xf86-video-intel xorg-xbacklight xorg-xinit emacs i3-wm i3lock i3status rofi dmenu conky xfce4-terminal thunar thunar-archive-plugin thunar-media-tags-plugin thunar-volman pulseaudio pavucontrol compton ttf-dejavu ttf-droid adobe-source-code-pro-fonts gajim feh chromium firefox thunderbird libreoffice-fresh sxiv redshift okular vinagre freerdp spice phonon-qt5-gstreamer transmission-qt xfce4-notifyd vlc evince atom texlive-most inkscape pandoc ttf-liberation ttf-dejavu ttf-linux-libertine ttf-linux-libertine-g arandr sway network-manager-applet networkmanager-openvpn lightdm lightdm-gtk-greeter keybase ttf-fira-sans ttf-fira-mono pass virt-manager openssh-askpass virt-viewer qemu qemu-arch-extra qemu-guest-agent samba cups a2ps wireshark-qt vnstat scrot gimp markdown alsa-utils pamixer termite noto-fonts noto-fonts-emoji noto-fonts-extra lxappearance-gtk3 system-config-printer hplip lxc rdesktop playerctl acpi flameshot vagrant terraform vault exa fd bat flatpak httpie libvirt firewalld ebtables python-black rofimoji
+arch-chroot /mnt pacman -S --noconfirm yajl vim tmux gdisk btrfs-progs efibootmgr w3m rsync ansible git subversion bzr openssh net-tools reflector parallel the_silver_searcher wpa_supplicant bash-completion irssi python-yaml rsync isync docker jre8-openjdk icedtea-web bind-tools gnuplot zbar davfs2 cadaver gmime xapian-core xtrans autoconf-archive openvpn lsof sshfs arch-install-scripts ntfs-3g tcpdump go go-tools zsh firewalld dnsmasq ntp htop openbsd-netcat jq wget ipcalc llvm yapf nfs-utils linux-headers xorg-server mesa xf86-input-libinput xf86-input-synaptics xf86-video-intel xorg-xbacklight xorg-xinit emacs i3-wm i3lock i3status rofi dmenu conky xfce4-terminal thunar thunar-archive-plugin thunar-media-tags-plugin thunar-volman pulseaudio pavucontrol compton ttf-dejavu ttf-droid adobe-source-code-pro-fonts gajim feh chromium firefox thunderbird libreoffice-fresh sxiv redshift okular vinagre freerdp spice phonon-qt5-gstreamer transmission-qt xfce4-notifyd vlc evince atom texlive-most inkscape pandoc ttf-liberation ttf-dejavu ttf-linux-libertine ttf-linux-libertine-g arandr sway network-manager-applet networkmanager-openvpn lightdm lightdm-gtk-greeter keybase ttf-fira-sans ttf-fira-mono pass virt-manager openssh-askpass virt-viewer qemu qemu-arch-extra qemu-guest-agent samba cups a2ps wireshark-qt vnstat scrot gimp markdown alsa-utils pamixer termite noto-fonts noto-fonts-emoji noto-fonts-extra lxappearance-gtk3 system-config-printer hplip lxc rdesktop playerctl acpi flameshot vagrant terraform vault exa fd bat flatpak httpie libvirt firewalld ebtables python-black rofimoji arc-gtk-theme arc-icon-theme qt5ct qt5-styleplugins breeze breeze-gtk oxygen gnome-themes-standard okular
 
 rm -f /mnt/etc/localtime
 ln -s /usr/share/zoneinfo/Europe/Paris /mnt/etc/localtime
@@ -173,9 +173,6 @@ cat <<EOF > /mnt/etc/modprobe.d/nobeep.conf
 blacklist pcspkr
 EOF
 
-arch-chroot /mnt pacman -S --noconfirm gnome gnome-extra
-arch-chroot /mnt pacman -S --noconfirm plasma plasma-meta kde-applications
-
 read -r -p "Install Nvidia proprietary drivers y/N? : " nvidia
 echo
 if [ "$nvidia" == "y" ]; then
@@ -220,14 +217,12 @@ arch-chroot /mnt git clone https://github.com/robbyrussell/oh-my-zsh.git /root/.
 
 arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/i3/config /home/sacha/.config/i3/config
 arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/compton/compton.conf /home/sacha/.config/compton/compton.conf
-arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/conky/conkyrc /home/sacha/.config/conky/conkyrc
-arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/conky/conkyrc-mainscreen /home/sacha/.config/conky/conkyrc-mainscreen
-arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/conky/conkyrc-secondscreen /home/sacha/.config/conky/conkyrc-secondscreen
 arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/conky/conkyrc-i3bar /home/sacha/.config/conky/conkyrc-i3bar
 arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/conky/conky-i3bar /home/sacha/.config/conky/conky-i3bar
 arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/shell/bashrc /home/sacha/.bashrc
 arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/shell/zshrc /home/sacha/.zshrc
 arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/shell/zshrc-root /root/.zshrc
+arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/profile /home/sacha/.profile
 arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/terminal/terminalrc /home/sacha/.config/xfce4/terminal/terminalrc
 arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/mbsync/mbsyncrc /home/sacha/.mbsyncrc
 arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/rofi/config /home/sacha/.config/rofi/config
@@ -238,7 +233,6 @@ arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/systemd/xfce4-notifyd.service
 arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/systemd/compton.service /home/sacha/.config/systemd/user/compton.service
 arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/systemd/nm-applet.service /home/sacha/.config/systemd/user/nm-applet.service
 arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/systemd/redshift.service /home/sacha/.config/systemd/user/redshift.service
-arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/systemd/conky.service /home/sacha/.config/systemd/user/conky.service
 arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/systemd/dropbox.service /home/sacha/.config/systemd/user/dropbox.service
 arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/systemd/systemd /home/sacha/.config/systemd/user/systemd
 arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/xorg/keyboard-layout.conf /etc/X11/xorg.conf.d/10-keyboard-layout.conf
@@ -255,6 +249,12 @@ arch-chroot /mnt ln -f -s /home/sacha/Git/Passwords /home/sacha/.password-store
 arch-chroot /mnt mkdir /home/sacha/.aws
 arch-chroot /mnt ln -f -s /home/sacha/Git/Security/Work/AWS/credentials /home/sacha/.aws/credentials
 arch-chroot /mnt ln -f -s /home/sacha/Git/Security/Work/AWS/config /home/sacha/.aws/config
+
 arch-chroot /mnt chown sacha.users -Rf /home/sacha
 usermod -R /mnt -s /usr/bin/zsh sacha
 usermod -R /mnt -s /bin/zsh root
+
+if `grep -q "Ryzen 7 1700X" /proc/cpuinfo`; then
+    arch-chroot /mnt git clone https://github.com/r4m0n/ZenStates-Linux /opt/ZenStates-Linux
+    arch-chroot ln -f -s /home/sacha/Git/dotfiles/systemd/shittyryzen.service /etc/systemd/system/default.target.wants/shittyryzen.service
+fi
