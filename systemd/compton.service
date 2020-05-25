@@ -1,8 +1,0 @@
-[Unit]
-Description=Compton X11 compositor
-Requires=dbus.socket
-
-[Service]
-ExecStart=/usr/bin/compton --config %h/.config/compton/compton.conf
-Restart=always
-RestartSec=5s

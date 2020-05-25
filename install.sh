@@ -122,7 +122,7 @@ EOF
 arch-chroot /mnt locale-gen
 
 
-arch-chroot /mnt pacman -S --noconfirm yajl vim tmux gdisk btrfs-progs efibootmgr w3m rsync ansible git subversion bzr openssh net-tools reflector parallel the_silver_searcher wpa_supplicant bash-completion irssi python-yaml rsync isync docker jre8-openjdk icedtea-web bind-tools gnuplot zbar davfs2 cadaver gmime xapian-core xtrans autoconf-archive openvpn lsof sshfs arch-install-scripts ntfs-3g tcpdump go go-tools zsh firewalld dnsmasq ntp htop openbsd-netcat jq wget ipcalc llvm yapf nfs-utils linux-headers xorg-server mesa xf86-input-libinput xf86-input-synaptics xf86-video-intel xorg-xbacklight xorg-xinit emacs i3-wm i3lock i3status rofi dmenu conky xfce4-terminal thunar thunar-archive-plugin thunar-media-tags-plugin thunar-volman pulseaudio pavucontrol compton ttf-dejavu ttf-droid adobe-source-code-pro-fonts gajim feh chromium firefox thunderbird libreoffice-fresh sxiv redshift okular vinagre freerdp spice phonon-qt5-gstreamer transmission-qt xfce4-notifyd vlc evince atom texlive-most inkscape pandoc ttf-liberation ttf-dejavu ttf-linux-libertine ttf-linux-libertine-g arandr sway network-manager-applet networkmanager-openvpn lightdm lightdm-gtk-greeter keybase ttf-fira-sans ttf-fira-mono pass virt-manager openssh-askpass virt-viewer qemu qemu-arch-extra qemu-guest-agent samba cups a2ps wireshark-qt vnstat scrot gimp markdown alsa-utils pamixer termite noto-fonts noto-fonts-emoji noto-fonts-extra lxappearance-gtk3 system-config-printer hplip lxc rdesktop playerctl acpi flameshot vagrant terraform vault exa fd bat flatpak httpie libvirt firewalld ebtables python-black rofimoji arc-gtk-theme arc-icon-theme qt5ct qt5-styleplugins breeze breeze-gtk oxygen gnome-themes-standard okular
+arch-chroot /mnt pacman -S --noconfirm yajl vim tmux gdisk btrfs-progs efibootmgr w3m rsync ansible git subversion bzr openssh net-tools reflector parallel the_silver_searcher wpa_supplicant bash-completion irssi python-yaml rsync isync docker jre8-openjdk icedtea-web bind-tools gnuplot zbar davfs2 cadaver gmime xapian-core xtrans autoconf-archive openvpn lsof sshfs arch-install-scripts ntfs-3g tcpdump go go-tools zsh firewalld dnsmasq ntp htop openbsd-netcat jq wget ipcalc llvm yapf nfs-utils linux-headers xorg-server mesa xf86-input-libinput xf86-input-synaptics xf86-video-intel xorg-xbacklight xorg-xinit emacs i3-wm i3lock i3status rofi dmenu conky xfce4-terminal thunar thunar-archive-plugin thunar-media-tags-plugin thunar-volman pulseaudio pavucontrol picom ttf-dejavu ttf-droid adobe-source-code-pro-fonts gajim feh chromium firefox thunderbird libreoffice-fresh sxiv redshift okular vinagre freerdp spice phonon-qt5-gstreamer transmission-qt xfce4-notifyd vlc evince atom texlive-most inkscape pandoc ttf-liberation ttf-dejavu ttf-linux-libertine ttf-linux-libertine-g arandr sway network-manager-applet networkmanager-openvpn lightdm lightdm-gtk-greeter keybase ttf-fira-sans ttf-fira-mono pass virt-manager openssh-askpass virt-viewer qemu qemu-arch-extra qemu-guest-agent samba cups a2ps wireshark-qt vnstat scrot gimp markdown alsa-utils pamixer termite noto-fonts noto-fonts-emoji noto-fonts-extra lxappearance-gtk3 system-config-printer hplip lxc rdesktop playerctl acpi flameshot vagrant terraform vault exa fd bat flatpak httpie libvirt firewalld ebtables python-black rofimoji arc-gtk-theme arc-icon-theme qt5ct qt5-styleplugins breeze breeze-gtk oxygen gnome-themes-standard okular
 
 rm -f /mnt/etc/localtime
 ln -s /usr/share/zoneinfo/Europe/Paris /mnt/etc/localtime
@@ -203,7 +203,7 @@ arch-chroot /mnt mkdir /home/sacha/Work
 arch-chroot /mnt mkdir /home/sacha/.config
 arch-chroot /mnt mkdir /home/sacha/.config/systemd/
 arch-chroot /mnt mkdir /home/sacha/.config/systemd/user
-arch-chroot /mnt mkdir /home/sacha/.config/compton/
+arch-chroot /mnt mkdir /home/sacha/.config/picom/
 arch-chroot /mnt mkdir /home/sacha/.config/i3
 arch-chroot /mnt mkdir /home/sacha/.config/conky
 arch-chroot /mnt mkdir /home/sacha/.config/rofi
@@ -216,7 +216,7 @@ arch-chroot /mnt git clone https://github.com/robbyrussell/oh-my-zsh.git /home/s
 arch-chroot /mnt git clone https://github.com/robbyrussell/oh-my-zsh.git /root/.oh-my-zsh/
 
 arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/i3/config /home/sacha/.config/i3/config
-arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/compton/compton.conf /home/sacha/.config/compton/compton.conf
+arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/picom/picom.conf /home/sacha/.config/picom/picom.conf
 arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/conky/conkyrc-i3bar /home/sacha/.config/conky/conkyrc-i3bar
 arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/conky/conky-i3bar /home/sacha/.config/conky/conky-i3bar
 arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/shell/bashrc /home/sacha/.bashrc
@@ -230,7 +230,7 @@ arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/rofi-pass/config /home/sacha/
 arch-chroot /mnt chmod 755 /home/sacha/.config/conky/conky-i3bar
 
 arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/systemd/xfce4-notifyd.service /home/sacha/.config/systemd/user/xfce4-notifyd.service
-arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/systemd/compton.service /home/sacha/.config/systemd/user/compton.service
+arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/systemd/picom.service /home/sacha/.config/systemd/user/picom.service
 arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/systemd/nm-applet.service /home/sacha/.config/systemd/user/nm-applet.service
 arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/systemd/redshift.service /home/sacha/.config/systemd/user/redshift.service
 arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/systemd/dropbox.service /home/sacha/.config/systemd/user/dropbox.service
