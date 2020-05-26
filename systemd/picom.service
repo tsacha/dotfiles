@@ -6,3 +6,6 @@ Requires=dbus.socket
 ExecStart=/usr/bin/picom --config %h/.config/picom/picom.conf
 Restart=always
 RestartSec=5s
+
+[Install]
+WantedBy=default.target
