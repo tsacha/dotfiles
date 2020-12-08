@@ -12,7 +12,7 @@ _rofi () {
 
 # If for some reason, you cannot do this, you can set the command here.
 # and set fix_layout to true
-fix_layout=false
+fix_layout=true
 
 layout_cmd () {
   setxkbmap fr bepo
@@ -31,14 +31,14 @@ wait=0.2
 
 ## Programs to be used
 # Editor
-EDITOR='/home/sacha/.oh-my-zsh/plugins/emacs/emacsclient.sh'
+EDITOR='emacs'
 
 # Browser
 BROWSER='firefox'
 
 ## Misc settings
 
-default_do='copyPass' # menu, autotype, copyPass, typeUser, typePass, copyUser, copyUrl, viewEntry, typeMenu, actionMenu, copyMenu, openUrl
+default_do='menu' # menu, autotype, copyPass, typeUser, typePass, copyUser, copyUrl, viewEntry, typeMenu, actionMenu, copyMenu, openUrl
 auto_enter='false'
 notify='true'
 default_autotype='user :tab pass'
