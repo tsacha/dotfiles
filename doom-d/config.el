@@ -78,8 +78,8 @@
 
 ;;; Keybinds
 (map! "M-$" #'other-window)
-(map! "M-+" #'undo-tree-undo)
-(map! "M--" #'undo-tree-redo)
+(map! "M-+" #'undo-fu-only-undo)
+(map! "M--" #'undo-fu-only-redo)
 (map! "C-s" #'swiper)
 (map! "C-M-/" #'counsel-git)
 (map! "C-M-*" #'counsel-git-grep)
@@ -96,5 +96,4 @@
 (add-hook! python-mode
   (blacken-mode))
 
-(after! smartparens
-  (smartparens-global-mode -1))
+(remove-hook 'doom-first-buffer-hook #'smartparens-global-mode)
