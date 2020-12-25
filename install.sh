@@ -103,7 +103,7 @@ cat <<EOF > /mnt/etc/mkinitcpio.conf
 MODULES="$modules_vmware nvme atkbd"
 BINARIES=""
 FILES=""
-HOOKS="base systemd autodetect keyboard sd-vconsole modconf block $encrypt_hook filesystems fsck"
+HOOKS="base systemd keyboard autodetect sd-vconsole modconf block $encrypt_hook filesystems fsck"
 EOF
 
 read -r -p "Hostname ? " hostname
