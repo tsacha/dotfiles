@@ -7,7 +7,7 @@ allow_bold = true
 dynamic_title = true
 urgent_on_bell = true
 clickable_url = true
-font = Source Code Pro Regular 14
+font = Iosevka Nerd Font Mono 14
 scrollback_lines = 10000
 search_wrap = true
 #icon_name = terminal
@@ -32,54 +32,45 @@ filter_unmatched_urls = true
 #modify_other_keys = false
 
 [colors]
-# Base16 Solarized Light
-# Author: Ethan Schoonover (http://ethanschoonover.com/solarized)
+# hard contrast: background = #f9f5d7
+background = #fbf1c7
+# soft contrast: background = #f2e5bc
+foreground = #3c3836
+foreground_bold = #3c3836
 
-foreground      = #586e75
-foreground_bold = #073642
-cursor          = #073642
-background      = #fdf6e3
+# light0 + gray
+color0 = #fbf1c7
+color8 = #928374
 
-# 16 color space
+# neutral_red + faded_red
+color1 = #cc241d
+color9 = #9d0006
 
-# Black, Gray, Silver, White
-color0  = #fdf6e3
-color8  = #839496
-color7  = #586e75
-color15 = #002b36
+# neutral_green + faded_green
+color2 = #98971a
+color10 = #79740e
 
-# Red
-color1  = #dc322f
-color9  = #dc322f
+# neutral_yellow + faded_yellow
+color3 = #d79921
+color11 = #b57614
 
-# Green
-color2  = #859900
-color10 = #859900
+# neutral_blue + faded_blue
+color4 = #458588
+color12 = #076678
 
-# Yellow
-color3  = #b58900
-color11 = #b58900
+# neutral_purple + faded_purple
+color5 = #b16286
+color13 = #8f3f71
 
-# Blue
-color4  = #268bd2
-color12 = #268bd2
+# neutral_aqua + faded_aqua
+color6 = #689d6a
+color14 = #427b58
 
-# Purple
-color5  = #6c71c4
-color13 = #6c71c4
+# dark4 + dark1
+color7 = #7c6f64
+color15 = #3c3836
 
-# Teal
-color6  = #2aa198
-color14 = #2aa198
-
-# Extra colors
-color16 = #cb4b16
-color17 = #d33682
-color18 = #eee8d5
-color19 = #93a1a1
-color20 = #657b83
-color21 = #073642
-
+# vim: ft=dosini cms=#%s
 
 [hints]
 #font = Monospace 12

@@ -16,9 +16,8 @@ set $mod Mod4
 # is used in the bar {} block below.
 #font pango:monospace 8
 
-# This font is widely installed, provides lots of unicode glyphs, right-to-left
-# text rendering and scalability on retina/hidpi displays (thanks to pango).
 font pango:Noto Sans Regular 12
+font pango:Iosevka Nerd Font Mono 12
 
 # Before i3 v4.8, we used to recommend this one as the default:
 # font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
@@ -163,28 +162,15 @@ mode "resize" {
 
 bindsym $mod+o mode "resize"
 
-set $background  #303030
-set $foreground  #ebdbb2
-set $fg0         #ffffff
-set $black       #282828
-set $darkgrey    #928374
-set $darkred     #cc241d
-set $red         #fb4934
-set $darkgreen   #98971a
-set $green       #b8bb26
-set $darkyellow  #d79921
-set $yellow      #fabd2f
-set $darkblue    #6495ed
-set $blue        #87ceeb
-set $darkmagenta #b16286
-set $magenta     #d285b1
-set $darkcyan    #689d6a
-set $cyan        #8ec07c
-set $lightgrey   #a89984
-set $white       #ebdbb2
-set $darkorange  #ff5f00
-set $orange      #fe8019
-set $bg1         #3c3836
+set $bg #282828
+set $red #cc241d
+set $green #98971a
+set $yellow #d79921
+set $blue #458588
+set $purple #b16286
+set $aqua #689d68
+set $gray #a89984
+set $darkgray #1d2021
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
@@ -195,27 +181,25 @@ bar {
   strip_workspace_numbers yes
   separator_symbol " "
 
-
   colors {
-    background $background
-    statusline $fg0
-    separator  $darkblue
-
-    focused_workspace  $darkblue       $darkblue       $black
-    active_workspace   $background     $background     $fg0
-    inactive_workspace $background     $background     $darkgrey
-    urgent_workspace   $red            $red            $fg0
-    binding_mode       #2f343a     #900000     #fdf6e3
+    # bar background color
+    background $bg
+    # text color used for blocks that do not have a color specified.
+    statusline $yellow
+    # workspaces section
+    #                    border  backgr. text
+    focused_workspace    $aqua $aqua $darkgray
+    inactive_workspace   $darkgray $darkgray $yellow
+    active_workspace     $darkgray $darkgray $yellow
+    urgent_workspace     $red $red $bg
   }
+
 }
 
-# class                 border          backgr.         text        indicator   child_border
-client.focused          $darkblue       $darkblue       $black      $black
-client.focused_inactive $bg1            $black          $fg0        $darkgrey
-client.unfocused        $bg1            $bg1            $fg0        $darkgrey
-client.urgent           $red            $red            $background $red
-client.placeholder      #000000     #0c0c0c     #fdf6e3     #000000     #0c0c0c
-client.background       #ffffff
+client.focused          $blue $blue $darkgray $purple $darkgray
+client.focused_inactive $darkgray $darkgray $yellow $purple $darkgray
+client.unfocused        $darkgray $darkgray $yellow $purple $darkgray
+client.urgent           $red $red $white $red $red
 
 bindsym $mod+F1 exec i3lock -c 000000
 

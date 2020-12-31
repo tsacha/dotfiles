@@ -62,21 +62,22 @@
 
 ;;;; Themes
 (setq custom-safe-themes t)
-(setq doom-theme 'doom-solarized-light)
+(setq doom-theme 'doom-gruvbox)
 (map! "<f7>" #' (lambda () (interactive)
-                  (setq doom-theme 'doom-solarized-light)
+                  (setq doom-theme 'doom-gruvbox-light)
                   (doom/reload-theme)))
 (map! "<f8>" #' (lambda () (interactive)
-                  (setq doom-theme 'doom-solarized-dark)
+                  (setq doom-theme 'doom-gruvbox)
                   (doom/reload-theme)))
 
 ;;;; Fonts
-(setq doom-font (font-spec :family "Noto Sans Mono" :size 16 :weight 'semi-light)
-      doom-variable-pitch-font (font-spec :family "Noto Sans Mono") ; inherits `doom-font''s :size
-      doom-unicode-font (font-spec :family "Noto Sans Mono" :size 16)
-      doom-big-font (font-spec :family "Noto Sans Mono" :size 21))
+(setq doom-font (font-spec :family "Iosevka" :size 18 :weight 'semi-light)
+      doom-variable-pitch-font (font-spec :family "Iosevka") ; inherits `doom-font''s :size
+      doom-unicode-font (font-spec :family "Iosevka" :size 18)
+      doom-big-font (font-spec :family "Iosevka" :size 21))
 
 ;;; Keybinds
+(map! "<f2>" #'treemacs)
 (map! "M-$" #'other-window)
 (map! "M-+" #'undo-fu-only-undo)
 (map! "M--" #'undo-fu-only-redo)
