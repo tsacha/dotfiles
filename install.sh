@@ -227,7 +227,7 @@ arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/shell/zshrc-root /root/.zshrc
 arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/profile /home/sacha/.profile
 arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/terminal/terminalrc /home/sacha/.config/xfce4/terminal/terminalrc
 arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/mbsync/mbsyncrc /home/sacha/.mbsyncrc
-arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/rofi/config /home/sacha/.config/rofi/config
+arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/rofi/config.rasi /home/sacha/.config/rofi/config.rasi
 arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/rofi-pass/config /home/sacha/.config/rofi-pass/config
 arch-chroot /mnt chmod 755 /home/sacha/.config/conky/conky-i3bar
 
