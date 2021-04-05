@@ -92,3 +92,6 @@ source "/opt/ansible-venv/bin/activate"
 export EDITOR=emacs
 export TERM=xterm-256color
 export XDG_CURRENT_DESKTOP=X-Generic
+
+autoload -U +X bashcompinit && bashcompinit
+complete -o nospace -C /usr/bin/terraform terraform
