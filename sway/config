@@ -234,7 +234,7 @@ input * xkb_numlock enable
 
 input type:touchpad {
   tap enabled
-  natural_scroll enabled
+  natural_scroll disabled
 }
 
 input * {
