@@ -62,13 +62,20 @@
 
 ;;;; Themes
 (setq custom-safe-themes t)
-(setq doom-theme 'doom-gruvbox)
-(map! "<f7>" #' (lambda () (interactive)
-                  (setq doom-theme 'doom-gruvbox-light)
-                  (doom/reload-theme)))
-(map! "<f8>" #' (lambda () (interactive)
-                  (setq doom-theme 'doom-gruvbox)
-                  (doom/reload-theme)))
+(use-package! gsettings
+  :config
+  (defun tsacha/reload-theme (&rest signal)
+    "Reload theme"
+    (if (string-equal (gsettings-get "org.gnome.desktop.interface" "gtk-theme") "Adwaita")
+        (progn
+          (setq doom-theme 'doom-gruvbox-light)
+          (doom/reload-theme))
+      (progn
+        (setq doom-theme 'doom-gruvbox)
+        (doom/reload-theme))))
+  (tsacha/reload-theme)
+  (require 'dbus)
+  (dbus-register-signal :session nil "/ca/desrt/dconf/Writer/user" "ca.desrt.dconf.Writer" "Notify" 'tsacha/reload-theme))
 
 ;;;; Fonts
 (setq doom-font (font-spec :family "Iosevka" :size 18 :weight 'semi-light)
@@ -93,6 +100,8 @@
 
 (after! ivy
   (setq ivy-extra-directories '("../" "./")))
+
+
 
 (add-hook! python-mode
   (blacken-mode))
