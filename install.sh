@@ -147,10 +147,7 @@ arch-chroot /mnt /usr/bin/sed -Ei 's/^#?background=.*/background=\/var\/cache\/b
 
 usermod -R /mnt -G wheel -a sacha
 usermod -R /mnt -G kvm -a sacha
-arch-chroot /mnt systemctl enable org.cups.cupsd
 arch-chroot /mnt systemctl enable ntpd
-arch-chroot /mnt systemctl enable systemd-resolved
-arch-chroot /mnt systemctl enable cups-browsed.service
 echo "a4" > /mnt/etc/papersize
 arch-chroot /mnt systemctl enable nscd.service
 arch-chroot /mnt systemctl enable firewalld.service
@@ -194,9 +191,6 @@ EndSection
 EOF
 fi
 
-arch-chroot /mnt ln -f -s /home/sacha/Dropbox/Documents/ /home/sacha/Documents
-arch-chroot /mnt ln -f -s /home/sacha/Dropbox/Documents/Work/iRaiser /home/sacha/Work
-arch-chroot /mnt ln -f -s /home/sacha/Dropbox/Pictures/ /home/sacha/Pictures
 arch-chroot /mnt mkdir /home/sacha/Downloads
 arch-chroot /mnt mkdir /home/sacha/Git
 arch-chroot /mnt mkdir /home/sacha/Git/Work
@@ -253,6 +247,9 @@ arch-chroot /mnt mkdir /home/sacha/.aws
 arch-chroot /mnt ln -f -s /home/sacha/Git/Security/Work/AWS/credentials /home/sacha/.aws/credentials
 arch-chroot /mnt ln -f -s /home/sacha/Git/Security/Work/AWS/config /home/sacha/.aws/config
 arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/jq/jq /home/sacha/.jq
+arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/git/gitconfig /home/sacha/.gitconfig
+arch-chroot /mnt mkdir /home/sacha/.screenlayout
+arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/xorg/desktop.sh /home/sacha/.screenlayout/desktop.sh
 
 arch-chroot /mnt chown sacha.users -Rf /home/sacha
 usermod -R /mnt -s /usr/bin/zsh sacha
