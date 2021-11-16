@@ -1,6 +1,6 @@
 configuration {
-	font: "Iosevka Nerd Font Mono 12";
-	ssh-command: "termite -t "SSH > {host}" -e "/bin/zsh -c 'source /home/sacha/.zshrc; {ssh-client} {host}'"";
+	font: "Iosevka Nerd Font Mono 14";
+	ssh-command: "alacritty -t "SSH > {host}" -e /bin/zsh -c 'source /home/sacha/.zshrc; {ssh-client} {host}'";
 	disable-history: true;
 	parse-known-hosts: false;
 	hide-scrollbar: true;
