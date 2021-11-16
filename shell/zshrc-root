@@ -85,5 +85,3 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 alias ls="exa --long --header --git"
-alias cat="bat"
-source "/home/sacha/Git/dotfiles/shell/current.zsh"
