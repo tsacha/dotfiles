@@ -206,15 +206,18 @@ bindsym $mod+F1 exec i3lock -c 000000
 
 bindsym XF86MonBrightnessUp exec xbacklight -inc 1
 bindsym XF86MonBrightnessDown exec xbacklight -dec 1
-bindsym XF86AudioRaiseVolume exec pamixer -i 3
-bindsym $mod+F12 exec pamixer -i 3
-bindsym XF86AudioLowerVolume exec pamixer -d 3
-bindsym $mod+F11 exec pamixer -d 3
-bindsym XF86AudioMute exec pamixer -t
+
+bindsym $mod+F9 exec /home/sacha/Git/dotfiles/pulseaudio/switch_headphones_speakers.sh
 bindsym $mod+F10 exec pamixer -t
+bindsym $mod+F11 exec pamixer -d 3
+bindsym $mod+F12 exec pamixer -i 3
+
+bindsym XF86AudioLowerVolume exec pamixer -d 3
+bindsym XF86AudioRaiseVolume exec pamixer -i 3
+bindsym XF86AudioMute exec pamixer -t
 bindsym --release  $mod+Shift+S exec flameshot gui
+bindsym $mod+F6 exec systemctl --user is-active redshift && systemctl --user stop redshift || systemctl --user start redshift;
 bindsym $mod+F7 exec /home/sacha/Git/dotfiles/alacritty/alacritty-theme-switcher.sh
-bindsym $mod+F8 exec /home/sacha/Git/dotfiles/pulseaudio/switch_headphones_speakers.sh
 bindsym XF86AudioPlay exec /usr/bin/dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause
 bindsym XF86AudioPrev exec /usr/bin/dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous
 bindsym XF86AudioNext exec /usr/bin/dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next
