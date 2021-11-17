@@ -257,7 +257,8 @@ arch-chroot /mnt pacman -S --noconfirm \
     ttf-fira-mono \
     ttf-iosevka-nerd \
     pass \
-    pass-otp
+    pass-otp \
+    age
 
 rm -f /mnt/etc/localtime
 ln -s /usr/share/zoneinfo/Europe/Paris /mnt/etc/localtime
