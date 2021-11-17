@@ -122,7 +122,7 @@ EOF
 arch-chroot /mnt locale-gen
 
 
-arch-chroot /mnt pacman -S --noconfirm
+arch-chroot /mnt pacman -S --noconfirm \
     vim \
     tmux \
     gdisk \
@@ -152,7 +152,6 @@ arch-chroot /mnt pacman -S --noconfirm
     go \
     go-tools \
     zsh \
-    firewalld \
     ntp \
     htop \
     openbsd-netcat \
