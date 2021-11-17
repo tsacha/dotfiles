@@ -255,6 +255,7 @@ arch-chroot /mnt pacman -S --noconfirm \
     ttf-linux-libertine-g \
     ttf-fira-sans \
     ttf-fira-mono \
+    ttf-iosevka-nerd \
     pass \
     pass-otp
 
