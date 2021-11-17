@@ -100,7 +100,7 @@ arch-chroot /mnt bootctl update
 genfstab -U /mnt > /mnt/etc/fstab
 
 cat <<EOF > /mnt/etc/mkinitcpio.conf
-MODULES="$modules_vmware nvme atkbd"
+MODULES="nvme atkbd"
 BINARIES=""
 FILES=""
 HOOKS="base systemd keyboard autodetect sd-vconsole modconf block $encrypt_hook filesystems fsck"
@@ -297,9 +297,12 @@ arch-chroot /mnt flatpak remote-add --if-not-exists flathub https://dl.flathub.o
 arch-chroot /mnt flatpak install -y flathub com.spotify.Client
 arch-chroot /mnt flatpak install -y flathub org.telegram.desktop
 
+read -r -p "VMWare configuration y/N? : " vmware
 if [ "$vmware" == "y" ]; then
-    arch-chroot /mnt pacman -S xf86-input-vmmouse xf86-video-vmware
+    arch-chroot /mnt pacman -S xf86-input-vmmouse xf86-video-vmware open-vm-tools
     echo 'needs_root_rights=yes' > /mnt/X11/Xwrapper.config
+    arch-chroot /mnt systemctl enable vmware-vmblock-fuse.service
+    arch-chroot /mnt systemctl enable vmtoolsd.service
 fi
 cat <<EOF > /mnt/etc/modprobe.d/nobeep.conf
 blacklist pcspkr
