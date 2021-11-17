@@ -392,5 +392,6 @@ usermod -R /mnt -s /bin/zsh root
 
 if `grep -q "Ryzen 7 1700X" /proc/cpuinfo`; then
     arch-chroot /mnt git clone https://github.com/r4m0n/ZenStates-Linux /opt/ZenStates-Linux
-    arch-chroot ln -f -s /home/sacha/Git/dotfiles/systemd/shittyryzen.service /etc/systemd/system/default.target.wants/shittyryzen.service
+    arch-chroot /mnt mkdir /etc/systemd/system/default.target.wants
+    arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/systemd/shittyryzen.service /etc/systemd/system/default.target.wants/shittyryzen.service
 fi
