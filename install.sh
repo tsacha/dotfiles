@@ -363,7 +363,6 @@ arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/systemd/xfce4-notifyd.service
 arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/systemd/picom.service /home/sacha/.config/systemd/user/picom.service
 arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/systemd/nm-applet.service /home/sacha/.config/systemd/user/nm-applet.service
 arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/systemd/redshift.service /home/sacha/.config/systemd/user/redshift.service
-arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/systemd/dropbox.service /home/sacha/.config/systemd/user/dropbox.service
 arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/systemd/systemd /home/sacha/.config/systemd/user/systemd
 arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/xorg/keyboard-layout.conf /etc/X11/xorg.conf.d/10-keyboard-layout.conf
 arch-chroot /mnt mkdir /home/sacha/.config/systemd/user/default.target.wants
