@@ -295,7 +295,6 @@ arch-chroot /mnt systemctl enable lightdm
 arch-chroot /mnt flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 arch-chroot /mnt flatpak install -y flathub com.spotify.Client
 arch-chroot /mnt flatpak install -y flathub org.telegram.desktop
-arch-chroot /mnt flatpak install -y flathub com.dropbox.Client
 
 if [ "$vmware" == "y" ]; then
     arch-chroot /mnt pacman -S xf86-input-vmmouse xf86-video-vmware
