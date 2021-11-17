@@ -12,7 +12,7 @@ git clone https://aur.archlinux.org/yay.git
 cd yay
 makepkg -si
 
-yay -S --noconfirm --noedit rofi-pass nerd-fonts-iosevka i3-gnome
+yay -S rofi-pass i3-gnome
 
 rm -Rf ~/.emacs.d
 git clone https://github.com/hlissner/doom-emacs ~/.emacs.d
