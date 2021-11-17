@@ -68,11 +68,9 @@
     "Reload theme"
     (if (string-equal (gsettings-get "org.gnome.desktop.interface" "gtk-theme") "Adwaita")
         (progn
-          (setq doom-theme 'doom-gruvbox-light)
-          (doom/reload-theme))
+          (load-theme 'doom-gruvbox-light t))
       (progn
-        (setq doom-theme 'doom-gruvbox)
-        (doom/reload-theme))))
+        (load-theme 'doom-gruvbox t))))
   (tsacha/reload-theme)
   (require 'dbus)
   (dbus-register-signal :session nil "/ca/desrt/dconf/Writer/user" "ca.desrt.dconf.Writer" "Notify" 'tsacha/reload-theme))
