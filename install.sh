@@ -329,6 +329,7 @@ EndSection
 EOF
 fi
 
+arch-chroot /mnt mkdir /home/sacha/Cloud
 arch-chroot /mnt mkdir /home/sacha/Downloads
 arch-chroot /mnt mkdir /home/sacha/Git
 arch-chroot /mnt mkdir /home/sacha/Git/Work
@@ -368,13 +369,13 @@ arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/systemd/xfce4-notifyd.service
 arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/systemd/picom.service /home/sacha/.config/systemd/user/picom.service
 arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/systemd/nm-applet.service /home/sacha/.config/systemd/user/nm-applet.service
 arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/systemd/redshift.service /home/sacha/.config/systemd/user/redshift.service
-arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/systemd/systemd /home/sacha/.config/systemd/user/systemd
+arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/systemd/onedriver@.service /home/sacha/.config/systemd/user/onedriver@home-sacha-Cloud.service
 arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/xorg/keyboard-layout.conf /etc/X11/xorg.conf.d/10-keyboard-layout.conf
 arch-chroot /mnt mkdir /home/sacha/.config/systemd/user/default.target.wants
 arch-chroot /mnt mkdir /home/sacha/.config/systemd/user/emacs.service.d
 arch-chroot /mnt ln -f -s /usr/lib/systemd/user/emacs.service /home/sacha/.config/systemd/user/default.target.wants/emacs.service
 arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/systemd/redshift.service /home/sacha/.config/systemd/user/default.target.wants/redshift.service
-arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/systemd/dropbox.service /home/sacha/.config/systemd/user/default.target.wants/dropbox.service
+arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/systemd/onedriver@.service /home/sacha/.config/systemd/user/default.target.wants/onedriver@home-sacha-Cloud.service
 arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/override-emacs-unit.conf /home/sacha/.config/systemd/user/emacs.service.d/override.conf
 arch-chroot /mnt mkdir /home/sacha/.config/alacritty
 arch-chroot /mnt cp /home/sacha/Git/dotfiles/alacritty/alacritty.yml /home/sacha/.config/alacritty/alacritty.yml # Copy for live reload
