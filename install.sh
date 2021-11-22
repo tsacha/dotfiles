@@ -293,10 +293,6 @@ usermod -R /mnt -G libvirt -a sacha
 usermod -R /mnt -G kvm -a sacha
 arch-chroot /mnt systemctl enable lightdm
 
-arch-chroot /mnt flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
-arch-chroot /mnt flatpak install -y flathub com.spotify.Client
-arch-chroot /mnt flatpak install -y flathub org.telegram.desktop
-
 read -r -p "VMWare configuration y/N? : " vmware
 if [ "$vmware" == "y" ]; then
     arch-chroot /mnt pacman -S xf86-input-vmmouse xf86-video-vmware open-vm-tools
