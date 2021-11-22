@@ -80,7 +80,7 @@ if [ ! -e /mnt/boot ]; then
     mkdir /mnt/boot
 fi
 mount $boot_disk /mnt/boot
-pacstrap /mnt base base-devel
+pacstrap /mnt base base-devel linux linux-firmware
 
 arch-chroot /mnt bootctl install
 
@@ -236,7 +236,6 @@ arch-chroot /mnt pacman -S --noconfirm \
     httpie \
     libvirt \
     firewalld \
-    ebtables \
     python-black \
     rofimoji \
     arc-gtk-theme \
@@ -351,7 +350,7 @@ arch-chroot /mnt git clone https://github.com/robbyrussell/oh-my-zsh.git /home/s
 arch-chroot /mnt git clone https://github.com/robbyrussell/oh-my-zsh.git /root/.oh-my-zsh/
 
 arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/sway/config /home/sacha/.config/i3/config
-arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/sway/config /home/sacha/.config/sway/config
+arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/i3/config /home/sacha/.config/sway/config
 arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/picom/picom.conf /home/sacha/.config/picom/picom.conf
 arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/conky/conkyrc-i3bar /home/sacha/.config/conky/conkyrc-i3bar
 arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/conky/conky-i3bar /home/sacha/.config/conky/conky-i3bar
@@ -381,9 +380,7 @@ arch-chroot /mnt mkdir /home/sacha/.config/alacritty
 arch-chroot /mnt cp /home/sacha/Git/dotfiles/alacritty/alacritty.yml /home/sacha/.config/alacritty/alacritty.yml # Copy for live reload
 arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/mime/mimeapps.list /home/sacha/.config/mimeapps.list
 arch-chroot /mnt ln -f -s /home/sacha/Git/Passwords /home/sacha/.password-store
-arch-chroot /mnt mkdir /home/sacha/.aws
-arch-chroot /mnt ln -f -s /home/sacha/Git/Security/Work/AWS/credentials /home/sacha/.aws/credentials
-arch-chroot /mnt ln -f -s /home/sacha/Git/Security/Work/AWS/config /home/sacha/.aws/config
+
 arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/jq/jq /home/sacha/.jq
 arch-chroot /mnt ln -f -s /home/sacha/Git/dotfiles/git/gitconfig /home/sacha/.gitconfig
 arch-chroot /mnt mkdir /home/sacha/.screenlayout
