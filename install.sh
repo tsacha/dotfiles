@@ -143,6 +143,7 @@ arch-chroot /mnt pacman -S --noconfirm \
     rsync \
     isync \
     docker \
+    docker-compose \
     bind-tools \
     gmime \
     lsof \
@@ -281,16 +282,14 @@ arch-chroot /mnt /usr/bin/sed -Ei 's/^#greeter-session.*/greeter-session=lightdm
 arch-chroot /mnt /usr/bin/sed -Ei 's/^#?background=.*/background=\/var\/cache\/background/g' /etc/lightdm/lightdm-gtk-greeter.conf
 
 usermod -R /mnt -G wheel -a sacha
-usermod -R /mnt -G kvm -a sacha
 arch-chroot /mnt systemctl enable ntpd
-echo "a4" > /mnt/etc/papersize
 arch-chroot /mnt systemctl enable nscd.service
 arch-chroot /mnt systemctl enable firewalld.service
 arch-chroot /mnt systemctl enable libvirtd.service
 arch-chroot /mnt systemctl enable NetworkManager.service
-usermod -R /mnt -G lp -a sacha
 usermod -R /mnt -G libvirt -a sacha
 usermod -R /mnt -G kvm -a sacha
+usermod -R /mnt -G docker -a sacha
 arch-chroot /mnt systemctl enable lightdm
 
 read -r -p "VMWare configuration y/N? : " vmware
