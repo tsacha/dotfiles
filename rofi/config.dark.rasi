@@ -4,5 +4,5 @@ configuration {
 	disable-history: true;
 	parse-known-hosts: false;
 	hide-scrollbar: true;
-        theme: "gruvbox-dark";
 }
+@theme "gruvbox-dark"

@@ -4,9 +4,11 @@ if [ $(gsettings get org.gnome.desktop.interface gtk-theme) == "'Adwaita'" ]; th
     gsettings set org.gnome.desktop.interface icon-theme 'Adwaita-dark'
     sed -Ei --follow-symlinks 's/colors: \*\w+/colors: *dark/g' ~/.config/alacritty/alacritty.yml
     ln -s -f ~/Git/dotfiles/shell/dark.zsh ~/Git/dotfiles/shell/current.zsh
+    ln -s -f ~/Git/dotfiles/rofi/config.dark.rasi ~/.config/rofi/config.rasi
 elif [ $(gsettings get org.gnome.desktop.interface gtk-theme) == "'Adwaita-dark'" ]; then
     gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita'
     gsettings set org.gnome.desktop.interface icon-theme 'Adwaita'
     sed -Ei --follow-symlinks 's/colors: \*\w+/colors: *light/g' ~/.config/alacritty/alacritty.yml
     ln -s -f ~/Git/dotfiles/shell/light.zsh ~/Git/dotfiles/shell/current.zsh
+    ln -s -f ~/Git/dotfiles/rofi/config.light.rasi ~/.config/rofi/config.rasi
 fi;
