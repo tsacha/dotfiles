@@ -255,7 +255,7 @@ arch-chroot /mnt pacman -S --noconfirm \
     ttf-fira-sans \
     ttf-fira-mono \
     ttf-iosevka-nerd \
-    pass \
+    gopass \
     pass-otp \
     age
 
