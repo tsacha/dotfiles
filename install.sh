@@ -236,7 +236,6 @@ arch-chroot /mnt pacman -S --noconfirm \
     flatpak \
     httpie \
     libvirt \
-    firewalld \
     python-black \
     rofimoji \
     arc-gtk-theme \
