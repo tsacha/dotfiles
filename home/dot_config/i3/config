@@ -43,7 +43,6 @@ bindsym $mod+d exec rofi -show run
 bindsym $mod+Shift+D exec i3-dmenu-desktop --dmenu='rofi -dmenu -i'
 bindsym $mod+u exec rofi -show ssh
 bindsym $mod+c exec rofimoji
-bindsym $mod+Mod1+c exec /home/sacha/Git/Work/documentation/scripts/list_clients_dynamodb.sh
 
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
@@ -206,7 +205,7 @@ bindsym $mod+F1 exec i3lock -c 000000
 bindsym XF86MonBrightnessUp exec xbacklight -inc 1
 bindsym XF86MonBrightnessDown exec xbacklight -dec 1
 
-bindsym $mod+F9 exec /home/sacha/Git/dotfiles/scripts/switch_headphones_speakers.sh
+bindsym $mod+F9 exec /home/sacha/.scripts/audio_switch.sh
 bindsym $mod+F10 exec pamixer -t
 bindsym $mod+F11 exec pamixer -d 3
 bindsym $mod+F12 exec pamixer -i 3
@@ -216,7 +215,7 @@ bindsym XF86AudioRaiseVolume exec pamixer -i 3
 bindsym XF86AudioMute exec pamixer -t
 bindsym --release  $mod+Shift+S exec flameshot gui
 bindsym $mod+F6 exec systemctl --user is-active redshift && systemctl --user stop redshift || systemctl --user start redshift;
-bindsym $mod+F7 exec /home/sacha/Git/dotfiles/scripts/alacritty-theme-switcher.sh
+bindsym $mod+F7 exec /home/sacha/.scripts/theme_switch.sh
 bindsym XF86AudioPlay exec /usr/bin/dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause
 bindsym XF86AudioPrev exec /usr/bin/dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous
 bindsym XF86AudioNext exec /usr/bin/dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next
@@ -230,7 +229,6 @@ exec systemctl --user start picom
 exec systemctl --user start gpg-agent-ssh.socket
 exec systemctl --user start nm-applet
 exec systemctl --user import-environment DISPLAY XAUTHORITY SSH_AUTH_SOCK
-exec /home/sacha/Git/dotfiles/scripts/xorg_desktop.sh
 
 exec feh --bg-fill /home/sacha/Cloud/Pictures/wallpapers/gris/01.png --bg-fill /home/sacha/Cloud/Pictures/wallpapers/gris/02.png --bg-fill /home/sacha/Cloud/Pictures/wallpapers/gris/03.png
 exec xinput set-prop "TPPS/2 IBM TrackPoint" "Evdev Wheel Emulation" 1
