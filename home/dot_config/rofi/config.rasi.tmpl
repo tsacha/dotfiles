@@ -1,0 +1,14 @@
+configuration {
+	font: "Iosevka Nerd Font Mono 14";
+	ssh-command: "alacritty -t "SSH > {host}" -e /bin/zsh -c 'source /home/sacha/.zshrc; {ssh-client} {host}'";
+	disable-history: true;
+	parse-known-hosts: false;
+	hide-scrollbar: true;
+}
+{{ if eq (output "gsettings" "get" "org.gnome.desktop.interface" "gtk-theme" | trim) "'Adwaita'" -}}
+@theme "gruvbox-light"
+{{ else if eq (output "gsettings" "get" "org.gnome.desktop.interface" "gtk-theme" | trim) "'Adwaita-dark'" -}}
+@theme "gruvbox-dark"
+{{ else -}}
+@theme "gruvbox-light"
+{{ end -}}

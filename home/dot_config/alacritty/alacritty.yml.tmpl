@@ -70,4 +70,10 @@ schemes:
 
 
 # Colors
+{{ if eq (output "gsettings" "get" "org.gnome.desktop.interface" "gtk-theme" | trim) "'Adwaita'" -}}
 colors: *light
+{{ else if eq (output "gsettings" "get" "org.gnome.desktop.interface" "gtk-theme" | trim) "'Adwaita-dark'" -}}
+colors: *dark
+{{ else -}}
+colors: *light
+{{ end -}}
