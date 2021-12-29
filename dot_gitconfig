@@ -1,0 +1,5 @@
+[user]
+name = Sacha Trémoureux
+email = sacha@tremoureux.fr
+[init]
+	defaultBranch = main
