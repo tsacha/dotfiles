@@ -332,10 +332,10 @@ Section "InputClass"
 EndSection
 EOF
 
-rm -Rf /mnt/home/sacha/.local/share/chezmoi
-arch-chroot /mnt git clone https://github.com/tsacha/dotfiles /home/sacha/.local/share/chezmoi
+rm -Rf /mnt/home/sacha/Git/dotfiles
+arch-chroot /mnt git clone https://github.com/tsacha/dotfiles /home/sacha/Git/dotfiles
 arch-chroot /mnt chown sacha.users -Rf /home/sacha
-arch-chroot -u sacha:users /mnt chezmoi apply
+arch-chroot -u sacha:users /mnt chezmoi -S /home/sacha/Git/dotfiles apply
 
 usermod -R /mnt -s /usr/bin/zsh sacha
 usermod -R /mnt -s /bin/zsh root
