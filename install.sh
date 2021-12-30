@@ -295,7 +295,7 @@ arch-chroot /mnt systemctl enable lightdm
 read -r -p "VMWare configuration y/N? : " vmware
 if [ "$vmware" == "y" ]; then
     arch-chroot /mnt pacman -S xf86-input-vmmouse xf86-video-vmware open-vm-tools
-    echo 'needs_root_rights=yes' > /mnt/X11/Xwrapper.config
+    echo 'needs_root_rights=yes' > /mnt/etc/X11/Xwrapper.config
     arch-chroot /mnt systemctl enable vmware-vmblock-fuse.service
     arch-chroot /mnt systemctl enable vmtoolsd.service
 fi
