@@ -8,4 +8,3 @@ else
     git -C ~/.emacs.d pull
 fi
 ~/.emacs.d/bin/doom sync -u
-popd
