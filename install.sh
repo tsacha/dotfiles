@@ -335,7 +335,7 @@ EOF
 rm -Rf /mnt/home/sacha/Git/dotfiles
 arch-chroot /mnt git clone https://github.com/tsacha/dotfiles /home/sacha/Git/dotfiles
 arch-chroot /mnt chown sacha.users -Rf /home/sacha
-arch-chroot -u sacha:users /mnt chezmoi -S /home/sacha/Git/dotfiles apply
+arch-chroot -u sacha:users /mnt bash -c "HOME=/home/sacha; chezmoi -S ~/Git/dotfiles -c ~/Git/dotfiles/chezmoi.toml --persistent-state ~/.config/chezmoi/chezmoistate.boltdb apply"
 
 usermod -R /mnt -s /usr/bin/zsh sacha
 usermod -R /mnt -s /bin/zsh root
