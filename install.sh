@@ -256,7 +256,7 @@ arch-chroot /mnt pacman -S --noconfirm \
     ttf-fira-mono \
     ttf-iosevka-nerd \
     gopass \
-    pass-otp \
+    xclip \
     age \
     chezmoi
 

@@ -3,7 +3,6 @@ configuration {
 	ssh-command: "alacritty -t "SSH > {host}" -e /bin/zsh -c 'source /home/sacha/.zshrc; {ssh-client} {host}'";
 	disable-history: true;
 	parse-known-hosts: false;
-	hide-scrollbar: true;
 }
 {{ if eq (output "gsettings" "get" "org.gnome.desktop.interface" "gtk-theme" | trim) "'Adwaita'" -}}
 @theme "gruvbox-light"

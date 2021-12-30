@@ -9,4 +9,4 @@ git clone https://aur.archlinux.org/yay.git
 cd yay
 makepkg -si
 
-yay -S rofi-pass i3-gnome onedriver
+yay -S i3-gnome onedriver
