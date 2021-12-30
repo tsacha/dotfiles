@@ -4,7 +4,5 @@
 if [ ! -d ~/.oh-my-zsh ]; then
     git clone --depth 1 https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
 else
-    pushd ~/.oh-my-zsh
-    git pull
-    popd
+    git -C ~/.oh-my-zsh pull
 fi
