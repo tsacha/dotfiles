@@ -156,6 +156,7 @@ arch-chroot /mnt pacman -S --noconfirm \
     ntp \
     htop \
     openbsd-netcat \
+    unzip \
     jq \
     yajl \
     wget \
