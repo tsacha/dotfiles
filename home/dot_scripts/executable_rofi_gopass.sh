@@ -12,7 +12,7 @@ selected_password=$(gopass list -f | rofi -dmenu -p gopass)
 if [ -z $selected_password ]; then
     exit
 fi
-pass_tmp=$(gopass show -n -u $selected_password | head -n -2)
+pass_tmp=$(gopass show -n -u $selected_password)
 
 declare -a keys
 keys+=("pass")
