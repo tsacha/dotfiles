@@ -62,24 +62,51 @@
 
 ;;;; Themes
 (setq custom-safe-themes t)
-(use-package! gsettings
-  :config
-  (defun tsacha/reload-theme (&rest signal)
-    "Reload theme"
-    (if (string-equal (gsettings-get "org.gnome.desktop.interface" "gtk-theme") "Adwaita")
+(cond
+ ((string-equal system-type "gnu/linux")
+  (use-package! gsettings
+    :config
+    (defun tsacha/reload-theme (&rest signal)
+      "Reload theme"
+      (if (string-equal (gsettings-get "org.gnome.desktop.interface" "gtk-theme") "Adwaita")
+          (progn
+            (load-theme 'doom-gruvbox-light t))
         (progn
-          (load-theme 'doom-gruvbox-light t))
+          (load-theme 'doom-gruvbox t))))
+    (tsacha/reload-theme)
+    (require 'dbus)
+    (dbus-register-signal :session nil "/ca/desrt/dconf/Writer/user" "ca.desrt.dconf.Writer" "Notify" 'tsacha/reload-theme)))
+ ((string-equal system-type "darwin")
+  (defun match-emacs-theme-to-system ()
+    "Automatically set the theme to match if OSX is in dark mode."
+    (interactive)
+    (if (system-dark-mode-enabled-p)
+        (progn
+          (load-theme 'doom-gruvbox t))
       (progn
-        (load-theme 'doom-gruvbox t))))
-  (tsacha/reload-theme)
-  (require 'dbus)
-  (dbus-register-signal :session nil "/ca/desrt/dconf/Writer/user" "ca.desrt.dconf.Writer" "Notify" 'tsacha/reload-theme))
+        (load-theme 'doom-gruvbox-light t))))
+  (defun system-dark-mode-enabled-p ()
+    "Check if dark mode is currently enabled on OSX."
+    (if (string= system-type "darwin")
+        (string=
+         (shell-command-to-string "printf %s \"$( osascript -e \'tell application \"System Events\" to tell appearance preferences to return dark mode\' )\"")
+         "true")
+      nil))
+
+  (match-emacs-theme-to-system)
+
+  )
+ )
 
 ;;;; Fonts
-(setq doom-font (font-spec :family "Iosevka" :size 18 :weight 'semi-light)
-      doom-variable-pitch-font (font-spec :family "Iosevka") ; inherits `doom-font''s :size
-      doom-unicode-font (font-spec :family "Iosevka" :size 18)
-      doom-big-font (font-spec :family "Iosevka" :size 21))
+(cond
+ ((string-equal system-type "gnu/linux")
+
+  (setq doom-font (font-spec :family "Iosevka" :size 18 :weight 'semi-light)
+        doom-variable-pitch-font (font-spec :family "Iosevka") ; inherits `doom-font''s :size
+        doom-unicode-font (font-spec :family "Iosevka" :size 18)
+        doom-big-font (font-spec :family "Iosevka" :size 21)))
+ )
 
 ;;; Keybinds
 (map! "<f2>" #'treemacs)

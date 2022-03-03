@@ -1,0 +1,9 @@
+{{ if eq .chezmoi.os "darwin" -}}
+*
+!Applications*
+Git*
+!.doom.d
+!.skhdrc
+!.password-store
+!.gitconfig
+{{ end -}}
