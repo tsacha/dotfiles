@@ -4,10 +4,22 @@ configuration {
 	disable-history: true;
 	parse-known-hosts: false;
 }
+
+
+{{ if eq .chezmoi.os "darwin" -}}
+{{ if eq (output "osascript" "-e" "tell app \"System Events\" to tell appearance preferences to get dark mode" | trim) "false" -}}
+@theme "gruvbox-light"
+{{ else if eq (output "osascript" "-e" "tell app \"System Events\" to tell appearance preferences to get dark mode" | trim) "true" -}}
+@theme "gruvbox-dark"
+{{ else -}}
+@theme "gruvbox-light"
+{{ end -}}
+{{ else -}}
 {{ if eq (output "gsettings" "get" "org.gnome.desktop.interface" "gtk-theme" | trim) "'Adwaita'" -}}
 @theme "gruvbox-light"
 {{ else if eq (output "gsettings" "get" "org.gnome.desktop.interface" "gtk-theme" | trim) "'Adwaita-dark'" -}}
 @theme "gruvbox-dark"
 {{ else -}}
 @theme "gruvbox-light"
+{{ end -}}
 {{ end -}}

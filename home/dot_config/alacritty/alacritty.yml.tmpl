@@ -1,3 +1,6 @@
+{{ if eq .chezmoi.os "darwin" -}}
+alt_send_esc: false
+{{ end -}}
 font:
   normal:
     family: Iosevka Nerd Font Mono
@@ -14,7 +17,6 @@ font:
   bold_italic:
     family: Iosevka Nerd Font Mono
     style: Bold Italic
-
   size: 14
 
 schemes:
@@ -70,10 +72,20 @@ schemes:
 
 
 # Colors
+{{ if eq .chezmoi.os "darwin" -}}
+{{ if eq (output "osascript" "-e" "tell app \"System Events\" to tell appearance preferences to get dark mode" | trim) "false" -}}
+colors: *light
+{{ else if eq (output "osascript" "-e" "tell app \"System Events\" to tell appearance preferences to get dark mode" | trim) "true" -}}
+colors: *dark
+{{ else -}}
+colors: *light
+{{ end -}}
+{{ else -}}
 {{ if eq (output "gsettings" "get" "org.gnome.desktop.interface" "gtk-theme" | trim) "'Adwaita'" -}}
 colors: *light
 {{ else if eq (output "gsettings" "get" "org.gnome.desktop.interface" "gtk-theme" | trim) "'Adwaita-dark'" -}}
 colors: *dark
 {{ else -}}
 colors: *light
+{{ end -}}
 {{ end -}}

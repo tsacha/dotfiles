@@ -1,3 +1,3 @@
-fn - p : open -na $HOME/Applications/Passwords.app
-fn - return : open -na kitty --args -1
-fn - l : open -na emacs
+alt - p : $HOME/.scripts/gopass.sh
+alt - return : open -na alacritty
+alt - l : open -na emacs

@@ -99,14 +99,15 @@
  )
 
 ;;;; Fonts
-(cond
- ((string-equal system-type "gnu/linux")
-
-  (setq doom-font (font-spec :family "Iosevka" :size 18 :weight 'semi-light)
+(if (string-equal system-type "gnu/linux")
+    (setq doom-font (font-spec :family "Iosevka" :size 18 :weight 'semi-light)
+          doom-variable-pitch-font (font-spec :family "Iosevka") ; inherits `doom-font''s :size
+          doom-unicode-font (font-spec :family "Iosevka" :size 18)
+          doom-big-font (font-spec :family "Iosevka" :size 21))
+  (setq doom-font (font-spec :family "Iosevka" :size 14 :weight 'semi-light)
         doom-variable-pitch-font (font-spec :family "Iosevka") ; inherits `doom-font''s :size
-        doom-unicode-font (font-spec :family "Iosevka" :size 18)
-        doom-big-font (font-spec :family "Iosevka" :size 21)))
- )
+        doom-unicode-font (font-spec :family "Iosevka" :size 14)
+        doom-big-font (font-spec :family "Iosevka" :size 16)))
 
 ;;; Keybinds
 (map! "<f2>" #'treemacs)

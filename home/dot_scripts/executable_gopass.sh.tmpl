@@ -1,14 +1,29 @@
 #!/usr/bin/env bash
 # Source: https://github.com/carnager/rofi-pass/blob/master/rofi-pass
 #
+{{ if eq .chezmoi.os "darwin" }}
 _clip_in() {
-   pbcopy
+    pbcopy
 }
+{{ else }}
+_clip_in() {
+    xclip -selection primary
+}
+_clip_in_clipboard() {
+    xclip -selection clipboard
+}
+{{ end }}
+
+{{ if eq .chezmoi.os "darwin" }}
 selected_password=$(gopass list -f | choose)
+{{ else }}
+selected_password=$(gopass list -f | rofi -dmenu -p gopass)
+{{ end }}
 if [ -z $selected_password ]; then
     exit
 fi
 pass_tmp=$(gopass show -n -u $selected_password)
+
 declare -a keys
 keys+=("pass")
 pass_otp_value=$(printf '%s' "${pass_tmp}" | grep 'otpauth://')
@@ -25,7 +40,11 @@ done < <(printf '%s\n' "${pass_key_value}")
 action=$(
     for k in ${keys[@]}; do
         echo $k
+{{ if eq .chezmoi.os "darwin" }}
     done | choose)
+{{ else -}}
+    done | rofi -dmenu -p key)
+{{ end -}}
 
 if [ -z $action ]; then
     exit
@@ -42,4 +61,11 @@ case $action in
         ;;
 esac
 
+{{ if eq .chezmoi.os "darwin" }}
 printf '%s' "$pass" | _clip_in
+osascript -e 'display notification "Copied password" with title "Gopass" subtitle "'$selected_password'" sound name "Submarine"'
+{{ else }}
+printf '%s' "$pass" | _clip_in
+printf '%s' "$pass" | _clip_in_clipboard
+notify-send "gopass" "Copied password"
+{{ end -}}

@@ -1,9 +1,10 @@
 {{ if eq .chezmoi.os "darwin" -}}
-*
-!Applications*
-Git*
-!.doom.d
-!.skhdrc
-!.password-store
-!.gitconfig
+.bashrc
+.profile
+.config/i3
+.config/picom
+.config/rofi
+.config/xfce4
+.config/sway
+.config/systemd
 {{ end -}}
