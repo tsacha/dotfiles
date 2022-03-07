@@ -38,7 +38,7 @@ bindsym $mod+Shift+Q kill
 #bindsym $mod+d exec dmenu_run
 bindsym $mod+l exec emacs
 bindsym $mod+j exec chromium
-bindsym $mod+p exec /home/sacha/.scripts/rofi_gopass.sh
+bindsym $mod+p exec $HOME/.scripts/gopass.sh
 bindsym $mod+d exec rofi -show run
 bindsym $mod+Shift+D exec i3-dmenu-desktop --dmenu='rofi -dmenu -i'
 bindsym $mod+u exec rofi -show ssh
@@ -205,7 +205,7 @@ bindsym $mod+F1 exec i3lock -c 000000
 bindsym XF86MonBrightnessUp exec xbacklight -inc 1
 bindsym XF86MonBrightnessDown exec xbacklight -dec 1
 
-bindsym $mod+F9 exec /home/sacha/Git/dotfiles/pulseaudio/switch_headphones_speakers.sh
+bindsym $mod+F9 exec $HOME/Git/dotfiles/pulseaudio/switch_headphones_speakers.sh
 bindsym $mod+F10 exec pamixer -t
 bindsym $mod+F11 exec pamixer -d 3
 bindsym $mod+F12 exec pamixer -i 3
@@ -215,7 +215,7 @@ bindsym XF86AudioRaiseVolume exec pamixer -i 3
 bindsym XF86AudioMute exec pamixer -t
 bindsym --release  $mod+Shift+S exec flameshot gui
 bindsym $mod+F6 exec systemctl --user is-active redshift && systemctl --user stop redshift || systemctl --user start redshift;
-bindsym $mod+F7 exec /home/sacha/Git/dotfiles/alacritty/alacritty-theme-switcher.sh
+bindsym $mod+F7 exec $HOME/Git/dotfiles/alacritty/alacritty-theme-switcher.sh
 bindsym XF86AudioPlay exec /usr/bin/dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause
 bindsym XF86AudioPrev exec /usr/bin/dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous
 bindsym XF86AudioNext exec /usr/bin/dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next
@@ -229,9 +229,9 @@ exec systemctl --user start picom
 exec systemctl --user start gpg-agent-ssh.socket
 exec systemctl --user start nm-applet
 exec systemctl --user import-environment DISPLAY XAUTHORITY SSH_AUTH_SOCK
-exec /home/sacha/Git/dotfiles/xorg/desktop.sh
+exec $HOME/Git/dotfiles/xorg/desktop.sh
 
-exec feh --bg-fill /home/sacha/Cloud/Pictures/wallpapers/gris/01.png --bg-fill /home/sacha/Cloud/Pictures/wallpapers/gris/02.png --bg-fill /home/sacha/Cloud/Pictures/wallpapers/gris/03.png
+exec feh --bg-fill $HOME/Cloud/Pictures/wallpapers/gris/01.png --bg-fill $HOME/Cloud/Pictures/wallpapers/gris/02.png --bg-fill $HOME/Cloud/Pictures/wallpapers/gris/03.png
 exec xinput set-prop "TPPS/2 IBM TrackPoint" "Evdev Wheel Emulation" 1
 exec xinput set-prop "TPPS/2 IBM TrackPoint" "Evdev Wheel Emulation Button" 2
 exec xinput set-prop "TPPS/2 IBM TrackPoint" "Evdev Wheel Emulation Timeout" 200

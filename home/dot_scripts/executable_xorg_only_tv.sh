@@ -8,5 +8,5 @@ xrandr \
     --output DP-4 --off \
     --output DP-5 --off
 
-feh --bg-fill /home/sacha/Pictures/wallpapers/gris/01.png
+feh --bg-fill $HOME/Pictures/wallpapers/gris/01.png
 nvidia-settings --load-config-only

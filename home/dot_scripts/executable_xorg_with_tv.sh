@@ -8,5 +8,5 @@ xrandr \
     --output DP-4 --mode 2560x1440 --pos 3840x0 --rate 144.0 --rotate left \
     --output DP-5 --off
 
-feh --bg-fill /home/sacha/Pictures/wallpapers/gris/01.png --bg-fill /home/sacha/Pictures/wallpapers/gris/02.png --bg-fill /home/sacha/Pictures/wallpapers/gris/03.png --bg-fill /home/sacha/Pictures/wallpapers/gris/04.png
+feh --bg-fill $HOME/Pictures/wallpapers/gris/01.png --bg-fill $HOME/Pictures/wallpapers/gris/02.png --bg-fill $HOME/Pictures/wallpapers/gris/03.png --bg-fill $HOME/Pictures/wallpapers/gris/04.png
 nvidia-settings --load-config-only

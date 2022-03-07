@@ -1,6 +1,6 @@
 configuration {
 	font: "Iosevka Nerd Font Mono 14";
-	ssh-command: "alacritty -t "SSH > {host}" -e /bin/zsh -c 'source /home/sacha/.zshrc; {ssh-client} {host}'";
+	ssh-command: "alacritty -t "SSH > {host}" -e /bin/zsh -c 'source $HOME/.zshrc; {ssh-client} {host}'";
 	disable-history: true;
 	parse-known-hosts: false;
 }
