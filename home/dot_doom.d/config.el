@@ -77,26 +77,8 @@
     (require 'dbus)
     (dbus-register-signal :session nil "/ca/desrt/dconf/Writer/user" "ca.desrt.dconf.Writer" "Notify" 'tsacha/reload-theme)))
  ((string-equal system-type "darwin")
-  (defun match-emacs-theme-to-system ()
-    "Automatically set the theme to match if OSX is in dark mode."
-    (interactive)
-    (if (system-dark-mode-enabled-p)
-        (progn
-          (load-theme 'doom-gruvbox t))
-      (progn
-        (load-theme 'doom-gruvbox-light t))))
-  (defun system-dark-mode-enabled-p ()
-    "Check if dark mode is currently enabled on OSX."
-    (if (string= system-type "darwin")
-        (string=
-         (shell-command-to-string "printf %s \"$( osascript -e \'tell application \"System Events\" to tell appearance preferences to return dark mode\' )\"")
-         "true")
-      nil))
-
-  (match-emacs-theme-to-system)
-
-  )
- )
+  (add-to-list 'load-path "~/.doom.d/auto-dark-emacs/")
+  (require 'auto-dark-emacs)))
 
 ;;;; Fonts
 (if (string-equal system-type "gnu/linux")
@@ -104,10 +86,10 @@
           doom-variable-pitch-font (font-spec :family "Iosevka") ; inherits `doom-font''s :size
           doom-unicode-font (font-spec :family "Iosevka" :size 18)
           doom-big-font (font-spec :family "Iosevka" :size 21))
-  (setq doom-font (font-spec :family "Iosevka" :size 14 :weight 'semi-light)
+  (setq doom-font (font-spec :family "Iosevka" :size 16 :weight 'semi-light)
         doom-variable-pitch-font (font-spec :family "Iosevka") ; inherits `doom-font''s :size
-        doom-unicode-font (font-spec :family "Iosevka" :size 14)
-        doom-big-font (font-spec :family "Iosevka" :size 16)))
+        doom-unicode-font (font-spec :family "Iosevka" :size 16)
+        doom-big-font (font-spec :family "Iosevka" :size 18)))
 
 ;;; Keybinds
 (map! "<f2>" #'treemacs)
