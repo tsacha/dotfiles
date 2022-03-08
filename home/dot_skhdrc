@@ -1,3 +1,4 @@
 alt - p : $HOME/.scripts/gopass.sh
 alt - return : open -na alacritty
 alt - l : open -na emacs
+alt - f1 : pmset displaysleepnow
