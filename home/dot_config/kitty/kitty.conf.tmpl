@@ -1,0 +1,19 @@
+macos_option_as_alt left
+macos_quit_when_last_window_closed yes
+hide_window_decorations titlebar-only
+close_on_child_death no
+
+font_family      Iosevka Nerd Font Mono
+bold_font        auto
+italic_font      auto
+bold_italic_font auto
+
+font_size 16.0
+
+{{ if eq (output "osascript" "-e" "tell app \"System Events\" to tell appearance preferences to get dark mode" | trim) "false" -}}
+include light.conf
+{{ else if eq (output "osascript" "-e" "tell app \"System Events\" to tell appearance preferences to get dark mode" | trim) "true" -}}
+include dark.conf
+{{ else -}}
+include light.conf
+{{ end -}}

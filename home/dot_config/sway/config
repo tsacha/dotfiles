@@ -36,7 +36,7 @@ bindsym $mod+Shift+Q kill
 
 # start dmenu (a program launcher)
 #bindsym $mod+d exec dmenu_run
-bindsym $mod+l exec emacs
+bindsym $mod+m exec emacs
 bindsym $mod+j exec chromium
 bindsym $mod+p exec $HOME/.scripts/gopass.sh
 bindsym $mod+d exec rofi -show run

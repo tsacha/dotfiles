@@ -1,4 +1,5 @@
-alt - p : $HOME/.scripts/gopass.sh
-alt - return : open -na alacritty
-alt - l : open -na emacs
-alt - f1 : pmset displaysleepnow
+cmd - p : $HOME/.scripts/gopass.sh
+cmd - return : open -na kitty
+cmd - m : open -na emacs
+cmd - j : open -na chrome
+cmd - f1 : pmset displaysleepnow

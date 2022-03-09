@@ -7,4 +7,6 @@
 .config/xfce4
 .config/sway
 .config/systemd
+{{ else -}}
+.config/kitty
 {{ end -}}
