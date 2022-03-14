@@ -114,4 +114,7 @@
 (add-hook! python-mode
   (blacken-mode))
 
+(add-hook! terraform-mode
+  (terraform-format-on-save-mode))
+
 (remove-hook 'doom-first-buffer-hook #'smartparens-global-mode)

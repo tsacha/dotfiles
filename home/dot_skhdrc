@@ -1,4 +1,5 @@
 cmd - p : $HOME/.scripts/gopass.sh
+cmd - g : $HOME/.scripts/github.sh
 cmd - return : open -na kitty
 cmd - m : open -na emacs
 cmd - j : open -na chrome

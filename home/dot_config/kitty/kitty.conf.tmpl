@@ -10,6 +10,8 @@ bold_italic_font auto
 
 font_size 16.0
 
+copy_on_select yes
+
 {{ if eq (output "osascript" "-e" "tell app \"System Events\" to tell appearance preferences to get dark mode" | trim) "false" -}}
 include light.conf
 {{ else if eq (output "osascript" "-e" "tell app \"System Events\" to tell appearance preferences to get dark mode" | trim) "true" -}}
