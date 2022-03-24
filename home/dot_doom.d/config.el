@@ -36,6 +36,9 @@
 (setq sentence-end-double-space nil)
 
 
+;;;;; Mouse autoselect
+(setq mouse-autoselect-window t)
+
 ;;;; Buffer / File Warnings
 (setq confirm-nonexistent-file-or-buffer nil)
 ;; via https://iqbalansari.github.io/blog/2014/12/07/automatically-create-parent-directories-on-visiting-a-new-file-in-emacs/
