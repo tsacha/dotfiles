@@ -4,3 +4,8 @@ cmd - return : open -na kitty
 cmd - m : open -na emacs
 cmd - j : open -na chrome
 cmd - f1 : pmset displaysleepnow
+
+shift + cmd - left : yabai -m window --warp west
+shift + cmd - right : yabai -m window --warp east
+cmd - x : yabai -m window --display recent; yabai -m display --focus recent
+cmd - e : yabai -m window --toggle split

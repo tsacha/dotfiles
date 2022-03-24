@@ -77,8 +77,14 @@
     (require 'dbus)
     (dbus-register-signal :session nil "/ca/desrt/dconf/Writer/user" "ca.desrt.dconf.Writer" "Notify" 'tsacha/reload-theme)))
  ((string-equal system-type "darwin")
-  (add-to-list 'load-path "~/.doom.d/auto-dark-emacs/")
-  (require 'auto-dark-emacs)))
+
+  (defun my/apply-theme (appearance)
+    "Load theme, taking current system APPEARANCE into consideration."
+    (mapc #'disable-theme custom-enabled-themes)
+    (pcase appearance
+      ('light (load-theme 'doom-gruvbox-light t))
+      ('dark (load-theme 'doom-gruvbox t))))
+  (add-hook 'ns-system-appearance-change-functions #'my/apply-theme)))
 
 ;;;; Fonts
 (if (string-equal system-type "gnu/linux")
