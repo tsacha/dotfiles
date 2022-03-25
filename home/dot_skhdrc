@@ -5,6 +5,9 @@ cmd - m : open -na emacs
 cmd - j : open -na chrome
 cmd - f1 : pmset displaysleepnow
 
+shift + cmd - c : yabai -m space --create
+shift + alt - c : yabai -m space --destroy
+
 shift + cmd - left : yabai -m window --warp west
 shift + cmd - right : yabai -m window --warp east
 
