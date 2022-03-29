@@ -118,7 +118,8 @@
 (after! ivy
   (setq ivy-extra-directories '("../" "./")))
 
-
+(add-hook! fish-mode
+  (add-hook 'before-save-hook #'fish_indent-before-save))
 
 (add-hook! python-mode
   (blacken-mode))

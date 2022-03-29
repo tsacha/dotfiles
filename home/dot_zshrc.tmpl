@@ -107,8 +107,13 @@ if [[ $#h -gt 0 ]]; then
   zstyle ':completion:*:slogin:*' hosts $h
 fi
 
-autoload -U +X bashcompinit && bashcompinit
-complete -o nospace -C terraform terraform
+if type brew &>/dev/null
+then
+  FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
+
+  autoload -Uz compinit
+  compinit
+fi
 
 if [[ -e ~/.acme.sh/acme.sh.env ]]; then
   source ~/.acme.sh/acme.sh.env

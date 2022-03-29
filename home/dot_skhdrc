@@ -6,7 +6,7 @@ cmd - j : open -na chrome
 cmd - f1 : pmset displaysleepnow
 
 shift + cmd - c : yabai -m space --create
-shift + alt - c : yabai -m space --destroy
+alt + cmd - c : yabai -m space --destroy
 
 shift + cmd - left : yabai -m window --warp west
 shift + cmd - right : yabai -m window --warp east
@@ -41,5 +41,8 @@ shift + cmd - 0x1D : yabai -m window --space 10
 
 shift + cmd - space : yabai -m window --toggle float && yabai -m window --grid 4:4:1:1:2:2
 shift + cmd - f : yabai -m window --toggle native-fullscreen
-cmd - x : yabai -m window --display recent | yabai -m window --display next; yabai -m display --focus recent
-cmd - e : yabai -m window --toggle split
+shift + cmd - x : yabai -m space --display next || yabai -m space --display prev
+shift + cmd - y : yabai -m window --display next || yabai -m window --display prev
+shift + cmd - e : yabai -m window --toggle split
+
+shift + cmd - r : brew services restart yabai
