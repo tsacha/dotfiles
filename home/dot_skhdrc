@@ -1,8 +1,8 @@
 cmd - p : $HOME/.scripts/gopass.sh
 cmd - g : $HOME/.scripts/github.sh
+cmd - j : $HOME/.scripts/jira.sh
 cmd - return : open -na kitty
 cmd - m : open -na emacs
-cmd - j : open -na chrome
 cmd - f1 : pmset displaysleepnow
 
 shift + cmd - c : yabai -m space --create
@@ -46,3 +46,4 @@ shift + cmd - y : yabai -m window --display next || yabai -m window --display pr
 shift + cmd - e : yabai -m window --toggle split
 
 shift + cmd - r : brew services restart yabai
+cmd - f7 :  osascript -e 'tell app "System Events" to tell appearance preferences to set dark mode to not dark mode'; cm apply -v ~/.config/kitty/kitty.conf; pgrep kitty | xargs kill -USR1;

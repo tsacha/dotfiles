@@ -56,6 +56,7 @@ yabai -m rule --add label="Dictionary" app="^Dictionary$" manage=off
 yabai -m rule --add label="mpv" app="^mpv$" manage=off
 yabai -m rule --add label="Software Update" title="Software Update" manage=off
 yabai -m rule --add label="About This Mac" app="System Information" title="About This Mac" manage=off
+yabai -m rule --add app="Numi" sticky=on layer=above manage=off
 yabai -m rule --add app="choose" manage=off
 yabai -m rule --add label=emacs app=Emacs manage=on
 
