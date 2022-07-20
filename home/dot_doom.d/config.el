@@ -51,7 +51,7 @@
 (add-to-list 'find-file-not-found-functions #'create-non-existent-directory)
 
 ;;;; yes/no questions
-(fset 'yes-or-no-p 'y-or-n-p)
+(setq use-short-answers t)
 
 ;;;; Clock
 (display-time-mode 1)
@@ -97,23 +97,33 @@
           doom-big-font (font-spec :family "Iosevka" :size 21))
   (setq doom-font (font-spec :family "Iosevka" :size 16 :weight 'semi-light)
         doom-variable-pitch-font (font-spec :family "Iosevka") ; inherits `doom-font''s :size
-        doom-unicode-font (font-spec :family "Iosevka" :size 16)
+        doom-unicode-font (font-spec :family "Apple Color Emoji" :size 16)
         doom-big-font (font-spec :family "Iosevka" :size 18)))
 
 ;;; Keybinds
-(map! "<f2>" #'treemacs)
-(map! "M-$" #'other-window)
+(map! "<f2>" #'vterm)
+(map! "C-x p" #'projectile-switch-project)
+(map! "C-x z" #'zoom-window-zoom)
 (map! "M-+" #'undo-fu-only-undo)
 (map! "M--" #'undo-fu-only-redo)
-(map! "C-s" #'swiper)
-(map! "C-M-/" #'counsel-git)
-(map! "C-M-*" #'counsel-git-grep)
-(map! "C-M-=" #'counsel-ag)
+(map! "C-s" #'consult-line)
+(map! "C-M-*" #'consult-ripgrep)
+(map! "C-M-=" #'+vertico/project-search)
+(map! "C-x f" #'consult-find)
 (map! "C-x g" #'magit)
 (map! "C-S-c" #'clipboard-kill-ring-save)
 (map! "C-S-x" #'clipboard-kill-region)
 (map! "C-S-v" #'clipboard-yank)
-(map! "C-x b" #'list-buffers)
+(map! "C-x C-é" #'+vertico/switch-workspace-buffer)
+(map! "s-t" #'+workspace/new)
+(map! "C-<tab>" #'+workspace/switch-right)
+(map! "C-S-<tab>" #'+workspace/switch-left)
+
+(setq projectile-switch-project-action #'projectile-dired)
+(setq +workspaces-switch-project-function (lambda (dir)
+                                            (dired dir)))
+
+(setq zoom-window-mode-line-color "DarkGreen")
 
 (after! ivy
   (setq ivy-extra-directories '("../" "./")))
@@ -128,3 +138,10 @@
   (terraform-format-on-save-mode))
 
 (remove-hook 'doom-first-buffer-hook #'smartparens-global-mode)
+
+;;; Completion
+(after! vertico
+  (vertico-multiform-mode)
+  (setq vertico-multiform-commands
+        '((find-file (vertico-sort-function . vertico-sort-alpha))
+          (projectile-find-file (vertico-sort-function . vertico-sort-history-alpha)))))

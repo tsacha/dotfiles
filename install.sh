@@ -150,6 +150,7 @@ arch-chroot /mnt pacman -S --noconfirm \
     sshfs \
     arch-install-scripts \
     tcpdump \
+    fd \
     go \
     go-tools \
     zsh \

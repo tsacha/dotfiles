@@ -8,5 +8,8 @@ export EDITOR=emacs
 export TERM=xterm-256color
 export XDG_CURRENT_DESKTOP=X-Generic
 
+set -x GOPATH $HOME/go
+
 fish_add_path /opt/homebrew/bin
+fish_add_path /usr/local/bin
 set -U fish_greeting "🐟"
