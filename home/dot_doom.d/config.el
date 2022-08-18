@@ -42,13 +42,13 @@
 ;;;; Buffer / File Warnings
 (setq confirm-nonexistent-file-or-buffer nil)
 ;; via https://iqbalansari.github.io/blog/2014/12/07/automatically-create-parent-directories-on-visiting-a-new-file-in-emacs/
-(defun create-non-existent-directory ()
+(defun tsacha/create-non-existent-directory ()
   "Check whether a given file's parent directories exist; if they do not, offer to create them."
   (let ((parent-directory (file-name-directory buffer-file-name)))
     (when (and (not (file-exists-p parent-directory))
                (y-or-n-p (format "Directory `%s' does not exist! Create it?" parent-directory)))
       (make-directory parent-directory t))))
-(add-to-list 'find-file-not-found-functions #'create-non-existent-directory)
+(add-to-list 'find-file-not-found-functions #'tsacha/create-non-existent-directory)
 
 ;;;; yes/no questions
 (setq use-short-answers t)
@@ -81,13 +81,13 @@
     (dbus-register-signal :session nil "/ca/desrt/dconf/Writer/user" "ca.desrt.dconf.Writer" "Notify" 'tsacha/reload-theme)))
  ((string-equal system-type "darwin")
 
-  (defun my/apply-theme (appearance)
+  (defun tsacha/apply-theme (appearance)
     "Load theme, taking current system APPEARANCE into consideration."
     (mapc #'disable-theme custom-enabled-themes)
     (pcase appearance
       ('light (load-theme 'doom-gruvbox-light t))
       ('dark (load-theme 'doom-gruvbox t))))
-  (add-hook 'ns-system-appearance-change-functions #'my/apply-theme)))
+  (add-hook 'ns-system-appearance-change-functions #'tsacha/apply-theme)))
 
 ;;;; Fonts
 (if (string-equal system-type "gnu/linux")
@@ -108,7 +108,7 @@
 (map! "M--" #'undo-fu-only-redo)
 (map! "C-s" #'consult-line)
 (map! "C-M-*" #'consult-ripgrep)
-(map! "C-M-=" #'+vertico/project-search)
+(map! "C-M-=" #'tsacha/project-search)
 (map! "C-x f" #'consult-find)
 (map! "C-x g" #'magit)
 (map! "C-S-c" #'clipboard-kill-ring-save)
@@ -118,6 +118,11 @@
 (map! "s-t" #'+workspace/new)
 (map! "C-<tab>" #'+workspace/switch-right)
 (map! "C-S-<tab>" #'+workspace/switch-left)
+
+
+(defun tsacha/project-search (&optional arg initial-query directory)
+  (interactive "P")
+  (consult-git-grep))
 
 (setq projectile-switch-project-action #'projectile-dired)
 (setq +workspaces-switch-project-function (lambda (dir)
