@@ -15,5 +15,12 @@ email = sacha@tremoureux.fr
 	process = git-lfs filter-process
 	required = true
 
-[url "ssh://git@github.com/"]
-	insteadOf = https://github.com/tsacha/
+[push]
+    autoSetupRemote = true
+
+[url "ssh://git@github.com/tsacha"]
+	insteadOf = https://github.com/tsacha
+
+{{ if stat (joinPath .chezmoi.homeDir ".gitconfig.work") }}
+{{ include (joinPath .chezmoi.homeDir ".gitconfig.work") }}
+{{ end }}
