@@ -107,7 +107,7 @@
 (map! "M-+" #'undo-fu-only-undo)
 (map! "M--" #'undo-fu-only-redo)
 (map! "C-s" #'consult-line)
-(map! "C-M-*" #'consult-ripgrep)
+(map! "C-M-*" #'tsacha/directory-search)
 (map! "C-M-=" #'tsacha/project-search)
 (map! "C-x f" #'consult-find)
 (map! "C-x g" #'magit)
@@ -119,6 +119,10 @@
 (map! "C-<tab>" #'+workspace/switch-right)
 (map! "C-S-<tab>" #'+workspace/switch-left)
 
+
+(defun tsacha/directory-search (&optional arg initial-query directory)
+  (interactive "P")
+  (consult-ripgrep default-directory))
 
 (defun tsacha/project-search (&optional arg initial-query directory)
   (interactive "P")
