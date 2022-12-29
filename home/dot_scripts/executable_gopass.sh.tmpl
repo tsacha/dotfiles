@@ -63,7 +63,7 @@ esac
 
 {{ if eq .chezmoi.os "darwin" }}
 printf '%s' "$pass" | _clip_in
-osascript -e 'display notification "Copied password" with title "Gopass" subtitle "'$selected_password'" sound name "Submarine"'
+# osascript -e 'display notification "Copied password" with title "Gopass" subtitle "'$selected_password'" sound name "Submarine"'
 {{ else }}
 printf '%s' "$pass" | _clip_in
 printf '%s' "$pass" | _clip_in_clipboard

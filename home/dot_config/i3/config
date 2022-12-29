@@ -37,8 +37,6 @@ bindsym $mod+Shift+Q kill
 # start dmenu (a program launcher)
 #bindsym $mod+d exec dmenu_run
 bindsym $mod+m exec emacs
-bindsym $mod+j exec chromium
-bindsym $mod+p exec $HOME/.scripts/gopass.sh
 bindsym $mod+d exec rofi -show run
 bindsym $mod+Shift+D exec i3-dmenu-desktop --dmenu='rofi -dmenu -i'
 bindsym $mod+u exec rofi -show ssh
@@ -205,6 +203,12 @@ bindsym $mod+F1 exec i3lock -c 000000
 bindsym XF86MonBrightnessUp exec xbacklight -inc 1
 bindsym XF86MonBrightnessDown exec xbacklight -dec 1
 
+bindsym $mod+p exec $HOME/.scripts/gopass.sh
+bindsym $mod+g exec $HOME/.scripts/github.sh
+bindsym $mod+F2 exec $HOME/.scripts/nomad_shell.fish
+bindsym $mod+F3 exec $HOME/.scripts/ec2.fish --single
+bindsym $mod+F4 exec $HOME/.scripts/ec2.fish --multiple
+bindsym $mod+F5 exec $HOME/.scripts/ec2.fish --parallel
 bindsym $mod+F9 exec $HOME/.scripts/audio_switch.sh
 bindsym $mod+F10 exec pamixer -t
 bindsym $mod+F11 exec pamixer -d 3

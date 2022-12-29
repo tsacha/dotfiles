@@ -1,7 +1,7 @@
 cmd - p : $HOME/.scripts/gopass.sh
 cmd - g : $HOME/.scripts/github.sh
 cmd - j : $HOME/.scripts/jira.sh
-cmd - f2 : $HOME/.scripts/shell.fish
+cmd - f2 : $HOME/.scripts/nomad_shell.fish
 cmd - f3 : $HOME/.scripts/ec2.fish --single
 cmd - f4 : $HOME/.scripts/ec2.fish --multiple
 cmd - f5 : $HOME/.scripts/ec2.fish --parallel

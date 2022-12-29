@@ -9,6 +9,7 @@ arch-chroot /mnt pacman -S --noconfirm \
     rsync \
     ansible \
     git \
+    git-lfs \
     openssh \
     net-tools \
     reflector \
@@ -88,6 +89,7 @@ arch-chroot /mnt pacman -S --noconfirm \
     arandr \
     sway \
     network-manager-applet \
+    networkmanager-openvpn \
     lightdm \
     lightdm-gtk-greeter \
     virt-manager \
@@ -109,9 +111,6 @@ arch-chroot /mnt pacman -S --noconfirm \
     rdesktop \
     acpi \
     flameshot \
-    vagrant \
-    terraform \
-    vault \
     exa \
     fd \
     flatpak \
@@ -139,7 +138,15 @@ arch-chroot /mnt pacman -S --noconfirm \
     gopass \
     xclip \
     age \
-    chezmoi
+    chezmoi \
+    aws-cli \
+    github-cli \
+    consul \
+    nomad \
+    vault \
+    vagrant \
+    terraform \
+    consul-template
 
 arch-chroot /mnt /usr/bin/sed -Ei 's/^#greeter-session.*/greeter-session=lightdm-gtk-greeter/g' /etc/lightdm/lightdm.conf
 arch-chroot /mnt /usr/bin/sed -Ei 's/^#?background=.*/background=\/var\/cache\/background/g' /etc/lightdm/lightdm-gtk-greeter.conf
