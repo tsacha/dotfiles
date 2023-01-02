@@ -118,6 +118,7 @@
 (map! "s-t" #'+workspace/new)
 (map! "C-<tab>" #'+workspace/switch-right)
 (map! "C-S-<tab>" #'+workspace/switch-left)
+(map! "C-<f1>" #'org-journal-open-current-journal-file)
 
 
 (defun tsacha/directory-search (&optional arg initial-query directory)
@@ -137,6 +138,8 @@
 (after! ivy
   (setq ivy-extra-directories '("../" "./")))
 
+(add-hook 'text-mode-hook 'turn-on-auto-fill)
+
 (add-hook! fish-mode
   (add-hook 'before-save-hook #'fish_indent-before-save))
 
@@ -154,3 +157,13 @@
   (setq vertico-multiform-commands
         '((find-file (vertico-sort-function . vertico-sort-alpha))
           (projectile-find-file (vertico-sort-function . vertico-sort-history-alpha)))))
+
+;; Org
+(after! org-journal
+    (setq org-journal-file-format "%Y-W%V.org"
+          org-journal-file-type   'weekly
+          org-journal-file-header "#+TITLE: %Y-W%V\n#+ROAM_TAGS: journal\n\nWeek %V, %Y\n\n* Backlog\n"
+          org-journal-date-format "%Y-%m-%d (%A)"
+          org-journal-time-prefix ""
+          org-journal-time-format "** %H:%M - "
+          org-journal-dir         "~/Git/Notes/Weekly"))
