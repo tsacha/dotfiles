@@ -15,7 +15,7 @@ _rofi () {
 fix_layout=true
 
 layout_cmd () {
-  setxkbmap fr bepo
+  setxkbmap fr bepo_afnor
 }
 
 # fields to be used

@@ -234,7 +234,7 @@ exec systemctl --user start gpg-agent-ssh.socket
 exec systemctl --user start nm-applet
 exec systemctl --user import-environment DISPLAY XAUTHORITY SSH_AUTH_SOCK
 
-exec feh --bg-fill ~/.wallpapers
+exec ~/.scripts/xorg.sh && feh --bg-fill ~/.wallpapers
 
 exec xinput set-prop "TPPS/2 IBM TrackPoint" "Evdev Wheel Emulation" 1
 exec xinput set-prop "TPPS/2 IBM TrackPoint" "Evdev Wheel Emulation Button" 2
