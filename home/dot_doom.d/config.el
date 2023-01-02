@@ -119,6 +119,7 @@
 (map! "C-<tab>" #'+workspace/switch-right)
 (map! "C-S-<tab>" #'+workspace/switch-left)
 (map! "C-<f1>" #'org-journal-open-current-journal-file)
+(map! "C-<f2>" #'magit-list-repositories)
 
 
 (defun tsacha/directory-search (&optional arg initial-query directory)
@@ -167,3 +168,17 @@
           org-journal-time-prefix ""
           org-journal-time-format "** %H:%M - "
           org-journal-dir         "~/Git/Notes/Weekly"))
+
+(setq magit-repository-directories
+      `(("~/Git/Work" . 1)
+        ("~/Git" . 1)))
+(setq magit-repolist-columns
+      '(("Name" 25 magit-repolist-column-ident nil)
+        ("Status" 7 magit-repolist-column-flag nil)
+        ("B<U" 3 magit-repolist-column-unpulled-from-upstream
+         ((:right-align t)
+          (:help-echo "Upstream changes not in branch")))
+        ("B>U" 3 magit-repolist-column-unpushed-to-upstream
+         ((:right-align t)
+          (:help-echo "Local changes not in upstream")))
+        ("Path" 99 magit-repolist-column-path nil)))
