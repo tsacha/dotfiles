@@ -161,13 +161,16 @@
 
 ;; Org
 (after! org-journal
-    (setq org-journal-file-format "%Y-W%V.org"
-          org-journal-file-type   'weekly
-          org-journal-file-header "#+TITLE: %Y-W%V\n#+ROAM_TAGS: journal\n\nWeek %V, %Y\n\n* Backlog\n"
-          org-journal-date-format "%Y-%m-%d (%A)"
-          org-journal-time-prefix ""
-          org-journal-time-format "** %H:%M - "
-          org-journal-dir         "~/Git/Notes/Weekly"))
+  (setq org-journal-file-format "%Y-W%V.org"
+        org-journal-file-type   'weekly
+        org-journal-file-header "#+TITLE: %Y-W%V\n#+ROAM_TAGS: journal\n\nWeek %V, %Y\n\n* Backlog\n"
+        org-journal-date-format "%Y-%m-%d (%A)"
+        org-journal-time-prefix ""
+        org-journal-time-format "** %H:%M - "
+        org-journal-dir         "~/Git/Notes/Weekly"))
+
+(after! org-agenda
+  (setq org-agenda-files        '("~/Git/Notes/Weekly")))
 
 (setq magit-repository-directories
       `(("~/Git/Work" . 1)
