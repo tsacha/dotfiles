@@ -130,6 +130,7 @@
   (interactive "P")
   (consult-git-grep))
 
+(setq +workspaces-on-switch-project-behavior t)
 (setq projectile-switch-project-action #'projectile-dired)
 (setq +workspaces-switch-project-function (lambda (dir)
                                             (dired dir)))
