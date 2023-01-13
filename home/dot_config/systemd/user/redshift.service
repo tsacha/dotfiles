@@ -3,7 +3,7 @@ Description=Redshift
 Requires=dbus.socket
 
 [Service]
-ExecStart=/usr/bin/redshift -r -v -t 6000:2400 -l 47.23:-1.63 -b 1:1
+ExecStart=/usr/bin/redshift -r -v -t 6000:2400 -l 47.23:-1.63 -b 1:0.6
 Restart=always
 RestartSec=5s
 

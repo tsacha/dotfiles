@@ -118,6 +118,7 @@
 (map! "s-t" #'+workspace/new)
 (map! "C-<tab>" #'+workspace/switch-right)
 (map! "C-S-<tab>" #'+workspace/switch-left)
+(map! "C-<iso-lefttab>" #'+workspace/switch-left)
 (map! "C-<f1>" #'org-journal-open-current-journal-file)
 (map! "C-<f2>" #'magit-list-repositories)
 
