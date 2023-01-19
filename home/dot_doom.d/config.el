@@ -65,29 +65,34 @@
 
 ;;;; Themes
 (setq custom-safe-themes t)
+
+(defun tsacha/select-theme (&rest signal)
+  "Select theme matching system settings"
+  (cond
+   ;;; Linux
+   ((string-equal system-type "gnu/linux")
+    (require 'gsettings)
+    (if (string-equal (gsettings-get "org.gnome.desktop.interface" "gtk-theme") "Adwaita")
+        (progn
+          (load-theme 'doom-gruvbox-light t))
+      (progn
+        (load-theme 'doom-gruvbox t))))
+   ;;; MacOS
+   ((string-equal system-type "darwin")
+    (if (string-equal ns-system-appearance "light")
+        (progn
+          (load-theme 'doom-gruvbox-light t))
+      (progn
+        (load-theme 'doom-gruvbox t))))))
+
+;;; Register system settings hooks
 (cond
  ((string-equal system-type "gnu/linux")
-  (use-package! gsettings
-    :config
-    (defun tsacha/reload-theme (&rest signal)
-      "Reload theme"
-      (if (string-equal (gsettings-get "org.gnome.desktop.interface" "gtk-theme") "Adwaita")
-          (progn
-            (load-theme 'doom-gruvbox-light t))
-        (progn
-          (load-theme 'doom-gruvbox t))))
-    (tsacha/reload-theme)
-    (require 'dbus)
-    (dbus-register-signal :session nil "/ca/desrt/dconf/Writer/user" "ca.desrt.dconf.Writer" "Notify" 'tsacha/reload-theme)))
+  (tsacha/select-theme)
+  (require 'dbus)
+  (dbus-register-signal :session nil "/ca/desrt/dconf/Writer/user" "ca.desrt.dconf.Writer" "Notify" 'tsacha/select-theme))
  ((string-equal system-type "darwin")
-
-  (defun tsacha/apply-theme (appearance)
-    "Load theme, taking current system APPEARANCE into consideration."
-    (mapc #'disable-theme custom-enabled-themes)
-    (pcase appearance
-      ('light (load-theme 'doom-gruvbox-light t))
-      ('dark (load-theme 'doom-gruvbox t))))
-  (add-hook 'ns-system-appearance-change-functions #'tsacha/apply-theme)))
+  (add-hook 'ns-system-appearance-change-functions #'tsacha/select-theme)))
 
 ;;;; Fonts
 (if (string-equal system-type "gnu/linux")
@@ -101,7 +106,11 @@
         doom-big-font (font-spec :family "Iosevka" :size 18)))
 
 ;;; Keybinds
-(map! "<f2>" #'vterm)
+(map! "<f1>" #'other-window)
+(map! "<f2>" #'consult-buffer)
+(map! "<f3>" #'projectile-switch-project)
+(map! "<f4>" #'projectile-find-file)
+(map! "<f5>" #'vterm)
 (map! "C-x p" #'projectile-switch-project)
 (map! "C-x z" #'zoom-window-zoom)
 (map! "M-+" #'undo-fu-only-undo)
@@ -114,13 +123,7 @@
 (map! "C-S-c" #'clipboard-kill-ring-save)
 (map! "C-S-x" #'clipboard-kill-region)
 (map! "C-S-v" #'clipboard-yank)
-(map! "C-x C-é" #'+vertico/switch-workspace-buffer)
-(map! "s-t" #'+workspace/new)
-(map! "C-<tab>" #'+workspace/switch-right)
-(map! "C-S-<tab>" #'+workspace/switch-left)
-(map! "C-<iso-lefttab>" #'+workspace/switch-left)
-(map! "C-<f1>" #'org-journal-open-current-journal-file)
-(map! "C-<f2>" #'magit-list-repositories)
+(map! "C-<f1>" #'magit-list-repositories)
 
 
 (defun tsacha/directory-search (&optional arg initial-query directory)
@@ -131,10 +134,10 @@
   (interactive "P")
   (consult-git-grep))
 
-(setq +workspaces-on-switch-project-behavior t)
-(setq projectile-switch-project-action #'projectile-dired)
-(setq +workspaces-switch-project-function (lambda (dir)
-                                            (dired dir)))
+(after! projectile
+  (setq projectile-project-search-path '(("~/Git" . 1) ("~/Git/Work" . 1)))
+  (setq projectile-switch-project-action #'projectile-dired)
+  (projectile-discover-projects-in-search-path))
 
 (setq zoom-window-mode-line-color "DarkGreen")
 
@@ -156,6 +159,7 @@
 
 ;;; Completion
 (after! vertico
+  (vertico-prescient-mode)
   (vertico-multiform-mode)
   (setq vertico-multiform-commands
         '((find-file (vertico-sort-function . vertico-sort-alpha))

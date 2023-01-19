@@ -10,3 +10,4 @@
 (package! blacken)
 (package! gsettings)
 (package! jinja2-mode :disable t)
+(package! vertico-prescient)
