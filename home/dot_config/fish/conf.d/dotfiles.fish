@@ -3,6 +3,9 @@ alias ls="exa --long --header --git"
 alias l="ls"
 alias cm="chezmoi -S ~/Git/dotfiles -c ~/Git/dotfiles/chezmoi.toml --persistent-state ~/.config/chezmoi/chezmoistate.boltdb"
 alias cms="chezmoi -S ~/Git/Security -c ~/Git/Security/chezmoi.toml --persistent-state ~/.config/chezmoi/chezmoistate-security.boltdb"
+alias co="consul"
+alias va="vault"
+alias tf="terraform"
 
 export EDITOR=emacs
 export TERM=xterm-256color
