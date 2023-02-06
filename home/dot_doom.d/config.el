@@ -124,7 +124,7 @@
 (map! "C-S-x" #'clipboard-kill-region)
 (map! "C-S-v" #'clipboard-yank)
 (map! "C-<f1>" #'magit-list-repositories)
-
+(map! "C-<f2>" #'org-journal-open-current-journal-file)
 
 (defun tsacha/directory-search (&optional arg initial-query directory)
   (interactive "P")
@@ -166,17 +166,27 @@
           (projectile-find-file (vertico-sort-function . vertico-sort-history-alpha)))))
 
 ;; Org
-(after! org-journal
-  (setq org-journal-file-format "%Y-W%V.org"
-        org-journal-file-type   'weekly
-        org-journal-file-header "#+TITLE: %Y-W%V\n#+ROAM_TAGS: journal\n\nWeek %V, %Y\n\n* Backlog\n"
-        org-journal-date-format "%Y-%m-%d (%A)"
-        org-journal-time-prefix ""
-        org-journal-time-format "** %H:%M - "
-        org-journal-dir         "~/Git/Notes/Weekly"))
+(setq org-journal-file-format "%Y-W%V.org"
+     org-journal-file-type   'weekly
+     org-journal-file-header "#+TITLE: %Y-W%V\nWeek %V, %Y\n\n* Backlog\n"
+     org-journal-date-format "%Y-%m-%d (%A)"
+     org-journal-time-prefix ""
+     org-journal-time-format "** %H:%M - "
+     org-journal-dir         "~/Git/Notes/Weekly")
+(setq org-directory "~/Git/Notes")
+(setq org-agenda-files        '("~/Git/Notes/Weekly"))
 
-(after! org-agenda
-  (setq org-agenda-files        '("~/Git/Notes/Weekly")))
+(after! org
+  (setq org-todo-keywords
+        (quote ((sequence "TODO(t)" "IN PROGRESS(p)" "|" "DONE(d)")
+                (sequence "WAITING(w)" "HOLD(h)" "|" "CANCELLED(c)"))))
+  (setq org-todo-keyword-faces
+        (quote (("TODO" :foreground "red" :weight bold)
+                ("IN PROGRESS" :foreground "blue" :weight bold)
+                ("DONE" :foreground "forest green" :weight bold)
+                ("WAITING" :foreground "orange" :weight bold)
+                ("HOLD" :foreground "magenta" :weight bold)
+                ("CANCELLED" :foreground "forest green" :weight bold)))))
 
 (setq magit-repository-directories
       `(("~/Git/Work" . 1)
