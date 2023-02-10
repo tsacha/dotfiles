@@ -166,8 +166,8 @@
 
 ;; Org
 (after! org
-  (setq org-todo-keywords (quote ((sequence "TODO(t)" "IN PROGRESS(p)" "|" "DONE(d)")
-                                  (sequence "WAITING(w)" "|" "CANCELLED(c)")))
+    (setq org-todo-keywords (quote ((sequence "TODO(t)" "IN PROGRESS(p)" "|" "DONE(d)")
+                                    (sequence "WAITING(w)" "|" "CANCELLED(c)")))
         org-directory "~/Git/Notes"
         org-agenda-files (list
                           "~/Git/Notes/Perso/gtd.org"
