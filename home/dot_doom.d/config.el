@@ -106,7 +106,7 @@
         doom-big-font (font-spec :family "Iosevka" :size 18)))
 
 ;;; Keybinds
-(map! "<f1>" #'other-window)
+(map! "<f1>" #'projectile-switch-project)
 (map! "<f2>" #'consult-buffer)
 (map! "<f3>" #'projectile-switch-project)
 (map! "<f4>" #'projectile-find-file)
@@ -166,24 +166,42 @@
 
 ;; Org
 (after! org
-    (setq org-todo-keywords (quote ((sequence "TODO(t)" "IN PROGRESS(p)" "|" "DONE(d)")
-                                    (sequence "WAITING(w)" "|" "CANCELLED(c)")))
+  (setq
+        org-todo-keywords
+        '((sequence "TODO(t)" "IN-PROGRESS(i!)" "BLOCKED(b@)"  "|" "DONE(d!)" "OBE(o@!)" "WONT-DO(w@/!)" ))
         org-directory "~/Git/Notes"
+        org-return-follows-link t
+        org-agenda-tags-column 75
+        org-agenda-skip-deadline-if-done t
+        org-deadline-warning-days 30
+        org-use-speed-commands t
+        org-capture-templates
+        '(("p" "Perso Todo Entry" entry (file "~/Git/Notes/Perso/perso.org")
+         "* TODO %?\n  %i\n  %a")
+          ("w" "Work Todo Entry" entry (file "~/Git/Notes/Work/work.org")
+         "* TODO %?\n  %i\n  %a")
+          ("j" "Work Log Entry"
+           entry (file+datetree "~/Git/Notes/Work/log.org")
+         "* %?"
+         :empty-lines 0)
+        )
         org-agenda-files (list
-                          "~/Git/Notes/Perso/gtd.org"
-                          "~/Git/Notes/Work/gtd.org")
+                          "~/Git/Notes/Perso/perso.org"
+                          "~/Git/Notes/Work/work.org")
         org-fold-core-style 'overlays
-        org-todo-keyword-faces (quote
-                                (("TODO" :foreground "red" :weight bold)
-                                 ("IN PROGRESS" :foreground "blue" :weight bold)
-                                 ("DONE" :foreground "forest green" :weight bold)
-                                 ("WAITING" :foreground "orange" :weight bold)
-                                 ("CANCELLED" :foreground "forest green" :weight bold)))))
+        org-todo-keyword-faces '(
+                                 ("TODO" . (:foreground "GoldenRod" :weight bold))
+                                 ("IN-PROGRESS" . (:foreground "Cyan" :weight bold))
+                                 ("BLOCKED" . (:foreground "Red" :weight bold))
+                                 ("DONE" . (:foreground "LimeGreen" :weight bold))
+                                 ("OBE" . (:foreground "LimeGreen" :weight bold))
+                                 ("WONT-DO" . (:foreground "LimeGreen" :weight bold)))))
 
+;;; Magit
 (setq magit-repository-directories
       `(("~/Git/Work" . 1)
-        ("~/Git" . 1)))
-(setq magit-repolist-columns
+        ("~/Git" . 1))
+      magit-repolist-columns
       '(("Name" 25 magit-repolist-column-ident nil)
         ("Status" 7 magit-repolist-column-flag nil)
         ("B<U" 3 magit-repolist-column-unpulled-from-upstream
