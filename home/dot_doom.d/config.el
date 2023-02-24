@@ -32,6 +32,11 @@
 (setq vc-make-backup-files t)
 (setq auto-save-file-name-transforms '((".*" "~/.emacs.d/auto-save-list/" t)))
 
+(setq auto-save-default t
+      auto-revert-use-notify nil
+      auto-revert-verbose nil)
+(global-auto-revert-mode 1)
+
 ;;;; Sentences end with a single space
 (setq sentence-end-double-space nil)
 
@@ -166,6 +171,15 @@
 
 ;; Org
 (after! org
+  (defmacro func-ignore (fnc)
+    "Return function that ignores its arguments and invokes FNC."
+    `(lambda (&rest _rest)
+       (funcall ,fnc)))
+
+  (advice-add 'org-deadline       :after (func-ignore #'org-save-all-org-buffers))
+  (advice-add 'org-schedule       :after (func-ignore #'org-save-all-org-buffers))
+  (advice-add 'org-store-log-note :after (func-ignore #'org-save-all-org-buffers))
+  (advice-add 'org-todo           :after (func-ignore #'org-save-all-org-buffers))
   (setq
         org-todo-keywords
         '((sequence "TODO(t)" "IN-PROGRESS(i!)" "BLOCKED(b@)"  "|" "DONE(d!)" "OBE(o@!)" "WONT-DO(w@/!)" ))
@@ -176,9 +190,9 @@
         org-deadline-warning-days 30
         org-use-speed-commands t
         org-capture-templates
-        '(("p" "Perso Todo Entry" entry (file "~/Git/Notes/Perso/perso.org")
+        '(("p" "Perso Todo Entry" entry (file "~/Git/Notes/perso.org")
          "* TODO %?\n  %i\n  %a")
-          ("w" "Work Todo Entry" entry (file "~/Git/Notes/Work/work.org")
+          ("w" "Work Todo Entry" entry (file "~/Git/Notes/work.org")
          "* TODO %?\n  %i\n  %a")
           ("j" "Work Log Entry"
            entry (file+datetree "~/Git/Notes/Work/log.org")
@@ -186,8 +200,8 @@
          :empty-lines 0)
         )
         org-agenda-files (list
-                          "~/Git/Notes/Perso/perso.org"
-                          "~/Git/Notes/Work/work.org")
+                          "~/Git/Notes/perso.org"
+                          "~/Git/Notes/work.org")
         org-fold-core-style 'overlays
         org-todo-keyword-faces '(
                                  ("TODO" . (:foreground "GoldenRod" :weight bold))
@@ -196,6 +210,16 @@
                                  ("DONE" . (:foreground "LimeGreen" :weight bold))
                                  ("OBE" . (:foreground "LimeGreen" :weight bold))
                                  ("WONT-DO" . (:foreground "LimeGreen" :weight bold)))))
+
+
+(setq org-caldav-url "http://localhost:5232/sacha/")
+(setq org-caldav-calendars
+  '((:calendar-id "b26ac1ce-d29d-7098-63a1-d47b090bb48e"
+     :files ("~/Git/Notes/sync.org")
+     :inbox "~/Git/Notes/perso.org")
+    (:calendar-id "87a3b0e9-0cbd-7bc0-81cd-81181c0a27f2"
+     :files ("~/Git/Notes/sync.org")
+     :inbox "~/Git/Notes/work.org")))
 
 ;;; Magit
 (setq magit-repository-directories
