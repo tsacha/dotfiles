@@ -1,5 +1,6 @@
 alias pass="gopass"
 alias ls="exa --long --header --git"
+alias cat="bat -pp"
 alias l="ls"
 alias cm="chezmoi -S ~/Git/dotfiles -c ~/Git/dotfiles/chezmoi.toml --persistent-state ~/.config/chezmoi/chezmoistate.boltdb"
 alias cms="chezmoi -S ~/Git/Security -c ~/Git/Security/chezmoi.toml --persistent-state ~/.config/chezmoi/chezmoistate-security.boltdb"
@@ -16,3 +17,5 @@ set -x GOPATH $HOME/go
 fish_add_path /opt/homebrew/bin
 fish_add_path /usr/local/bin
 set -U fish_greeting "🐟"
+
+starship init fish | source

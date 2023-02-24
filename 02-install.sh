@@ -146,7 +146,10 @@ arch-chroot /mnt pacman -S --noconfirm \
     vault \
     vagrant \
     terraform \
-    consul-template
+    consul-template \
+    starship \
+    dust \
+    bat
 
 arch-chroot /mnt /usr/bin/sed -Ei 's/^#greeter-session.*/greeter-session=lightdm-gtk-greeter/g' /etc/lightdm/lightdm.conf
 arch-chroot /mnt /usr/bin/sed -Ei 's/^#?background=.*/background=\/var\/cache\/background/g' /etc/lightdm/lightdm-gtk-greeter.conf
