@@ -212,12 +212,12 @@
                                  ("WONT-DO" . (:foreground "LimeGreen" :weight bold)))))
 
 
-(setq org-caldav-url "http://localhost:5232/sacha/")
+(setq org-caldav-url "")
 (setq org-caldav-calendars
-  '((:calendar-id "b26ac1ce-d29d-7098-63a1-d47b090bb48e"
+  '((:calendar-id ""
      :files ("~/Git/Notes/sync.org")
      :inbox "~/Git/Notes/perso.org")
-    (:calendar-id "87a3b0e9-0cbd-7bc0-81cd-81181c0a27f2"
+    (:calendar-id ""
      :files ("~/Git/Notes/sync.org")
      :inbox "~/Git/Notes/work.org")))
 
