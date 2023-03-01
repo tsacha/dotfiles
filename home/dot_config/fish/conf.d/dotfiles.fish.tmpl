@@ -3,7 +3,7 @@ alias ls="exa --long --header --git"
 
 function cat
     {{ if eq .chezmoi.os "darwin" -}}
-    set THEME (string trim (osascript -e tell app "System Events" to tell appearance preferences to get dark mode))
+    set THEME (string trim (osascript -e 'tell app "System Events" to tell appearance preferences to get dark mode'))
     if [ "$THEME" = false ]
         bat -pp --theme=gruvbox-light $argv
     else if [ "$THEME" = true ]
