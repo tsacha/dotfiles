@@ -113,10 +113,8 @@
 ;;; Keybinds
 (map! "<f1>" #'projectile-switch-project)
 (map! "<f2>" #'consult-buffer)
-(map! "<f3>" #'projectile-switch-project)
-(map! "<f4>" #'projectile-find-file)
-(map! "<f5>" #'vterm)
-(map! "C-x p" #'projectile-switch-project)
+(map! "<f3>" #'projectile-find-file)
+(map! "<f4>" #'vterm)
 (map! "C-x z" #'zoom-window-zoom)
 (map! "M-+" #'undo-fu-only-undo)
 (map! "M--" #'undo-fu-only-redo)
