@@ -114,6 +114,7 @@
 (map! "<f1>" #'projectile-switch-project)
 (map! "<f2>" #'consult-buffer)
 (map! "<f3>" #'projectile-find-file)
+(map! "<C-f3>" #'projectile-invalidate-cache)
 (map! "<f4>" #'vterm)
 (map! "C-x z" #'zoom-window-zoom)
 (map! "M-+" #'undo-fu-only-undo)
