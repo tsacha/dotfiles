@@ -14,14 +14,20 @@ _clip_in_clipboard() {
 }
 {{ end }}
 
-{{ if eq .chezmoi.os "darwin" }}
-selected_password=$(gopass list -f | choose)
-{{ else }}
-selected_password=$(gopass list -f | rofi -dmenu -p gopass)
-{{ end }}
+if [ "$1" == "saved" ]  && [ -s "/tmp/.gopass_selected_password" ]; then
+    selected_password=$(cat /tmp/.gopass_selected_password)
+else
+    {{ if eq .chezmoi.os "darwin" }}
+    selected_password=$(gopass list -f | choose)
+    {{ else }}
+    selected_password=$(gopass list -f | rofi -dmenu -p gopass)
+    {{ end }}
+fi
+
 if [ -z $selected_password ]; then
     exit
 fi
+echo $selected_password > /tmp/.gopass_selected_password
 pass_tmp=$(gopass show -n -u $selected_password)
 
 declare -a keys

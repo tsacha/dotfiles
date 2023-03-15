@@ -39,6 +39,7 @@ bindsym $mod+Shift+Q kill
 bindsym $mod+m exec emacs
 bindsym $mod+j exec chromium
 bindsym $mod+p exec $HOME/.scripts/gopass.sh
+bindsym $mod+i exec $HOME/.scripts/gopass.sh saved
 bindsym $mod+d exec rofi -show run
 bindsym $mod+Shift+D exec i3-dmenu-desktop --dmenu='rofi -dmenu -i'
 bindsym $mod+u exec rofi -show ssh

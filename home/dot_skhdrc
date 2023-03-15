@@ -1,4 +1,5 @@
 cmd - p : $HOME/.scripts/gopass.sh
+cmd - i : $HOME/.scripts/gopass.sh saved
 cmd - g : $HOME/.scripts/github.sh
 cmd - j : $HOME/.scripts/jira.sh
 cmd - f2 : $HOME/.scripts/nomad_shell.fish
