@@ -1,5 +1,4 @@
 ;;; .doom.d/config.el -*- lexical-binding: t; -*-
-
 ;;;; Latitude/Longitude
 (setq calendar-latitude +47.23)
 (setq calendar-longitude -1.63)
@@ -234,3 +233,9 @@
          ((:right-align t)
           (:help-echo "Local changes not in upstream")))
         ("Path" 99 magit-repolist-column-path nil)))
+
+;;; Git-autocommit
+(setq gac-automatically-add-new-files-p t)
+(setq gac-debounce-interval 30)
+(setq gac-silent-message-p t)
+(setq gac-automatically-push-p t)

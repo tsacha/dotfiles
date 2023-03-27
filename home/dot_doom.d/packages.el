@@ -12,3 +12,4 @@
 (package! jinja2-mode :disable t)
 (package! vertico-prescient)
 (package! org-caldav)
+(package! git-auto-commit-mode)
