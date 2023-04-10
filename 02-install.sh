@@ -1,155 +1,157 @@
 #!/bin/bash
 arch-chroot /mnt pacman -S --noconfirm \
-    vim \
-    tmux \
-    gdisk \
-    btrfs-progs \
-    efibootmgr \
-    w3m \
-    rsync \
+    acpi \
+    adobe-source-code-pro-fonts \
+    age \
+    alacritty \
+    alsa-utils \
     ansible \
-    git \
-    git-lfs \
-    openssh \
-    net-tools \
-    reflector \
-    parallel \
-    the_silver_searcher \
-    wpa_supplicant \
+    arandr \
+    arc-gtk-theme \
+    arc-icon-theme \
+    arch-install-scripts \
+    aws-cli \
     bash-completion \
-    python-yaml \
-    rsync \
-    isync \
+    bat \
+    bind-tools \
+    breeze \
+    breeze-gtk \
+    btop \
+    btrfs-progs \
+    chezmoi \
+    chromium \
+    conky \
+    consul \
+    consul-template \
+    dmenu \
     docker \
     docker-compose \
-    bind-tools \
-    gmime \
-    lsof \
-    sshfs \
-    arch-install-scripts \
-    tcpdump \
+    dust \
+    efibootmgr \
+    emacs \
+    evince \
+    exa \
     fd \
+    fd \
+    feh \
+    firefox \
+    flameshot \
+    flatpak \
+    freerdp \
     fzf \
-    iperf3 \
-    ripgrep \
-    btop \
+    gdisk \
+    gimp \
+    git \
+    git-lfs \
+    github-cli \
+    gmime \
+    gnome-themes-standard \
     go \
     go-tools \
-    zsh \
-    ntp \
+    gopass \
     htop \
-    openbsd-netcat \
-    unzip \
-    jq \
-    yajl \
-    wget \
-    ipcalc \
-    yapf \
-    nfs-utils \
-    linux-headers \
-    xorg-server \
-    xorg-xinput \
-    xorg-xwayland \
-    mesa \
-    xf86-input-libinput \
-    xf86-input-synaptics \
-    xf86-video-intel \
-    xorg-xbacklight \
-    xorg-xinit \
-    emacs \
+    httpie \
     i3-wm \
     i3lock \
-    swaylock \
     i3status \
-    rofi \
-    dmenu \
-    conky \
-    xfce4-terminal \
-    pulseaudio \
-    pavucontrol \
-    picom \
-    adobe-source-code-pro-fonts \
-    feh \
-    chromium \
-    firefox \
-    thunderbird \
+    ipcalc \
+    iperf3 \
+    isync \
+    jq \
     libreoffice-fresh \
-    sxiv \
-    redshift \
-    okular \
-    remmina \
+    libvirt \
     libvncserver \
-    spice-gtk \
-    freerdp \
-    xfce4-notifyd \
-    phonon-qt5-gstreamer \
-    vlc \
-    evince \
-    pandoc \
-    arandr \
-    sway \
-    network-manager-applet \
-    networkmanager-openvpn \
     lightdm \
     lightdm-gtk-greeter \
-    virt-manager \
-    virt-viewer \
-    qemu-full \
-    qemu-arch-extra \
-    qemu-guest-agent \
-    wireshark-qt \
-    scrot \
-    gimp \
-    alsa-utils \
-    pamixer \
-    alacritty \
+    linux-headers \
+    lsof \
+    lxappearance-gtk3 \
+    lxc \
+    mesa \
+    net-tools \
+    network-manager-applet \
+    networkmanager-openvpn \
+    nfs-utils \
+    nomad \
     noto-fonts \
     noto-fonts-emoji \
     noto-fonts-extra \
-    lxappearance-gtk3 \
-    lxc \
-    rdesktop \
-    acpi \
-    flameshot \
-    exa \
-    fd \
-    flatpak \
-    httpie \
-    libvirt \
-    python-black \
-    rofimoji \
-    arc-gtk-theme \
-    arc-icon-theme \
-    qt5ct \
-    breeze \
-    breeze-gtk \
-    oxygen \
-    gnome-themes-standard \
+    ntp \
     okular \
+    okular \
+    openbsd-netcat \
+    openssh \
+    oxygen \
+    pamixer \
+    pandoc \
+    parallel \
+    pavucontrol \
+    phonon-qt5-gstreamer \
+    picom \
+    pipewire-pulse \
+    pipewire-audio \
+    pipewire-alsa \
+    python-black \
+    python-yaml \
+    qemu-arch-extra \
+    qemu-full \
+    qemu-guest-agent \
+    qt5ct \
+    rdesktop \
+    redshift \
+    reflector \
+    remmina \
+    ripgrep \
+    rofi \
+    rofimoji \
+    rsync \
+    rsync \
+    scrot \
+    spice-gtk \
+    sshfs \
+    starship \
+    sway \
+    swaylock \
+    sxiv \
+    tcpdump \
+    terraform \
+    the_silver_searcher \
+    thunderbird \
+    tmux \
+    ttf-dejavu \
     ttf-dejavu \
     ttf-droid \
+    ttf-fira-mono \
+    ttf-fira-sans \
+    ttf-iosevka-nerd \
     ttf-liberation \
-    ttf-dejavu \
     ttf-linux-libertine \
     ttf-linux-libertine-g \
-    ttf-fira-sans \
-    ttf-fira-mono \
-    ttf-iosevka-nerd \
-    gopass \
-    xclip \
-    age \
-    chezmoi \
-    aws-cli \
-    github-cli \
-    consul \
-    nomad \
-    vault \
+    unzip \
     vagrant \
-    terraform \
-    consul-template \
-    starship \
-    dust \
-    bat
+    vault \
+    vim \
+    virt-manager \
+    virt-viewer \
+    vlc \
+    w3m \
+    wget \
+    wireshark-qt \
+    wpa_supplicant \
+    xclip \
+    xf86-input-libinput \
+    xf86-input-synaptics \
+    xf86-video-intel \
+    xfce4-notifyd \
+    xfce4-terminal \
+    xorg-server \
+    xorg-xbacklight \
+    xorg-xinit \
+    xorg-xinput \
+    xorg-xwayland \
+    yajl \
+    yapf \
+    zsh
 
 arch-chroot /mnt /usr/bin/sed -Ei 's/^#greeter-session.*/greeter-session=lightdm-gtk-greeter/g' /etc/lightdm/lightdm.conf
 arch-chroot /mnt /usr/bin/sed -Ei 's/^#?background=.*/background=\/var\/cache\/background/g' /etc/lightdm/lightdm-gtk-greeter.conf
