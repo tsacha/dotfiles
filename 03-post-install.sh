@@ -13,4 +13,4 @@ git clone https://aur.archlinux.org/yay.git
 cd yay
 makepkg -si
 
-yay -S i3-gnome xremap
+yay -S xremap

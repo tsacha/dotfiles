@@ -45,6 +45,7 @@ arch-chroot /mnt pacman -S --noconfirm \
     git-lfs \
     github-cli \
     gmime \
+    gnome-settings-daemon \
     gnome-themes-standard \
     go \
     go-tools \

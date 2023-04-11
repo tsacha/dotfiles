@@ -238,6 +238,7 @@ default_border none
 default_floating_border none
 hide_edge_borders both
 
+exec --no-startup-id /usr/lib/gsd-xsettings
 exec systemctl --user start xfce4-notifyd
 exec systemctl --user start picom
 exec systemctl --user start gpg-agent-ssh.socket
