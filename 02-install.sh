@@ -44,7 +44,6 @@ arch-chroot /mnt pacman -S --noconfirm \
     git \
     git-lfs \
     github-cli \
-    gmime \
     gnome-settings-daemon \
     gnome-themes-standard \
     go \
@@ -55,6 +54,7 @@ arch-chroot /mnt pacman -S --noconfirm \
     i3-wm \
     i3lock \
     i3status \
+    inetutils \
     ipcalc \
     iperf3 \
     isync \
@@ -104,7 +104,7 @@ arch-chroot /mnt pacman -S --noconfirm \
     remmina \
     ripgrep \
     rofi \
-    rofimoji \
+    rofi-emoji \
     rsync \
     rsync \
     scrot \

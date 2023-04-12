@@ -40,7 +40,7 @@ bindsym $mod+m exec emacs
 bindsym $mod+d exec rofi -show run
 bindsym $mod+Shift+D exec i3-dmenu-desktop --dmenu='rofi -dmenu -i'
 bindsym $mod+u exec rofi -show ssh
-bindsym $mod+j exec rofimoji
+bindsym $mod+j exec rofi -modi emoji -show emoji
 
 bindsym --release $mod+c exec --no-startup-id xdotool key --clearmodifiers ctrl+c
 bindsym --release $mod+v exec --no-startup-id xdotool key --clearmodifiers ctrl+v

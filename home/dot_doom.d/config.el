@@ -100,10 +100,10 @@
 
 ;;;; Fonts
 (if (string-equal system-type "gnu/linux")
-    (setq doom-font (font-spec :family "Iosevka" :size 18 :weight 'semi-light)
-          doom-variable-pitch-font (font-spec :family "Iosevka") ; inherits `doom-font''s :size
-          doom-unicode-font (font-spec :family "Iosevka" :size 18)
-          doom-big-font (font-spec :family "Iosevka" :size 21))
+    (setq doom-font (font-spec :family "Iosevka Nerd Font" :size 18 :weight 'semi-light)
+          doom-variable-pitch-font (font-spec :family "Iosevka Nerd Font") ; inherits `doom-font''s :size
+          doom-unicode-font (font-spec :family "Iosevka Nerd Font" :size 18)
+          doom-big-font (font-spec :family "Iosevka Nerd Font" :size 21))
   (setq doom-font (font-spec :family "Iosevka" :size 16 :weight 'semi-light)
         doom-variable-pitch-font (font-spec :family "Iosevka") ; inherits `doom-font''s :size
         doom-unicode-font (font-spec :family "Apple Color Emoji" :size 16)
