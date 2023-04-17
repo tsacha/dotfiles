@@ -84,11 +84,22 @@ pacstrap /mnt base base-devel linux linux-firmware
 
 arch-chroot /mnt bootctl install
 
-echo 'default arch' > /mnt/boot/loader/loader.conf
+cat <<EOF > /mnt/boot/loader/loader.conf
+default arch
+timeout 2
+EOF
+
 cat <<EOF > /mnt/boot/loader/entries/arch.conf
 title   Arch Linux
 linux   /vmlinuz-linux
 initrd  /initramfs-linux.img
+options rd.luks.name=$data_uuid=$cryptname root=$data_disk rootfstype=ext4 add_efi_memmap
+EOF
+
+cat <<EOF > /mnt/boot/loader/entries/arch-fallback.conf
+title   Arch Linux Fallback
+linux   /vmlinuz-linux
+initrd  /initramfs-linux-fallback.img
 options rd.luks.name=$data_uuid=$cryptname root=$data_disk rootfstype=ext4 add_efi_memmap
 EOF
 
@@ -113,7 +124,15 @@ cat <<EOF > /mnt/etc/hosts
 127.0.0.1	localhost.localdomain	localhost $hostname
 ::1		localhost.localdomain	localhost $hostname
 EOF
-echo 'KEYMAP=fr-bepo-latin9' > /mnt/etc/vconsole.conf
+
+cat <<EOF > /mnt/etc/vconsole.conf
+KEYMAP=fr-bepo-latin9
+XKBLAYOUT=fr
+XKBMODEL=altwin:swap_lalt_lwin
+XKBVARIANT=bepo_afnor
+EOF
+chattr +i /mnt/etc/vconsole.conf
+
 echo 'LANG=en_US.UTF-8' > /mnt/etc/locale.conf
 cat <<EOF > /mnt/etc/locale.gen
 en_US.UTF-8 UTF-8
@@ -138,12 +157,9 @@ echo
 
 echo root:$root_passwd | chpasswd -R /mnt
 echo sacha:$user_passwd | chpasswd -R /mnt
-arch-chroot /mnt /usr/bin/sed -i 's/# %wheel ALL=(ALL:ALL) ALL/%wheel ALL=(ALL:ALL) ALL/g' /etc/sudoers
-
+arch-chroot /mnt /usr/bin/sed -i 's/# %wheel ALL=(ALL:ALL) ALL/%wheel ALL=(ALL:ALL) NOPASSWD:ALL/g' /etc/sudoers
 
 arch-chroot /mnt pacman -S --noconfirm fish
 usermod -R /mnt -G wheel -a sacha
 usermod -R /mnt -s /usr/bin/fish sacha
 usermod -R /mnt -s /bin/fish root
-
-

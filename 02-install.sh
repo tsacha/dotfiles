@@ -51,6 +51,7 @@ arch-chroot /mnt pacman -S --noconfirm \
     gopass \
     htop \
     httpie \
+    hyperv \
     i3-wm \
     i3lock \
     i3status \
@@ -77,6 +78,7 @@ arch-chroot /mnt pacman -S --noconfirm \
     noto-fonts \
     noto-fonts-emoji \
     noto-fonts-extra \
+    ntfs-3g \
     ntp \
     okular \
     okular \
@@ -128,12 +130,14 @@ arch-chroot /mnt pacman -S --noconfirm \
     ttf-liberation \
     ttf-linux-libertine \
     ttf-linux-libertine-g \
+    udiskie \
     unzip \
     vagrant \
     vault \
     vim \
     virt-manager \
     virt-viewer \
+    virt-what \
     vlc \
     w3m \
     wget \
