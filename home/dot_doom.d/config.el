@@ -114,7 +114,8 @@
 (map! "<f2>" #'consult-buffer)
 (map! "<f3>" #'projectile-find-file)
 (map! "<C-f3>" #'projectile-invalidate-cache)
-(map! "<f4>" #'vterm)
+(map! "<f4>" #'other-window)
+(map! "<f5>" #'vterm)
 (map! "C-x z" #'zoom-window-zoom)
 (map! "M-+" #'undo-fu-only-undo)
 (map! "M--" #'undo-fu-only-redo)
@@ -146,7 +147,7 @@
 (after! ivy
   (setq ivy-extra-directories '("../" "./")))
 
-(add-hook 'text-mode-hook 'turn-on-auto-fill)
+;;(add-hook 'text-mode-hook 'turn-on-auto-fill)
 
 (add-hook! fish-mode
   (add-hook 'before-save-hook #'fish_indent-before-save))
