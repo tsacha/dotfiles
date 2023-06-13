@@ -147,8 +147,6 @@
 (after! ivy
   (setq ivy-extra-directories '("../" "./")))
 
-;;(add-hook 'text-mode-hook 'turn-on-auto-fill)
-
 (add-hook! fish-mode
   (add-hook 'before-save-hook #'fish_indent-before-save))
 
@@ -167,58 +165,6 @@
   (setq vertico-multiform-commands
         '((find-file (vertico-sort-function . vertico-sort-alpha))
           (projectile-find-file (vertico-sort-function . vertico-sort-history-alpha)))))
-
-;; Org
-(after! org
-  (defmacro func-ignore (fnc)
-    "Return function that ignores its arguments and invokes FNC."
-    `(lambda (&rest _rest)
-       (funcall ,fnc)))
-
-  (advice-add 'org-deadline       :after (func-ignore #'org-save-all-org-buffers))
-  (advice-add 'org-schedule       :after (func-ignore #'org-save-all-org-buffers))
-  (advice-add 'org-store-log-note :after (func-ignore #'org-save-all-org-buffers))
-  (advice-add 'org-todo           :after (func-ignore #'org-save-all-org-buffers))
-  (setq
-        org-todo-keywords
-        '((sequence "TODO(t)" "IN-PROGRESS(i!)" "BLOCKED(b@)"  "|" "DONE(d!)" "OBE(o@!)" "WONT-DO(w@/!)" ))
-        org-directory "~/Git/Notes"
-        org-return-follows-link t
-        org-agenda-tags-column 75
-        org-agenda-skip-deadline-if-done t
-        org-deadline-warning-days 30
-        org-use-speed-commands t
-        org-capture-templates
-        '(("p" "Perso Todo Entry" entry (file "~/Git/Notes/perso.org")
-         "* TODO %?\n  %i\n  %a")
-          ("w" "Work Todo Entry" entry (file "~/Git/Notes/work.org")
-         "* TODO %?\n  %i\n  %a")
-          ("j" "Work Log Entry"
-           entry (file+datetree "~/Git/Notes/Work/log.org")
-         "* %?"
-         :empty-lines 0)
-        )
-        org-agenda-files (list
-                          "~/Git/Notes/perso.org"
-                          "~/Git/Notes/work.org")
-        org-fold-core-style 'overlays
-        org-todo-keyword-faces '(
-                                 ("TODO" . (:foreground "GoldenRod" :weight bold))
-                                 ("IN-PROGRESS" . (:foreground "Cyan" :weight bold))
-                                 ("BLOCKED" . (:foreground "Red" :weight bold))
-                                 ("DONE" . (:foreground "LimeGreen" :weight bold))
-                                 ("OBE" . (:foreground "LimeGreen" :weight bold))
-                                 ("WONT-DO" . (:foreground "LimeGreen" :weight bold)))))
-
-
-(setq org-caldav-url "")
-(setq org-caldav-calendars
-  '((:calendar-id ""
-     :files ("~/Git/Notes/sync.org")
-     :inbox "~/Git/Notes/perso.org")
-    (:calendar-id ""
-     :files ("~/Git/Notes/sync.org")
-     :inbox "~/Git/Notes/work.org")))
 
 ;;; Magit
 (setq magit-repository-directories
