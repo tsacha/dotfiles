@@ -159,6 +159,7 @@ arch-chroot /mnt pacman -S --noconfirm \
     zsh
 
 arch-chroot /mnt /usr/bin/sed -Ei 's/^#greeter-session.*/greeter-session=lightdm-gtk-greeter/g' /etc/lightdm/lightdm.conf
+arch-chroot /mnt /usr/bin/sed -Ei 's/^#autologin-user.*/autologin-user=sacha/g' /etc/lightdm/lightdm.conf
 arch-chroot /mnt /usr/bin/sed -Ei 's/^#?background=.*/background=\/var\/cache\/background/g' /etc/lightdm/lightdm-gtk-greeter.conf
 
 arch-chroot /mnt systemctl enable ntpd
@@ -166,6 +167,8 @@ arch-chroot /mnt systemctl enable nscd.service
 arch-chroot /mnt systemctl enable firewalld.service
 arch-chroot /mnt systemctl enable libvirtd.service
 arch-chroot /mnt systemctl enable NetworkManager.service
+groupadd -R /mnt -r autologin
+usermod -R /mnt -G autologin -a sacha
 usermod -R /mnt -G libvirt -a sacha
 usermod -R /mnt -G kvm -a sacha
 usermod -R /mnt -G docker -a sacha

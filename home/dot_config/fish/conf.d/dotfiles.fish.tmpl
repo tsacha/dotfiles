@@ -31,6 +31,11 @@ alias no="nomad"
 alias va="vault"
 alias tf="terraform"
 alias k="kubectl"
+{{ if eq .chezmoi.os "darwin" -}}
+alias t="task"
+{{ else -}}
+alias t="go-task"
+{{ end -}}
 
 export EDITOR=emacs
 export TERM=xterm-256color

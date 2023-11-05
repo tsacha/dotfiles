@@ -63,6 +63,9 @@ echo "Luks opened."
 data_uuid=`blkid $data_disk -s UUID -o value`
 data_disk=/dev/mapper/$cryptname
 
+echo -n "Fais ton taf Sacha du futur et rajoute le TPM dans le LUKS."
+echo -n "systemd-cryptenroll --tpm2-device=auto /dev/nvme1n1p2"
+
 read -r -p "Format boot partition? y/N " format_boot
 if [ "$format_boot" == "y" ]; then
     echo -n "Format boot partition… "
@@ -89,12 +92,22 @@ default arch
 timeout 2
 EOF
 
-cat <<EOF > /mnt/boot/loader/entries/arch.conf
+read -r -p "Nvidia? (y/N) : " nvidia
+if [ "$nvidia" == "y" ]; then
+    cat <<EOF > /mnt/boot/loader/entries/arch.conf
+title   Arch Linux
+linux   /vmlinuz-linux
+initrd  /initramfs-linux.img
+options rd.luks.name=$data_uuid=$cryptname root=$data_disk rootfstype=ext4 add_efi_memmap nvidia_drm.modeset=1
+EOF
+else
+    cat <<EOF > /mnt/boot/loader/entries/arch.conf
 title   Arch Linux
 linux   /vmlinuz-linux
 initrd  /initramfs-linux.img
 options rd.luks.name=$data_uuid=$cryptname root=$data_disk rootfstype=ext4 add_efi_memmap
 EOF
+fi
 
 cat <<EOF > /mnt/boot/loader/entries/arch-fallback.conf
 title   Arch Linux Fallback
