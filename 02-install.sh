@@ -23,6 +23,7 @@ arch-chroot /mnt pacman -S --noconfirm \
     conky \
     consul \
     consul-template \
+    delve \
     dmenu \
     docker \
     docker-compose \
@@ -49,6 +50,7 @@ arch-chroot /mnt pacman -S --noconfirm \
     go \
     go-tools \
     gopass \
+    gopls \
     htop \
     httpie \
     hyperv \
@@ -61,6 +63,7 @@ arch-chroot /mnt pacman -S --noconfirm \
     isync \
     jq \
     libreoffice-fresh \
+    libva-mesa-driver \
     libvirt \
     libvncserver \
     lightdm \
@@ -70,6 +73,7 @@ arch-chroot /mnt pacman -S --noconfirm \
     lxappearance-gtk3 \
     lxc \
     mesa \
+    mesa-vdpau \
     net-tools \
     network-manager-applet \
     networkmanager-openvpn \
@@ -91,9 +95,9 @@ arch-chroot /mnt pacman -S --noconfirm \
     pavucontrol \
     phonon-qt5-gstreamer \
     picom \
-    pipewire-pulse \
-    pipewire-audio \
     pipewire-alsa \
+    pipewire-audio \
+    pipewire-pulse \
     python-black \
     python-yaml \
     qemu-arch-extra \
@@ -121,6 +125,7 @@ arch-chroot /mnt pacman -S --noconfirm \
     the_silver_searcher \
     thunderbird \
     tmux \
+    tpm2-tss \
     ttf-dejavu \
     ttf-dejavu \
     ttf-droid \
