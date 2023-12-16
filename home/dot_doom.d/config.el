@@ -111,11 +111,14 @@
 
 ;;; Keybinds
 (map! "<f1>" #'projectile-switch-project)
-(map! "<f2>" #'consult-buffer)
-(map! "<f3>" #'projectile-find-file)
-(map! "<C-f3>" #'projectile-invalidate-cache)
+(map! "<f2>" #'projectile-find-file)
+(map! "<C-f2>" #'projectile-invalidate-cache)
+(map! "<f3>" #'consult-buffer)
 (map! "<f4>" #'other-window)
-(map! "<f5>" #'vterm)
+(map! "<f5>" #'tsacha/dap-toggle)
+(map! "<C-f5>" #'dap-breakpoint-toggle)
+(map! "<M-f5>" #'dap-eval-thing-at-point)
+(map! "<f6>" #'vterm)
 (map! "C-x z" #'zoom-window-zoom)
 (map! "M-+" #'undo-fu-only-undo)
 (map! "M--" #'undo-fu-only-redo)
@@ -128,6 +131,12 @@
 (map! "C-S-x" #'clipboard-kill-region)
 (map! "C-S-v" #'clipboard-yank)
 (map! "C-<f1>" #'magit-list-repositories)
+
+(defun tsacha/dap-toggle  (&optional arg initial-query directory)
+  (interactive "P")
+  (if +dap-running-session-mode
+      (dap-debug-restart)
+    (dap-debug-last)))
 
 (defun tsacha/directory-search (&optional arg initial-query directory)
   (interactive "P")
@@ -181,8 +190,11 @@
           (:help-echo "Local changes not in upstream")))
         ("Path" 99 magit-repolist-column-path nil)))
 
-;;; Git-autocommit
-(setq gac-automatically-add-new-files-p t)
-(setq gac-debounce-interval 30)
-(setq gac-silent-message-p t)
-(setq gac-automatically-push-p t)
+
+(use-package! dap-mode
+  :config
+  (setq dap-ui-locals-expand-depth t
+        dap-ui-expressions-expand-depth t
+        dap-auto-show-output nil)
+  (set-popup-rule! "\\*dap-ui-locals\\*" :side 'right :width 0.3)
+  (set-popup-rule! "\\*dap-ui-sessions\\*" :side 'right :width 0.3))
