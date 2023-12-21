@@ -24,6 +24,7 @@ function cat
 end
 
 alias l="ls"
+alias v="nvim"
 alias cm="chezmoi -S ~/Git/dotfiles -c ~/Git/dotfiles/chezmoi.toml --persistent-state ~/.config/chezmoi/chezmoistate.boltdb"
 alias cms="chezmoi -S ~/Git/Security -c ~/Git/Security/chezmoi.toml --persistent-state ~/.config/chezmoi/chezmoistate-security.boltdb"
 alias co="consul"
@@ -46,6 +47,7 @@ set -x GOPATH $HOME/go
 
 fish_add_path /opt/homebrew/bin
 fish_add_path /usr/local/bin
-set -U fish_greeting "🐟"
 
 starship init fish | source
+zoxide init fish | source
+alias cd="z"

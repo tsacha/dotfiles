@@ -1,0 +1,17 @@
+{{ if eq .chezmoi.os "darwin" -}}
+{{ if eq (output "osascript" "-e" "tell app \"System Events\" to tell appearance preferences to get dark mode" | trim) "false" -}}
+set background=light
+{{ else if eq (output "osascript" "-e" "tell app \"System Events\" to tell appearance preferences to get dark mode" | trim) "true" -}}
+set background=dark
+{{ else -}}
+set background=light
+{{ end -}}
+{{ else -}}
+{{ if eq (output "gsettings" "get" "org.gnome.desktop.interface" "gtk-theme" | trim) "'Adwaita'" -}}
+set background=light
+{{ else if eq (output "gsettings" "get" "org.gnome.desktop.interface" "gtk-theme" | trim) "'Adwaita-dark'" -}}
+set background=dark
+{{ else -}}
+set background=light
+{{ end -}}
+{{ end -}}
