@@ -52,4 +52,4 @@ shift + cmd - e : yabai -m window --toggle split
 
 shift + cmd - r : brew services restart yabai
 
-cmd - f7 :  osascript -e 'tell app "System Events" to tell appearance preferences to set dark mode to not dark mode'; cm apply -v ~/.config/kitty/kitty.conf; pgrep kitty | xargs kill -USR1;
+cmd - f7 : ~/.scripts/theme_switch.sh
