@@ -36,7 +36,8 @@ bindsym $mod+Shift+Q kill
 
 # start dmenu (a program launcher)
 #bindsym $mod+d exec dmenu_run
-bindsym $mod+m exec emacs
+bindsym $mod+shift+m exec emacs
+bindsym $mod+m exec neovide --frame=none --nofork
 bindsym $mod+d exec rofi -show run
 bindsym $mod+Shift+D exec i3-dmenu-desktop --dmenu='rofi -dmenu -i'
 bindsym $mod+u exec rofi -show ssh
