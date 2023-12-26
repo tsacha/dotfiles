@@ -8,7 +8,7 @@ cmd - f4 : $HOME/.scripts/ec2.fish --multiple
 cmd - f5 : $HOME/.scripts/ec2.fish --parallel
 cmd - return : open -na kitty
 shift + cmd - m : open -na emacs
-cmd - m : open -na neovide --frame=none
+cmd - m : neovide --frame=none
 cmd - f1 : pmset displaysleepnow
 
 shift + cmd - c : yabai -m space --create
