@@ -86,6 +86,16 @@ require("lazy").setup({
 
 -- Base settings
 vim.wo.relativenumber = true
+if vim.g.neovide then
+local keymapopts = {
+  silent = true,
+  noremap = true
+}
+  vim.keymap.set({"n", "v"}, "<D-v>", "\"*p", keymapOpts)
+  vim.keymap.set({"n", "v"}, "<D-c>", "\"*y", keymapOpts)
+  vim.keymap.set({"n", "v"}, "<D-x>", "\"*x", keymapOpts)
+  vim.g.neovide_cursor_animation_length = 0
+end
 
 ---- Remove trailing whitespaces
 vim.api.nvim_create_autocmd({ "BufWritePre" }, {
