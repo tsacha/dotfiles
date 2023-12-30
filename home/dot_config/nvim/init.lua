@@ -271,7 +271,7 @@ vim.keymap.set("n", "<leader>dC", function()
 end)
 
 -- Close debugger and clear breakpoints
-vim.keymap.set("n", "<leader>de", function()
+vim.keymap.set("n", "<leader>dq", function()
   dap.clear_breakpoints()
   ui.toggle({})
   dap.terminate()
@@ -356,7 +356,7 @@ require('telescope').setup {
   extensions = {
     file_browser = {
       theme = "ivy",
-      hijack_netrw = false,
+      hijack_netrw = true,
       mappings = {},
     },
     fzf = {
@@ -386,16 +386,17 @@ local extensions = require('telescope').extensions
 
 vim.keymap.set('n', '<leader>fr', extensions.repo.list, {})
 vim.keymap.set('n', '<leader>fg', telescope.git_files, {})
+vim.keymap.set('n', '<leader>fG', telescope.git_status, {})
 vim.keymap.set('n', '<leader>ff', telescope.find_files, {})
-vim.keymap.set('n', '<leader>fs', telescope.current_buffer_fuzzy_find, {})
+vim.keymap.set('n', '<leader>fd', require "telescope".extensions.file_browser.file_browser, {})
 vim.keymap.set('n', '<leader>fb', telescope.buffers, {})
 vim.keymap.set('n', '<leader>fl', telescope.lsp_document_symbols, {})
 vim.keymap.set('n', '<leader>y', telescope.registers, {})
+vim.keymap.set('n', '<leader>fs', telescope.current_buffer_fuzzy_find, {})
+vim.keymap.set('n', '<leader>fp', telescope.live_grep, {})
 
 --- Better escape
 require("better_escape").setup()
-
--- Line
 
 -- Leap & Bepo
 require("leap").add_default_mappings()
