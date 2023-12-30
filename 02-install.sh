@@ -36,6 +36,7 @@ arch-chroot /mnt pacman -S --noconfirm \
     fd \
     feh \
     firefox \
+    fisher \
     flameshot \
     flatpak \
     freerdp \
@@ -45,6 +46,7 @@ arch-chroot /mnt pacman -S --noconfirm \
     git \
     git-lfs \
     github-cli \
+    glow \
     gnome-settings-daemon \
     gnome-themes-standard \
     go \
@@ -69,6 +71,7 @@ arch-chroot /mnt pacman -S --noconfirm \
     lightdm \
     lightdm-gtk-greeter \
     linux-headers \
+    locate \
     lsof \
     lxappearance-gtk3 \
     lxc \

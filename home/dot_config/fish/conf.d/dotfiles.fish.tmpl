@@ -1,3 +1,5 @@
+set -U fish_greeting ""
+
 alias pass="gopass"
 alias ls="exa --long --header --git"
 
@@ -39,7 +41,7 @@ alias t="task"
 alias t="go-task"
 {{ end -}}
 
-export EDITOR=emacs
+export EDITOR=nvim
 export TERM=xterm-256color
 export XDG_CURRENT_DESKTOP=X-Generic
 
@@ -47,7 +49,3 @@ set -x GOPATH $HOME/go
 
 fish_add_path /opt/homebrew/bin
 fish_add_path /usr/local/bin
-
-starship init fish | source
-zoxide init fish | source
-alias cd="z"

@@ -36,8 +36,27 @@ require("lazy").setup({
     "nvim-telescope/telescope-file-browser.nvim",
     dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" }
   },
-  "cljoly/telescope-repo.nvim",
-  "ahmedkhalf/project.nvim",
+  {
+    "coffebar/neovim-project",
+    opts = {
+      last_session_on_startup = false,
+      projects = {
+        "~/Git/*",
+        "~/Git/Work/*",
+      },
+    },
+    init = function()
+      -- enable saving the state of plugins in the session
+      vim.opt.sessionoptions:append("globals") -- save global variables that start with an uppercase letter and contain at least one lowercase letter.
+    end,
+    dependencies = {
+      { "nvim-lua/plenary.nvim" },
+      { "nvim-telescope/telescope.nvim", tag = "0.1.4" },
+      { "Shatur/neovim-session-manager" },
+    },
+    lazy = false,
+    priority = 100,
+  },
   "max397574/better-escape.nvim",
   "nanotee/zoxide.vim",
   "ggandor/leap.nvim",
@@ -86,15 +105,19 @@ require("lazy").setup({
 
 -- Base settings
 vim.wo.relativenumber = true
+vim.o.termguicolors = true
 if vim.g.neovide then
 local keymapopts = {
   silent = true,
   noremap = true
 }
+  vim.keymap.set({"n", "v"}, "<S-Insert>", "\"*p", keymapOpts)
   vim.keymap.set({"n", "v"}, "<D-v>", "\"*p", keymapOpts)
   vim.keymap.set({"n", "v"}, "<D-c>", "\"*y", keymapOpts)
   vim.keymap.set({"n", "v"}, "<D-x>", "\"*x", keymapOpts)
   vim.g.neovide_cursor_animation_length = 0
+  vim.g.neovide_scroll_animation_length = 0
+  vim.o.guifont = "Iosevka Nerd Font Mono:h16"
 end
 
 ---- Remove trailing whitespaces
@@ -340,7 +363,6 @@ require'nvim-treesitter.configs'.setup {
 }
 
 --- Projects
-require("project_nvim").setup()
 
 --- Telescope
 require('telescope').setup {
@@ -364,34 +386,25 @@ require('telescope').setup {
       override_generic_sorter = true,  -- override the generic sorter
       override_file_sorter = true,     -- override the file sorter
       case_mode = "smart_case",        -- or "ignore_case" or "respect_case"
-    },
-    repo = {
-      settings = {
-        auto_lcd = true,
-      },
-      list = {
-        search_dirs = {
-          "~/Git",
-        },
-      },
-    },
+    }
   }
 }
+
 require("telescope").load_extension("fzf")
-require("telescope").load_extension("repo")
 require("telescope").load_extension("file_browser")
 
 local telescope = require('telescope.builtin')
 local extensions = require('telescope').extensions
 
-vim.keymap.set('n', '<leader>fr', extensions.repo.list, {})
+vim.keymap.set('n', '<leader>fr', "<CMD>Telescope neovim-project discover<CR>", {})
 vim.keymap.set('n', '<leader>fg', telescope.git_files, {})
 vim.keymap.set('n', '<leader>fG', telescope.git_status, {})
 vim.keymap.set('n', '<leader>ff', telescope.find_files, {})
-vim.keymap.set('n', '<leader>fd', require "telescope".extensions.file_browser.file_browser, {})
+vim.keymap.set('n', '<leader>fd', extensions.file_browser.file_browser, {})
 vim.keymap.set('n', '<leader>fb', telescope.buffers, {})
 vim.keymap.set('n', '<leader>fl', telescope.lsp_document_symbols, {})
 vim.keymap.set('n', '<leader>y', telescope.registers, {})
+vim.keymap.set('n', '<leader>m', telescope.marks, {})
 vim.keymap.set('n', '<leader>fs', telescope.current_buffer_fuzzy_find, {})
 vim.keymap.set('n', '<leader>fp', telescope.live_grep, {})
 

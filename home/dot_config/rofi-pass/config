@@ -31,7 +31,7 @@ wait=0.2
 
 ## Programs to be used
 # Editor
-EDITOR='emacs'
+EDITOR='nvim'
 
 # Browser
 BROWSER='firefox'
