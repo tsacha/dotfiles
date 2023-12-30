@@ -25,21 +25,23 @@ function cat
     {{ end -}}
 end
 
-alias l="ls"
-alias v="nvim"
+abbr --add l ls
+abbr --add v nvim
+abbr --add vim nvim
+abbr --add co consul
+abbr --add no nomad
+abbr --add va vault
+abbr --add tf terraform
+abbr --add k kubectl
+{{ if eq .chezmoi.os "darwin" -}}
+abbr --add t task
+{{ else -}}
+abbr --add t go-task
+{{ end -}}
+
 alias cm="chezmoi -S ~/Git/dotfiles -c ~/Git/dotfiles/chezmoi.toml --persistent-state ~/.config/chezmoi/chezmoistate.boltdb"
 alias cms="chezmoi -S ~/Git/Security -c ~/Git/Security/chezmoi.toml --persistent-state ~/.config/chezmoi/chezmoistate-security.boltdb"
-alias co="consul"
-alias no="nomad"
-alias va="vault"
-alias tf="terraform"
-alias k="kubectl"
 alias talos="talosctl --talosconfig ~/Git/homelab/talos/data/talosconfig"
-{{ if eq .chezmoi.os "darwin" -}}
-alias t="task"
-{{ else -}}
-alias t="go-task"
-{{ end -}}
 
 export EDITOR=nvim
 export TERM=xterm-256color
