@@ -25,18 +25,7 @@ require("lazy").setup({
       end,
   },
   "lewis6991/gitsigns.nvim",
-  {
-    "NeogitOrg/neogit",
-    dependencies = {
-      "nvim-lua/plenary.nvim",         -- required
-      "sindrets/diffview.nvim",        -- optional - Diff integration
-
-      -- Only one of these is needed, not both.
-      "nvim-telescope/telescope.nvim", -- optional
-      "ibhagwan/fzf-lua",              -- optional
-    },
-    config = true
-  },
+  "tpope/vim-fugitive",
   "rcarriga/nvim-notify",
   {
     "nvim-telescope/telescope.nvim",
@@ -81,11 +70,6 @@ require("lazy").setup({
     event = {"CmdlineEnter"},
     ft = {"go", 'gomod'},
     build = ':lua require("go.install").update_all_sync()' -- if you need to install/update all binaries
-  },
-  {
-    'windwp/nvim-autopairs',
-    event = "InsertEnter",
-    opts = {} -- this is equalent to setup({}) function
   },
   "hrsh7th/cmp-nvim-lsp",
   "hrsh7th/nvim-cmp",
@@ -176,6 +160,7 @@ require("bepo").digits()
 
 -- Git
 require('gitsigns').setup()
+vim.keymap.set('n', '<leader>gg', ":Git<CR>", {})
 
 -- Guess-indent
 require('guess-indent').setup()
