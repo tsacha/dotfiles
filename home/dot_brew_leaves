@@ -3,7 +3,6 @@ ansible
 autoconf
 awscli
 btop
-byobu
 calicoctl
 chezmoi
 choose-gui

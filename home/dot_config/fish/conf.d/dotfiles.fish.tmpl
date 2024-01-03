@@ -27,7 +27,7 @@ end
 
 abbr --add l ls
 abbr --add v nvim
-abbr --add vim nvim
+abbr --add gs "git status"
 abbr --add co consul
 abbr --add no nomad
 abbr --add va vault
@@ -38,10 +38,37 @@ abbr --add t task
 {{ else -}}
 abbr --add t go-task
 {{ end -}}
-
 alias cm="chezmoi -S ~/Git/dotfiles -c ~/Git/dotfiles/chezmoi.toml --persistent-state ~/.config/chezmoi/chezmoistate.boltdb"
 alias cms="chezmoi -S ~/Git/Security -c ~/Git/Security/chezmoi.toml --persistent-state ~/.config/chezmoi/chezmoistate-security.boltdb"
-alias talos="talosctl --talosconfig ~/Git/homelab/talos/data/talosconfig"
+alias tal="talosctl --talosconfig ~/Git/homelab/talos/data/talosconfig"
+
+alias nn=fzf_project
+function fzf_project
+    set -l dir
+    if string match $PWD $HOME
+        set dir (
+            begin
+                find /home/sacha/Git -mindepth 1 -maxdepth 1 -type d;
+                find /home/sacha/Git/Work -mindepth 1 -maxdepth 1 -type d;
+            end | fzf
+        )
+        cd $dir
+        git status
+    else
+        set dir (fzf -0)
+        if string length -q $dir
+            nvim $dir
+        end
+    end
+end
+alias nd=fzf_dir
+function fzf_dir
+    set -l dir (find . -mindepth 1 -type d -not -path "*./.*" | fzf)
+    if string length -q $dir
+        cd $dir
+    end
+end
+alias ng="cd (git rev-parse --show-toplevel)"
 
 export EDITOR=nvim
 export TERM=xterm-256color

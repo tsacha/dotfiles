@@ -1,8 +1,7 @@
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system({
-    "git",
-    "clone",
+    "git", "clone",
     "--filter=blob:none",
     "https://github.com/folke/lazy.nvim.git",
     "--branch=stable", -- latest stable release
@@ -26,6 +25,18 @@ require("lazy").setup({
       end,
   },
   "lewis6991/gitsigns.nvim",
+  {
+    "NeogitOrg/neogit",
+    dependencies = {
+      "nvim-lua/plenary.nvim",         -- required
+      "sindrets/diffview.nvim",        -- optional - Diff integration
+
+      -- Only one of these is needed, not both.
+      "nvim-telescope/telescope.nvim", -- optional
+      "ibhagwan/fzf-lua",              -- optional
+    },
+    config = true
+  },
   "rcarriga/nvim-notify",
   {
     "nvim-telescope/telescope.nvim",
@@ -35,27 +46,6 @@ require("lazy").setup({
   {
     "nvim-telescope/telescope-file-browser.nvim",
     dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" }
-  },
-  {
-    "coffebar/neovim-project",
-    opts = {
-      last_session_on_startup = false,
-      projects = {
-        "~/Git/*",
-        "~/Git/Work/*",
-      },
-    },
-    init = function()
-      -- enable saving the state of plugins in the session
-      vim.opt.sessionoptions:append("globals") -- save global variables that start with an uppercase letter and contain at least one lowercase letter.
-    end,
-    dependencies = {
-      { "nvim-lua/plenary.nvim" },
-      { "nvim-telescope/telescope.nvim", tag = "0.1.4" },
-      { "Shatur/neovim-session-manager" },
-    },
-    lazy = false,
-    priority = 100,
   },
   "max397574/better-escape.nvim",
   "nanotee/zoxide.vim",
@@ -396,7 +386,6 @@ require("telescope").load_extension("file_browser")
 local telescope = require('telescope.builtin')
 local extensions = require('telescope').extensions
 
-vim.keymap.set('n', '<leader>fr', "<CMD>Telescope neovim-project discover<CR>", {})
 vim.keymap.set('n', '<leader>fg', telescope.git_files, {})
 vim.keymap.set('n', '<leader>fG', telescope.git_status, {})
 vim.keymap.set('n', '<leader>ff', telescope.find_files, {})

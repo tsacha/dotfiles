@@ -8,9 +8,9 @@ elif [ $(gsettings get org.gnome.desktop.interface gtk-theme) == "'Adwaita-dark'
     gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita'
     gsettings set org.gnome.desktop.interface icon-theme 'Adwaita'
 fi;
-$cm apply --force ~/.config/alacritty/alacritty.toml ~/.config/rofi/config.rasi ~/.config/k9s/skin.yml ~/.vimrc.color
+$cm apply --force ~/.config/alacritty/alacritty.toml ~/.config/rofi/config.rasi ~/.config/k9s/skin.yml ~/.vimrc.color ~/.config/tmux/tmux.conf
 {{ else }}
 osascript -e 'tell app "System Events" to tell appearance preferences to set dark mode to not dark mode'
-$cm apply --force ~/.config/alacritty/alacritty.toml ~/.config/k9s/skin.yml ~/.vimrc.color ~/.config/kitty/kitty.conf
+$cm apply --force ~/.config/alacritty/alacritty.toml ~/.config/k9s/skin.yml ~/.vimrc.color ~/.config/kitty/kitty.conf ~/.config/tmux/tmux.conf
 pgrep kitty | xargs kill -USR1
 {{ end }}
