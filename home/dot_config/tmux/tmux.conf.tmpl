@@ -18,6 +18,9 @@ set -ag terminal-overrides ",xterm-256color:RGB"
 set -g prefix C-Space
 bind C-Space send-prefix
 set -g mouse on
+set-option -g status-interval 5
+set-option -g automatic-rename on
+set-option -g automatic-rename-format '#{b:pane_current_path}'
 
 {{ if eq $color "light" }}
 ## COLORSCHEME: gruvbox light (medium)
