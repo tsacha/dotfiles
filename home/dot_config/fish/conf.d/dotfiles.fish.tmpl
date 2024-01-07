@@ -49,8 +49,8 @@ function fzf_project
     if string match $PWD $HOME
         set dir (
             begin
-                find /home/sacha/Git -mindepth 1 -maxdepth 1 -type d;
-                find /home/sacha/Git/Work -mindepth 1 -maxdepth 1 -type d;
+                find $HOME/Git -mindepth 1 -maxdepth 1 -type d;
+                find $HOME/Git/Work -mindepth 1 -maxdepth 1 -type d;
             end | fzf
         )
         cd $dir
