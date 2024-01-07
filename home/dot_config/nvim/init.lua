@@ -191,7 +191,18 @@ require("mason-lspconfig").setup {
 }
 
 local lsp = require("lspconfig")
+
+---- Golang
 lsp.gopls.setup({capabilities = capabilities})
+
+---- Terraform
+lsp.terraformls.setup{}
+vim.api.nvim_create_autocmd({"BufWritePre"}, {
+  pattern = {"*.tf", "*.tfvars"},
+  callback = function()
+    vim.lsp.buf.format()
+  end,
+})
 
 -- Debuggers
 require("mason-nvim-dap").setup({
@@ -276,15 +287,6 @@ vim.keymap.set("n", "<leader>dq", function()
   vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-w>=", false, true, true), "n", false)
   require("notify")("Debugger session ended", "warn")
 end)
-
--- Terraform
-require'lspconfig'.terraformls.setup{}
-vim.api.nvim_create_autocmd({"BufWritePre"}, {
-  pattern = {"*.tf", "*.tfvars"},
-  callback = function()
-    vim.lsp.buf.format()
-  end,
-})
 
 -- Golang
 require('go').setup()
