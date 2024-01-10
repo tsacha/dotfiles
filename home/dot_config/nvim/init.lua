@@ -28,11 +28,6 @@ require("lazy").setup({
   "tpope/vim-fugitive",
   "rcarriga/nvim-notify",
   {
-     "m4xshen/hardtime.nvim",
-     dependencies = { "MunifTanjim/nui.nvim", "nvim-lua/plenary.nvim" },
-     opts = {}
-  },
-  {
     "nvim-telescope/telescope.nvim",
     dependencies = { 'nvim-lua/plenary.nvim' }
   },
@@ -166,9 +161,6 @@ require("bepo").digits()
 -- Git
 require('gitsigns').setup()
 vim.keymap.set('n', '<leader>gg', ":Git<CR>", {})
-
--- Hardtime
-require("hardtime").setup()
 
 -- Guess-indent
 require('guess-indent').setup()
