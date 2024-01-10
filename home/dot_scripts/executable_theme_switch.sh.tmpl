@@ -12,5 +12,5 @@ $cm apply --force ~/.config/alacritty/alacritty.toml ~/.config/rofi/config.rasi 
 {{ else }}
 osascript -e 'tell app "System Events" to tell appearance preferences to set dark mode to not dark mode'
 $cm apply --force ~/.config/alacritty/alacritty.toml ~/.config/k9s/skin.yml ~/.vimrc.color ~/.config/kitty/kitty.conf ~/.config/tmux/tmux.conf
-pgrep kitty | xargs kill -USR1
+ps aux | egrep 'kitty$' | awk '{ print $2 }' | xargs kill -USR1
 {{ end }}

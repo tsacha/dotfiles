@@ -27,7 +27,7 @@ end
 
 abbr --add l ls
 abbr --add tm tmux
-abbr --add v nvim
+abbr --add n nvim
 abbr --add gs "git status"
 abbr --add lg lazygit
 abbr --add co consul
@@ -35,6 +35,9 @@ abbr --add no nomad
 abbr --add va vault
 abbr --add tf terraform
 abbr --add k kubectl
+abbr --add es ~/.scripts/ec2.fish --single
+abbr --add em ~/.scripts/ec2.fish --multiple
+abbr --add ep ~/.scripts/ec2.fish --parallel
 {{ if eq .chezmoi.os "darwin" -}}
 abbr --add t task
 {{ else -}}
