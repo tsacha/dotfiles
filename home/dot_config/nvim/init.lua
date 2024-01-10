@@ -78,6 +78,7 @@ require("lazy").setup({
 })
 
 -- Base settings
+vim.opt.autochdir = true
 vim.wo.relativenumber = true
 vim.o.termguicolors = true
 if vim.g.neovide then
@@ -375,15 +376,27 @@ local extensions = require('telescope').extensions
 
 vim.keymap.set('n', '<leader>fg', telescope.git_files, {})
 vim.keymap.set('n', '<leader>fG', telescope.git_status, {})
-vim.keymap.set('n', '<leader>ff', telescope.find_files, {})
-vim.keymap.set('n', '<leader>fd', extensions.file_browser.file_browser, {})
+vim.keymap.set('n', '<leader>fF', telescope.find_files, {})
+vim.keymap.set('n', '<leader>ff', extensions.file_browser.file_browser, {})
 vim.keymap.set('n', '<leader>fb', telescope.buffers, {})
-vim.keymap.set('n', '<leader>fl', telescope.lsp_document_symbols, {})
 vim.keymap.set('n', '<leader>y', telescope.registers, {})
 vim.keymap.set('n', '<leader>m', telescope.marks, {})
 vim.keymap.set('n', '<leader>fs', telescope.current_buffer_fuzzy_find, {})
-vim.keymap.set('n', '<leader>fp', telescope.live_grep, {})
+function live_grep_git_dir()
+  local git_dir = vim.fn.system(string.format("git -C %s rev-parse --show-toplevel", vim.fn.expand("%:p:h")))
+  git_dir = string.gsub(git_dir, "\n", "") -- remove newline character from git_dir
+  local opts = {
+    cwd = git_dir,
+  }
+  require('telescope.builtin').live_grep(opts)
+end
+vim.keymap.set('n', '<leader>fS', ":lua live_grep_git_dir()<CR>", {})
 
+vim.keymap.set('n', '<leader>ll', telescope.lsp_document_symbols, {})
+vim.keymap.set('n', '<leader>ld', telescope.lsp_definitions, {})
+vim.keymap.set('n', '<leader>lr', telescope.lsp_references, {})
+vim.keymap.set('n', '<leader>li', telescope.lsp_incoming_calls, {})
+vim.keymap.set('n', '<leader>lo', telescope.lsp_outgoing_calls, {})
 --- Better escape
 require("better_escape").setup()
 
