@@ -93,7 +93,6 @@ arch-chroot /mnt pacman -S --noconfirm \
     openssh \
     oxygen \
     pamixer \
-    pandoc \
     parallel \
     pavucontrol \
     phonon-qt5-gstreamer \

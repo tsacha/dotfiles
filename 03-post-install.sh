@@ -12,3 +12,20 @@ cd $HOME
 git clone https://aur.archlinux.org/yay.git
 cd yay
 makepkg -si
+
+
+# azure-cli-bin 2.55.0-2
+# flux-bin 2.2.2-1
+# gomplate-bin 3.11.5-1
+# google-cloud-cli 458.0.0-1
+# grpcurl-bin 1.8.9-1
+# hurl-bin 4.1.0-2
+# ijq 0.4.1-1
+# keeper-password-manager 16.10.11-1
+# mqtt-explorer 0.3.5-13
+# noto-color-emoji-fontconfig 1.0.0-1
+# rpi-imager-bin 1.8.4-1
+# ventoy-bin 1.0.96-1
+# visual-studio-code-bin 1.85.1-1
+# winbox 3.40-2
+# yay 12.2.0-1
