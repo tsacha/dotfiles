@@ -358,6 +358,7 @@ require('telescope').setup {
       theme = "ivy",
       hijack_netrw = true,
       mappings = {},
+      follow_symlinks = true,
     },
     fzf = {
       fuzzy = true,                    -- false will only do exact matching
