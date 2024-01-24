@@ -188,7 +188,7 @@ local capabilities = require('cmp_nvim_lsp').default_capabilities()
 --- LSP
 require("mason").setup()
 require("mason-lspconfig").setup {
-    ensure_installed = { "gopls", "terraformls", "ansiblels" }
+    ensure_installed = { "gopls", "terraformls", "ansiblels", "bufls", "svelte" }
 }
 
 local lsp = require("lspconfig")
@@ -204,6 +204,8 @@ vim.api.nvim_create_autocmd({"BufWritePre"}, {
     vim.lsp.buf.format()
   end,
 })
+
+lsp.bufls.setup{}
 
 -- Debuggers
 require("mason-nvim-dap").setup({
@@ -358,7 +360,7 @@ require('telescope').setup {
       theme = "ivy",
       hijack_netrw = true,
       mappings = {},
-      follow_symlinks = true,
+      follow_symlinks = false,
     },
     fzf = {
       fuzzy = true,                    -- false will only do exact matching
