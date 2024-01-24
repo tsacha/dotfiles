@@ -71,6 +71,11 @@ require("lazy").setup({
     ft = {"go", 'gomod'},
     build = ':lua require("go.install").update_all_sync()' -- if you need to install/update all binaries
   },
+  {
+    "pmizio/typescript-tools.nvim",
+    dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+    opts = {},
+  },
   "hrsh7th/cmp-nvim-lsp",
   "hrsh7th/nvim-cmp",
   "dcampos/nvim-snippy",
@@ -188,7 +193,7 @@ local capabilities = require('cmp_nvim_lsp').default_capabilities()
 --- LSP
 require("mason").setup()
 require("mason-lspconfig").setup {
-    ensure_installed = { "gopls", "terraformls", "ansiblels", "bufls", "svelte" }
+    ensure_installed = { "gopls", "terraformls", "ansiblels", "bufls", "tsserver", "svelte" }
 }
 
 local lsp = require("lspconfig")
@@ -198,14 +203,18 @@ lsp.gopls.setup({capabilities = capabilities})
 
 ---- Terraform
 lsp.terraformls.setup{}
+
+--- Web things
+lsp.svelte.setup{}
+lsp.bufls.setup{}
+
+--- Auto indent
 vim.api.nvim_create_autocmd({"BufWritePre"}, {
-  pattern = {"*.tf", "*.tfvars"},
+  pattern = {"*.tf", "*.tfvars", "*.ts", "*.svelte"},
   callback = function()
     vim.lsp.buf.format()
   end,
 })
-
-lsp.bufls.setup{}
 
 -- Debuggers
 require("mason-nvim-dap").setup({
@@ -398,6 +407,7 @@ vim.keymap.set('n', '<leader>fS', ":lua live_grep_git_dir()<CR>", {})
 vim.keymap.set('n', '<leader>ll', telescope.lsp_document_symbols, {})
 vim.keymap.set('n', '<leader>ld', telescope.lsp_definitions, {})
 vim.keymap.set('n', '<leader>lr', telescope.lsp_references, {})
+vim.keymap.set('n', '<leader>lR', ":LspRestart<CR>", {})
 vim.keymap.set('n', '<leader>li', telescope.lsp_incoming_calls, {})
 vim.keymap.set('n', '<leader>lo', telescope.lsp_outgoing_calls, {})
 --- Better escape
