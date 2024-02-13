@@ -13,17 +13,6 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
   "tsacha/bepo.nvim",
   "sainnhe/gruvbox-material",
-  {
-      "sontungexpt/sttusline",
-      branch = "table_version",
-      dependencies = {
-          "nvim-tree/nvim-web-devicons",
-      },
-      event = { "BufEnter" },
-      config = function(_, opts)
-          require("sttusline").setup()
-      end,
-  },
   "lewis6991/gitsigns.nvim",
   "tpope/vim-fugitive",
   "rcarriga/nvim-notify",
@@ -48,14 +37,8 @@ require("lazy").setup({
   "nmac427/guess-indent.nvim",
   "nvim-treesitter/nvim-treesitter",
   {
-    "utilyre/barbecue.nvim",
-    name = "barbecue",
-    version = "*",
-    dependencies = {
-      "SmiteshP/nvim-navic",
-      "nvim-tree/nvim-web-devicons", -- optional dependency
-    },
-    opts = {},
+    'nvim-lualine/lualine.nvim',
+    dependencies = { 'nvim-tree/nvim-web-devicons' }
   },
   {
     "ray-x/go.nvim",
@@ -80,6 +63,18 @@ require("lazy").setup({
   "hrsh7th/nvim-cmp",
   "dcampos/nvim-snippy",
   "dcampos/cmp-snippy",
+  {
+    "johmsalas/text-case.nvim",
+    dependencies = { "nvim-telescope/telescope.nvim" },
+    config = function()
+      require("textcase").setup({})
+      require("telescope").load_extension("textcase")
+    end,
+    keys = {
+      "ga", -- Default invocation prefix
+      { "ga.", "<cmd>TextCaseOpenTelescope<CR>", mode = { "n", "v" }, desc = "Telescope" },
+    },
+  }
 })
 
 -- Base settings
@@ -164,6 +159,8 @@ map('n', '<leader>tt', ':tabnew<CR>')
 require("bepo").setup()
 require("bepo").digits()
 
+-- Line
+require('lualine').setup {}
 
 -- Git
 require('gitsigns').setup()
