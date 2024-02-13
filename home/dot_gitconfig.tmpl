@@ -21,6 +21,19 @@ email = sacha@tremoureux.fr
 [url "ssh://git@github.com/tsacha"]
 	insteadOf = https://github.com/tsacha
 
+[alias]
+	staash = stash --all
+	bb = !~/.scripts/better-git-branch.sh
+
+[rerere]
+	enabled = true
+[column]
+	ui = auto
+[branch]
+	sort = -committerdate
+[fetch]
+	writeCommitGraph = true
+
 {{ if stat (joinPath .chezmoi.homeDir ".gitconfig.work") }}
 {{ include (joinPath .chezmoi.homeDir ".gitconfig.work") }}
 {{ end }}
