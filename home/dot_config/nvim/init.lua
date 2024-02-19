@@ -370,7 +370,7 @@ require('telescope').setup {
       follow_symlinks = false,
     },
     fzf = {
-      fuzzy = true,                    -- false will only do exact matching
+      fuzzy = false,                    -- false will only do exact matching
       override_generic_sorter = true,  -- override the generic sorter
       override_file_sorter = true,     -- override the file sorter
       case_mode = "smart_case",        -- or "ignore_case" or "respect_case"
@@ -385,8 +385,6 @@ local telescope = require('telescope.builtin')
 local extensions = require('telescope').extensions
 
 vim.keymap.set('n', '<leader>fg', telescope.git_files, {})
-vim.keymap.set('n', '<leader>fG', telescope.git_status, {})
-vim.keymap.set('n', '<leader>fF', telescope.find_files, {})
 vim.keymap.set('n', '<leader>ff', extensions.file_browser.file_browser, {})
 vim.keymap.set('n', '<leader>fb', telescope.buffers, {})
 vim.keymap.set('n', '<leader>y', telescope.registers, {})
