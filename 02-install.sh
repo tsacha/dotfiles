@@ -3,6 +3,7 @@ arch-chroot /mnt pacman -S --noconfirm \
     acpi \
     adobe-source-code-pro-fonts \
     age \
+    age-plugin-yubikey \
     alacritty \
     alsa-utils \
     ansible \
@@ -65,6 +66,7 @@ arch-chroot /mnt pacman -S --noconfirm \
     isync \
     jq \
     libreoffice-fresh \
+    libusb-compat \
     libva-mesa-driver \
     libvirt \
     libvncserver \
@@ -95,6 +97,8 @@ arch-chroot /mnt pacman -S --noconfirm \
     pamixer \
     parallel \
     pavucontrol \
+    pcsclite \
+    pcsc-tools \
     phonon-qt5-gstreamer \
     picom \
     pipewire-alsa \
@@ -163,6 +167,7 @@ arch-chroot /mnt pacman -S --noconfirm \
     xorg-xwayland \
     yajl \
     yapf \
+    yubikey-manager \
     zsh
 
 arch-chroot /mnt /usr/bin/sed -Ei 's/^#greeter-session.*/greeter-session=lightdm-gtk-greeter/g' /etc/lightdm/lightdm.conf
@@ -174,6 +179,7 @@ arch-chroot /mnt systemctl enable nscd.service
 arch-chroot /mnt systemctl enable firewalld.service
 arch-chroot /mnt systemctl enable libvirtd.service
 arch-chroot /mnt systemctl enable NetworkManager.service
+arch-chroot /mnt systemctl enable pcscd
 groupadd -R /mnt -r autologin
 usermod -R /mnt -G autologin -a sacha
 usermod -R /mnt -G libvirt -a sacha

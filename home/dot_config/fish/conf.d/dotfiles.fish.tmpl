@@ -88,3 +88,9 @@ fish_add_path /opt/homebrew/bin
 fish_add_path $GOPATH/bin
 fish_add_path /usr/local/bin
 fish_add_path $HOME/.local/bin
+
+{{ if eq .chezmoi.os "darwin" -}}
+set -gx SSH_AUTH_SOCK ~/.gnupg/S.gpg-agent.ssh
+{{ else }}
+set -gx SSH_AUTH_SOCK $XDG_RUNTIME_DIR/gnupg/S.gpg-agent.ssh
+{{ end }}
