@@ -1,6 +1,3 @@
-[user]
-name = Sacha Trémoureux
-email = sacha@tremoureux.fr
 [init]
 	defaultBranch = main
 
@@ -33,6 +30,9 @@ email = sacha@tremoureux.fr
 	sort = -committerdate
 [fetch]
 	writeCommitGraph = true
+
+[commit]
+	gpgsign = true
 
 {{ if stat (joinPath .chezmoi.homeDir ".gitconfig.work") }}
 {{ include (joinPath .chezmoi.homeDir ".gitconfig.work") }}
