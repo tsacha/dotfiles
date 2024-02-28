@@ -1,7 +1,6 @@
 set -U fish_greeting ""
 
 alias pass="gopass"
-alias ls="exa --long --header --git"
 
 function cat
     {{ if eq .chezmoi.os "darwin" -}}
@@ -25,6 +24,7 @@ function cat
     {{ end -}}
 end
 
+alias ls="eza --long --header --git"
 abbr --add l ls
 abbr --add tm tmux
 abbr --add n nvim

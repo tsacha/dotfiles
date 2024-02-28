@@ -31,7 +31,7 @@ arch-chroot /mnt pacman -S --noconfirm \
     efibootmgr \
     emacs \
     evince \
-    exa \
+    eza \
     fd \
     fd \
     feh \
