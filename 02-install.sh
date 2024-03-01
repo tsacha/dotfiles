@@ -28,6 +28,7 @@ arch-chroot /mnt pacman -S --noconfirm \
     dmenu \
     docker \
     docker-compose \
+    dunst \
     dust \
     efibootmgr \
     emacs \
@@ -158,8 +159,6 @@ arch-chroot /mnt pacman -S --noconfirm \
     xf86-input-libinput \
     xf86-input-synaptics \
     xf86-video-intel \
-    xfce4-notifyd \
-    xfce4-terminal \
     xorg-server \
     xorg-xbacklight \
     xorg-xinit \
