@@ -168,6 +168,7 @@ arch-chroot /mnt pacman -S --noconfirm \
     yajl \
     yapf \
     yubikey-manager \
+    yubikey-touch-detector \
     zsh
 
 arch-chroot /mnt /usr/bin/sed -Ei 's/^#greeter-session.*/greeter-session=lightdm-gtk-greeter/g' /etc/lightdm/lightdm.conf
