@@ -34,7 +34,6 @@ require("lazy").setup({
   "jay-babu/mason-nvim-dap.nvim",
   "rcarriga/nvim-dap-ui",
   "neovim/nvim-lspconfig",
-  "nmac427/guess-indent.nvim",
   "nvim-treesitter/nvim-treesitter",
   {
     'nvim-lualine/lualine.nvim',
@@ -166,9 +165,6 @@ require('lualine').setup {}
 require('gitsigns').setup()
 vim.keymap.set('n', '<leader>gg', ":Git<CR>", {})
 
--- Guess-indent
-require('guess-indent').setup()
-
 -- Autocompletion
 local cmp = require('cmp')
 cmp.setup {
@@ -205,6 +201,16 @@ lsp.terraformls.setup{}
 --- Web things
 lsp.svelte.setup{}
 lsp.bufls.setup{}
+
+--- Manual indent ---
+local g = vim.g
+local o = vim.o
+local opt = vim.opt
+
+opt.tabstop = 4
+opt.smartindent = true
+opt.shiftwidth = 4
+opt.expandtab = true
 
 --- Auto indent
 vim.api.nvim_create_autocmd({"BufWritePre"}, {
