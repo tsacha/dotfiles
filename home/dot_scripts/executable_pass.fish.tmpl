@@ -49,6 +49,7 @@ end
 
 if not test -f ~/.pass_cache_folders.gpg || not test -f ~/.pass_cache_items.gpg || set --query _flag_purge
     bw_login
+    bw sync
     bw list folders | encrypt > ~/.pass_cache_folders.gpg
     bw list items | encrypt > ~/.pass_cache_items.gpg
     chmod 600 ~/.pass_cache_folders.gpg
@@ -77,7 +78,11 @@ else
     set -g selected_item (cat ~/.pass_cache_items.gpg | decrypt | jq '.[]|select(.id=="'(cat ~/.pass_cache_selection)'")')
 end
 
-set selected_field (echo $selected_item | jq -r '.login|to_entries[]|select(.value!=null and .value!=[] and .key!="uris")|.key' | selector)
+if test (echo $selected_item | jq -r '.type' | string collect) -eq 3
+    set selected_field (echo $selected_item | jq -r '.card|to_entries[]|select(.value!=null and .value!=[] and .key!="uris")|.key' | selector)
+else
+    set selected_field (echo $selected_item | jq -r '.login|to_entries[]|select(.value!=null and .value!=[] and .key!="uris")|.key' | selector)
+end
 if test -z $selected_field
     return
 end
@@ -85,6 +90,8 @@ end
 echo | _clip_in
 if string match "totp" $selected_field >/dev/null
     echo $selected_item | jq -r '.login.'$selected_field | ~/.scripts/parse_otpauth_uri | string collect | _clip_in
+else if test (echo $selected_item | jq -r '.type' | string collect) -eq 3
+    echo $selected_item | jq -r '.card.'$selected_field | string collect | _clip_in
 else
     echo $selected_item | jq -r '.login.'$selected_field | string collect | _clip_in
 end

@@ -73,7 +73,8 @@ require("lazy").setup({
       "ga", -- Default invocation prefix
       { "ga.", "<cmd>TextCaseOpenTelescope<CR>", mode = { "n", "v" }, desc = "Telescope" },
     },
-  }
+  },
+  "nmac427/guess-indent.nvim",
 })
 
 -- Base settings
@@ -213,6 +214,7 @@ opt.shiftwidth = 4
 opt.expandtab = true
 
 --- Auto indent
+require('guess-indent').setup {}
 vim.api.nvim_create_autocmd({"BufWritePre"}, {
   pattern = {"*.tf", "*.tfvars", "*.ts", "*.svelte"},
   callback = function()
@@ -373,7 +375,7 @@ require('telescope').setup {
       theme = "ivy",
       hijack_netrw = true,
       mappings = {},
-      follow_symlinks = false,
+      follow_symlinks = true,
     },
     fzf = {
       fuzzy = false,                    -- false will only do exact matching
