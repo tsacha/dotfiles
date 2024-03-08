@@ -11,7 +11,7 @@ arch-chroot /mnt pacman -S --noconfirm \
     arc-gtk-theme \
     arc-icon-theme \
     arch-install-scripts \
-    aws-cli \
+    aws-cli-v2 \
     bash-completion \
     bat \
     bind-tools \
