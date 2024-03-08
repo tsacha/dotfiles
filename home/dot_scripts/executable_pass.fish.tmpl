@@ -11,6 +11,7 @@ if set --query _flag_help
 end
 
 {{ if eq .chezmoi.os "darwin" }}
+alias sed="gsed"
 function selector
     choose
 end
@@ -31,14 +32,12 @@ if not set --query _flag_selected
     if test -z $selected_item
         return
     end
-    echo $selected_item
-    set item (echo $selected_item | sed -E "s/[^\t]+\t+[^\t]+\t+(.*)/\1/g")
+    set item (echo $selected_item | sed -E "s/[^\t]*\t*[^\t]+\t+(.*)/\1/g")
     echo $item > ~/.pass_selected
 else
     set item (cat ~/.pass_selected)
 end
 
-echo $item
 set field (rbw get $item --full --raw | jq -r '(.data|select(.!=null)|to_entries[]|select(.value!=null).key),(.fields[].name)' | selector)
 if test -z $field
     return
