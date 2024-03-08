@@ -31,20 +31,11 @@ function decrypt
         gpg --yes --batch --decrypt 2> /dev/null
 end
 function encrypt
-        gpg --yes --batch --armor --encrypt --recipient {{ output "yq" "-r" ".creation_rules[].pgp" (joinPath .chezmoi.homeDir ".sops.yaml") }}
+        gpg --yes --batch --armor --encrypt --recipient {{ (first (fromYaml (output "cat" (joinPath .chezmoi.homeDir ".sops.yaml"))).creation_rules).pgp }}
 end
 
 if test -f ~/.pass_session.gpg
     set -gx BW_SESSION (cat $HOME/.pass_session.gpg | decrypt)
-end
-
-function bw_login
-    if not string match "unlocked" (bw status | jq -r '.status') >/dev/null
-        bw logout > /dev/null
-        set -gx BW_SESSION (bw login --raw sacha@tremoureux.fr (gpg -d $HOME/.pass.gpg 2>/dev/null | head -n1) --code (oathtool -b --totp (gpg -d $HOME/.pass.gpg 2>/dev/null | tail -n 1)))
-        echo $BW_SESSION | encrypt > ~/.pass_session.gpg
-        chmod 600 ~/.pass_session.gpg
-    end
 end
 
 if not test -f ~/.pass_cache_folders.gpg || not test -f ~/.pass_cache_items.gpg || set --query _flag_purge
