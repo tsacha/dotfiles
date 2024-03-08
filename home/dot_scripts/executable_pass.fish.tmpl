@@ -1,12 +1,11 @@
 #!/usr/bin/env fish
-argparse --name=passdropdown "h/help" "p/purge" "s/selected" -- $argv
+argparse --name=passdropdown "h/help" "s/selected" -- $argv
 or return
 
 if set --query _flag_help
     printf "Usage: passdropdown [OPTIONS]\n\n"
     printf "Options:\n"
     printf "  -h/--help       Prints help and exits\n"
-    printf "  -p/--purge      Purge cache\n"
     printf "  -s/--selected   Selected item\n"
     return 0
 end
@@ -27,64 +26,31 @@ function _clip_in
 end
 {{ end }}
 
-function decrypt
-        gpg --yes --batch --decrypt 2> /dev/null
-end
-function encrypt
-        gpg --yes --batch --armor --encrypt --recipient {{ (first (fromYaml (output "cat" (joinPath .chezmoi.homeDir ".sops.yaml"))).creation_rules).pgp }}
-end
-
-if test -f ~/.pass_session.gpg
-    set -gx BW_SESSION (cat $HOME/.pass_session.gpg | decrypt)
-end
-
-if not test -f ~/.pass_cache_folders.gpg || not test -f ~/.pass_cache_items.gpg || set --query _flag_purge
-    bw_login
-    bw sync
-    bw list folders | encrypt > ~/.pass_cache_folders.gpg
-    bw list items | encrypt > ~/.pass_cache_items.gpg
-    chmod 600 ~/.pass_cache_folders.gpg
-    chmod 600 ~/.pass_cache_items.gpg
-end
-
 if not set --query _flag_selected
-    set list_folders (cat ~/.pass_cache_folders.gpg | decrypt)
-    set selected_folder_name (echo $list_folders | jq -r '.[].name' | selector)
-    if test -z $selected_folder_name
+    set selected_item (rbw list --fields folder,name,id | sed -E 's/\t/\t\t\t/g' | sed -E 's/\t//' | sed -E 's/([^\t]{8,})\t/\1/g' | sed -E 's/([^\t]{16,})\t/\1/g' | sort -u | selector)
+    if test -z $selected_item
         return
     end
-    set selected_folder (echo $list_folders | jq -r '.[]|select(.name=="'$selected_folder_name'").id') > /dev/null
-    if not string match null $selected_folder > /dev/null
-        set selected_folder '"'$selected_folder'"'
-    end
-
-    set list_items (cat ~/.pass_cache_items.gpg | decrypt | jq '.[]|select(.folderId=='$selected_folder')')
-    set selected_item_name (echo $list_items | jq -r '.name' | selector) >/dev/null
-    if test -z $selected_item_name
-        return
-    end
-    set -g selected_item (echo $list_items | jq -r 'select(.name=="'$selected_item_name'")')
-    echo $selected_item | jq -r '.id' | string collect > ~/.pass_cache_selection
+    echo $selected_item
+    set item (echo $selected_item | sed -E "s/[^\t]+\t+[^\t]+\t+(.*)/\1/g")
+    echo $item > ~/.pass_selected
 else
-    set -g selected_item (cat ~/.pass_cache_items.gpg | decrypt | jq '.[]|select(.id=="'(cat ~/.pass_cache_selection)'")')
+    set item (cat ~/.pass_selected)
 end
 
-if test (echo $selected_item | jq -r '.type' | string collect) -eq 3
-    set selected_field (echo $selected_item | jq -r '.card|to_entries[]|select(.value!=null and .value!=[] and .key!="uris")|.key' | selector)
-else
-    set selected_field (echo $selected_item | jq -r '.login|to_entries[]|select(.value!=null and .value!=[] and .key!="uris")|.key' | selector)
-end
-if test -z $selected_field
+echo $item
+set field (rbw get $item --full --raw | jq -r '(.data|select(.!=null)|to_entries[]|select(.value!=null).key),(.fields[].name)' | selector)
+if test -z $field
     return
 end
 
 echo | _clip_in
-if string match "totp" $selected_field >/dev/null
-    echo $selected_item | jq -r '.login.'$selected_field | ~/.scripts/parse_otpauth_uri | string collect | _clip_in
-else if test (echo $selected_item | jq -r '.type' | string collect) -eq 3
-    echo $selected_item | jq -r '.card.'$selected_field | string collect | _clip_in
+if string match "totp" $field >/dev/null
+    rbw code $item | string collect | _clip_in
+else if string match "uris" $field >/dev/null
+    rbw get $item --full --raw | jq -r '.data.uris[].uri' | selector | string collect | _clip_in
 else
-    echo $selected_item | jq -r '.login.'$selected_field | string collect | _clip_in
+    rbw get $item --full --raw | jq -r '(select(.data!=null).data|to_entries[]|select(.key=="'$field'").value),(select(.fields!=null).fields[]|select(.name=="'$field'").value)' | string collect | _clip_in
 end
 {{ if eq .chezmoi.os "darwin" }}
 osascript -e 'display notification "Copied password" with title "Pass"'

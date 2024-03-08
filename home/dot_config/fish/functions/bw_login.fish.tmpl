@@ -1,8 +1,0 @@
-function bw_login
-    if not string match "unlocked" (bw status | jq -r '.status') >/dev/null
-        bw logout > /dev/null
-        set -gx BW_SESSION (bw login --raw sacha@tremoureux.fr (gpg -d $HOME/.pass.gpg 2>/dev/null | head -n1) --code (oathtool -b --totp (gpg -d $HOME/.pass.gpg 2>/dev/null | tail -n 1)))
-        echo $BW_SESSION | gpg --yes --batch --armor --encrypt --recipient {{ (first (fromYaml (output "cat" (joinPath .chezmoi.homeDir ".sops.yaml"))).creation_rules).pgp -}} > ~/.pass_session.gpg
-        chmod 600 ~/.pass_session.gpg
-    end
-end
