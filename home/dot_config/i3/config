@@ -214,7 +214,6 @@ bindsym XF86MonBrightnessUp exec xbacklight -inc 1
 bindsym XF86MonBrightnessDown exec xbacklight -dec 1
 
 bindsym $mod+p exec $HOME/.scripts/pass.fish
-bindsym $mod+Mod1+p exec $HOME/.scripts/pass.fish -p
 bindsym $mod+i exec $HOME/.scripts/pass.fish -s
 bindsym $mod+g exec $HOME/.scripts/github.sh
 bindsym $mod+F2 exec $HOME/.scripts/nomad_shell.fish

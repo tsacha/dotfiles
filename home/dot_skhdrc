@@ -1,5 +1,4 @@
 cmd - p : $HOME/.scripts/pass.fish
-cmd + alt - p : $HOME/.scripts/pass.fish -p
 cmd - i : $HOME/.scripts/pass.fish -s
 cmd - g : $HOME/.scripts/github.sh
 cmd - j : $HOME/.scripts/jira.sh
