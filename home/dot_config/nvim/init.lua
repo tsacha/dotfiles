@@ -75,6 +75,10 @@ require("lazy").setup({
     },
   },
   "nmac427/guess-indent.nvim",
+  {
+    "gbprod/yanky.nvim",
+    opts = {},
+  }
 })
 
 -- Base settings
