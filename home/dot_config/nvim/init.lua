@@ -392,6 +392,7 @@ require('telescope').setup {
 
 require("telescope").load_extension("fzf")
 require("telescope").load_extension("file_browser")
+require("telescope").load_extension("yank_history")
 
 local telescope = require('telescope.builtin')
 local extensions = require('telescope').extensions
@@ -399,8 +400,8 @@ local extensions = require('telescope').extensions
 vim.keymap.set('n', '<leader>fg', telescope.git_files, {})
 vim.keymap.set('n', '<leader>ff', extensions.file_browser.file_browser, {})
 vim.keymap.set('n', '<leader>fb', telescope.buffers, {})
-vim.keymap.set('n', '<leader>y', telescope.registers, {})
 vim.keymap.set('n', '<leader>m', telescope.marks, {})
+vim.keymap.set('n', '<leader>y', extensions.yank_history.yank_history, {})
 vim.keymap.set('n', '<leader>fs', telescope.current_buffer_fuzzy_find, {})
 function live_grep_git_dir()
   local git_dir = vim.fn.system(string.format("git -C %s rev-parse --show-toplevel", vim.fn.expand("%:p:h")))
