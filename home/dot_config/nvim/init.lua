@@ -159,6 +159,9 @@ map('n', '<leader>q', ':q<CR>')
 map('n', '<leader>Q', ':qa!<CR>')
 map('n', '<leader>tt', ':tabnew<CR>')
 
+-- Yanky
+vim.keymap.set({"n","x"}, "y", "<Plug>(YankyYank)")
+
 -- Bépo
 require("bepo").setup()
 require("bepo").digits()
