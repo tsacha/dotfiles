@@ -195,10 +195,28 @@ local capabilities = require('cmp_nvim_lsp').default_capabilities()
 --- LSP
 require("mason").setup()
 require("mason-lspconfig").setup {
-    ensure_installed = { "gopls", "terraformls", "ansiblels", "bufls", "tsserver", "svelte" }
+    ensure_installed = { "gopls", "terraformls", "ansiblels", "bufls", "tsserver", "svelte", "yamlls" }
 }
 
 local lsp = require("lspconfig")
+
+---- YAML
+lsp.yamlls.setup {
+  settings = {
+    yaml = {
+      validate = true,
+      -- disable the schema store
+      schemaStore = {
+        enable = false,
+        url = "",
+      },
+      -- manually select schemas
+      schemas = {
+        ['https://json.schemastore.org/kustomization.json'] = 'kustomization.{yml,yaml}',
+      }
+    }
+  }
+}
 
 ---- Golang
 lsp.gopls.setup({capabilities = capabilities})
