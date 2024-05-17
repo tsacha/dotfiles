@@ -30,6 +30,7 @@ require("lazy").setup({
   "ggandor/leap.nvim",
   "williamboman/mason.nvim",
   "williamboman/mason-lspconfig.nvim",
+  "nvim-neotest/nvim-nio",
   "mfussenegger/nvim-dap",
   "jay-babu/mason-nvim-dap.nvim",
   "rcarriga/nvim-dap-ui",
@@ -195,7 +196,7 @@ local capabilities = require('cmp_nvim_lsp').default_capabilities()
 --- LSP
 require("mason").setup()
 require("mason-lspconfig").setup {
-    ensure_installed = { "gopls", "terraformls", "ansiblels", "bufls", "tsserver", "svelte", "yamlls" }
+    ensure_installed = { "gopls", "terraformls", "ansiblels", "bufls", "tsserver", "svelte", "yamlls", "pyright", "ruff", "ruff_lsp" }
 }
 
 local lsp = require("lspconfig")
@@ -228,6 +229,23 @@ lsp.terraformls.setup{}
 lsp.svelte.setup{}
 lsp.bufls.setup{}
 
+---- Python
+require('lspconfig').ruff_lsp.setup {}
+require('lspconfig').pyright.setup {
+  settings = {
+    pyright = {
+      -- Using Ruff's import organizer
+      disableOrganizeImports = true,
+    },
+    python = {
+      analysis = {
+        -- Ignore all files for analysis to exclusively use Ruff for linting
+        ignore = { '*' },
+      },
+    },
+  },
+}
+
 --- Manual indent ---
 local g = vim.g
 local o = vim.o
@@ -241,7 +259,7 @@ opt.expandtab = true
 --- Auto indent
 require('guess-indent').setup {}
 vim.api.nvim_create_autocmd({"BufWritePre"}, {
-  pattern = {"*.tf", "*.tfvars", "*.ts", "*.svelte"},
+  pattern = {"*.tf", "*.tfvars", "*.ts", "*.svelte", "*.py"},
   callback = function()
     vim.lsp.buf.format()
   end,
