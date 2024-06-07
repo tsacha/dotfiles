@@ -14,7 +14,8 @@
 {{ end -}}
 
 {{ if eq .chezmoi.os "darwin" -}}
-alt_send_esc: false
+[window]
+option_as_alt = "OnlyLeft"
 {{ end -}}
 
 [font]

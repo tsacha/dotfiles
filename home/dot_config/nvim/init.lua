@@ -165,7 +165,6 @@ vim.keymap.set({"n","x"}, "y", "<Plug>(YankyYank)")
 
 -- Bépo
 require("bepo").setup()
-require("bepo").digits()
 
 -- Line
 require('lualine').setup {}
