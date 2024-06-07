@@ -55,6 +55,11 @@ require("lazy").setup({
     build = ':lua require("go.install").update_all_sync()' -- if you need to install/update all binaries
   },
   {
+    'mrcjkb/rustaceanvim',
+    version = '^4', -- Recommended
+    lazy = false, -- This plugin is already lazy
+  },
+  {
     "pmizio/typescript-tools.nvim",
     dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
     opts = {},
@@ -87,10 +92,10 @@ vim.opt.autochdir = true
 vim.wo.relativenumber = true
 vim.o.termguicolors = true
 if vim.g.neovide then
-local keymapopts = {
-  silent = true,
-  noremap = true
-}
+  local keymapopts = {
+    silent = true,
+    noremap = true
+  }
   vim.keymap.set({"n", "v"}, "<S-Insert>", "\"*p", keymapOpts)
   vim.keymap.set({"n", "v"}, "<D-v>", "\"*p", keymapOpts)
   vim.keymap.set({"n", "v"}, "<D-c>", "\"*y", keymapOpts)
@@ -193,9 +198,23 @@ cmp.setup {
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 --- LSP
+vim.lsp.inlay_hint.enable()
+
 require("mason").setup()
 require("mason-lspconfig").setup {
-    ensure_installed = { "gopls", "terraformls", "ansiblels", "bufls", "tsserver", "svelte", "yamlls", "pyright", "ruff", "ruff_lsp" }
+    ensure_installed = {
+      "gopls",
+      "terraformls",
+      "ansiblels",
+      "bufls",
+      "tsserver",
+      "svelte",
+      "yamlls",
+      "pyright",
+      "ruff",
+      "ruff_lsp",
+      "rust_analyzer"
+    }
 }
 
 local lsp = require("lspconfig")
@@ -220,6 +239,27 @@ lsp.yamlls.setup {
 
 ---- Golang
 lsp.gopls.setup({capabilities = capabilities})
+
+---- Rust
+vim.g.rustaceanvim = {
+  -- Plugin configuration
+  tools = {
+  },
+  -- LSP configuration
+  server = {
+    on_attach = function(client, bufnr)
+      -- you can also put keymaps in here
+    end,
+    default_settings = {
+      -- rust-analyzer language server configuration
+      ['rust-analyzer'] = {
+      },
+    },
+  },
+  -- DAP configuration
+  dap = {
+  },
+}
 
 ---- Terraform
 lsp.terraformls.setup{}
@@ -266,7 +306,7 @@ vim.api.nvim_create_autocmd({"BufWritePre"}, {
 
 -- Debuggers
 require("mason-nvim-dap").setup({
-    ensure_installed = { "delve" }
+    ensure_installed = { "delve", "codelldb" }
 })
 
 require("dapui").setup({
