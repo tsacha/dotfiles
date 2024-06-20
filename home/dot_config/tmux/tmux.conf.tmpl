@@ -23,6 +23,10 @@ set-option -g status-interval 5
 set-option -g automatic-rename on
 set-option -g automatic-rename-format '#{b:pane_current_path}'
 
+bind M-c attach-session -c "#{pane_current_path}"
+bind h split-window -h
+bind v split-window -v
+
 {{ if eq $color "light" }}
 ## COLORSCHEME: gruvbox light (medium)
 #
@@ -129,7 +133,5 @@ set-option -g status-right "#[bg=colour237,fg=colour239 nobold, nounderscore, no
 set-window-option -g window-status-current-format "#[bg=colour214,fg=colour237,nobold,noitalics,nounderscore]#[bg=colour214,fg=colour239] #I #[bg=colour214,fg=colour239,bold] #W#{?window_zoomed_flag,*Z,} #[bg=colour237,fg=colour214,nobold,noitalics,nounderscore]"
 set-window-option -g window-status-format "#[bg=colour239,fg=colour237,noitalics]#[bg=colour239,fg=colour223] #I #[bg=colour239,fg=colour223] #W #[bg=colour237,fg=colour239,noitalics]"
 {{ end }}
-
-bind M-c attach-session -c "#{pane_current_path}"
 
 # vim: set ft=tmux tw=0 nowrap:
