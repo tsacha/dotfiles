@@ -60,22 +60,14 @@ function fzf_project
         )
         if string length -q $dir
             cd $dir
-            if test -z "$TMUX"
-                tmux new-session -s (path basename (pwd)) || tmux attach-session -t (path basename (pwd))
-            end
         end
     else
         set -l file (fd --type f --strip-cwd-prefix | fzf -0)
         if string length -q $file
-            if test -z "$TMUX"
-                tmux new-session -s (path basename (git rev-parse --show-toplevel)) nvim $file
-            else
-                nvim $file
-            end
+            nvim $file
         end
     end
 end
-alias nt="tmux attach-session -t (tmux list-sessions -F '#{session_name}' | fzf)"
 alias gg="cd (git rev-parse --show-toplevel)"
 
 export EDITOR=nvim
