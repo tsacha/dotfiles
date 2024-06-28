@@ -25,7 +25,5 @@ $cm apply --force \
     ~/.wezterm.lua \
     ~/.config/k9s/config.yaml \
     ~/.vimrc.color \
-    ~/.config/kitty/kitty.conf \
     ~/.config/tmux/tmux.conf
-ps aux | egrep 'kitty$' | awk '{ print $2 }' | xargs kill -USR1
 {{ end }}
