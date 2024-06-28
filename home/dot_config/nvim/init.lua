@@ -84,7 +84,8 @@ require("lazy").setup({
   {
     "gbprod/yanky.nvim",
     opts = {},
-  }
+  },
+  { "rose-pine/neovim", name = "rose-pine" }
 })
 
 -- Base settings
@@ -137,9 +138,9 @@ end
 watch_file(colorFile)
 reload()
 
-vim.cmd([[colorscheme gruvbox-material]])
+--vim.cmd([[colorscheme gruvbox-material]])
+vim.cmd("colorscheme rose-pine")
 
-vim.g.gruvbox_material_background = 'medium'
 vim.opt.termguicolors = true
 if os.getenv('theme') == 'light' then
   vim.o.background = 'light'
@@ -210,7 +211,7 @@ require("mason-lspconfig").setup {
       "tsserver",
       "svelte",
       "yamlls",
-      "pyright",
+      "basedpyright",
       "ruff",
       "ruff_lsp",
       "rust_analyzer"
@@ -270,19 +271,19 @@ lsp.bufls.setup{}
 
 ---- Python
 require('lspconfig').ruff_lsp.setup {}
-require('lspconfig').pyright.setup {
-  settings = {
-    pyright = {
-      -- Using Ruff's import organizer
-      disableOrganizeImports = true,
-    },
-    python = {
-      analysis = {
-        -- Ignore all files for analysis to exclusively use Ruff for linting
-        ignore = { '*' },
-      },
-    },
-  },
+require('lspconfig').basedpyright.setup {
+--  settings = {
+--    pyright = {
+--      -- Using Ruff's import organizer
+--      disableOrganizeImports = true,
+--    },
+--    python = {
+--      analysis = {
+--        -- Ignore all files for analysis to exclusively use Ruff for linting
+--        ignore = { '*' },
+--      },
+--    },
+--  },
 }
 
 --- Manual indent ---
