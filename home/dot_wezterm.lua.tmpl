@@ -14,6 +14,7 @@
 {{ end -}}
 
 local wezterm = require 'wezterm'
+local act = wezterm.action
 local config = {}
 config.font = wezterm.font({
   family='Monaspace Argon',
@@ -70,6 +71,40 @@ config.window_padding = {
   right = 10,
   top = 5,
   bottom = 5,
+}
+
+config.pane_focus_follows_mouse = true
+config.keys = {
+  {
+    key = 'h',
+    mods = 'CTRL',
+    action = act.SplitHorizontal,
+  },
+  {
+    key = 'v',
+    mods = 'CTRL',
+    action = act.SplitVertical,
+  },
+  {
+    key = 'LeftArrow',
+    mods = 'CTRL',
+    action = act.ActivatePaneDirection 'Left',
+  },
+  {
+    key = 'RightArrow',
+    mods = 'CTRL',
+    action = act.ActivatePaneDirection 'Right',
+  },
+  {
+    key = 'UpArrow',
+    mods = 'CTRL',
+    action = act.ActivatePaneDirection 'Up',
+  },
+  {
+    key = 'DownArrow',
+    mods = 'CTRL',
+    action = act.ActivatePaneDirection 'Down',
+  },
 }
 
 return config
