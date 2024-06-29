@@ -87,6 +87,3 @@ set -gx SSH_AUTH_SOCK ~/.gnupg/S.gpg-agent.ssh
 {{ else }}
 set -gx SSH_AUTH_SOCK $XDG_RUNTIME_DIR/gnupg/S.gpg-agent.ssh
 {{ end }}
-
-set --universal pure_enable_k8s false
-set --universal pure_enable_single_line_prompt true
