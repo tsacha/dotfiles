@@ -105,6 +105,36 @@ config.keys = {
     mods = 'ALT|SHIFT',
     action = act.ActivatePaneDirection 'Down',
   },
+  {
+    key = 't',
+    mods = 'ALT|SHIFT',
+    action = act.SpawnTab 'CurrentPaneDomain',
+  },
+  {
+    key = 't',
+    mods = 'ALT|SHIFT',
+    action = act.SpawnTab 'CurrentPaneDomain',
+  },
+  {
+    key = 'w',
+    mods = 'ALT|SHIFT',
+    action = wezterm.action.CloseCurrentTab { confirm = true },
+  },
+  {
+    key = 'z',
+    mods = 'ALT|SHIFT',
+    action = wezterm.action.TogglePaneZoomState,
+  },
+  {
+    key = 'Tab',
+    mods = 'ALT',
+    action = act.ActivateTabRelative(1)
+  },
+  {
+    key = 'Tab',
+    mods = 'ALT|SHIFT',
+    action = act.ActivateTabRelative(-1)
+  },
 }
 config.mouse_bindings = {
   -- Scrolling up while holding CTRL increases the font size
