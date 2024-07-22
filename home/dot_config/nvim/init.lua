@@ -199,7 +199,7 @@ cmp.setup {
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 --- LSP
-vim.lsp.inlay_hint.enable()
+--vim.lsp.inlay_hint.enable()
 
 require("mason").setup()
 require("mason-lspconfig").setup {
@@ -272,18 +272,19 @@ lsp.bufls.setup{}
 ---- Python
 require('lspconfig').ruff_lsp.setup {}
 require('lspconfig').basedpyright.setup {
---  settings = {
---    pyright = {
---      -- Using Ruff's import organizer
---      disableOrganizeImports = true,
---    },
---    python = {
---      analysis = {
---        -- Ignore all files for analysis to exclusively use Ruff for linting
---        ignore = { '*' },
---      },
---    },
---  },
+  settings = {
+    basedpyright = {
+      analysis = {
+        typeCheckingMode = "basic"
+      }
+    },
+    python = {
+      analysis = {
+        -- Ignore all files for analysis to exclusively use Ruff for linting
+        ignore = { '*' },
+      },
+    },
+  },
 }
 
 --- Manual indent ---
