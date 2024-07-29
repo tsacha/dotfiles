@@ -10,8 +10,41 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+--- Keybinds
+local function map(mode, lhs, rhs, opts)
+  local options = { noremap=true, silent=true }
+  if opts then
+    options = vim.tbl_extend('force', options, opts)
+  end
+  vim.api.nvim_set_keymap(mode, lhs, rhs, options)
+end
+
+vim.g.mapleader = ' '
+vim.opt.langmap = ''
+-- First row
+.. [[bq,mw,pe,or,wt,zy,vu,di,lo,jp]]
+.. [[BQ,MW,PE,OR,WT,ZY,VU,DI,LO,JP]]
+
+-- Second row
+.. [[aa,us,id,ef,\,g,ch,tj,sk,rl,n\;]]
+.. [[AA,US,ID,EF,\;G,CH,TJ,SK,RL,N:]]
+
+-- Third row
+.. [[-z,yx,xc,.v,kb,qm,g\,,h.,f/]]
+.. [[!Z,YX,XC,:V,KB,QM,G<,H>,F?]]
+
+-- Custom
+.. [[~$]]
+
+map('n', '<C-o>', '<C-r>')
+map('n', '<leader>.', '<C-v>')
+
+map('n', '<leader>s', ':w<CR>')
+map('n', '<leader>q', ':q<CR>')
+map('n', '<leader>Q', ':qa!<CR>')
+map('n', '<leader>tt', ':tabnew<CR>')
+
 require("lazy").setup({
-  "tsacha/bepo.nvim",
   "sainnhe/gruvbox-material",
   "lewis6991/gitsigns.nvim",
   "tpope/vim-fugitive",
@@ -88,7 +121,7 @@ require("lazy").setup({
   { "rose-pine/neovim", name = "rose-pine" }
 })
 
--- Base settings
+---- Base settings
 vim.opt.autochdir = true
 vim.wo.relativenumber = true
 vim.o.termguicolors = true
@@ -105,7 +138,7 @@ if vim.g.neovide then
   vim.g.neovide_scroll_animation_length = 0
   vim.o.guifont = "Iosevka Nerd Font Mono:h16"
 end
-
+--
 ---- Remove trailing whitespaces
 vim.api.nvim_create_autocmd({ "BufWritePre" }, {
     pattern = {"*"},
@@ -150,27 +183,8 @@ end
 vim.wo.relativenumber = true
 vim.wo.number = true
 
---- Keybinds
-local function map(mode, lhs, rhs, opts)
-  local options = { noremap=true, silent=true }
-  if opts then
-    options = vim.tbl_extend('force', options, opts)
-  end
-  vim.api.nvim_set_keymap(mode, lhs, rhs, options)
-end
-
-vim.g.mapleader = ' '
-map('n', 'wk', ':close')
-map('n', '<leader>s', ':w<CR>')
-map('n', '<leader>q', ':q<CR>')
-map('n', '<leader>Q', ':qa!<CR>')
-map('n', '<leader>tt', ':tabnew<CR>')
-
 -- Yanky
 vim.keymap.set({"n","x"}, "y", "<Plug>(YankyYank)")
-
--- Bépo
-require("bepo").setup()
 
 -- Line
 require('lualine').setup {}
@@ -198,7 +212,7 @@ cmp.setup {
 }
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
---- LSP
+-- LSP
 --vim.lsp.inlay_hint.enable()
 
 require("mason").setup()
@@ -442,7 +456,6 @@ require'nvim-treesitter.configs'.setup {
 }
 
 --- Projects
-
 --- Telescope
 require('telescope').setup {
   defaults = {
@@ -499,11 +512,9 @@ vim.keymap.set('n', '<leader>lr', telescope.lsp_references, {})
 vim.keymap.set('n', '<leader>lR', ":LspRestart<CR>", {})
 vim.keymap.set('n', '<leader>li', telescope.lsp_incoming_calls, {})
 vim.keymap.set('n', '<leader>lo', telescope.lsp_outgoing_calls, {})
---- Better escape
+
+-- Better escape
 require("better_escape").setup()
 
--- Leap & Bepo
+-- Leap
 require("leap").add_default_mappings()
-vim.keymap.set({'n', 'x', 'o'}, 'k', '<Plug>(leap-forward-to)')
-vim.keymap.set({'n', 'x', 'o'}, 'K', '<Plug>(leap-backward-to)')
-vim.keymap.set({'n', 'x', 'o'}, 'gk', '<Plug>(leap-from-window)')
