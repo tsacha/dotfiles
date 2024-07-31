@@ -217,7 +217,7 @@ Section "InputClass"
 EndSection
 EOF
 fi
-arch-chroot /mnt localectl set-x11-keymap fr altwin:swap_lalt_lwin bepo_afnor
+arch-chroot /mnt localectl set-x11-keymap bepolar "" "" "lv3:rwin_switch,grp:shifts_toggle,caps:ctrl_modifier,altwin:swap_lalt_lwin"
 
 rm -Rf /mnt/home/sacha/Git/dotfiles
 arch-chroot /mnt git clone https://github.com/tsacha/dotfiles /home/sacha/Git/dotfiles
