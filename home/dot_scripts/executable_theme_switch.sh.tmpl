@@ -16,8 +16,10 @@ $cm apply --force \
     ~/.config/k9s/config.yaml \
     ~/.vimrc.color \
     ~/.config/tmux/tmux.conf \
-    ~/.config/dunst/dunstrc
+    ~/.config/dunst/dunstrc \
+    ~/.config/helix/config.toml
 systemctl --user restart dunst
+pkill -USR1 helix
 i3-msg restart
 {{ else }}
 osascript -e 'tell app "System Events" to tell appearance preferences to set dark mode to not dark mode'
@@ -25,5 +27,7 @@ $cm apply --force \
     ~/.wezterm.lua \
     ~/.config/k9s/config.yaml \
     ~/.vimrc.color \
-    ~/.config/tmux/tmux.conf
+    ~/.config/tmux/tmux.conf \
+    ~/.config/helix/config.toml
+pkill -USR1 helix
 {{ end }}
