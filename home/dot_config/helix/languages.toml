@@ -1,0 +1,7 @@
+[language-server.pylsp.config.pylsp]
+plugins.ruff.enabled = true
+plugins.black.enabled = true
+
+[language-server.terraform-ls]
+command = "terraform-ls"
+args = ["serve", "-log-file", "/dev/null"]
