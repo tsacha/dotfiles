@@ -88,26 +88,17 @@ require("lazy").setup({
   { "rose-pine/neovim", name = "rose-pine" }
 })
 
--- Base settings
-vim.opt.autochdir = true
-vim.wo.relativenumber = true
-vim.o.termguicolors = true
+---
+require('base')
 
----- Remove trailing whitespaces
-vim.api.nvim_create_autocmd({ "BufWritePre" }, {
-    pattern = {"*"},
-    callback = function(ev)
-        save_cursor = vim.fn.getpos(".")
-        vim.cmd([[%s/\s\+$//e]])
-        vim.fn.setpos(".", save_cursor)
-    end,
-})
-
+---
 require("toggle-dark-mode")
 
--- Relative numbers
-vim.wo.relativenumber = true
-vim.wo.number = true
+--- Better escape
+require("better_escape").setup()
+
+-- Leap
+require("leap").add_default_mappings()
 
 --- Keybinds
 local function map(mode, lhs, rhs, opts)
@@ -124,6 +115,9 @@ map('n', '<leader>s', ':w<CR>')
 map('n', '<leader>q', ':q<CR>')
 map('n', '<leader>Q', ':qa!<CR>')
 map('n', '<leader>tt', ':tabnew<CR>')
+map('n', '<leader>h', ':split<CR>')
+map('n', '<leader>v', ':vsplit<CR>')
+map('n', '<leader>o', '<C-w>w')
 
 -- Yanky
 vim.keymap.set({"n","x"}, "y", "<Plug>(YankyYank)")
@@ -193,13 +187,13 @@ lsp.yamlls.setup {
     }
   }
 }
+lsp.gopls.setup({capabilities = capabilities})
 
 ---- Debuggers
 require("debuggers")
 
 ---- Golang
-require("go")
-lsp.gopls.setup({capabilities = capabilities})
+require("go-config")
 
 ---- Rust
 vim.g.rustaceanvim = {
@@ -245,16 +239,6 @@ require('lspconfig').basedpyright.setup {
   },
 }
 
---- Manual indent ---
-local g = vim.g
-local o = vim.o
-local opt = vim.opt
-
-opt.tabstop = 4
-opt.smartindent = true
-opt.shiftwidth = 4
-opt.expandtab = true
-
 --- Auto indent
 require('guess-indent').setup {}
 vim.api.nvim_create_autocmd({"BufWritePre"}, {
@@ -263,10 +247,6 @@ vim.api.nvim_create_autocmd({"BufWritePre"}, {
     vim.lsp.buf.format()
   end,
 })
-
--- Golang
-require('go')
-
 
 -- Treesitter
 require'nvim-treesitter.configs'.setup {
@@ -279,67 +259,7 @@ require'nvim-treesitter.configs'.setup {
   },
 }
 
---- Projects
 
 --- Telescope
-require('telescope').setup {
-  defaults = {
-    layout_strategy = "horizontal",
-    layout_config = {
-      horizontal = { width = 0.9 },
-    },
-    preview = {
-      hide_on_startup = false
-    }
-  },
-  extensions = {
-    file_browser = {
-      theme = "ivy",
-      hijack_netrw = true,
-      mappings = {},
-      follow_symlinks = true,
-    },
-    fzf = {
-      fuzzy = false,                    -- false will only do exact matching
-      override_generic_sorter = true,  -- override the generic sorter
-      override_file_sorter = true,     -- override the file sorter
-      case_mode = "smart_case",        -- or "ignore_case" or "respect_case"
-    }
-  }
-}
+require('telescope-config')
 
-require("telescope").load_extension("fzf")
-require("telescope").load_extension("file_browser")
-require("telescope").load_extension("yank_history")
-
-local telescope = require('telescope.builtin')
-local extensions = require('telescope').extensions
-
-vim.keymap.set('n', '<leader>fg', telescope.git_files, {})
-vim.keymap.set('n', '<leader>ff', extensions.file_browser.file_browser, {})
-vim.keymap.set('n', '<leader>fb', telescope.buffers, {})
-vim.keymap.set('n', '<leader>m', telescope.marks, {})
-vim.keymap.set('n', '<leader>y', extensions.yank_history.yank_history, {})
-vim.keymap.set('n', '<leader>fs', telescope.current_buffer_fuzzy_find, {})
-function live_grep_git_dir()
-  local git_dir = vim.fn.system(string.format("git -C %s rev-parse --show-toplevel", vim.fn.expand("%:p:h")))
-  git_dir = string.gsub(git_dir, "\n", "") -- remove newline character from git_dir
-  local opts = {
-    cwd = git_dir,
-  }
-  require('telescope.builtin').live_grep(opts)
-end
-vim.keymap.set('n', '<leader>fS', ":lua live_grep_git_dir()<CR>", {})
-
-vim.keymap.set('n', '<leader>ll', telescope.lsp_document_symbols, {})
-vim.keymap.set('n', '<leader>ld', telescope.lsp_definitions, {})
-vim.keymap.set('n', '<leader>lr', telescope.lsp_references, {})
-vim.keymap.set('n', '<leader>lR', ":LspRestart<CR>", {})
-vim.keymap.set('n', '<leader>li', telescope.lsp_incoming_calls, {})
-vim.keymap.set('n', '<leader>lo', telescope.lsp_outgoing_calls, {})
-
---- Better escape
-require("better_escape").setup()
-
--- Leap
-require("leap").add_default_mappings()

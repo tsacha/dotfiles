@@ -25,12 +25,18 @@ function cat
 end
 
 alias ls="eza --long --header --git"
+{{ if not (eq .chezmoi.os "darwin") -}}
 alias hx="helix"
+{{ end -}}
 
 abbr --add l ls
 abbr --add tm tmux
 abbr --add n nvim
+{{ if not (eq .chezmoi.os "darwin") -}}
 abbr --add h helix
+{{ else }}
+abbr --add h hx
+{{ end -}}
 abbr --add gs "git status"
 abbr --add lg lazygit
 abbr --add co consul
