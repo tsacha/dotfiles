@@ -25,6 +25,8 @@ function cat
 end
 
 alias ls="eza --long --header --git"
+alias hx="helix"
+
 abbr --add l ls
 abbr --add tm tmux
 abbr --add n nvim
@@ -49,7 +51,18 @@ alias cm="chezmoi -S ~/Git/dotfiles -c ~/Git/dotfiles/chezmoi.toml --persistent-
 alias cms="chezmoi -S ~/Git/Security -c ~/Git/Security/chezmoi.toml --persistent-state ~/.config/chezmoi/chezmoistate-security.boltdb"
 alias tal="talosctl --talosconfig ~/Git/homelab/talos/data/talosconfig"
 
-alias nn=fzf_project
+function nn
+    fzf_project nvim
+end
+
+function ee
+    fzf_project emacs -nw
+end
+
+function hh
+    fzf_project hx
+end
+
 function fzf_project
     set -l dir
     if string match $PWD $HOME
@@ -65,7 +78,7 @@ function fzf_project
     else
         set -l file (fd --type f --strip-cwd-prefix | fzf -0)
         if string length -q $file
-            nvim $file
+            $argv[1] $argv[2] $file
         end
     end
 end
