@@ -139,10 +139,9 @@ cat <<EOF > /mnt/etc/hosts
 EOF
 
 cat <<EOF > /mnt/etc/vconsole.conf
-KEYMAP=fr-bepo-latin9
+KEYMAP=fr
 XKBLAYOUT=fr
 XKBMODEL=altwin:swap_lalt_lwin
-XKBVARIANT=bepo_afnor
 EOF
 chattr +i /mnt/etc/vconsole.conf
 
