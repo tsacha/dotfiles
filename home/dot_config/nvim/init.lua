@@ -25,7 +25,6 @@ require("lazy").setup({
     "nvim-telescope/telescope-file-browser.nvim",
     dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" }
   },
-  "max397574/better-escape.nvim",
   "nanotee/zoxide.vim",
   "ggandor/leap.nvim",
   "williamboman/mason.nvim",
@@ -93,9 +92,6 @@ require('base')
 
 ---
 require("toggle-dark-mode")
-
---- Better escape
-require("better_escape").setup()
 
 -- Leap
 require("leap").add_default_mappings()
