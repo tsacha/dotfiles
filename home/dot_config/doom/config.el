@@ -45,10 +45,10 @@
           doom-variable-pitch-font (font-spec :family "Monaspace Argon") ; inherits `doom-font''s :size
           doom-symbol-font (font-spec :family "Monaspace Argon" :size 20)
           doom-big-font (font-spec :family "Monaspace Argon" :size 23))
-  (setq doom-font (font-spec :family "Monaspace Argon" :size 20)
+  (setq doom-font (font-spec :family "Monaspace Argon" :size 18)
         doom-variable-pitch-font (font-spec :family "Monaspace Argon") ; inherits `doom-font''s :size
-        doom-symbol-font (font-spec :family "Apple Color Emoji" :size 23)
-        doom-big-font (font-spec :family "Monaspace Argon" :size 20)))
+        doom-symbol-font (font-spec :family "Apple Color Emoji" :size 21)
+        doom-big-font (font-spec :family "Monaspace Argon" :size 18)))
 
 
 

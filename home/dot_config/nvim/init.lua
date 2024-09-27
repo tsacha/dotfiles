@@ -154,7 +154,7 @@ require("mason-lspconfig").setup {
       "terraformls",
       "ansiblels",
       "bufls",
-      "tsserver",
+      "ts_ls",
       "svelte",
       "yamlls",
       "basedpyright",

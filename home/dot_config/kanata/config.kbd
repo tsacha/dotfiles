@@ -1,58 +1,47 @@
-;; ANSI sub-layer (let kanata ignore all other keys)
-(defsrc
-  q    w    e    r    t    y    u    i    o    p
-  a    s    d    f    g    h    j    k    l    ;
-  z    x    c    v    b    n    m    ,    .    /
-       lalt           spc            ralt
-)
-
-;; Base layer (active by default when kanata starts up):
-;;  - home-row mods on SDF and JKL
-;;  - the 3 main thumb keys become mod/taps
-(deflayer qwerty
-  _    _    _    _    _    _    _    _    _    _
-  _    @ss  @dd  @ff  _    _    @jj  @kk  @ll  _
-  _    _    _    _    _    _    _    _    _    _
-       @sft           @nav           @alt
-)
-
-;; Navigation layer:
-;;  - left: arrows, Tab/Shift-Tab, one-hand shortcuts (Ctrl-AZXCV)
-;;  - right: numpad
-(deflayer numnav
-  tab  home up   end  pgup    /  7  8  9  XX
-  -    lft  down rght pgdn    -  4  5  6  0
-  -    -    -    -    S-tab   ,  1  2  3  .
-       del            _             esc
-)
-
-;; Special key aliases
-(defalias
-  ;; Main mod-tap: NumNav layer when hold, Space when tapped.
-  ;; The space key must be hold long enough (200ms) to become a layer shift.
-  nav (tap-hold 400 175 spc (layer-toggle numnav))
-
-  ;; Space-cadet thumb keys: Shift/BackSpace, AltGr/Return
-  ;;  - acts as a modifier by default, or as BS/Ret when tapped separately;
-  ;;  - works great with Qwerty-Lafayette and Ergo-L keyboard layouts, where
-  ;;    neither Shift nor AltGr are used outside of the 3×10 main alpha keys.
-  sft (tap-hold-press 200 175 bspc lsft)
-  alt (tap-hold-press 200 175 ret ralt)
-
-  ;; Home-row mods
-  ;; Must be hold long enough (200ms) to become a modifier.
-  ss (tap-hold 200 175 s lalt)
-  dd (tap-hold 200 175 d lmet)
-  ff (tap-hold 200 175 f lctl)
-  jj (tap-hold 200 175 j rctl)
-  kk (tap-hold 200 175 k lmet)
-  ll (tap-hold 200 175 l lalt)
-)
-
-
 (defcfg
-  process-unmapped-keys yes
-  windows-altgr cancel-lctl-press
+  macos-dev-names-include (
+    "Apple Internal Keyboard / Trackpad"
+  )
 )
 
-;; vim: set ft=lisp
+(defsrc
+
+  esc  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12
+
+  1    2    3    4    5  bspc   6    7    8    9    0
+  q    w    e    r    t         y    u    i    o    p
+  a    s    d    f    g         h    j    k    l    ;
+  `    z    x    c    v    b    n    m    ,    .    /
+
+  rmet ralt
+  fn
+)
+
+(deflayer base
+  _    _    _    _    _    _    _    _    _    _    _    _    _
+
+  _    _    _    _    _    _    _    _    _    _    _
+  _    _    _    _    _         _    _    _    _    _
+  _    _    _    _    _         _    _    _    _    _
+  z    x    c    v    b    <    n    m    ,    .    /
+
+  ralt rmet
+  @fnl
+)
+
+
+(deflayer fn
+  _    brdn brup _    _    _    _    _    _    _    mute vold volu
+
+  _    _    _    _    _    _    _    _    _    _    _
+  _    _    _    _    _         _    _    _    _    _
+  _    _    _    _    _         _    _    _    _    _
+  z    x    c    v    b    <    n    m    ,    .    /
+
+  ralt rmet
+  fn
+)
+
+(defalias
+  fnl (layer-while-held fn)
+)
