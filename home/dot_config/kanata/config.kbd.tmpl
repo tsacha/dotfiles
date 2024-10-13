@@ -1,0 +1,76 @@
+(defsrc
+
+  esc  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12
+
+  1    2    3    4    5  bspc   6    7    8    9    0
+  q    w    e    r    t         y    u    i    o    p
+  a    s    d    f    g         h    j    k    l    ;
+  {{ if eq .chezmoi.os "darwin" }}`{{ else }}<{{ end }}    z    x    c    v    b    n    m    ,    .    /
+
+  lmet lalt spc rmet ralt
+{{ if eq .chezmoi.os "darwin" }}
+  fn
+{{ end }}
+)
+
+(deflayer base
+  _    _    _    _    _    _    _    _    _    _    _    _    _
+
+  _    _    _    _    _    _    _    _    _    _    _
+  _    _    _    _    _         _    _    _    _    _
+  _    @ss  @dd  @ff  _         _    @jj  @kk  @ll  _
+  z    x    c    v    b    bspc n    m    ,    .    /
+
+{{ if eq .chezmoi.os "darwin" }}
+  lmet @sft spc ralt @sym
+  @fnl
+{{ else }}
+  lmet @sft spc rmet @sym
+{{ end }}
+)
+
+
+{{ if eq .chezmoi.os "darwin" }}
+(defcfg
+  macos-dev-names-include (
+    "Apple Internal Keyboard / Trackpad"
+  )
+)
+(deflayer fn
+  _    brdn brup _    _    _    _    _    _    _    mute vold volu
+
+  _    _    _    _    _    _    _    _    _    _    _
+  _    _    _    _    _         _    _    _    _    _
+  _    _    _    _    _         _    _    _    _    _
+  z    x    c    v    b    <    n    m    ,    .    /
+
+  lalt lmet spc ralt rmet
+  fn
+)
+{{ else if eq .chezmoi.os "linux" }}
+(defcfg
+  linux-dev-names-exclude (
+    "foostan Corne v4 Keyboard"
+    "foostan Corne v4 Consumer Control"
+    "foostan Corne v4 Mouse"
+    "foostan Corne v4"
+  )
+)
+{{ end }}
+
+(defalias
+{{ if eq .chezmoi.os "darwin" }}
+  fnl (layer-while-held fn)
+  sym (tap-hold-press 200 200 bspc rmet)
+{{ else }}
+  sym (tap-hold-press 200 200 bspc ralt)
+{{ end }}
+  ss (tap-hold 125 125 s lctl)
+  dd (tap-hold 125 125 d lmet)
+  ff (tap-hold 125 125 f lalt)
+  jj (tap-hold 125 125 j lalt)
+  kk (tap-hold 125 125 k lmet)
+  ll (tap-hold 125 125 l rctl)
+
+  sft (tap-hold-press 200 200 spc lsft)
+)
