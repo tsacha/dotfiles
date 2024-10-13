@@ -9,4 +9,5 @@
 .config/systemd
 {{ else -}}
 .config/kitty
+Library/
 {{ end -}}
