@@ -22,7 +22,7 @@
   z    x    c    v    b    bspc n    m    ,    .    /
 
 {{ if eq .chezmoi.os "darwin" }}
-  lmet @sft spc ralt @sym
+  @sft lalt spc @sym rmet
   @fnl
 {{ else }}
   lmet @sft spc rmet @sym
@@ -61,9 +61,6 @@
 (defalias
 {{ if eq .chezmoi.os "darwin" }}
   fnl (layer-while-held fn)
-  sym (tap-hold-press 200 200 bspc rmet)
-{{ else }}
-  sym (tap-hold-press 200 200 bspc ralt)
 {{ end }}
   ss (tap-hold 125 125 s lctl)
   dd (tap-hold 125 125 d lmet)
@@ -72,5 +69,6 @@
   kk (tap-hold 125 125 k lmet)
   ll (tap-hold 125 125 l rctl)
 
+  sym (tap-hold-press 200 200 bspc ralt)
   sft (tap-hold-press 200 200 spc lsft)
 )
