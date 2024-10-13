@@ -22,13 +22,26 @@
   z    x    c    v    b    bspc n    m    ,    .    /
 
 {{ if eq .chezmoi.os "darwin" }}
-  @sft lalt spc @sym rmet
+  @sft lalt @nav @sym rmet
   @fnl
 {{ else }}
-  lmet @sft spc rmet @sym
+  lmet @sft @nav rmet @sym
 {{ end }}
 )
 
+(deflayer nav
+  _    _    _    _    _    _    _    _    _    _    _    _    _
+
+  _    _    _    _    _    _    _    _    _    _    _
+  _    home up   end  pgup      _    _    _    _    _
+  _    lft  down rght pgdn      _    _    _    _    _
+  _    _    _    _    _    _    _    _    _    _    _
+
+  -    -    -   -    -
+{{ if eq .chezmoi.os "darwin" }}
+  -
+{{ end }}
+)
 
 {{ if eq .chezmoi.os "darwin" }}
 (defcfg
@@ -42,10 +55,10 @@
   _    _    _    _    _    _    _    _    _    _    _
   _    _    _    _    _         _    _    _    _    _
   _    _    _    _    _         _    _    _    _    _
-  z    x    c    v    b    <    n    m    ,    .    /
+  z    x    c    v    b    bspc n    m    ,    .    /
 
-  lalt lmet spc ralt rmet
-  fn
+  -    -    -   -    -
+  -
 )
 {{ else if eq .chezmoi.os "linux" }}
 (defcfg
@@ -71,4 +84,5 @@
 
   sym (tap-hold-press 200 200 bspc ralt)
   sft (tap-hold-press 200 200 spc lsft)
+  nav (tap-hold 200 200 spc (layer-while-held nav))
 )
