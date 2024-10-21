@@ -16,18 +16,21 @@ require("dapui").setup({
   layouts = {
     {
       elements = {
-        "scopes",
+        {
+          id = "scopes",
+          size = 0.35
+        },
+        {
+          id = "breakpoints",
+          size = 0.30,
+        },
+        {
+          id = "repl",
+          size = 0.35,
+        },
       },
-      size = 0.3,
-      position = "right"
-    },
-    {
-      elements = {
-        "repl",
-        "breakpoints"
-      },
-      size = 0.3,
-      position = "bottom",
+      position = "right",
+      size = 50,
     },
   },
   floating = {
@@ -54,17 +57,16 @@ end
 
 vim.fn.sign_define('DapBreakpoint', { text = '🐞' })
 
--- Start debugging session
-vim.keymap.set("n", "<leader>ds", function()
-  dap.continue()
-  ui.toggle({})
-  vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-w>=", false, true, true), "n", false) -- Spaces buffers evenly
-end)
-
 -- Set breakpoints, get variable values, step into/out of functions, etc.
-vim.keymap.set("n", "<leader>dl", require("dap.ui.widgets").hover)
+vim.keymap.set("n", "<leader>dh", require("dap.ui.widgets").hover)
+vim.keymap.set("n", "<leader>dp", require("dap.ui.widgets").preview)
 vim.keymap.set("n", "<leader>dc", dap.continue)
 vim.keymap.set("n", "<leader>db", dap.toggle_breakpoint)
+vim.keymap.set('n', '<leader>dl', function() dap.set_breakpoint(nil, nil, vim.fn.input('Log point message: ')) end)
+vim.keymap.set("n", "<leader>du", function()
+    ui.toggle({})
+    vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-w>=", false, true, true), "n", false) -- Spaces buffers evenly
+end)
 vim.keymap.set("n", "<leader>dn", dap.step_over)
 vim.keymap.set("n", "<leader>di", dap.step_into)
 vim.keymap.set("n", "<leader>do", dap.step_out)
@@ -76,7 +78,6 @@ end)
 -- Close debugger and clear breakpoints
 vim.keymap.set("n", "<leader>dq", function()
   dap.clear_breakpoints()
-  ui.toggle({})
   dap.terminate()
   vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-w>=", false, true, true), "n", false)
   require("notify")("Debugger session ended", "warn")
@@ -93,18 +94,16 @@ require('dap').set_log_level('INFO') -- Helps when configuring DAP, see logs wit
 dap.configurations = {
     go = {
       {
-        type = "go", -- Which adapter to use
+        type = "delve", -- Which adapter to use
         name = "Debug", -- Human readable name
-        request = "launch", -- Whether to "launch" or "attach" to program
-        program = "${file}", -- The buffer you are focused on when running nvim-dap
+        name = 'Container debugging (/wd:34567)',
+        mode = 'remote',
+        request = 'attach',
       },
     }
 }
-dap.adapters.go = {
-  type = "server",
-  port = "${port}",
-  executable = {
-    command = vim.fn.stdpath("data") .. '/mason/bin/dlv',
-    args = { "dap", "-l", "127.0.0.1:${port}" },
-  },
+dap.adapters.delve = {
+  type = 'server',
+  host = '127.0.0.1',
+  port = '34567'
 }
