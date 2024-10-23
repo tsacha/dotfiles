@@ -22,10 +22,10 @@
   z    x    c    v    b    bspc n    m    ,    .    /
 
 {{ if eq .chezmoi.os "darwin" }}
-  @sft lalt @nav @sym rmet
+  @sft @alt spc @sym rmet
   @fnl
 {{ else }}
-  lmet @sft @nav rmet @sym
+  @alt @sft spc rmet @sym
 {{ end }}
 )
 
@@ -82,7 +82,7 @@
   kk (tap-hold 125 125 k lmet)
   ll (tap-hold 125 125 l rctl)
 
+  alt (tap-hold 200 200 tab (layer-while-held nav))
   sym (tap-hold-press 200 200 bspc ralt)
-  sft (tap-hold-press 200 200 ret lsft)
-  nav (tap-hold 200 200 spc (layer-while-held nav))
+  sft (tap-hold-press 200 200 spc lsft)
 )
