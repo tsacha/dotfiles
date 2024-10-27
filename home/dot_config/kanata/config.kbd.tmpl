@@ -8,7 +8,7 @@
   {{ if eq .chezmoi.os "darwin" }}`{{ else }}<{{ end }}    z    x    c    v    b    n    m    ,    .    /
 
 {{ if eq .chezmoi.os "darwin" }}
-  lctl lmet lalt   spc   rmet ralt rctl
+  lctl lalt lmet   spc   rmet ralt rctl
   fn
 {{ else }}
   lctl lmet lalt   spc   ralt menu rctl
@@ -37,7 +37,11 @@
 
   home pgdn pgup end  _    _    _    _    _    _
   lft  down up   rght _    _    _    _    _    _
-  _    slck ssrq ins  _    _    _    del  _    _    _
+{{ if eq .chezmoi.os "darwin" }}
+  _    slck _    ins  _    _    _    del  _    _    _
+{{ else }}
+  _    slck prnt ins  _    _    _    del  _    _    _
+{{ end }}
 
   _    _    _      _      _   _    _
 {{ if eq .chezmoi.os "darwin" }}
@@ -75,7 +79,6 @@
   z    x    c    v    b    bspc n    m    ,    .    /
 
   _    _    _      _      _   _    _
-  _    _
   _
 )
 {{ else if eq .chezmoi.os "linux" }}
