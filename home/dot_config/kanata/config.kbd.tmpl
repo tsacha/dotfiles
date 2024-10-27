@@ -1,15 +1,17 @@
 (defsrc
-
   esc  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12
 
   1    2    3    4    5  bspc   6    7    8    9    0
+
   q    w    e    r    t         y    u    i    o    p
   a    s    d    f    g         h    j    k    l    ;
   {{ if eq .chezmoi.os "darwin" }}`{{ else }}<{{ end }}    z    x    c    v    b    n    m    ,    .    /
 
-  lmet lalt spc rmet ralt
 {{ if eq .chezmoi.os "darwin" }}
+  lctl lmet lalt   spc   rmet ralt rctl
   fn
+{{ else }}
+  lctl lmet lalt   spc   ralt menu rctl
 {{ end }}
 )
 
@@ -17,15 +19,14 @@
   _    _    _    _    _    _    _    _    _    _    _    _    _
 
   _    _    _    _    _    _    _    _    _    _    _
+
   _    _    _    _    _         _    _    _    _    _
-  _    @ss  @dd  @ff  _         _    @jj  @kk  @ll  _
+  @aa  @ss  @dd  @ff  _         _    @jj  @kk  @ll  @se
   z    x    c    v    b    bspc n    m    ,    .    /
 
+  lctl @thl2 @thl1 spc @thr1 @thr2 rctl
 {{ if eq .chezmoi.os "darwin" }}
-  @sft @alt spc @sym rmet
   @fnl
-{{ else }}
-  @alt @sft spc rmet @sym
 {{ end }}
 )
 
@@ -33,11 +34,27 @@
   _    _    _    _    _    _    _    _    _    _    _    _    _
 
   _    _    _    _    _    _    _    _    _    _    _
-  _    home up   end  pgup      _    _    _    _    _
-  _    lft  down rght pgdn      _    _    _    _    _
+
+  home pgdn pgup end  _    _    _    _    _    _
+  lft  down up   rght _    _    _    _    _    _
+  _    slck ssrq ins  _    _    _    del  _    _    _
+
+  _    _    _      _      _   _    _
+{{ if eq .chezmoi.os "darwin" }}
+  _
+{{ end }}
+)
+
+(deflayer num
+  _    _    _    _    _    _    _    _    _    _    _    _    _
+
   _    _    _    _    _    _    _    _    _    _    _
 
-  -    -    -   -    -
+  f1   f2   f3   f4   f5        f6   f7   f8   f9   f10
+  1    2    3    4    5         6    7    8    9    0
+  f11  _    _    _    _    _    _    _    _    _    f12
+
+  _    _    _      _      _   _    _
 {{ if eq .chezmoi.os "darwin" }}
   -
 {{ end }}
@@ -57,8 +74,9 @@
   _    _    _    _    _         _    _    _    _    _
   z    x    c    v    b    bspc n    m    ,    .    /
 
-  -    -    -   -    -
-  -
+  _    _    _      _      _   _    _
+  _    _
+  _
 )
 {{ else if eq .chezmoi.os "linux" }}
 (defcfg
@@ -75,14 +93,17 @@
 {{ if eq .chezmoi.os "darwin" }}
   fnl (layer-while-held fn)
 {{ end }}
-  ss (tap-hold 125 125 s lctl)
-  dd (tap-hold 125 125 d lmet)
-  ff (tap-hold 125 125 f lalt)
-  jj (tap-hold 125 125 j lalt)
-  kk (tap-hold 125 125 k lmet)
-  ll (tap-hold 125 125 l rctl)
+  aa (tap-hold 140 140 a (layer-while-held nav))
+  ss (tap-hold 140 140 s lctl)
+  dd (tap-hold 140 140 d lmet)
+  ff (tap-hold 140 140 f lalt)
+  jj (tap-hold 140 140 j lalt)
+  kk (tap-hold 140 140 k lmet)
+  ll (tap-hold 140 140 l rctl)
+  se (tap-hold 140 140 ; (layer-while-held nav))
 
-  alt (tap-hold 200 200 tab (layer-while-held nav))
-  sym (tap-hold-press 200 200 bspc ralt)
-  sft (tap-hold-press 200 200 spc lsft)
+  thl1 (tap-hold-press 200 200 spc ralt)
+  thl2 (tap-hold 200 200 esc (layer-while-held num))
+  thr1 (tap-hold-press 200 200 bspc lsft)
+  thr2 (tap-hold-press 200 200 ret (layer-while-held num))
 )
