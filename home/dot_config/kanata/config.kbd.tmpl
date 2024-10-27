@@ -43,7 +43,7 @@
   _    slck prnt ins  _    _    _    del  _    _    _
 {{ end }}
 
-  _    _    _      _      _   _    _
+  _    _    esc      _      _   _    _
 {{ if eq .chezmoi.os "darwin" }}
   _
 {{ end }}
@@ -106,7 +106,7 @@
   se (tap-hold 140 140 ; (layer-while-held nav))
 
   thl1 (tap-hold-press 200 200 spc ralt)
-  thl2 (tap-hold 200 200 esc (layer-while-held num))
+  thl2 (tap-hold 200 200 tab (layer-while-held num))
   thr1 (tap-hold-press 200 200 bspc lsft)
   thr2 (tap-hold-press 200 200 ret (layer-while-held num))
 )
