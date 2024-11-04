@@ -29,6 +29,13 @@ return {
             function()
                 require('telescope.builtin').marks({})
             end
+        },
+        {
+            "<leader>dd",
+            mode = { "n" },
+            function()
+                require('telescope.builtin').diagnostics({})
+            end
         }
     },
     config = function()
