@@ -86,17 +86,16 @@ return {
 
             require('mason-lspconfig').setup({
                 ensure_installed = {
+                    -- "buf_ls", https://github.com/williamboman/mason-lspconfig.nvim/pull/485
                     "lua_ls",
                     "gopls",
                     "terraformls",
                     "ansiblels",
-                    "bufls",
                     "ts_ls",
                     "svelte",
                     "yamlls",
                     "basedpyright",
                     "ruff",
-                    "ruff_lsp",
                     "rust_analyzer"
                 },
                 handlers = {
