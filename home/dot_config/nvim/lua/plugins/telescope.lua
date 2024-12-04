@@ -45,7 +45,7 @@ return {
                 layout_config = {
                     horizontal = { width = 0.9 },
                 },
-            },
+            }
         })
     end,
 }

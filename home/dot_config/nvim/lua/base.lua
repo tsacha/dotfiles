@@ -47,7 +47,6 @@ local function map(mode, lhs, rhs, opts)
     vim.api.nvim_set_keymap(mode, lhs, rhs, options)
 end
 
-map("n", "wk", ":close")
 map("n", "<leader>s", ":w<CR>")
 map("n", "<leader>q", ":q<CR>")
 map("n", "<leader>Q", ":qa!<CR>")
