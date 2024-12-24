@@ -5,7 +5,7 @@
 
   q    w    e    r    t         y    u    i    o    p
   a    s    d    f    g         h    j    k    l    ;
-  {{ if eq .chezmoi.os "darwin" }}`{{ else }}<{{ end }}    z    x    c    v    b    n    m    ,    .    /
+  <    z    x    c    v    b    n    m    ,    .    /    `
 
 {{ if eq .chezmoi.os "darwin" }}
   lsft lctl lalt lmet   spc   rmet ralt rctl
@@ -22,7 +22,7 @@
 
   _    _    _    _    _         _    _    _    _    _
   @aa  @ss  @dd  @ff  _         _    @jj  @kk  @ll  @se
-  z    x    c    v    b    bspc n    m    ,    .    /
+  z    x    c    v    b    bspc n    m    ,    .    /    z
 
   @thr1 lctl @thl2 @thl1 spc @thr1 @thr2 rctl
 {{ if eq .chezmoi.os "darwin" }}
@@ -38,9 +38,9 @@
   _  home up     end  pgup    _    _    _    _    _
   _  lft  down   rght pgdn    _    _    _    _    _
 {{ if eq .chezmoi.os "darwin" }}
-  _    slck _    ins  _    _    _    del  _    _    _
+  _    slck _    ins  _    _    _    del  _    _    _    _
 {{ else }}
-  _    slck prnt ins  _    _    _    del  _    _    _
+  _    slck prnt ins  _    _    _    del  _    _    _    _
 {{ end }}
 
   _    _    _    esc      _      esc _    _
@@ -56,7 +56,7 @@
 
   f1   f2   f3   f4   f5        f6   f7   f8   f9   f10
   1    2    3    4    5         6    7    8    9    0
-  f11  _    _    _    _    _    _    _    _    _    f12
+  f11  _    _    _    _    _    _    _    _    _    f12    _
 
   _    _    _    _      _      _   _    _
 {{ if eq .chezmoi.os "darwin" }}
@@ -68,6 +68,7 @@
 (defcfg
   macos-dev-names-include (
     "Apple Internal Keyboard / Trackpad"
+    "USB Keyboard"
   )
 )
 (deflayer fn
@@ -76,7 +77,7 @@
   _    _    _    _    _    _    _    _    _    _    _
   _    _    _    _    _         _    _    _    _    _
   _    _    _    _    _         _    _    _    _    _
-  z    x    c    v    b    bspc n    m    ,    .    /
+  z    x    c    v    b    bspc n    m    ,    .    /     z
 
   _    _    _    _      _      _   _    _
   _
