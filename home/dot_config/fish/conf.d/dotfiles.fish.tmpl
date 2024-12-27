@@ -32,11 +32,6 @@ alias hx="helix"
 abbr --add l ls
 abbr --add tm tmux
 abbr --add n nvim
-{{ if not (eq .chezmoi.os "darwin") -}}
-abbr --add h helix
-{{ else }}
-abbr --add h hx
-{{ end -}}
 abbr --add gs "git status"
 abbr --add lg lazygit
 abbr --add co consul
@@ -92,6 +87,7 @@ alias gg="cd (git rev-parse --show-toplevel)"
 
 set -x K9S_CONFIG_DIR $HOME/.config/k9s
 set -x GOPATH $HOME/go
+set -x EDITOR nvim
 
 fish_add_path /opt/homebrew/bin
 fish_add_path $GOPATH/bin
