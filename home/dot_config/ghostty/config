@@ -1,0 +1,6 @@
+window-decoration = false
+window-theme = system
+theme = light:rose-pine-dawn,dark:rose-pine
+font-family = Monaspace Argon
+gtk-single-instance = true
+font-size = 16
