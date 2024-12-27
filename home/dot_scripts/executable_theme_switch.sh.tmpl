@@ -1,33 +1,27 @@
 #!/bin/bash
 cm="chezmoi -S ~/Git/dotfiles -c ~/Git/dotfiles/chezmoi.toml --persistent-state ~/.config/chezmoi/chezmoistate.boltdb"
 {{ if not (eq .chezmoi.os "darwin") -}}
-if [ $(gsettings get org.gnome.desktop.interface gtk-theme) == "'Adwaita'" ]; then
+if [ $(gsettings get org.gnome.desktop.interface color-scheme) == "'prefer-light'" ]; then
+    gsettings set org.gnome.desktop.interface color-scheme \'prefer-dark\'
     gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita-dark'
-    gsettings set org.gnome.desktop.interface icon-theme 'Adwaita-dark'
-elif [ $(gsettings get org.gnome.desktop.interface gtk-theme) == "'Adwaita-dark'" ]; then
+elif [ $(gsettings get org.gnome.desktop.interface color-scheme) == "'prefer-dark'" ]; then
+    gsettings set org.gnome.desktop.interface color-scheme \'prefer-light\'
     gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita'
-    gsettings set org.gnome.desktop.interface icon-theme 'Adwaita'
 fi;
 $cm apply --force \
     ~/.config/i3/config \
     ~/.config/conky/conkyrc-i3bar \
-    ~/.wezterm.lua \
     ~/.config/rofi/config.rasi \
     ~/.config/k9s/config.yaml \
     ~/.vimrc.color \
     ~/.config/tmux/tmux.conf \
-    ~/.config/dunst/dunstrc \
-    ~/.config/helix/config.toml
+    ~/.config/dunst/dunstrc
 systemctl --user restart dunst
-pkill -USR1 helix
 i3-msg restart
 {{ else }}
 osascript -e 'tell app "System Events" to tell appearance preferences to set dark mode to not dark mode'
 $cm apply --force \
-    ~/.wezterm.lua \
     ~/.config/k9s/config.yaml \
     ~/.vimrc.color \
-    ~/.config/tmux/tmux.conf \
-    ~/.config/helix/config.toml
-pkill -USR1 helix
+    ~/.config/tmux/tmux.conf
 {{ end }}

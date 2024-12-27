@@ -7,9 +7,9 @@ set background=dark
 set background=light
 {{ end -}}
 {{ else -}}
-{{ if eq (output "gsettings" "get" "org.gnome.desktop.interface" "gtk-theme" | trim) "'Adwaita'" -}}
+{{ if eq (output "gsettings" "get" "org.gnome.desktop.interface" "color-scheme" | trim) "'prefer-light'" -}}
 set background=light
-{{ else if eq (output "gsettings" "get" "org.gnome.desktop.interface" "gtk-theme" | trim) "'Adwaita-dark'" -}}
+{{ else if eq (output "gsettings" "get" "org.gnome.desktop.interface" "color-scheme" | trim) "'prefer-dark'" -}}
 set background=dark
 {{ else -}}
 set background=light

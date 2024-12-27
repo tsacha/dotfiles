@@ -9,7 +9,7 @@
    ;;; Linux
    ((string-equal system-type "gnu/linux")
     (require 'gsettings)
-    (if (string-equal (gsettings-get "org.gnome.desktop.interface" "gtk-theme") "Adwaita")
+    (if (string-equal (gsettings-get "org.gnome.desktop.interface" "color-scheme") "prefer-light")
         (progn
           (load-theme 'doom-rose-pine-dawn t))
       (progn

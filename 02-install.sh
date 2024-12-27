@@ -8,7 +8,7 @@ arch-chroot /mnt pacman -S --noconfirm \
     alsa-utils \
     ansible \
     arandr \
-    arc-gtk-theme \
+    arc-color-scheme \
     arc-icon-theme \
     arch-install-scripts \
     aws-cli-v2 \

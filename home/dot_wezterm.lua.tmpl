@@ -6,9 +6,9 @@
 {{ $color = "dark" }}
 {{ end -}}
 {{ else -}}
-{{ if eq (output "gsettings" "get" "org.gnome.desktop.interface" "gtk-theme" | trim) "'Adwaita'" -}}
+{{ if eq (output "gsettings" "get" "org.gnome.desktop.interface" "color-scheme" | trim) "'prefer-light'" -}}
 {{ $color = "light" }}
-{{ else if eq (output "gsettings" "get" "org.gnome.desktop.interface" "gtk-theme" | trim) "'Adwaita-dark'" -}}
+{{ else if eq (output "gsettings" "get" "org.gnome.desktop.interface" "color-scheme" | trim) "'prefer-dark'" -}}
 {{ $color = "dark" }}
 {{ end -}}
 {{ end -}}

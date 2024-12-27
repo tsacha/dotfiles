@@ -12,11 +12,6 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
     end,
 })
 
--- Sync clipboard between OS and Neovim.
-vim.schedule(function()
-    vim.opt.clipboard = "unnamedplus"
-end)
-
 -- Relative numbers
 vim.opt.number = true
 vim.opt.relativenumber = true
