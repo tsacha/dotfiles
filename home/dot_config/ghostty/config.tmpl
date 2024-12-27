@@ -1,0 +1,14 @@
+{{ if eq .chezmoi.os "darwin" -}}
+window-decoration = true
+macos-titlebar-style = hidden
+macos-option-as-alt = left
+{{ else -}}
+window-decoration = false
+gtk-single-instance = true
+{{ end -}}
+
+quit-after-last-window-closed = true
+window-theme = system
+theme = light:rose-pine-dawn,dark:rose-pine
+font-family = Monaspace Argon
+font-size = 16
