@@ -15,6 +15,7 @@ $cm apply --force \
     ~/.config/k9s/config.yaml \
     ~/.vimrc.color \
     ~/.config/tmux/tmux.conf \
+    ~/.config/zellij/config.kdl \
     ~/.config/dunst/dunstrc
 systemctl --user restart dunst
 i3-msg restart
@@ -23,5 +24,6 @@ osascript -e 'tell app "System Events" to tell appearance preferences to set dar
 $cm apply --force \
     ~/.config/k9s/config.yaml \
     ~/.vimrc.color \
+    ~/.config/zellij/config.kdl \
     ~/.config/tmux/tmux.conf
 {{ end }}

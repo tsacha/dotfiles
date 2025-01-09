@@ -1,0 +1,31 @@
+{{ $color := "light" }}
+{{ if eq .chezmoi.os "darwin" -}}
+{{ if eq (output "osascript" "-e" "tell app \"System Events\" to tell appearance preferences to get dark mode" | trim) "false" -}}
+{{ $color = "light" }}
+{{ else if eq (output "osascript" "-e" "tell app \"System Events\" to tell appearance preferences to get dark mode" | trim) "true" -}}
+{{ $color = "dark" }}
+{{ end -}}
+{{ else -}}
+{{ if eq (output "gsettings" "get" "org.gnome.desktop.interface" "color-scheme" | trim) "'prefer-light'" -}}
+{{ $color = "light" }}
+{{ else if eq (output "gsettings" "get" "org.gnome.desktop.interface" "color-scheme" | trim) "'prefer-dark'" -}}
+{{ $color = "dark" }}
+{{ end -}}
+{{ end -}}
+
+{{ if eq $color "light" }}
+theme "rose-pine-dawn"
+{{ else }}
+theme "rose-pine"
+{{ end }}
+simplified_ui true
+default_layout "compact"
+
+pane_frames false
+ui {
+    pane_frames {
+        hide_session_name true
+    }
+}
+
+default_mode "locked"

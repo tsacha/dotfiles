@@ -1,6 +1,6 @@
 {{ if eq .chezmoi.os "darwin" -}}
 window-decoration = true
-macos-titlebar-style = hidden
+macos-titlebar-style = tabs
 macos-option-as-alt = left
 {{ else -}}
 window-decoration = false
@@ -12,3 +12,9 @@ window-theme = system
 theme = light:rose-pine-dawn,dark:rose-pine
 font-family = Monaspace Argon
 font-size = 16
+fullscreen = true
+focus-follows-mouse = true
+
+keybind = ctrl+shift+h=new_split:right
+keybind = ctrl+shift+v=new_split:down
+keybind = ctrl+shift+t=new_tab
