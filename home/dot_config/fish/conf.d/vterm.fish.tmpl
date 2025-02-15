@@ -13,7 +13,11 @@ function vterm_printf
 end
 
 function vterm_prompt_end
+{{ if eq .chezmoi.os "darwin" -}}
     vterm_printf '51;A'(whoami)'@'(hostname)':'(pwd)
+{{ else }}
+    vterm_printf '51;A'(whoami)'@'(hostnamectl hostname)':'(pwd)
+{{ end -}}
 end
 functions --copy fish_prompt vterm_old_fish_prompt
 function fish_prompt --description 'Write out the prompt; do not replace this. Instead, put this at end of your file.'

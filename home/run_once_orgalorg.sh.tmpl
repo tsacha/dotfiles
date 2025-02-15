@@ -1,7 +1,0 @@
-#!/usr/bin/env bash
-{{ if not (eq .chezmoi.os "darwin") -}}
-curl -L -O https://github.com/reconquest/orgalorg/releases/download/1.2.0/orgalorg_1.2.0_linux_amd64.tar.gz
-tar xvf orgalorg_*.tar.gz orgalorg
-sudo mv orgalorg /usr/local/bin/
-rm orgalorg_*.tar.gz
-{{ end }}

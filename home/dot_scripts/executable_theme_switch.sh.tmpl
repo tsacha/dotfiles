@@ -7,17 +7,18 @@ if [ $(gsettings get org.gnome.desktop.interface color-scheme) == "'prefer-light
 elif [ $(gsettings get org.gnome.desktop.interface color-scheme) == "'prefer-dark'" ]; then
     gsettings set org.gnome.desktop.interface color-scheme \'prefer-light\'
     gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita'
+elif [ $(gsettings get org.gnome.desktop.interface color-scheme) == "'default'" ]; then
+    gsettings set org.gnome.desktop.interface color-scheme \'prefer-light\'
+    gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita'
 fi;
 $cm apply --force \
-    ~/.config/i3/config \
+    ~/.config/sway/config \
     ~/.config/conky/conkyrc-i3bar \
     ~/.config/rofi/config.rasi \
     ~/.config/k9s/config.yaml \
     ~/.config/tmux/tmux.conf \
-    ~/.config/zellij/config.kdl \
-    ~/.config/dunst/dunstrc
-systemctl --user restart dunst
-i3-msg restart
+    ~/.config/zellij/config.kdl
+swaymsg reload
 {{ else }}
 osascript -e 'tell app "System Events" to tell appearance preferences to set dark mode to not dark mode'
 $cm apply --force \

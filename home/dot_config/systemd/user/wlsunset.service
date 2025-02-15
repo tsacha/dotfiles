@@ -1,9 +1,9 @@
 [Unit]
-Description=Redshift
+Description=wlsunset
 Requires=dbus.socket
 
 [Service]
-ExecStart=/usr/bin/redshift -r -v -t 6000:2800 -l 47.23:-1.63 -b 1:0.8
+ExecStart=/usr/bin/wlsunset -t 6000:2800 -l 47.23:-1.63
 Restart=always
 RestartSec=5s
 

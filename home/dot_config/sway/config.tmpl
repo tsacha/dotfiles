@@ -1,0 +1,195 @@
+{{ $color := "light" }}
+{{ if eq .chezmoi.os "darwin" -}}
+{{ if eq (output "osascript" "-e" "tell app \"System Events\" to tell appearance preferences to get dark mode" | trim) "false" -}}
+{{ $color = "light" }}
+{{ else if eq (output "osascript" "-e" "tell app \"System Events\" to tell appearance preferences to get dark mode" | trim) "true" -}}
+{{ $color = "dark" }}
+{{ end -}}
+{{ else -}}
+{{ if eq (output "gsettings" "get" "org.gnome.desktop.interface" "color-scheme" | trim) "'prefer-light'" -}}
+{{ $color = "light" }}
+{{ else if eq (output "gsettings" "get" "org.gnome.desktop.interface" "color-scheme" | trim) "'prefer-dark'" -}}
+{{ $color = "dark" }}
+{{ end -}}
+{{ end -}}
+
+# Logo key. Use Mod1 for Alt.
+set $mod Mod4
+set $left h
+set $down j
+set $up k
+set $right l
+set $term ghostty
+set $menu fuzzel
+
+output * bg /usr/share/backgrounds/archlinux/awesome.png fill
+
+bindsym $mod+Return exec $term
+bindsym $mod+Shift+q kill
+bindsym $mod+d exec $menu
+bindsym $mod+Shift+c reload
+bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
+
+floating_modifier $mod normal
+
+# Move your focus around
+bindsym $mod+$left focus left
+bindsym $mod+$down focus down
+bindsym $mod+$up focus up
+bindsym $mod+$right focus right
+# Or use $mod+[up|down|left|right]
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# Move the focused window with the same, but add Shift
+bindsym $mod+Shift+$left move left
+bindsym $mod+Shift+$down move down
+bindsym $mod+Shift+$up move up
+bindsym $mod+Shift+$right move right
+# Ditto, with arrow keys
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# Switch to workspace
+bindsym $mod+1 workspace number 1
+bindsym $mod+2 workspace number 2
+bindsym $mod+3 workspace number 3
+bindsym $mod+4 workspace number 4
+bindsym $mod+5 workspace number 5
+bindsym $mod+6 workspace number 6
+bindsym $mod+7 workspace number 7
+bindsym $mod+8 workspace number 8
+bindsym $mod+9 workspace number 9
+bindsym $mod+0 workspace number 10
+# Move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace number 1
+bindsym $mod+Shift+2 move container to workspace number 2
+bindsym $mod+Shift+3 move container to workspace number 3
+bindsym $mod+Shift+4 move container to workspace number 4
+bindsym $mod+Shift+5 move container to workspace number 5
+bindsym $mod+Shift+6 move container to workspace number 6
+bindsym $mod+Shift+7 move container to workspace number 7
+bindsym $mod+Shift+8 move container to workspace number 8
+bindsym $mod+Shift+9 move container to workspace number 9
+bindsym $mod+Shift+0 move container to workspace number 10
+
+bindsym $mod+b splith
+bindsym $mod+v splitv
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+bindsym $mod+f fullscreen
+bindsym $mod+Shift+space floating toggle
+bindsym $mod+space focus mode_toggle
+bindsym $mod+a focus parent
+
+bindsym $mod+Shift+minus move scratchpad
+bindsym $mod+minus scratchpad show
+
+mode "resize" {
+    bindsym $left resize shrink width 10px
+    bindsym $down resize grow height 10px
+    bindsym $up resize shrink height 10px
+    bindsym $right resize grow width 10px
+
+    bindsym Left resize shrink width 10px
+    bindsym Down resize grow height 10px
+    bindsym Up resize shrink height 10px
+    bindsym Right resize grow width 10px
+
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+bindsym $mod+r mode "resize"
+
+bindsym --locked XF86AudioMute exec pactl set-sink-mute \@DEFAULT_SINK@ toggle
+bindsym --locked XF86AudioLowerVolume exec pactl set-sink-volume \@DEFAULT_SINK@ -5%
+bindsym --locked XF86AudioRaiseVolume exec pactl set-sink-volume \@DEFAULT_SINK@ +5%
+bindsym --locked XF86AudioMicMute exec pactl set-source-mute \@DEFAULT_SOURCE@ toggle
+bindsym --locked XF86MonBrightnessDown exec brightnessctl set 5%-
+bindsym --locked XF86MonBrightnessUp exec brightnessctl set 5%+
+bindsym Print exec grim
+
+bindsym $mod+F7 exec $HOME/.scripts/theme_switch.sh
+
+font pango:Monaspace Neon 12
+title_align center
+gaps outer 2
+gaps inner 4
+
+{{ if eq $color "light" }}
+set $base           #faf4ed
+set $surface        #fffaf3
+set $overlay        #f2e9e1
+set $muted          #9893a5
+set $subtle         #797593
+set $text           #575279
+set $love           #b4637a
+set $gold           #ea9d34
+set $rose           #d7827e
+set $pine           #286983
+set $foam           #56949f
+set $iris           #907aa9
+set $highlightlow   #f4ede8
+set $highlightmed   #dfdad9
+set $highlighthigh  #cecacd
+{{ else }}
+set $base           #191724
+set $surface        #1f1d2e
+set $overlay        #26233a
+set $muted          #6e6a86
+set $subtle         #908caa
+set $text           #e0def4
+set $love           #eb6f92
+set $gold           #f6c177
+set $rose           #ebbcba
+set $pine           #31748f
+set $foam           #9ccfd8
+set $iris           #c4a7e7
+set $highlightlow   #21202e
+set $highlightmed   #403d52
+set $highlighthigh  #524f67
+{{ end }}
+
+
+bar {
+  mode hide
+  status_command while date +'%Y-%m-%d %X'; do sleep 1; done
+  workspace_buttons yes
+  strip_workspace_numbers yes
+  separator_symbol " "
+
+  colors {
+    # bar background color
+    background $base
+    # text color used for blocks that do not have a color specified.
+    statusline $text
+    # workspaces section
+    #                    border  backgr. text
+    focused_workspace    $iris $iris $base
+    inactive_workspace   $base $base $iris
+    active_workspace     $base $base $text
+    urgent_workspace     $love $love $base
+  }
+}
+
+client.focused          $iris $iris $base $rose $rose
+client.focused_inactive $muted $iris $muted $subtle $surface
+client.unfocused        $base $highlightlow $subtle $rose $muted
+client.urgent           $love $love $base $love $love
+
+input "type:keyboard" {
+  xkb_layout ergol_anglemod
+}
+output * adaptive_sync on
+output DP-6 mode 3440x1440@143.923004Hz scale 1
+
+exec systemctl --user start gpg-agent-ssh.socket
+exec systemctl --user import-environment SSH_AUTH_SOCK
+
+include /etc/sway/config.d/*
