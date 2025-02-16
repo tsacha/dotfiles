@@ -20,9 +20,7 @@ set $down j
 set $up k
 set $right l
 set $term ghostty
-set $menu fuzzel
-
-output * bg /usr/share/backgrounds/archlinux/awesome.png fill
+set $menu wmenu-run
 
 bindsym $mod+Return exec $term
 bindsym $mod+Shift+q kill
@@ -87,8 +85,7 @@ bindsym $mod+Shift+space floating toggle
 bindsym $mod+space focus mode_toggle
 bindsym $mod+a focus parent
 
-bindsym $mod+Shift+minus move scratchpad
-bindsym $mod+minus scratchpad show
+bindsym $mod+x exec swaymsg move workspace to "$(swaymsg -t get_outputs | jq '[.[] | select(.active == true)] | .[(map(.focused) | index(true) + 1) % length].name')"
 
 mode "resize" {
     bindsym $left resize shrink width 10px
@@ -156,9 +153,10 @@ set $highlightmed   #403d52
 set $highlighthigh  #524f67
 {{ end }}
 
-
+default_border none
 bar {
   mode hide
+  position bottom
   status_command while date +'%Y-%m-%d %X'; do sleep 1; done
   workspace_buttons yes
   strip_workspace_numbers yes
@@ -178,7 +176,7 @@ bar {
   }
 }
 
-client.focused          $iris $iris $base $rose $rose
+client.focused          $iris $iris $base $rose $iris
 client.focused_inactive $muted $iris $muted $subtle $surface
 client.unfocused        $base $highlightlow $subtle $rose $muted
 client.urgent           $love $love $base $love $love
@@ -186,8 +184,23 @@ client.urgent           $love $love $base $love $love
 input "type:keyboard" {
   xkb_layout ergol_anglemod
 }
+output DP-5 mode 1920x1080@143.981003Hz scale 1 pos 0 0
+output DP-4 mode 1920x1080@143.854996Hz scale 1 pos 1920 0
+output DP-6 mode 3440x1440@143.923004Hz scale 1 pos 0 1080
+
 output * adaptive_sync on
-output DP-6 mode 3440x1440@143.923004Hz scale 1
+output * bg /usr/share/backgrounds/archlinux/awesome.png fill
+
+workspace 1 output DP-6
+workspace 2 output DP-6
+workspace 3 output DP-6
+workspace 4 output DP-6
+workspace 5 output DP-6
+workspace 6 output DP-6
+workspace 7 output DP-6
+workspace 8 output DP-6
+workspace 9 output DP-6
+workspace 10 output DP-6
 
 exec systemctl --user start gpg-agent-ssh.socket
 exec systemctl --user import-environment SSH_AUTH_SOCK
