@@ -55,7 +55,8 @@ return {
                 local extensions = require('telescope').extensions
                 extensions.file_browser.file_browser({
                     no_ignore = true,
-                    grouped = true
+                    grouped = true,
+                    follow_symlinks = true
                 })
             end
         }
