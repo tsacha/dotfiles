@@ -96,7 +96,8 @@ return {
                     "yamlls",
                     "basedpyright",
                     "ruff",
-                    "rust_analyzer"
+                    "rust_analyzer",
+                    "helm_ls"
                 },
                 handlers = {
                     -- this first function is the "default handler"
@@ -106,6 +107,26 @@ return {
                     end,
                 }
             })
+
+            require('lspconfig').yamlls.setup {
+                settings = {
+                    yaml = {
+                        schemas = {
+                            kubernetes = "templates/**",
+                            ["http://json.schemastore.org/github-workflow"] = ".github/workflows/*",
+                            ["http://json.schemastore.org/github-action"] = ".github/action.{yml,yaml}",
+                            ["https://raw.githubusercontent.com/ansible/ansible-lint/main/src/ansiblelint/schemas/ansible.json#/$defs/tasks"] = "roles/tasks/*.{yml,yaml}",
+                            ["http://json.schemastore.org/kustomization"] = "kustomization.{yml,yaml}",
+                            ["https://raw.githubusercontent.com/ansible/ansible-lint/main/src/ansiblelint/schemas/ansible.json#/$defs/playbook"] = "*play*.{yml,yaml}",
+                            ["https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json"] = "*docker-compose*.{yml,yaml}",
+                        },
+                        validate = false,
+                        format = { enable = true },
+                        completion = true,
+                        hover = true,
+                    }
+                }
+            }
         end
     }
 }

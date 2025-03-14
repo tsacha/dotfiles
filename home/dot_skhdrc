@@ -1,11 +1,3 @@
-cmd - p : $HOME/.scripts/pass.fish
-cmd - i : $HOME/.scripts/pass.fish -s
-cmd - g : $HOME/.scripts/github.sh
-cmd - j : $HOME/.scripts/jira.sh
-cmd - f2 : $HOME/.scripts/nomad_shell.fish
-cmd - f3 : $HOME/.scripts/ec2.fish --single
-cmd - f4 : $HOME/.scripts/ec2.fish --multiple
-cmd - f5 : $HOME/.scripts/ec2.fish --parallel
 cmd - return : open -a ghostty
 shift + cmd - m : open -na emacs
 cmd - f1 : pmset displaysleepnow

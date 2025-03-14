@@ -1,0 +1,28 @@
+views:
+  v1/nodes:
+    sortColumn: AGE:asc # Sorts nodes by age in ascending order
+    columns:
+      - INTERNAL-IP|S
+      - NAME|W
+      - NODECLASS:metadata.labels.karpenter\.k8s\.aws/ec2nodeclass
+      - AZ:metadata.labels.topology\.kubernetes\.io/zone|W
+      - TYPE:metadata.labels.node\.kubernetes\.io/instance-type
+      - ARCH|W
+      - VERSION|W
+      - PODS|S
+      - "%CPU|S"
+      - CPU|W
+      - CPU/A|W
+      - "%MEM|S"
+      - MEM|W
+      - MEM/A|W
+      - TAINTS|R
+      - AGE|R
+      - STATUS|R
+      - EXTERNAL-IP|H
+      - LABELS|H
+      - OS-IMAGE|H
+      - KERNEL|H
+      - ROLE|H
+      - VALID|H
+

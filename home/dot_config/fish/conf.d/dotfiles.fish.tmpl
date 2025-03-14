@@ -86,6 +86,7 @@ end
 alias gg="cd (git rev-parse --show-toplevel)"
 
 set -x K9S_CONFIG_DIR $HOME/.config/k9s
+set -gx PATH $PATH $HOME/.krew/bin
 set -x GOPATH $HOME/go
 set -x EDITOR nvim
 
