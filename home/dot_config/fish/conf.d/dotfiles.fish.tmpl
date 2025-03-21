@@ -25,12 +25,11 @@ function cat
 end
 
 alias ls="eza --long --header --git"
-{{ if not (eq .chezmoi.os "darwin") -}}
-alias hx="helix"
-{{ end -}}
+alias k="kubectl"
+alias ku="kubie"
+kubectl completion fish | source
 
 abbr --add l ls
-abbr --add tm tmux
 abbr --add n nvim
 abbr --add gs "git status"
 abbr --add lg lazygit
@@ -38,7 +37,6 @@ abbr --add co consul
 abbr --add no nomad
 abbr --add va vault
 abbr --add tf terraform
-abbr --add k kubectl
 abbr --add es ~/.scripts/ec2.fish --single
 abbr --add em ~/.scripts/ec2.fish --multiple
 abbr --add ep ~/.scripts/ec2.fish --parallel
