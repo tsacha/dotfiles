@@ -68,3 +68,11 @@ otf-monaspace
 
 npm
 
+qrencode
+gnupg
+paperkey
+age
+
+kubectl
+minikube
+docker
