@@ -21,25 +21,13 @@ vim.api.nvim_create_autocmd("LspAttach", {
     end,
 })
 
--- This is copied straight from blink
--- https://cmp.saghen.dev/installation#merging-lsp-capabilities
-local capabilities = {
-    textDocument = {
-        foldingRange = {
-            dynamicRegistration = false,
-            lineFoldingOnly = true,
-        },
-    },
-}
-
-capabilities = require("blink.cmp").get_lsp_capabilities(capabilities)
-
 -- Setup language servers.
-
 vim.lsp.config("*", {
-    capabilities = capabilities,
+    capabilities = require("blink.cmp").get_lsp_capabilities({
+        textDocument = { completion = { completionItem = { snippetSupport = false } } },
+    }),
     root_markers = { ".git" },
 })
 
 -- Enable each language server by filename under the lsp/ folder
-vim.lsp.enable({ "gopls", "basedpyright", "yamlls", "helm_ls" })
+--vim.lsp.enable({ "gopls", "basedpyright", "yamlls", "terraform_ls", "helm_ls" })
