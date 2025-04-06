@@ -2,7 +2,7 @@ return {
   cmd = { 'yaml-language-server', '--stdio' },
   filetypes = { 'yml', 'yaml' },
   settings = {
-    validate = false,
+    validate = true,
     format = { enable = true },
     completion = true,
     hover = true,

@@ -23,11 +23,20 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
 -- Setup language servers.
 vim.lsp.config("*", {
-    capabilities = require("blink.cmp").get_lsp_capabilities({
-        textDocument = { completion = { completionItem = { snippetSupport = false } } },
-    }),
+    capabilities = require("blink.cmp").get_lsp_capabilities({}),
     root_markers = { ".git" },
 })
+vim.diagnostic.config({
+    virtual_lines = { current_line = true }
+})
+
 
 -- Enable each language server by filename under the lsp/ folder
---vim.lsp.enable({ "gopls", "basedpyright", "yamlls", "terraform_ls", "helm_ls" })
+vim.lsp.enable({
+    "lua_ls",
+    "yamlls",
+    "helm_ls",
+    "gopls",
+    "basedpyright",
+    "terraform_ls"
+})

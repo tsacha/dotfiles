@@ -4,5 +4,8 @@ return {
   lazy = false,
   opts = {
     keymap = { preset = 'super-tab' },
+    sources = {
+      default = { 'lsp', 'path', 'snippets' },
+    },
   },
 }
