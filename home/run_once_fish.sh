@@ -11,7 +11,7 @@ tide configure \
     --lean_prompt_height='One line' \
     --prompt_spacing=Compact \
     --icons='Few icons' \
-    --transient=No
+    --transient=Yes
 
 if contains aws $tide_right_prompt_items
     set -Ue tide_right_prompt_items[(contains -i aws $tide_right_prompt_items)]
