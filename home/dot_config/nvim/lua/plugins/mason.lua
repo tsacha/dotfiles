@@ -10,16 +10,16 @@ return {
             require("mason").setup()
             require('mason-lspconfig').setup({
                 ensure_installed = {
-                    "lua_ls",
-                    "gopls",
-                    "terraformls",
                     "ansiblels",
-                    "ts_ls",
-                    "yamlls",
                     "basedpyright",
+                    "gopls",
+                    "helm_ls",
+                    "lua_ls",
                     "ruff",
                     "rust_analyzer",
-                    "helm_ls"
+                    "terraformls",
+                    "ts_ls",
+                    "yamlls",
                 },
             })
         end

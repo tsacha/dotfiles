@@ -33,10 +33,10 @@ vim.diagnostic.config({
 
 -- Enable each language server by filename under the lsp/ folder
 vim.lsp.enable({
-    "lua_ls",
-    "yamlls",
-    "helm_ls",
-    "gopls",
     "basedpyright",
-    "terraform_ls"
+    "gopls",
+    "helm_ls",
+    "lua_ls",
+    "terraform_ls",
+    "yamlls",
 })
