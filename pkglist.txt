@@ -76,3 +76,5 @@ age
 kubectl
 minikube
 docker
+
+entr

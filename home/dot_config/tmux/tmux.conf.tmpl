@@ -1,3 +1,19 @@
+{{ $color := "light" }}
+{{ if eq .chezmoi.os "darwin" -}}
+{{ if eq (output "osascript" "-e" "tell app \"System Events\" to tell appearance preferences to get dark mode" | trim) "false" -}}
+{{ $color = "light" }}
+{{ else if eq (output "osascript" "-e" "tell app \"System Events\" to tell appearance preferences to get dark mode" | trim) "true" -}}
+{{ $color = "dark" }}
+{{ end -}}
+{{ else -}}
+{{ if eq (output "gsettings" "get" "org.gnome.desktop.interface" "color-scheme" | trim) "'prefer-light'" -}}
+{{ $color = "light" }}
+{{ else if eq (output "gsettings" "get" "org.gnome.desktop.interface" "color-scheme" | trim) "'prefer-dark'" -}}
+{{ $color = "dark" }}
+{{ end -}}
+{{ end -}}
+
+
 set -s escape-time 0
 set-option -g default-terminal "xterm-256color"
 set-option -ga terminal-overrides ",xterm-256color:Tc"
@@ -12,3 +28,19 @@ set-option -g automatic-rename-format '#{b:pane_current_path}'
 bind M-c attach-session -c "#{pane_current_path}"
 bind h split-window -h
 bind v split-window -v
+
+set -g visual-activity off
+set -g visual-bell off
+set -g visual-silence off
+setw -g monitor-activity off
+set -g bell-action none
+
+set-option -g status-style bg=default
+set -g status-position top
+set -g status-left ' '
+set -g status-right ''
+set -g window-status-separator '   '
+set -g window-status-current-style bold
+set -g window-status-current-format "#I• #W"
+set -g window-status-format "#I· #W"
+

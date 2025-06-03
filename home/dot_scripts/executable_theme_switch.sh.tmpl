@@ -14,11 +14,13 @@ fi;
 $cm apply --force \
     ~/.config/sway/config \
     ~/.config/k9s/config.yaml \
+    ~/.config/tmux/tmux.conf \
     ~/.config/zellij/config.kdl
 swaymsg reload
 {{ else }}
 osascript -e 'tell app "System Events" to tell appearance preferences to set dark mode to not dark mode'
 $cm apply --force \
     ~/.config/k9s/config.yaml \
+    ~/.config/tmux/tmux.conf \
     ~/.config/zellij/config.kdl
 {{ end }}
