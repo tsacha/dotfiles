@@ -17,7 +17,7 @@ return {
                     "lua_ls",
                     "ruff",
                     "rust_analyzer",
-                    "terraformls",
+                    "tofu_ls",
                     "ts_ls",
                     "yamlls",
                 },

@@ -37,6 +37,6 @@ vim.lsp.enable({
     "gopls",
     "helm_ls",
     "lua_ls",
-    "terraform_ls",
+    "tofu_ls",
     "yamlls",
 })

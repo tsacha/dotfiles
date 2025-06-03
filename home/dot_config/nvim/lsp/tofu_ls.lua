@@ -1,5 +1,5 @@
 return {
-  cmd = { 'terraform-ls', 'serve' },
+  cmd = { 'tofu-ls', 'serve' },
   filetypes = { 'terraform', 'tf' },
   settings = {
     validate = false,
