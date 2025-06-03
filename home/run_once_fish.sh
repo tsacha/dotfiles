@@ -2,6 +2,7 @@
 fisher install jethrokuan/z
 fisher install jhillyerd/plugin-git
 fisher install IlanCosman/tide@v6
+fisher install meaningful-ooo/sponge
 
 tide configure \
     --auto \

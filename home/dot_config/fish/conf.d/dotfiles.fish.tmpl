@@ -1,82 +1,30 @@
 set -U fish_greeting ""
 
-alias pass="gopass"
-
-function cat
-    {{ if eq .chezmoi.os "darwin" -}}
-    set THEME (string trim (osascript -e 'tell app "System Events" to tell appearance preferences to get dark mode'))
-    if [ "$THEME" = false ]
-        bat -pp --theme=gruvbox-light $argv
-    else if [ "$THEME" = true ]
-        bat -pp --theme=gruvbox-dark $argv
-    else
-        bat -pp $argv
-    end
-    {{ else -}}
-    set THEME (string trim (gsettings get org.gnome.desktop.interface color-scheme))
-    if [ "$THEME" = "'prefer-light'" ]
-        bat -pp --theme=gruvbox-light $argv
-    else if [ "$THEME" = "'prefer-dark'" ]
-        bat -pp --theme=gruvbox-dark $argv
-    else
-        bat -pp $argv
-    end
-    {{ end -}}
-end
-
-mise activate fish | source
-
-# adds alias for "kubectl" to "kubecolor" with completions
-function kubectl --wraps kubectl
-  command kubecolor $argv
-end
-
-# adds alias for "k" to "kubecolor" with completions
-function k --wraps kubectl
-  command kubecolor $argv
-end
-
-# reuse "kubectl" completions on "kubecolor"
-function kubecolor --wraps kubectl
-  command kubecolor $argv
-end
-
+alias cat="bat -pp --theme-dark=rose-pine --theme-light=rose-pine-dawn"
 alias ls="eza --long --header --git"
-alias k="kubectl"
-alias ku="kubie"
-kubectl completion fish | source
+alias ag="ag -f"
+alias cm="chezmoi -S ~/Git/dotfiles -c ~/Git/dotfiles/chezmoi.toml --persistent-state ~/.config/chezmoi/chezmoistate.boltdb"
+alias cms="chezmoi -S ~/Git/Security -c ~/Git/Security/chezmoi.toml --persistent-state ~/.config/chezmoi/chezmoistate-security.boltdb"
+alias tal="talosctl --talosconfig ~/Git/homelab/.private/talos/talosconfig"
+alias gg="cd (git rev-parse --show-toplevel)"
+alias gs="git status"
 
 abbr --add l ls
 abbr --add n nvim
-abbr --add gs "git status"
-abbr --add lg lazygit
-abbr --add co consul
-abbr --add no nomad
-abbr --add va vault
 abbr --add tf tofu
-abbr --add es ~/.scripts/ec2.fish --single
-abbr --add em ~/.scripts/ec2.fish --multiple
-abbr --add ep ~/.scripts/ec2.fish --parallel
+abbr --add tm tmux
+abbr --add lg lazygit
+
 {{ if eq .chezmoi.os "darwin" -}}
 abbr --add t task
 {{ else -}}
 abbr --add t go-task
 {{ end -}}
-alias ag="ag -f"
-alias cm="chezmoi -S ~/Git/dotfiles -c ~/Git/dotfiles/chezmoi.toml --persistent-state ~/.config/chezmoi/chezmoistate.boltdb"
-alias cms="chezmoi -S ~/Git/Security -c ~/Git/Security/chezmoi.toml --persistent-state ~/.config/chezmoi/chezmoistate-security.boltdb"
-alias tal="talosctl --talosconfig ~/Git/homelab/private/talos/talosconfig"
+
+mise activate fish | source
 
 function nn
     fzf_project nvim
-end
-
-function ee
-    fzf_project emacs -nw
-end
-
-function hh
-    fzf_project hx
 end
 
 function fzf_project
@@ -98,20 +46,18 @@ function fzf_project
         end
     end
 end
-alias gg="cd (git rev-parse --show-toplevel)"
 
-set -x K9S_CONFIG_DIR $HOME/.config/k9s
-set -gx PATH $PATH $HOME/.krew/bin
 set -x GOPATH $HOME/go
 set -x EDITOR nvim
-
-fish_add_path /opt/homebrew/bin
-fish_add_path $GOPATH/bin
-fish_add_path /usr/local/bin
-fish_add_path $HOME/.local/bin
-
 {{ if eq .chezmoi.os "darwin" -}}
 set -gx SSH_AUTH_SOCK ~/.gnupg/S.gpg-agent.ssh
 {{ else }}
 set -gx SSH_AUTH_SOCK $XDG_RUNTIME_DIR/gnupg/S.gpg-agent.ssh
 {{ end }}
+
+{{ if eq .chezmoi.os "darwin" -}}
+fish_add_path /opt/homebrew/bin
+{{ end }}
+fish_add_path $GOPATH/bin
+fish_add_path /usr/local/bin
+fish_add_path $HOME/.local/bin
