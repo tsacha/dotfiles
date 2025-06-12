@@ -17,7 +17,7 @@ return {
         rangeVariableTypes = true,
       },
       staticcheck = true,
-      gofumpt = true,
+      gofumpt = false,
       semanticTokens = true,
     },
   },

@@ -1,5 +1,5 @@
 -- Base settings
-vim.opt.autochdir = true
+vim.opt.autochdir = false
 vim.o.termguicolors = true
 
 ---- Remove trailing whitespaces
@@ -33,6 +33,8 @@ vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
 vim.opt.inccommand = "split"
 vim.opt.cursorline = true
 vim.opt.scrolloff = 10
+
+vim.g.root_spec = { "cwd" }
 
 local function map(mode, lhs, rhs, opts)
     local options = { noremap = true, silent = true }

@@ -1,8 +1,8 @@
 return {
     {
-        'williamboman/mason.nvim',
+        'mason-org/mason.nvim',
         dependencies = {
-            { 'williamboman/mason-lspconfig.nvim' },
+            { 'mason-org/mason-lspconfig.nvim' },
         },
         lazy = false,
         opts = {},
@@ -10,15 +10,12 @@ return {
             require("mason").setup()
             require('mason-lspconfig').setup({
                 ensure_installed = {
-                    "ansiblels",
                     "basedpyright",
                     "gopls",
                     "helm_ls",
                     "lua_ls",
                     "ruff",
-                    "rust_analyzer",
                     "tofu_ls",
-                    "ts_ls",
                     "yamlls",
                 },
             })
