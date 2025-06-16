@@ -34,7 +34,7 @@ vim.opt.inccommand = "split"
 vim.opt.cursorline = true
 vim.opt.scrolloff = 10
 
-vim.g.root_spec = { "cwd" }
+--vim.g.root_spec = { "cwd" }
 
 local function map(mode, lhs, rhs, opts)
     local options = { noremap = true, silent = true }

@@ -54,6 +54,7 @@ return {
             function()
                 local extensions = require('telescope').extensions
                 extensions.file_browser.file_browser({
+                    path = "%:p:h",
                     no_ignore = true,
                     grouped = true,
                     follow_symlinks = true
