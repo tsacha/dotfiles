@@ -11,7 +11,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
         vim.keymap.set('n', '<leader>ll', telescope.lsp_document_symbols, {})
         vim.keymap.set('n', '<leader>ld', telescope.lsp_definitions, {})
         vim.keymap.set('n', '<leader>lr', telescope.lsp_references, {})
-        vim.keymap.set('n', '<leader>lR', ":LspRestart<CR>", {})
         vim.keymap.set('n', '<leader>li', telescope.lsp_incoming_calls, {})
         vim.keymap.set('n', '<leader>lo', telescope.lsp_outgoing_calls, {})
         vim.keymap.set('n', '<leader>lm', telescope.lsp_implementations, {})

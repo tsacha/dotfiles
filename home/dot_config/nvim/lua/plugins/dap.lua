@@ -1,14 +1,12 @@
 return {
     "mfussenegger/nvim-dap",
     dependencies = {
-        "leoluz/nvim-dap-go",
         "nvim-neotest/nvim-nio",
         "igorlfs/nvim-dap-view",
+        "theHamsta/nvim-dap-virtual-text",
     },
     config = function()
-        require('dap-go').setup({
-            dap_configurations = {}
-        })
+        require("nvim-dap-virtual-text").setup()
         local dap, dapui = require("dap"), require("dap-view")
         dapui.setup({
             winbar = {
@@ -34,6 +32,11 @@ return {
             "<leader>db",
             function() require("dap").toggle_breakpoint() end,
             desc = "Toggle Breakpoint"
+        },
+        {
+            "<leader>dl",
+            function() require('dap').set_breakpoint(nil, nil, vim.fn.input('Log point message: ')) end,
+            desc = "Toggle Logpoint"
         },
         {
             "<leader>dc",

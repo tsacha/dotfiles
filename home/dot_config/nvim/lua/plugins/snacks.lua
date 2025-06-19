@@ -13,9 +13,7 @@ return {
       "<leader>fe",
       mode = { "n" },
       function()
-        Snacks.explorer.open({
-          auto_close = true,
-        })
+        Snacks.explorer.open({})
       end
     },
 
