@@ -1,7 +1,69 @@
 return {
-    "rcarriga/nvim-dap-ui",
+    "mfussenegger/nvim-dap",
     dependencies = {
+        "leoluz/nvim-dap-go",
         "nvim-neotest/nvim-nio",
-        "mfussenegger/nvim-dap",
+        "igorlfs/nvim-dap-view",
+    },
+    config = function()
+        require('dap-go').setup({
+            dap_configurations = {}
+        })
+        local dap, dapui = require("dap"), require("dap-view")
+        dapui.setup({
+            winbar = {
+                sections = { "console", "watches", "scopes", "exceptions", "breakpoints", "threads", "repl" },
+            }
+        })
+
+        dap.listeners.before.attach.dapui_config = function()
+            dapui.open()
+        end
+        dap.listeners.before.launch.dapui_config = function()
+            dapui.open()
+        end
+        dap.listeners.before.event_terminated.dapui_config = function()
+            --dapui.close()
+        end
+        dap.listeners.before.event_exited.dapui_config = function()
+            --dapui.close()
+        end
+    end,
+    keys = {
+        {
+            "<leader>db",
+            function() require("dap").toggle_breakpoint() end,
+            desc = "Toggle Breakpoint"
+        },
+        {
+            "<leader>dc",
+            function() require("dap").continue() end,
+            desc = "Continue"
+        },
+        {
+            "<leader>de",
+            function() require("dap-view").add_expr() end,
+            desc = "Eval"
+        },
+        {
+            "<leader>do",
+            function() require("dap").step_over() end,
+            desc = "Step Over"
+        },
+        {
+            "<leader>di",
+            function() require("dap").step_into() end,
+            desc = "Step Into"
+        },
+        {
+            "<leader>dT",
+            function() require("dap").terminate() end,
+            desc = "Terminate"
+        },
+        {
+            "<leader>du",
+            function() require("dap-view").toggle() end,
+            desc = "UI"
+        }
     },
 }
