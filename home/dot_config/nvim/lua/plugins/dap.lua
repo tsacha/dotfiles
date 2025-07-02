@@ -2,15 +2,38 @@ return {
     "mfussenegger/nvim-dap",
     dependencies = {
         "nvim-neotest/nvim-nio",
-        "igorlfs/nvim-dap-view",
+        --"igorlfs/nvim-dap-view",
+        "rcarriga/nvim-dap-ui",
         "theHamsta/nvim-dap-virtual-text",
     },
     config = function()
         require("nvim-dap-virtual-text").setup()
-        local dap, dapui = require("dap"), require("dap-view")
+        --local dap, dapui = require("dap"), require("dap-view")
+        local dap, dapui = require("dap"), require("dapui")
         dapui.setup({
+            layouts = {
+                {
+                    elements = {
+                        { id = "console", size = 0.5 },
+                        { id = "repl",    size = 0.5 },
+                    },
+                    position = "bottom",
+                    size = 5,
+                },
+                {
+                    elements = {
+                        { id = "scopes",      size = 0.60 },
+                        { id = "watches",     size = 0.30 },
+                        { id = "stacks",      size = 0.05 },
+                        { id = "breakpoints", size = 0.05 },
+                    },
+                    position = "left",
+                    size = 60,
+                },
+            },
             winbar = {
                 sections = { "console", "watches", "scopes", "exceptions", "breakpoints", "threads", "repl" },
+                default_section = "scopes",
             }
         })
 
@@ -28,45 +51,14 @@ return {
         end
     end,
     keys = {
-        {
-            "<leader>db",
-            function() require("dap").toggle_breakpoint() end,
-            desc = "Toggle Breakpoint"
-        },
-        {
-            "<leader>dl",
-            function() require('dap').set_breakpoint(nil, nil, vim.fn.input('Log point message: ')) end,
-            desc = "Toggle Logpoint"
-        },
-        {
-            "<leader>dc",
-            function() require("dap").continue() end,
-            desc = "Continue"
-        },
-        {
-            "<leader>de",
-            function() require("dap-view").add_expr() end,
-            desc = "Eval"
-        },
-        {
-            "<leader>do",
-            function() require("dap").step_over() end,
-            desc = "Step Over"
-        },
-        {
-            "<leader>di",
-            function() require("dap").step_into() end,
-            desc = "Step Into"
-        },
-        {
-            "<leader>dT",
-            function() require("dap").terminate() end,
-            desc = "Terminate"
-        },
-        {
-            "<leader>du",
-            function() require("dap-view").toggle() end,
-            desc = "UI"
-        }
+        { "<leader>db", function() require("dap").toggle_breakpoint() end,                                           desc = "Toggle Breakpoint" },
+        { "<leader>dl", function() require('dap').set_breakpoint(nil, nil, vim.fn.input('Log point message: ')) end, desc = "Toggle Logpoint" },
+        { "<leader>dc", function() require("dap").continue() end,                                                    desc = "Continue" },
+        { "<leader>de", function() require('dapui').elements.watches.add(vim.fn.expand('<cword>')) end,              desc = "Eval" },
+        { "<C-j>",      function() require("dap").step_over() end,                                                   desc = "Step Over" },
+        { "<C-l>",      function() require("dap").step_into() end,                                                   desc = "Step Into" },
+        { "<C-k>",      function() require("dap").step_out() end,                                                    desc = "Step Into" },
+        { "<leader>dk", function() require("dap").terminate() end,                                                   desc = "Terminate" },
+        { "<leader>du", function() require("dapui").toggle() end,                                                    desc = "UI" }
     },
 }

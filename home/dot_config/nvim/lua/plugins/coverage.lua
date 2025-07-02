@@ -14,15 +14,9 @@ return {
         })
     end,
     keys = {
+        { "<leader>cc", function() toggle_coverage() end, desc = "test coverage" },
         {
-            "<leader>tc",
-            function()
-                toggle_coverage()
-            end,
-            desc = "test coverage"
-        },
-        {
-            "<leader>tC",
+            "<leader>cu",
             function()
                 require("coverage").load()
                 require("coverage").summary()
