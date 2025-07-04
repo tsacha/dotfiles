@@ -5,9 +5,22 @@ return {
         --"igorlfs/nvim-dap-view",
         "rcarriga/nvim-dap-ui",
         "theHamsta/nvim-dap-virtual-text",
+        "leoluz/nvim-dap-go",
     },
     config = function()
         require("nvim-dap-virtual-text").setup()
+        require('dap-go').setup({
+            dap_configurations = {
+                {
+                    -- Must be "go" or it will be ignored by the plugin
+                    type = "go",
+                    name = "Attach remote",
+                    mode = "remote",
+                    request = "attach",
+                    port = "2345"
+                }
+            },
+        })
         --local dap, dapui = require("dap"), require("dap-view")
         local dap, dapui = require("dap"), require("dapui")
         dapui.setup({
@@ -59,6 +72,8 @@ return {
         { "<C-l>",      function() require("dap").step_into() end,                                                   desc = "Step Into" },
         { "<C-k>",      function() require("dap").step_out() end,                                                    desc = "Step Into" },
         { "<leader>dk", function() require("dap").terminate() end,                                                   desc = "Terminate" },
-        { "<leader>du", function() require("dapui").toggle() end,                                                    desc = "UI" }
+        { "<leader>du", function() require("dapui").toggle() end,                                                    desc = "UI" },
+        { "<leader>dt", function() require("dap-go").debug_test() end,                                               desc = "Debug Test" },
+        { "<leader>dT", function() require("dap-go").debug_last_test() end,                                          desc = "Debug Last Test" },
     },
 }
