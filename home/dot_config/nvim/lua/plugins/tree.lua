@@ -9,5 +9,5 @@ return {
   lazy = false,
   keys = {
     { "<leader>fe", mode = { "n" }, "<Cmd>Neotree toggle reveal=true current<CR>" }
-  }
+  },
 }

@@ -71,5 +71,13 @@ return {
                 },
             }
         })
+        if vim.fn.argc() == 0 then
+            vim.defer_fn(
+                function()
+                    require("telescope.builtin").find_files()
+                end,
+                0
+            )
+        end
     end,
 }
