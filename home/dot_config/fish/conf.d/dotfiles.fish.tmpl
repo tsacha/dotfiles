@@ -56,6 +56,10 @@ function envsource
 end
 
 set -x GOPATH $HOME/go
+abbr dlvs dlv debug  -l :2345 --accept-multiclient --headless
+abbr dlvc dlv connect localhost:2345
+
+
 set -x EDITOR nvim
 {{ if eq .chezmoi.os "darwin" -}}
 set -gx SSH_AUTH_SOCK ~/.gnupg/S.gpg-agent.ssh
