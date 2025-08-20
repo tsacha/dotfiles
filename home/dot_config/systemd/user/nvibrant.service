@@ -1,0 +1,13 @@
+[Unit]
+Description=nvibrant
+Requires=dbus.socket
+
+[Service]
+ExecStart=/usr/sbin/nvibrant
+ExecStop=/usr/sbin/nvibrant 0 0 0 0 0 0 0
+Environment="ATTRIBUTE=dithering"
+Type=oneshot
+RemainAfterExit=true
+
+[Install]
+WantedBy=default.target

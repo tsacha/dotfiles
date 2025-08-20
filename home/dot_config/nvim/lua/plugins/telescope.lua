@@ -52,6 +52,13 @@ return {
             "<leader>ff",
             mode = { "n" },
             function()
+                require("telescope.builtin").find_files()
+            end
+        },
+        {
+            "<leader>fF",
+            mode = { "n" },
+            function()
                 local extensions = require('telescope').extensions
                 extensions.file_browser.file_browser({
                     path = "%:p:h",
