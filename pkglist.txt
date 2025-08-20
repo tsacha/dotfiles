@@ -37,6 +37,7 @@ ly
 swaync
 
 brightnessctl
+niri
 playerctl
 sway
 swaybg
@@ -70,6 +71,8 @@ npm
 
 qrencode
 gnupg
+pinentry
+gcr
 paperkey
 age
 

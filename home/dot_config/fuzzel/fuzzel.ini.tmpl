@@ -1,0 +1,57 @@
+[main]
+font = Monaspace Argon:size=14
+dpi-aware = no
+terminal = ghostty
+y-margin = 16
+width = 60
+inner-pad = 16
+horizontal-pad = 32
+vertical-pad = 24
+line-height = 32
+lines = 10
+icon-theme = Papirus
+image-size-ratio = 1
+prompt = ""
+
+[border]
+width = 1
+radius = 24
+
+{{ $color := "light" }}
+{{ if eq .chezmoi.os "darwin" -}}
+{{ if eq (output "osascript" "-e" "tell app \"System Events\" to tell appearance preferences to get dark mode" | trim) "false" -}}
+{{ $color = "light" }}
+{{ else if eq (output "osascript" "-e" "tell app \"System Events\" to tell appearance preferences to get dark mode" | trim) "true" -}}
+{{ $color = "dark" }}
+{{ end -}}
+{{ else -}}
+{{ if eq (output "gsettings" "get" "org.gnome.desktop.interface" "color-scheme" | trim) "'prefer-light'" -}}
+{{ $color = "light" }}
+{{ else if eq (output "gsettings" "get" "org.gnome.desktop.interface" "color-scheme" | trim) "'prefer-dark'" -}}
+{{ $color = "dark" }}
+{{ end -}}
+{{ end -}}
+
+{{ if eq $color "light" }}
+[colors]
+background = faf4edff
+text = 575279ff
+match = eb6f92ff
+border = 907aa9ff
+selection = f2e9e1ff
+selection-text = 907aa9ff
+selection-match = 907aa9ff
+prompt = 575279ff
+input = 575279ff
+{{ else }}
+[colors]
+background = 191724ff
+text = e0def4ff
+match = eb6f92ff
+border = c4a7e7ff
+selection = 26233aff
+selection-text = c4a7e7ff
+selection-match = c4a7e7ff
+prompt = e0def4ff
+input = e0def4ff
+{{ end }}

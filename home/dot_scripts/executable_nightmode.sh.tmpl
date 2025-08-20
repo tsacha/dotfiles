@@ -1,0 +1,2 @@
+#!/bin/bash
+if systemctl --user is-active wlsunset; then systemctl --user stop wlsunset; else systemctl --user start wlsunset; fi

@@ -3,7 +3,7 @@ Description=wlsunset
 Requires=dbus.socket
 
 [Service]
-ExecStart=/usr/bin/wlsunset -t 6000:2800 -l 47.23:-1.63
+ExecStart=/usr/bin/wlsunset -T 6000 -t 3400 -l 47.23 -L -1.5
 Restart=always
 RestartSec=5s
 
