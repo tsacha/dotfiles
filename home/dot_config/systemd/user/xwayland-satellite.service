@@ -1,0 +1,11 @@
+[Unit]
+Description=xwayland-satellite
+Requires=dbus.socket
+
+[Service]
+ExecStart=/usr/sbin/xwayland-satellite
+Restart=always
+RestartSec=5s
+
+[Install]
+WantedBy=default.target

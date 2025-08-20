@@ -1,0 +1,11 @@
+[Unit]
+Description=swww
+Requires=dbus.socket
+
+[Service]
+ExecStart=/usr/sbin/swww-daemon
+Restart=always
+RestartSec=5s
+
+[Install]
+WantedBy=default.target
