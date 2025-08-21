@@ -1,6 +1,8 @@
 return {
   cmd = { 'tofu-ls', 'serve' },
-  filetypes = { 'terraform', 'tf' },
+  -- Base filetypes
+  filetypes = { 'terraform', 'terraform-vars' },
+  root_markers = { '.terraform', '.git' },
   settings = {
     validate = false,
     format = { enable = true },

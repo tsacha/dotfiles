@@ -49,14 +49,14 @@ return {
             end
         },
         {
-            "<leader>ff",
+            "<leader>fF",
             mode = { "n" },
             function()
                 require("telescope.builtin").find_files()
             end
         },
         {
-            "<leader>fF",
+            "<leader>ff",
             mode = { "n" },
             function()
                 local extensions = require('telescope').extensions
