@@ -1,6 +1,8 @@
 [Unit]
 Description=nvibrant
-Requires=dbus.socket
+PartOf=graphical-session.target
+After=graphical-session.target
+Requisite=graphical-session.target
 
 [Service]
 ExecStart=/usr/sbin/nvibrant
@@ -10,4 +12,4 @@ Type=oneshot
 RemainAfterExit=true
 
 [Install]
-WantedBy=default.target
+WantedBy=graphical-session.target
