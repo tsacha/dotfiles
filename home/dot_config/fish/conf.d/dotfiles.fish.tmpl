@@ -43,7 +43,7 @@ function fzf_project
     else
         set -l file (fd --type f --strip-cwd-prefix | fzf -0)
         if string length -q $file
-            $argv[1] $argv[2] $file
+            commandline -j (string join " " $argv[1] $argv[2] $file)
         end
     end
 end
