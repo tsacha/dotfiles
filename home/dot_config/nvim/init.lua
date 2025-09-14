@@ -29,5 +29,6 @@ require("lazy").setup({
     checker = { enabled = true, notify = false },
 })
 
-require("lsp")
+require("map")
 require("base")
+require("lsp")

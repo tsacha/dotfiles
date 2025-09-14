@@ -42,6 +42,13 @@ return {
             end
         },
         {
+            "<leader>fr",
+            mode = { "n" },
+            function()
+                require('telescope.builtin').registers({})
+            end
+        },
+        {
             "<leader>dd",
             mode = { "n" },
             function()

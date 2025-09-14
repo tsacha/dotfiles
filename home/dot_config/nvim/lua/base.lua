@@ -12,6 +12,31 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
     end,
 })
 
+--- Keep cursor position after yank
+local keymap_set = vim.keymap.set
+local win_get_cursor = vim.api.nvim_win_get_cursor
+local win_set_cursor = vim.api.nvim_win_set_cursor
+local create_autocmd = vim.api.nvim_create_autocmd
+
+keymap_set({ "n", "x" }, "y", function()
+    vim.b.cursor_pre_yank = win_get_cursor(0)
+    return "y"
+end, { expr = true })
+
+keymap_set("n", "Y", function()
+    vim.b.cursor_pre_yank = win_get_cursor(0)
+    return "y$"
+end, { expr = true })
+
+create_autocmd("TextYankPost", {
+    callback = function()
+        if vim.v.event.operator == "y" and vim.b.cursor_pre_yank then
+            win_set_cursor(0, vim.b.cursor_pre_yank)
+            vim.b.cursor_pre_yank = nil
+        end
+    end,
+})
+
 -- Relative numbers
 vim.opt.number = true
 vim.opt.relativenumber = true
@@ -33,23 +58,3 @@ vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
 vim.opt.inccommand = "split"
 vim.opt.cursorline = true
 vim.opt.scrolloff = 10
-
---vim.g.root_spec = { "cwd" }
-
-local function map(mode, lhs, rhs, opts)
-    local options = { noremap = true, silent = true }
-    if opts then
-        options = vim.tbl_extend("force", options, opts)
-    end
-    vim.api.nvim_set_keymap(mode, lhs, rhs, options)
-end
-
-map("n", "<leader>s", ":w<CR>")
-map("n", "<leader>q", ":q<CR>")
-map("n", "<leader>Q", ":qa!<CR>")
-map("n", "<leader>tt", ":tabnew<CR>")
-map("n", "<leader>tp", ":tabprevious<CR>")
-map("n", "<leader>tn", ":tabnext<CR>")
-map("n", "<leader>h", ":vsplit<CR>")
-map("n", "<leader>v", ":split<CR>")
-map("n", "<leader>o", "<C-w>w")
