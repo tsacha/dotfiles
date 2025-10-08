@@ -1,14 +1,13 @@
 return {
-    { -- Autoformat
-        "stevearc/conform.nvim",
-        event = { "BufWritePre" },
-        cmd = { "ConformInfo" },
-        opts = {
-            notify_on_error = false,
-            formatters_by_ft = {
-                lua = { "stylua" },
-                fish = { "fish_indent" },
-            },
+    "stevearc/conform.nvim",
+    event = { "BufWritePre" },
+    cmd = { "ConformInfo" },
+    opts = {
+        notify_on_error = false,
+        formatters_by_ft = {
+            go = { "gofmt" },
+            lua = { "stylua" },
+            fish = { "fish_indent" },
         },
     },
 }
