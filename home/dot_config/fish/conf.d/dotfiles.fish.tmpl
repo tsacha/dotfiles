@@ -16,6 +16,9 @@ abbr --add tf tofu
 abbr --add tm tmux
 abbr --add lg lazygit
 
+bind ctrl-backspace backward-kill-token
+bind alt-backspace backward-kill-word
+
 {{ if eq .chezmoi.os "darwin" -}}
 abbr --add t task
 {{ else -}}

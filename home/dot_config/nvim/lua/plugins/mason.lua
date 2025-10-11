@@ -3,6 +3,7 @@ return {
 		"mason-org/mason.nvim",
 		dependencies = {
 			{ "mason-org/mason-lspconfig.nvim" },
+			{ "WhoIsSethDaniel/mason-tool-installer.nvim" },
 		},
 		lazy = false,
 		opts = {},
@@ -18,6 +19,11 @@ return {
 					"stylua",
 					"tofu_ls",
 					"yamlls",
+				},
+			})
+			require("mason-tool-installer").setup({
+				ensure_installed = {
+					"yamlfmt",
 				},
 			})
 		end,
