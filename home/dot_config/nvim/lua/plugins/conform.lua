@@ -16,6 +16,7 @@ return {
 			},
 		},
 		formatters_by_ft = {
+			python = { "ruff_format" },
 			go = { "gofmt" },
 			lua = { "stylua" },
 			fish = { "fish_indent" },
