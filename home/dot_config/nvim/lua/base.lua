@@ -2,22 +2,6 @@
 vim.opt.autochdir = false
 vim.o.termguicolors = true
 
----- Remove trailing whitespaces and call Conform
-vim.api.nvim_create_autocmd({ "BufWritePre" }, {
-	pattern = { "*" },
-	callback = function(args)
-		local save_cursor = vim.fn.getpos(".")
-		vim.cmd([[%s/\s\+$//e]])
-		vim.fn.setpos(".", save_cursor)
-		require("conform").format({ bufnr = args.buf })
-	end,
-})
-
-vim.api.nvim_create_autocmd("BufWritePre", {
-	pattern = "*",
-	callback = function(args) end,
-})
-
 --- Keep cursor position after yank
 local keymap_set = vim.keymap.set
 local win_get_cursor = vim.api.nvim_win_get_cursor
