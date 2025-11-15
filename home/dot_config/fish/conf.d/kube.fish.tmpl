@@ -1,16 +1,18 @@
 # adds alias for "kubectl" to "kubecolor" with completions
-function kubectl --wraps kubectl
-  command kubecolor $argv
-end
+if type -q kubecolor
+  function kubectl --wraps kubectl
+    command kubecolor $argv
+  end
 
 # adds alias for "k" to "kubecolor" with completions
-function k --wraps kubectl
-  command kubecolor $argv
-end
+  function k --wraps kubectl
+    command kubecolor $argv
+  end
 
 # reuse "kubectl" completions on "kubecolor"
-function kubecolor --wraps kubectl
-  command kubecolor $argv
+  function kubecolor --wraps kubectl
+    command kubecolor $argv
+  end
 end
 
 alias k="kubectl"
@@ -18,4 +20,6 @@ alias ku="kubie"
 
 set -x K9S_CONFIG_DIR $HOME/.config/k9s
 
-kubectl completion fish | source
+if type -q kubectl
+  kubectl completion fish | source
+end

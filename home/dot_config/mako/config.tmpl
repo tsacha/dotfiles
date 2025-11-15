@@ -1,0 +1,32 @@
+{{ $color := "light" }}
+{{ if eq .chezmoi.os "darwin" -}}
+{{ if eq (output "osascript" "-e" "tell app \"System Events\" to tell appearance preferences to get dark mode" | trim) "false" -}}
+{{ $color = "light" }}
+{{ else if eq (output "osascript" "-e" "tell app \"System Events\" to tell appearance preferences to get dark mode" | trim) "true" -}}
+{{ $color = "dark" }}
+{{ end -}}
+{{ else -}}
+{{ if eq (output "gsettings" "get" "org.gnome.desktop.interface" "color-scheme" | trim) "'prefer-light'" -}}
+{{ $color = "light" }}
+{{ else if eq (output "gsettings" "get" "org.gnome.desktop.interface" "color-scheme" | trim) "'prefer-dark'" -}}
+{{ $color = "dark" }}
+{{ end -}}
+{{ end -}}
+
+{{ if eq $color "light" }}
+background-color=#f2e9e1
+text-color=#575279
+border-color=#cecacd
+progress-color=over #286983
+
+[urgency=high]
+border-color=#b4637a
+{{ else }}
+background-color=#26233a
+text-color=#e0def4
+border-color=#524f67
+progress-color=over #31748f
+
+[urgency=high]
+border-color=#eb6f92
+{{ end }}
