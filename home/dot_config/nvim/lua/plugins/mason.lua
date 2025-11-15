@@ -11,10 +11,11 @@ return {
 			require("mason").setup()
 			require("mason-lspconfig").setup({
 				ensure_installed = {
-					"clangd",
 					"basedpyright",
+					"clangd",
 					"gopls",
 					"helm_ls",
+					"lua_ls",
 					"ruff",
 					"stylua",
 					"tofu_ls",
