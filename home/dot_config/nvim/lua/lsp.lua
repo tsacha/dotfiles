@@ -33,6 +33,7 @@ vim.diagnostic.config({
 -- Enable each language server by filename under the lsp/ folder
 vim.lsp.enable({
 	"basedpyright",
+	"gleam",
 	"gopls",
 	"helm_ls",
 	"lua_ls",

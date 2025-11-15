@@ -25,8 +25,6 @@ abbr --add t task
 abbr --add t go-task
 {{ end -}}
 
-mise activate fish | source
-
 function nn
     fzf_project nvim
 end
@@ -75,5 +73,6 @@ set -gx SSH_AUTH_SOCK $XDG_RUNTIME_DIR/gnupg/S.gpg-agent.ssh
 fish_add_path /opt/homebrew/bin
 {{ end }}
 fish_add_path $GOPATH/bin
-fish_add_path /usr/local/bin
 fish_add_path $HOME/.local/bin
+
+mise activate fish | source
