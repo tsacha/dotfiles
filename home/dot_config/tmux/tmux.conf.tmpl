@@ -23,16 +23,15 @@ set-option -g status-interval 5
 set-option -g automatic-rename on
 set-option -g automatic-rename-format '#{b:pane_current_path}#{?#{==:#{pane_current_command},fish},, ▸ #{pane_current_command}}'
 
-bind M-c attach-session -c "#{pane_current_path}"
-bind h split-window -h
-bind v split-window -v
+bind h split-window -h -c "#{pane_current_path}"
+bind v split-window -v -c "#{pane_current_path}"
 
 bind -n M-h select-pane -L
 bind -n M-j select-pane -D
 bind -n M-k select-pane -U
 bind -n M-l select-pane -R
 
-bind -n M-t new-window -c "#{pane_current_path}"
+bind -n M-t new-window -a -c "#{pane_current_path}"
 bind -n M-n next-window
 bind -n M-r previous-window
 
@@ -76,3 +75,5 @@ set -g clock-mode-style 24
 
 # Copy mode styling
 set -g mode-style bg=colour4,fg=colour0
+
+set -q mode-key vi
