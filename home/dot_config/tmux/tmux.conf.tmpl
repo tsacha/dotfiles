@@ -1,24 +1,14 @@
-{{ $color := "light" }}
-{{ if eq .chezmoi.os "darwin" -}}
-{{ if eq (output "osascript" "-e" "tell app \"System Events\" to tell appearance preferences to get dark mode" | trim) "false" -}}
-{{ $color = "light" }}
-{{ else if eq (output "osascript" "-e" "tell app \"System Events\" to tell appearance preferences to get dark mode" | trim) "true" -}}
-{{ $color = "dark" }}
-{{ end -}}
-{{ else -}}
-{{ if eq (output "gsettings" "get" "org.gnome.desktop.interface" "color-scheme" | trim) "'prefer-light'" -}}
-{{ $color = "light" }}
-{{ else if eq (output "gsettings" "get" "org.gnome.desktop.interface" "color-scheme" | trim) "'prefer-dark'" -}}
-{{ $color = "dark" }}
-{{ end -}}
-{{ end -}}
 set -s escape-time 0
 set-option -g default-terminal "xterm-256color"
 set-option -ga terminal-overrides ",xterm-256color:Tc"
 
 set -g prefix M-q
 bind M-t send-prefix
+
 set -g mouse on
+bind -n WheelUpPane if -F '#{alternate_on}' 'send-keys Up' 'if -F "#{mouse_any_flag}" "send -M" "copy-mode -e; send-keys -M"'
+bind -n WheelDownPane if -F '#{alternate_on}' 'send-keys Down' 'send-keys -M'
+
 set-option -g status-interval 5
 set-option -g automatic-rename on
 set-option -g automatic-rename-format '#{b:pane_current_path}#{?#{==:#{pane_current_command},fish},, ▸ #{pane_current_command}}'
