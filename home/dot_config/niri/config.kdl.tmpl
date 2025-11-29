@@ -15,6 +15,7 @@
 {{ end -}}
 
 environment {
+    XDG_CURRENT_DESKTOP "gnome"
     QT_QPA_PLATFORM "wayland"
     DISPLAY ":0"
 }
@@ -107,6 +108,8 @@ binds {
     Mod+F2 { show-hotkey-overlay; }
     Mod+F6 hotkey-overlay-title="Toggle nightmode" { spawn "~/.scripts/nightmode.sh"; }
     Mod+F7 hotkey-overlay-title="Toggle dark-mode" { spawn "~/.scripts/theme_switch.sh"; }
+    Mod+F9 hotkey-overlay-title="Decrease monitor brightness" { spawn "~/.scripts/brightness.sh" "decrease" "10"; }
+    Mod+F10 hotkey-overlay-title="Increase monitor brightness" { spawn "~/.scripts/brightness.sh" "increase" "10"; }
 
     XF86AudioRaiseVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1+"; }
     XF86AudioLowerVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1-"; }

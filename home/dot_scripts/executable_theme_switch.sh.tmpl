@@ -16,13 +16,11 @@ $cm apply --force \
     ~/.config/niri/config.kdl \
     ~/.config/k9s/config.yaml \
     ~/.config/fuzzel/fuzzel.ini \
-    ~/.config/glow/glow.yml \
     ~/.config/zellij/config.kdl
 swaymsg reload
 {{ else }}
 osascript -e 'tell app "System Events" to tell appearance preferences to set dark mode to not dark mode'
 $cm apply --force \
     ~/.config/k9s/config.yaml \
-    ~/.config/glow/glow.yml \
     ~/.config/zellij/config.kdl
 {{ end }}
