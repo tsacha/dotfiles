@@ -56,16 +56,16 @@ output "DP-6" {
 }
 
 layout {
-    gaps 8
+    gaps 4
     center-focused-column "always"
 
     preset-column-widths {
-        proportion 0.33334
         proportion 0.5
         proportion 0.66667
+        proportion 0.8
     }
 
-    default-column-width { proportion 0.66667; }
+    default-column-width { proportion 0.8; }
     focus-ring {
         width 1
 
@@ -79,7 +79,7 @@ layout {
     }
 
     border {
-        width 2
+        width 1
 
 {{ if eq $color "light" }}
         active-color "#907aa9"
@@ -93,7 +93,7 @@ layout {
 
 screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
 animations {
-    slowdown 0.4
+    slowdown 0.3
 }
 
 window-rule {
@@ -108,6 +108,7 @@ binds {
     Mod+F2 { show-hotkey-overlay; }
     Mod+F6 hotkey-overlay-title="Toggle nightmode" { spawn "~/.scripts/nightmode.sh"; }
     Mod+F7 hotkey-overlay-title="Toggle dark-mode" { spawn "~/.scripts/theme_switch.sh"; }
+    Mod+F8 hotkey-overlay-title="Switch audio output" { spawn "~/.scripts/audio_switch.sh"; }
     Mod+F9 hotkey-overlay-title="Decrease monitor brightness" { spawn "~/.scripts/brightness.sh" "decrease" "10"; }
     Mod+F10 hotkey-overlay-title="Increase monitor brightness" { spawn "~/.scripts/brightness.sh" "increase" "10"; }
 
