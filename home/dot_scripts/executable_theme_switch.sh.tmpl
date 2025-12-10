@@ -4,12 +4,15 @@ cm="chezmoi -S ~/Git/dotfiles -c ~/Git/dotfiles/chezmoi.toml --persistent-state 
 if [ $(gsettings get org.gnome.desktop.interface color-scheme) == "'prefer-light'" ]; then
     gsettings set org.gnome.desktop.interface color-scheme \'prefer-dark\'
     gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita-dark'
+    swww query && swww img $HOME/.wallpapers/dark.jpg
 elif [ $(gsettings get org.gnome.desktop.interface color-scheme) == "'prefer-dark'" ]; then
     gsettings set org.gnome.desktop.interface color-scheme \'prefer-light\'
     gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita'
+    swww query && swww img $HOME/.wallpapers/light.png
 elif [ $(gsettings get org.gnome.desktop.interface color-scheme) == "'default'" ]; then
     gsettings set org.gnome.desktop.interface color-scheme \'prefer-light\'
     gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita'
+    swww query && swww img $HOME/.wallpapers/light.png
 fi;
 $cm apply --force \
     ~/.config/sway/config \
