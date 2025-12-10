@@ -3,6 +3,7 @@ Description=wlsunset
 PartOf=graphical-session.target
 After=graphical-session.target
 Requisite=graphical-session.target
+ConditionEnvironment=XDG_CURRENT_DESKTOP=niri
 
 [Service]
 ExecStart=/usr/bin/wlsunset -T 6000 -t 3400 -l 47.23 -L -1.5
