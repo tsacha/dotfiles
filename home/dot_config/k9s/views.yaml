@@ -25,4 +25,8 @@ views:
       - KERNEL|H
       - ROLE|H
       - VALID|H
+      - "GPU/A|H"
+      - "GPU/C|H"
+      - "SH-GPU/A|H"
+      - "SH-GPU/C|H"
 
