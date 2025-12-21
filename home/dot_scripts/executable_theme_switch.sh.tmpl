@@ -17,13 +17,12 @@ fi;
 $cm apply --force \
     ~/.config/sway/config \
     ~/.config/niri/config.kdl \
-    ~/.config/k9s/config.yaml \
-    ~/.config/fuzzel/fuzzel.ini \
-    ~/.config/zellij/config.kdl
+    ~/.config/k9s/skins/rosepine.yaml
 swaymsg reload
 {{ else }}
 osascript -e 'tell app "System Events" to tell appearance preferences to set dark mode to not dark mode'
 $cm apply --force \
     ~/.config/k9s/config.yaml \
+    ~/.config/k9s/skins/rosepine.yaml \
     ~/.config/zellij/config.kdl
 {{ end }}
