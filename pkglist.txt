@@ -21,7 +21,6 @@ git
 age
 less
 
-mise
 go
 npm
 
