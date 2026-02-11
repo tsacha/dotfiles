@@ -23,3 +23,7 @@ set -x K9S_CONFIG_DIR $HOME/.config/k9s
 if type -q kubectl
   kubectl completion fish | source
 end
+
+if type -q kubie
+  kubie generate-completion fish | source
+end
