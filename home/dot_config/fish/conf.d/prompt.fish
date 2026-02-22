@@ -31,6 +31,6 @@ function fish_right_prompt
     end
 
     set_color $ctx_color
-    echo -n "☸ $k8s_context"
+    echo -n "☸  $k8s_context"
     set_color normal
 end
