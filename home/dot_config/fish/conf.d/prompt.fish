@@ -18,8 +18,14 @@ function fish_prompt
 end
 
 function fish_right_prompt
-    set -l k8s_context (kubectl config current-context 2>/dev/null)
-    test -z "$k8s_context"; and return
+    set -l kubeconfig $KUBECONFIG
+    if test -z "$kubeconfig"
+        set kubeconfig ~/.kube/config
+    end
+    test -f "$kubeconfig"; or return
+
+    set -l k8s_context (yq '.current-context' $kubeconfig 2>/dev/null)
+    test -z "$k8s_context"; or test "$k8s_context" = "null"; and return
 
     set -l ctx_color 4481d0
     if string match -q "*prod*" "$k8s_context"

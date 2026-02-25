@@ -7,7 +7,9 @@
 .config/xfce4
 .config/sway
 .config/systemd
+.config/fish/conf.d/dotfiles_linux.fish
 {{ else -}}
 .config/kitty
 Library/
+.config/fish/conf.d/dotfiles_darwin.fish
 {{ end -}}

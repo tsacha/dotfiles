@@ -4,5 +4,3 @@ function __fzf_reverse_isearch
     and commandline -- $result
     commandline -f repaint
 end
-
-bind \cr __fzf_reverse_isearch
