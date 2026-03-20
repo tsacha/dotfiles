@@ -2,10 +2,9 @@ return {
 	{
 		"nvim-treesitter/nvim-treesitter",
 		build = ":TSUpdate",
-		main = "nvim-treesitter.configs",
+		main = "nvim-treesitter.config",
 		opts = function(_plugin, opts)
-			local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
-			parser_config.gleam = {
+			require("nvim-treesitter.parsers").gleam = {
 				install_info = {
 					url = "https://github.com/gleam-lang/tree-sitter-gleam",
 					revision = "main",
