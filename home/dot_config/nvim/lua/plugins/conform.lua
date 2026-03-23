@@ -29,6 +29,7 @@ return {
 			fish = { "fish_indent" },
 			helm = { "yamlfmt" },
 			yaml = { "yamlfmt" },
+			markdown = { "prettier" },
 		},
 	},
 	config = function(_, opts)
