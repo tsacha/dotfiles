@@ -1,4 +1,5 @@
 set -gx K9S_CONFIG_DIR $HOME/.config/k9s
+set -gx PATH $PATH $HOME/.krew/bin
 
 abbr --add k kubectl
 abbr --add ku kubie
