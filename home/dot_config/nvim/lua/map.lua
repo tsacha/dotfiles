@@ -6,6 +6,11 @@ local function map(mode, lhs, rhs, opts)
 	vim.api.nvim_set_keymap(mode, lhs, rhs, options)
 end
 
+for _, lhs in ipairs({ "<C-S-c>" }) do
+	map("n", lhs, '"+yy')
+	map("x", lhs, '"+y')
+end
+
 map("n", "<leader>s", ":w<CR>")
 map("n", "<leader>q", ":q<CR>")
 map("n", "<leader>Q", ":qa!<CR>")
