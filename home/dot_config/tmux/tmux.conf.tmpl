@@ -69,3 +69,5 @@ set -g clock-mode-style 24
 set -g mode-style bg=colour4,fg=colour0
 
 set -q mode-key vi
+bind-key -T copy-mode-vi WheelUpPane send-keys -X scroll-up
+bind-key -T copy-mode-vi WheelDownPane send-keys -X scroll-down
