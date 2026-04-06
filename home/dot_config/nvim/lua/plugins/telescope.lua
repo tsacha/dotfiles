@@ -1,10 +1,3 @@
-vim.pack.add({
-	{ src = "https://github.com/nvim-lua/plenary.nvim" },
-	{ src = "https://github.com/nvim-telescope/telescope-fzf-native.nvim", run = "make" },
-	{ src = "https://github.com/nvim-telescope/telescope.nvim", branch = "0.2.x" },
-	{ src = "https://github.com/nvim-telescope/telescope-file-browser.nvim", run = "make" },
-})
-
 require("telescope").setup({
 	defaults = {
 		layout_strategy = "horizontal",
