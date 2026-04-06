@@ -1,12 +1,12 @@
 [Unit]
-Description=swww
+Description=awww
 PartOf=graphical-session.target
 After=graphical-session.target
 Requisite=graphical-session.target
 ConditionEnvironment=XDG_CURRENT_DESKTOP=niri
 
 [Service]
-ExecStart=/usr/sbin/swww-daemon
+ExecStart=/usr/sbin/awww-daemon
 Restart=always
 RestartSec=5s
 

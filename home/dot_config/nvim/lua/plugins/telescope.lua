@@ -1,89 +1,67 @@
-return {
-	"nvim-telescope/telescope.nvim",
-	dependencies = { "nvim-lua/plenary.nvim" },
-	keys = {
-		{
-			"<leader>fs",
-			mode = { "n" },
-			function()
-				require("telescope.builtin").current_buffer_fuzzy_find({})
-			end,
-		},
-		{
-			"<leader>fS",
-			mode = { "n" },
-			function()
-				require("telescope.builtin").live_grep({
-					cwd = Snacks.git.get_root(),
-				})
-			end,
-		},
-		{
-			"<leader>fb",
-			mode = { "n" },
-			function()
-				require("telescope.builtin").buffers({})
-			end,
-		},
-		{
-			"<leader>fg",
-			mode = { "n" },
-			function()
-				require("telescope.builtin").git_files({
-					show_untracked = true,
-				})
-			end,
-		},
-		{
-			"<leader>fm",
-			mode = { "n" },
-			function()
-				require("telescope.builtin").marks({})
-			end,
-		},
-		{
-			"<leader>fr",
-			mode = { "n" },
-			function()
-				require("telescope.builtin").registers({})
-			end,
-		},
-		{
-			"<leader>dd",
-			mode = { "n" },
-			function()
-				require("telescope.builtin").diagnostics({})
-			end,
-		},
-		{
-			"<leader>fF",
-			mode = { "n" },
-			function()
-				require("telescope.builtin").find_files()
-			end,
-		},
-		{
-			"<leader>ff",
-			mode = { "n" },
-			function()
-				local extensions = require("telescope").extensions
-				extensions.file_browser.file_browser({
-					path = "%:p:h",
-					no_ignore = true,
-					grouped = true,
-					follow_symlinks = true,
-				})
-			end,
+vim.pack.add({
+	{ src = "https://github.com/nvim-lua/plenary.nvim" },
+	{ src = "https://github.com/nvim-telescope/telescope-fzf-native.nvim", run = "make" },
+	{ src = "https://github.com/nvim-telescope/telescope.nvim", branch = "0.2.x" },
+	{ src = "https://github.com/nvim-telescope/telescope-file-browser.nvim", run = "make" },
+})
+
+require("telescope").setup({
+	defaults = {
+		layout_strategy = "horizontal",
+		layout_config = {
+			horizontal = { width = 0.9 },
 		},
 	},
-	config = function()
-		require("telescope").setup({
-			defaults = {
-				layout_strategy = "horizontal",
-				layout_config = {
-					horizontal = { width = 0.9 },
-				},
-			},
-		})
-	end,
-}
+	extensions = {
+		file_browser = {
+			theme = "ivy",
+			hijack_netrw = true,
+		},
+	},
+})
+
+local map = vim.keymap.set
+map("n", "<leader>fs", function()
+	require("telescope.builtin").current_buffer_fuzzy_find({})
+end)
+
+map("n", "<leader>fS", function()
+	local root = vim.fs.root(0, ".git") or vim.uv.cwd()
+	require("telescope.builtin").live_grep({
+		cwd = root,
+	})
+end)
+
+map("n", "<leader>fb", function()
+	require("telescope.builtin").buffers({})
+end)
+
+map("n", "<leader>fg", function()
+	require("telescope.builtin").git_files({
+		show_untracked = true,
+	})
+end)
+
+map("n", "<leader>fm", function()
+	require("telescope.builtin").marks({})
+end)
+map("n", "<leader>fr", function()
+	require("telescope.builtin").registers({})
+end)
+
+map("n", "<leader>dd", function()
+	require("telescope.builtin").diagnostics({})
+end)
+
+map("n", "<leader>fF", function()
+	require("telescope.builtin").find_files()
+end)
+
+map("n", "<leader>ff", function()
+	require("telescope").extensions.file_browser.file_browser({
+		path = "%:p:h",
+		no_ignore = true,
+		grouped = true,
+		follow_symlinks = true,
+	})
+end)

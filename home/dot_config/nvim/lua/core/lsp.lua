@@ -1,5 +1,12 @@
--- This is where you enable features that only work
--- if there is a language server active in the file
+vim.lsp.enable({
+	"basedpyright",
+	"gopls",
+	"helm_ls",
+	"lua_ls",
+	"tofu_ls",
+	"yamlls",
+})
+
 vim.api.nvim_create_autocmd("LspAttach", {
 	desc = "LSP actions",
 	callback = function(event)
@@ -21,22 +28,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
 	end,
 })
 
--- Setup language servers.
-vim.lsp.config("*", {
-	capabilities = require("blink.cmp").get_lsp_capabilities({}),
-	root_markers = { ".git" },
-})
 vim.diagnostic.config({
 	virtual_lines = { current_line = true },
-})
-
--- Enable each language server by filename under the lsp/ folder
-vim.lsp.enable({
-	"basedpyright",
-	"gleam",
-	"gopls",
-	"helm_ls",
-	"lua_ls",
-	"tofu_ls",
-	"yamlls",
 })

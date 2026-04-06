@@ -1,32 +1,62 @@
-return {
-	{
-		"nvim-treesitter/nvim-treesitter",
-		build = ":TSUpdate",
-		main = "nvim-treesitter.config",
-		opts = function(_plugin, opts)
-			require("nvim-treesitter.parsers").gleam = {
-				install_info = {
-					url = "https://github.com/gleam-lang/tree-sitter-gleam",
-					revision = "main",
-					files = { "src/parser.c", "src/scanner.c" },
-				},
-				filetype = "gleam",
-			}
-
-			return vim.tbl_deep_extend("force", opts, {
-				auto_install = true,
-				highlight = { enable = true },
-				indent = { enable = false },
-				incremental_selection = {
-					enable = true,
-					keymaps = {
-						init_selection = "<A-o>",
-						node_incremental = "<A-o>",
-						scope_incremental = "<A-O>",
-						node_decremental = "<A-i>",
-					},
-				},
-			})
-		end,
-	},
+local treesitter = require("nvim-treesitter")
+local parsers = {
+    'bash',
+    'c',
+    'comment',
+    'css',
+    'csv',
+    'diff',
+    'dockerfile',
+    'gitignore',
+    'go',
+    'html',
+    'javascript',
+    'jsdoc',
+    'json',
+    'lua',
+    'luadoc',
+    'make',
+    'markdown',
+    'markdown_inline',
+    'nginx',
+    'php',
+    'python',
+    'query',
+    'regex',
+    'rust',
+    'scss',
+    'svelte',
+    'sql',
+    'templ',
+    'toml',
+    'tsv',
+    'typescript',
+    'vim',
+    'vimdoc',
+    'xml',
+    'yaml',
+    'zig',
 }
+treesitter.install(parsers)
+
+ vim.api.nvim_create_autocmd('FileType', {
+    callback = function(args)
+      local buf, filetype = args.buf, args.match
+
+      local language = vim.treesitter.language.get_lang(filetype)
+      if not language then
+        return
+      end
+
+      -- check if parser exists and load it
+      if not vim.treesitter.language.add(language) then
+        return
+      end
+
+      -- enables syntax highlighting and other treesitter features
+      vim.treesitter.start(buf, language)
+
+      -- enables treesitter based indentation
+      vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+    end,
+})

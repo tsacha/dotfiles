@@ -1,34 +1,28 @@
--- Bootstrap lazy.nvim
-local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not (vim.uv or vim.loop).fs_stat(lazypath) then
-	local lazyrepo = "https://github.com/folke/lazy.nvim.git"
-	local out = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
-	if vim.v.shell_error ~= 0 then
-		vim.api.nvim_echo({
-			{ "Failed to clone lazy.nvim:\n", "ErrorMsg" },
-			{ out, "WarningMsg" },
-			{ "\nPress any key to exit..." },
-		}, true, {})
-		vim.fn.getchar()
-		os.exit(1)
-	end
-end
-vim.opt.rtp:prepend(lazypath)
+vim.pack.add({
+	{ src = "https://github.com/rose-pine/neovim" },
 
--- Make sure to setup `mapleader` and `maplocalleader` before
--- loading lazy.nvim so that mappings are correct.
--- This is also a good place to setup other settings (vim.opt)
-vim.g.mapleader = " "
-vim.g.maplocalleader = "\\"
+	{ src = "https://github.com/neovim/nvim-lspconfig" },
+	{ src = "https://github.com/nvim-treesitter/nvim-treesitter" },
 
--- Setup lazy.nvim
-require("lazy").setup({
-	spec = {
-		{ import = "plugins" },
-	},
-	checker = { enabled = true, notify = false },
+	{ src = "https://github.com/saghen/blink.cmp", branch = "1.*" },
 })
 
-require("map")
-require("base")
-require("lsp")
+vim.cmd("colorscheme rose-pine")
+
+--- Core configuration
+require("core.keymap")
+require("core.options")
+require("core.lsp")
+
+--- Major plugins
+require("plugins.blink")
+require("plugins.treesitter")
+require("plugins.conform")
+require("plugins.telescope")
+
+--- Minor plugins
+require("plugins.gitsigns")
+require("plugins.neoscroll")
+
+--- Languages plugins
+require("plugins.helm")

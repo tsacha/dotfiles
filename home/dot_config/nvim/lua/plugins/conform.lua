@@ -1,58 +1,67 @@
-return {
-	"stevearc/conform.nvim",
-	event = { "BufReadPre", "BufNewFile" },
-	cmd = { "ConformInfo" },
-	opts = {
-		notify_on_error = false,
-		format_on_save = function(bufnr)
-			-- Disable with a global or buffer-local variable
-			if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
-				return
-			end
-			return { timeout_ms = 500, lsp_fallback = true }
-		end,
-		formatters = {
-			yamlfmt = {
-				inherit = false,
-				command = "yamlfmt",
-				args = {
-					"-formatter",
-					"include_document_start=false",
-					"-",
-				},
+vim.pack.add({ "https://github.com/stevearc/conform.nvim" })
+
+require("conform").setup({
+	formatters_by_ft = {
+		python = { "ruff_format" },
+		go = { "gofmt" },
+		lua = { "stylua" },
+		fish = { "fish_indent" },
+		helm = { "yamlfmt" },
+		yaml = { "yamlfmt" },
+		markdown = { "prettier" },
+	},
+	formatters = {
+		yamlfmt = {
+			inherit = false,
+			command = "yamlfmt",
+			args = {
+				"-formatter",
+				"include_document_start=false",
+				"-",
 			},
 		},
-		formatters_by_ft = {
-			python = { "ruff_format" },
-			go = { "gofmt" },
-			lua = { "stylua" },
-			fish = { "fish_indent" },
-			helm = { "yamlfmt" },
-			yaml = { "yamlfmt" },
-			markdown = { "prettier" },
-		},
 	},
-	config = function(_, opts)
-		require("conform").setup(opts)
-
-		vim.api.nvim_create_user_command("FormatDisable", function(args)
-			if args.bang then
-				-- FormatDisable! will disable formatting just for this buffer
-				vim.b.disable_autoformat = true
-			else
-				vim.g.disable_autoformat = true
-			end
-		end, {
-			desc = "Disable autoformat-on-save",
-			bang = true,
-		})
-
-		vim.api.nvim_create_user_command("FormatEnable", function()
-			vim.b.disable_autoformat = false
-			vim.g.disable_autoformat = false
-		end, {
-			desc = "Re-enable autoformat-on-save",
-		})
+	default_format_opts = {
+		lsp_format = "fallback",
+	},
+	format_on_save = function(bufnr)
+		local ignore_filetypes = {}
+		if vim.tbl_contains(ignore_filetypes, vim.bo[bufnr].filetype) then
+			return
+		end
+		if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
+			return
+		end
+		local bufname = vim.api.nvim_buf_get_name(bufnr)
+		if bufname:match("/node_modules/") then
+			return
+		end
+		return { timeout_ms = 500, lsp_format = "fallback" }
 	end,
-}
--- vim: ts=2 sts=2 sw=2 et
+})
+
+vim.api.nvim_create_user_command("FormatDisable", function(opts)
+	if opts.bang then
+		vim.b.disable_autoformat = true
+	else
+		vim.g.disable_autoformat = true
+	end
+	vim.notify("Autoformat disabled" .. (opts.bang and " (buffer)" or " (global)"), vim.log.levels.WARN)
+end, { desc = "Disable autoformat-on-save", bang = true })
+
+vim.api.nvim_create_user_command("FormatEnable", function()
+	vim.b.disable_autoformat = false
+	vim.g.disable_autoformat = false
+	vim.notify("Autoformat enabled", vim.log.levels.INFO)
+end, { desc = "Re-enable autoformat-on-save" })
+
+local auto_format = true
+
+vim.keymap.set("n", "<leader>uf", function()
+	auto_format = not auto_format
+	if auto_format then
+		vim.cmd("FormatEnable")
+	else
+		vim.cmd("FormatDisable")
+	end
+end, { desc = "Toggle Autoformat" })

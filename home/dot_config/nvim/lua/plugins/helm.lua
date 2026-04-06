@@ -1,7 +1,1 @@
-return {
-	{ "towolf/vim-helm", ft = "helm" },
-	{
-		"nvim-treesitter/nvim-treesitter",
-		opts = { ensure_installed = { "helm" } },
-	},
-}
+vim.pack.add({ "https://github.com/towolf/vim-helm" })
