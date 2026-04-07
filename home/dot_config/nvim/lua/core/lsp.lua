@@ -31,3 +31,15 @@ vim.api.nvim_create_autocmd("LspAttach", {
 vim.diagnostic.config({
 	virtual_lines = { current_line = true },
 })
+
+vim.lsp.config("tofu_ls", {
+	cmd = { "tofu-ls", "serve" },
+	filetypes = { "terraform", "terraform-vars" },
+	root_markers = { ".terraform", ".git" },
+	settings = {
+		validate = false,
+		format = { enable = true },
+		completion = true,
+		hover = true,
+	},
+})

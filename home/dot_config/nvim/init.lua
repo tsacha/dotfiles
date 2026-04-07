@@ -25,6 +25,8 @@ vim.pack.add({
 
 vim.cmd("colorscheme rose-pine")
 
+require('vim._core.ui2').enable({})
+
 --- Core configuration
 require("core.keymap")
 require("core.options")
