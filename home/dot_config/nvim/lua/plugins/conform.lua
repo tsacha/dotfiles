@@ -4,7 +4,7 @@ require("conform").setup({
 		go = { "gofmt" },
 		lua = { "stylua" },
 		fish = { "fish_indent" },
-		helm = { "yamlfmt" },
+		--helm = { "yamlfmt" },
 		yaml = { "yamlfmt" },
 		markdown = { "prettier" },
 	},

@@ -10,6 +10,7 @@ local parsers = {
     'gitignore',
     'go',
     'hcl',
+    'helm',
     'html',
     'javascript',
     'jsdoc',
