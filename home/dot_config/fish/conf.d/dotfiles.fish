@@ -17,6 +17,7 @@ abbr --add n nvim
 abbr --add tf tofu
 abbr --add tm tmux
 abbr --add lg lazygit
+abbr --add gcmai 'git commit -m (gcmsg_ai)'
 
 bind ctrl-backspace backward-kill-token
 bind alt-backspace backward-kill-word
