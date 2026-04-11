@@ -1,0 +1,5 @@
+[Desktop Entry]
+Name=Theme Switch
+Exec=/home/sacha/.scripts/theme_switch.sh
+Type=Application
+NoDisplay=true
