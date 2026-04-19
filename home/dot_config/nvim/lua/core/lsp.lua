@@ -5,6 +5,18 @@ vim.lsp.enable({
 	"lua_ls",
 	"tofu_ls",
 	"yamlls",
+	"zls",
+})
+
+vim.lsp.config("zls", {
+	cmd = { "zls" },
+	filetypes = { "zig", "zon" },
+	root_markers = { "build.zig", ".git" },
+	settings = {
+		zls = {
+			enable_build_on_save = true,
+		},
+	},
 })
 
 vim.api.nvim_create_autocmd("LspAttach", {
@@ -30,6 +42,8 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
 vim.diagnostic.config({
 	virtual_lines = { current_line = true },
+	signs = true,
+	float = { source = true },
 })
 
 vim.lsp.config("tofu_ls", {
