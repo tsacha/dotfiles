@@ -35,5 +35,4 @@ require("plugins.neoscroll")
 require("plugins.guess-indent")
 
 --- Languages plugins
-require("plugins.kubectl")
 require("plugins.helm")

@@ -16,6 +16,9 @@ set-option -g automatic-rename-format '#{b:pane_current_path}#{?#{==:#{pane_curr
 bind h split-window -h -c "#{pane_current_path}"
 bind v split-window -v -c "#{pane_current_path}"
 
+set-hook -g after-split-window 'select-layout -E'
+set-hook -g pane-exited 'select-layout -E'
+
 bind -n M-h select-pane -L
 bind -n M-j select-pane -D
 bind -n M-k select-pane -U
@@ -32,6 +35,7 @@ set -g visual-bell off
 set -g visual-silence off
 setw -g monitor-activity off
 set -g bell-action none
+set -g focus-events on
 
 # Status bar styling
 set-option -g status-style bg=default,fg=colour7

@@ -2,16 +2,16 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
 local function map(mode, lhs, rhs, opts)
-        local options = { noremap = true, silent = true }
-        if opts then
-                options = vim.tbl_extend("force", options, opts)
-        end
-        vim.api.nvim_set_keymap(mode, lhs, rhs, options)
+	local options = { noremap = true, silent = true }
+	if opts then
+		options = vim.tbl_extend("force", options, opts)
+	end
+	vim.api.nvim_set_keymap(mode, lhs, rhs, options)
 end
 
 for _, lhs in ipairs({ "<Leader>c" }) do
-        map("n", lhs, '"+yy')
-        map("x", lhs, '"+y')
+	map("n", lhs, '"+yy')
+	map("x", lhs, '"+y')
 end
 
 map("n", "<leader>s", ":w<CR>")
