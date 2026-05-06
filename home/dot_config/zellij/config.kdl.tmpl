@@ -1,24 +1,10 @@
-{{ $color := "light" }}
-{{ if eq .chezmoi.os "darwin" -}}
-{{ if eq (output "osascript" "-e" "tell app \"System Events\" to tell appearance preferences to get dark mode" | trim) "false" -}}
-{{ $color = "light" }}
-{{ else if eq (output "osascript" "-e" "tell app \"System Events\" to tell appearance preferences to get dark mode" | trim) "true" -}}
-{{ $color = "dark" }}
-{{ end -}}
-{{ else -}}
-{{ if eq (output "gsettings" "get" "org.gnome.desktop.interface" "color-scheme" | trim) "'prefer-light'" -}}
-{{ $color = "light" }}
-{{ else if eq (output "gsettings" "get" "org.gnome.desktop.interface" "color-scheme" | trim) "'prefer-dark'" -}}
-{{ $color = "dark" }}
-{{ end -}}
-{{ end -}}
-
-{{ if eq $color "light" }}
-theme "rose-pine-dawn"
-{{ else }}
 theme "rose-pine"
-{{ end }}
+theme_light "rose-pine-dawn"
+theme_dark "rose-pine"
 simplified_ui true
+show_startup_tips false
+show_release_notes false
+
 
 pane_frames false
 ui {
@@ -27,3 +13,58 @@ ui {
     }
 }
 show_startup_tips false
+default_layout "compact"
+
+focus_follows_mouse true
+mouse_click_through true
+osc8_hyperlinks true
+
+keybinds {
+    normal {
+        unbind "Ctrl p" "Ctrl t" "Ctrl n" "Ctrl s" "Ctrl o" "Ctrl h" "Ctrl g" "Ctrl q"
+        bind "Alt h" { MoveFocus "Left"; }
+        bind "Alt j" { MoveFocus "Down"; }
+        bind "Alt k" { MoveFocus "Up"; }
+        bind "Alt l" { MoveFocus "Right"; }
+        bind "Alt t" { NewTab; }
+        bind "Alt r" { GoToNextTab; }
+        bind "Alt n" { GoToPreviousTab; }
+        bind "Alt Space" { SwitchToMode "Scroll"; }
+        bind "Alt q" { SwitchToMode "Pane"; }
+        bind "Alt w" { SwitchToMode "Tab"; }      // Ctrl+t → Alt+w (Alt+t = NewTab)
+        bind "Alt e" { SwitchToMode "Resize"; }   // Ctrl+n → Alt+e (Alt+n = PreviousTab)
+        bind "Alt o" { SwitchToMode "Session"; }  // Ctrl+o → Alt+o
+        bind "Alt m" { SwitchToMode "Move"; }     // Ctrl+h → Alt+m (Alt+h = navigation)
+        bind "Alt g" { SwitchToMode "Locked"; }   // Ctrl+g → Alt+g
+    }
+    pane {
+        unbind "Ctrl p"
+        bind "h" { NewPane "Right"; SwitchToMode "Normal"; }
+        bind "v" { NewPane "Down"; SwitchToMode "Normal"; }
+        bind "Esc" "Alt q" { SwitchToMode "Normal"; }
+    }
+    tab {
+        unbind "Ctrl t"
+        bind "Esc" "Alt w" { SwitchToMode "Normal"; }
+    }
+    resize {
+        unbind "Ctrl n"
+        bind "Esc" "Alt e" { SwitchToMode "Normal"; }
+    }
+    scroll {
+        unbind "Ctrl s" "Ctrl c"
+        bind "Alt Space" { SwitchToMode "Normal"; }
+    }
+    session {
+        unbind "Ctrl o"
+        bind "Esc" "Alt o" { SwitchToMode "Normal"; }
+    }
+    move {
+        unbind "Ctrl h"
+        bind "Esc" "Alt m" { SwitchToMode "Normal"; }
+    }
+    locked {
+        unbind "Ctrl g"
+        bind "Alt g" { SwitchToMode "Normal"; }
+    }
+}

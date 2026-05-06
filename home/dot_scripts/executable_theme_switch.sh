@@ -32,6 +32,5 @@ else
 osascript -e 'tell app "System Events" to tell appearance preferences to set dark mode to not dark mode'
 $cm apply --force \
     ~/.config/k9s/config.yaml \
-    ~/.config/k9s/skins/rosepine.yaml \
-    ~/.config/zellij/config.kdl
+    ~/.config/k9s/skins/rosepine.yaml
 fi
