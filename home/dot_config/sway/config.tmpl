@@ -76,6 +76,7 @@ bindsym $mod+Shift+8 move container to workspace number 8
 bindsym $mod+Shift+9 move container to workspace number 9
 bindsym $mod+Shift+0 move container to workspace number 10
 
+workspace_layout tabbed
 bindsym $mod+b layout splith
 bindsym $mod+v layout splitv
 bindsym $mod+s layout stacking
@@ -120,40 +121,25 @@ bindsym $mod+F10 exec $HOME/.scripts/brightness.sh increase 10
 font pango:Monaspace Neon 12
 title_align center
 hide_edge_borders smart
+smart_gaps on
 gaps inner 4
 
 {{ if eq $color "light" }}
-set $base           #faf4ed
-set $surface        #fffaf3
-set $overlay        #f2e9e1
-set $muted          #9893a5
-set $subtle         #797593
-set $text           #575279
-set $love           #b4637a
-set $gold           #ea9d34
-set $rose           #d7827e
-set $pine           #286983
-set $foam           #56949f
-set $iris           #907aa9
-set $highlightlow   #f4ede8
-set $highlightmed   #dfdad9
-set $highlighthigh  #cecacd
+set $base    #faf4ed
+set $surface #fffaf3
+set $subtle  #797593
+set $text    #575279
+set $love    #b4637a
+set $foam    #56949f
+set $iris    #907aa9
 {{ else }}
-set $base           #191724
-set $surface        #1f1d2e
-set $overlay        #26233a
-set $muted          #6e6a86
-set $subtle         #908caa
-set $text           #e0def4
-set $love           #eb6f92
-set $gold           #f6c177
-set $rose           #ebbcba
-set $pine           #31748f
-set $foam           #9ccfd8
-set $iris           #c4a7e7
-set $highlightlow   #21202e
-set $highlightmed   #403d52
-set $highlighthigh  #524f67
+set $base    #191724
+set $surface #1f1d2e
+set $subtle  #908caa
+set $text    #e0def4
+set $love    #eb6f92
+set $foam    #9ccfd8
+set $iris    #c4a7e7
 {{ end }}
 
 default_border pixel 1
