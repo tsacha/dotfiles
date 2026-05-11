@@ -22,6 +22,7 @@ require("vim._core.ui2").enable({})
 require("core.keymap")
 require("core.options")
 require("core.lsp")
+require("core.yank")
 
 --- Major plugins
 require("plugins.blink")
