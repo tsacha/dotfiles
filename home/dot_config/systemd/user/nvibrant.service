@@ -1,8 +1,5 @@
 [Unit]
 Description=nvibrant
-PartOf=graphical-session.target
-After=graphical-session.target
-Requisite=graphical-session.target
 
 [Service]
 ExecStart=/usr/sbin/nvibrant
@@ -12,4 +9,4 @@ Type=oneshot
 RemainAfterExit=true
 
 [Install]
-WantedBy=graphical-session.target
+WantedBy=default.target
