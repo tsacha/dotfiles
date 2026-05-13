@@ -15,10 +15,10 @@
 
 # Logo key. Use Mod1 for Alt.
 set $mod Mod4
-set $left h
+set $left n
 set $down j
 set $up k
-set $right l
+set $right r
 set $term ghostty
 set $menu fuzzel
 
@@ -86,6 +86,7 @@ bindsym $mod+f fullscreen
 bindsym $mod+Shift+space floating toggle
 bindsym $mod+space focus mode_toggle
 bindsym $mod+a focus parent
+bindsym $mod+x exec swaymsg move workspace to "$(swaymsg -t get_outputs | jq '[.[] | select(.active == true)] | .[(map(.focused) | index(true) + 1) % length].name')"
 
 mode "resize" {
     bindsym $left resize shrink width 10px
@@ -102,7 +103,7 @@ mode "resize" {
     bindsym Escape mode "default"
 }
 
-bindsym $mod+r mode "resize"
+bindsym $mod+z mode "resize"
 
 bindsym --locked XF86AudioRaiseVolume exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1+
 bindsym --locked XF86AudioLowerVolume exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1-
@@ -200,3 +201,4 @@ exec systemctl --user start gpg-agent-ssh.socket
 exec systemctl --user import-environment SSH_AUTH_SOCK
 
 include /etc/sway/config.d/*
+include $HOME/.config/sway/*
