@@ -25,6 +25,8 @@ fi;
 $cm apply --force \
     ~/.config/sway/config \
     ~/.config/niri/config.kdl \
+    ~/.config/mako/config \
+    ~/.config/fuzzel/fuzzel.ini \
     ~/.config/k9s/skins/rosepine.yaml
 swaymsg reload
 fi
