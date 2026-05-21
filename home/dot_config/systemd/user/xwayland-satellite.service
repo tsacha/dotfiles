@@ -1,7 +1,9 @@
 [Unit]
 Description=xwayland-satellite
+PartOf=default.target
 
 [Service]
+ExecCondition=/bin/sh -c 'printf "%s" "$${XDG_CURRENT_DESKTOP:-}" | grep -qi niri'
 ExecStartPre=/bin/sleep 1
 ExecStart=/usr/sbin/xwayland-satellite
 Type=notify

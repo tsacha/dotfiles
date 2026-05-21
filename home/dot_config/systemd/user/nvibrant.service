@@ -1,7 +1,9 @@
 [Unit]
 Description=nvibrant
+PartOf=default.target
 
 [Service]
+ExecCondition=/bin/sh -c 'case "$${XDG_CURRENT_DESKTOP:-}" in *GNOME*|*KDE*) exit 1 ;; *) exit 0 ;; esac'
 ExecStart=/usr/sbin/nvibrant
 ExecStop=/usr/sbin/nvibrant 0 0 0 0 0 0 0
 Environment="ATTRIBUTE=dithering"

@@ -1,7 +1,9 @@
 [Unit]
 Description=awww
+PartOf=default.target
 
 [Service]
+ExecCondition=/bin/sh -c 'case "$${XDG_CURRENT_DESKTOP:-}" in *GNOME*|*KDE*) exit 1 ;; *) exit 0 ;; esac'
 ExecStart=/usr/sbin/awww-daemon
 Restart=always
 RestartSec=5s
