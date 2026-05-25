@@ -3,6 +3,7 @@ require("conform").setup({
 		python = { "ruff_format" },
 		go = { "gofmt" },
 		lua = { "stylua" },
+		rust = { "rustfmt" },
 		fish = { "fish_indent" },
 		--helm = { "yamlfmt" },
 		yaml = { "yamlfmt" },

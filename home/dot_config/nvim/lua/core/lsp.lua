@@ -3,9 +3,26 @@ vim.lsp.enable({
 	"gopls",
 	"helm_ls",
 	"lua_ls",
+	"rust_analyzer",
 	"tofu_ls",
 	"yamlls",
 	"zls",
+})
+
+vim.lsp.config("rust_analyzer", {
+	cmd = { "rust-analyzer" },
+	filetypes = { "rust" },
+	root_markers = { "Cargo.toml", "rust-project.json", ".git" },
+	settings = {
+		["rust-analyzer"] = {
+			cargo = {
+				allFeatures = true,
+			},
+			check = {
+				command = "clippy",
+			},
+		},
+	},
 })
 
 vim.lsp.config("zls", {
