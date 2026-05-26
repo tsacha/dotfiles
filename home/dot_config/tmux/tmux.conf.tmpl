@@ -55,35 +55,35 @@ set -g focus-events on
 # Status bar styling
 {{ if eq $color "light" }}
 set-option -g status-style bg=#fffaf3,fg=#575279
-set -g status-right "#[fg=#9ccfd8]%H:%M #[fg=default]· #[fg=#c4a7e7]%d %b "
-set -g window-status-current-style fg=#907aa9,bg=#f2e9e1
-set -g window-status-current-format " #[bold]•#[nobold] #[fg=#575279]#W "
-set -g window-status-format " · #W "
+set -g status-right "#[fg=#c4a7e7]%H:%M #[fg=default]· #[fg=#9ccfd8]%d %b "
+set -g window-status-current-style fg=#fffaf3,bg=#286983,bold
+set -g window-status-current-format "#[fg=#fffaf3,bg=#286983,bold] #W #[default]"
+set -g window-status-format " #W "
 set -g window-status-activity-style fg=#ea9d34
-set -g window-status-bell-style fg=#907aa9
+set -g window-status-bell-style fg=#c4a7e7
 set -g pane-border-style fg=#f2e9e1
-set -g pane-active-border-style fg=#907aa9
-set -g message-style bg=#fffaf3,fg=#907aa9
+set -g pane-active-border-style fg=#286983
+set -g message-style bg=#fffaf3,fg=#286983
 set -g message-command-style bg=#fffaf3,fg=#56949f
-set -g display-panes-active-colour "#907aa9"
+set -g display-panes-active-colour "#286983"
 set -g display-panes-colour "#9893a5"
-set -g clock-mode-colour "#907aa9"
+set -g clock-mode-colour "#286983"
 set -g mode-style bg=#f2e9e1,fg=#575279
 {{ else }}
 set-option -g status-style bg=#1f1d2e,fg=#e0def4
-set -g status-right "#[fg=#9ccfd8]%H:%M #[fg=default]· #[fg=#c4a7e7]%d %b "
-set -g window-status-current-style fg=#c4a7e7,bg=#26233a
-set -g window-status-current-format " #[bold]•#[nobold] #[fg=#e0def4]#W "
-set -g window-status-format " · #W "
+set -g status-right "#[fg=#c4a7e7]%H:%M #[fg=default]· #[fg=#9ccfd8]%d %b "
+set -g window-status-current-style fg=#1f1d2e,bg=#31748f,bold
+set -g window-status-current-format "#[fg=#1f1d2e,bg=#31748f,bold] #W #[default]"
+set -g window-status-format " #W "
 set -g window-status-activity-style fg=#f6c177
 set -g window-status-bell-style fg=#c4a7e7
 set -g pane-border-style fg=#26233a
-set -g pane-active-border-style fg=#c4a7e7
-set -g message-style bg=#1f1d2e,fg=#c4a7e7
+set -g pane-active-border-style fg=#31748f
+set -g message-style bg=#1f1d2e,fg=#31748f
 set -g message-command-style bg=#1f1d2e,fg=#9ccfd8
-set -g display-panes-active-colour "#c4a7e7"
+set -g display-panes-active-colour "#31748f"
 set -g display-panes-colour "#908caa"
-set -g clock-mode-colour "#c4a7e7"
+set -g clock-mode-colour "#31748f"
 set -g mode-style bg=#26233a,fg=#e0def4
 {{ end }}
 set -g status-position top
