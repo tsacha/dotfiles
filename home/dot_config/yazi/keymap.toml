@@ -1,0 +1,5 @@
+[[mgr.prepend_keymap]]
+on   = "!"
+for  = "unix"
+run  = 'shell "cd \"$0\" && $SHELL" --block'
+desc = "Open $SHELL in hovered directory"

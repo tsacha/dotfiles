@@ -14,8 +14,9 @@ alias gs="git status"
 
 abbr --add l ls
 abbr --add n nvim
+abbr --add y yazi
 abbr --add tf tofu
-abbr --add tm tmux
+abbr --add t tmux
 abbr --add lg lazygit
 abbr --add gcmai 'git commit -m (gcmsg_ai)'
 

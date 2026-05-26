@@ -1,4 +1,4 @@
-abbr --add t task
+abbr --add ta task
 
 set -gx SSH_AUTH_SOCK ~/.gnupg/S.gpg-agent.ssh
 

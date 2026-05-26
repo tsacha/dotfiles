@@ -1,0 +1,10 @@
+[flavor]
+dark = "rose-pine"
+light = "rose-pine-dawn"
+
+[indicator]
+padding = { open = "▐", close = "▌" }
+
+[status]
+sep_left  = { open = "▐", close = "▌" }
+sep_right = { open = "▐", close = "▌" }
