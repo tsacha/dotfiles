@@ -120,6 +120,7 @@ bindsym $mod+F7 exec $HOME/.scripts/theme_switch.sh
 bindsym $mod+F8 exec $HOME/.scripts/audio_switch.sh
 bindsym $mod+F9 exec $HOME/.scripts/brightness.sh decrease 10
 bindsym $mod+F10 exec $HOME/.scripts/brightness.sh increase 10
+bindsym $mod+F11 exec swaymsg output DP-6 hdr toggle
 
 font pango:Monaspace Neon 12
 title_align center
@@ -182,7 +183,7 @@ input "type:keyboard" {
   xkb_options caps:escape
 }
 output DP-5 mode 1920x1080@143.981003Hz scale 1 pos 0 0
-output DP-6 mode 3440x1440@143.923004Hz scale 1 pos 0 1080
+output DP-6 mode 3440x1440@143.923004Hz scale 1 pos 0 1080 render_bit_depth 10
 
 output * adaptive_sync on
 
