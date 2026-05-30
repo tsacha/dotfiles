@@ -28,3 +28,5 @@ kubectl
 kubie
 
 pavucontrol
+
+gnome-themes-extra
