@@ -115,6 +115,7 @@ bindsym Ctrl+Print exec grim
 bindsym Alt+Print exec grim -g "$(swaymsg -t get_tree | jq -r '.. | select(.focused?) | .rect | "\(.x),\(.y) \(.width)x\(.height)"')"
 
 bindsym $mod+F1 exec swaylock
+bindsym $mod+F2 exec $HOME/.scripts/fuzzel-emoji
 bindsym $mod+F6 exec $HOME/.scripts/nightmode.sh
 bindsym $mod+F7 exec $HOME/.scripts/theme_switch.sh
 bindsym $mod+F8 exec $HOME/.scripts/audio_switch.sh

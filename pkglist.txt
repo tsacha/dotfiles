@@ -5,6 +5,7 @@ chezmoi
 nvim
 firefox
 
+fuzzel
 ghostty
 awww
 wlsunset
@@ -20,6 +21,9 @@ bat
 git
 age
 less
+jq
+curl
+wl-clipboard
 
 go
 npm

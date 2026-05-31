@@ -1,0 +1,215 @@
+#!/usr/bin/env python3
+import json
+import os
+import re
+import shutil
+import subprocess
+import sys
+import tempfile
+import urllib.request
+from collections.abc import Mapping
+from collections import defaultdict
+from pathlib import Path
+
+
+CACHE_DIR = (
+    Path(os.environ.get("XDG_CACHE_HOME", Path.home() / ".cache")) / "fuzzel-emoji"
+)
+DATA_FILE = Path(os.environ.get("FUZZEL_EMOJI_DATA", CACHE_DIR / "emojis.txt"))
+META_FILE = DATA_FILE.parent / "emojis.meta"
+EMOJI_TEST_URL = os.environ.get(
+    "FUZZEL_EMOJI_TEST_URL",
+    "https://www.unicode.org/Public/emoji/latest/emoji-test.txt",
+)
+CLDR_BASE_URL = os.environ.get(
+    "FUZZEL_EMOJI_CLDR_BASE_URL",
+    "https://raw.githubusercontent.com/unicode-org/cldr-json/main/cldr-json",
+)
+LOCALES = os.environ.get("FUZZEL_EMOJI_LOCALES", "en,fr")
+EMOJI_LINE_RE = re.compile(r"#\s*(\S+)\s+E[0-9.]+\s+(.+)")
+
+
+def die(message: str) -> None:
+    print(f"fuzzel-emoji: {message}", file=sys.stderr)
+    sys.exit(1)
+
+
+def need(command: str) -> None:
+    if shutil.which(command) is None:
+        die(f"missing command: {command}")
+
+
+def fetch(url: str) -> str:
+    with urllib.request.urlopen(url, timeout=30) as response:
+        return response.read().decode("utf-8")
+
+
+def cldr_url(locale: str, derived: bool = False) -> str:
+    path = (
+        f"cldr-annotations-derived-full/annotationsDerived/{locale}/annotations.json"
+        if derived
+        else f"cldr-annotations-full/annotations/{locale}/annotations.json"
+    )
+    return f"{CLDR_BASE_URL}/{path}"
+
+
+def locales() -> list[str]:
+    return [locale for raw in LOCALES.split(",") if (locale := raw.strip())]
+
+
+def add_term(terms_by_emoji: defaultdict[str, list[str]], emoji: str, term: object) -> None:
+    text = str(term).strip()
+    if text and text not in terms_by_emoji[emoji]:
+        terms_by_emoji[emoji].append(text)
+
+
+def emoji_entries(emoji_test: str) -> tuple[str, list[tuple[str, str]]]:
+    version = "unknown"
+    entries = []
+
+    for line in emoji_test.splitlines():
+        if line.startswith("# Version:"):
+            version = line.split(":", 1)[1].strip()
+            continue
+
+        if "; fully-qualified" not in line:
+            continue
+
+        if match := EMOJI_LINE_RE.search(line):
+            entries.append(match.groups())
+
+    return version, entries
+
+
+def add_annotations(
+    terms_by_emoji: defaultdict[str, list[str]],
+    locale: str,
+    derived: bool = False,
+) -> None:
+    try:
+        data = json.loads(fetch(cldr_url(locale, derived)))
+    except Exception as error:
+        kind = "derived" if derived else "base"
+        print(
+            f"fuzzel-emoji: warning: failed to fetch CLDR {kind} annotations for {locale}: {error}",
+            file=sys.stderr,
+        )
+        return
+
+    annotations = (
+        data.get("annotations", {}).get("annotations")
+        or data.get("annotationsDerived", {}).get("annotations")
+        or {}
+    )
+
+    for emoji, values in annotations.items():
+        terms = values.get("tts", []) + values.get("default", [])
+        for term in terms:
+            add_term(terms_by_emoji, emoji, term)
+
+
+def emoji_rows(
+    entries: list[tuple[str, str]],
+    terms_by_emoji: Mapping[str, list[str]],
+) -> list[str]:
+    rows = []
+
+    for emoji, _name in entries:
+        rows.append(" ".join([emoji, *terms_by_emoji.get(emoji, [])]))
+
+    return rows
+
+
+def write_cache(rows: list[str]) -> None:
+    tmp = tempfile.NamedTemporaryFile(
+        "w",
+        encoding="utf-8",
+        dir=DATA_FILE.parent,
+        prefix=".emojis.",
+        delete=False,
+    )
+    tmp_path = Path(tmp.name)
+
+    try:
+        with tmp:
+            tmp.write("\n".join(rows) + "\n")
+        tmp_path.replace(DATA_FILE)
+    except Exception:
+        tmp_path.unlink(missing_ok=True)
+        raise
+
+
+def generate_cache() -> None:
+    DATA_FILE.parent.mkdir(parents=True, exist_ok=True)
+
+    try:
+        emoji_test = fetch(EMOJI_TEST_URL)
+    except Exception as error:
+        die(f"failed to fetch {EMOJI_TEST_URL}: {error}")
+
+    version, entries = emoji_entries(emoji_test)
+    terms_by_emoji = defaultdict(list)
+    for emoji, name in entries:
+        add_term(terms_by_emoji, emoji, name)
+
+    for locale in locales():
+        add_annotations(terms_by_emoji, locale)
+        add_annotations(terms_by_emoji, locale, derived=True)
+
+    rows = emoji_rows(entries, terms_by_emoji)
+    if not rows:
+        die("generated cache is empty")
+
+    write_cache(rows)
+    META_FILE.write_text(
+        "\n".join(
+            [
+                f"emoji_test_url={EMOJI_TEST_URL}",
+                f"emoji_version={version or 'unknown'}",
+                f"cldr_base_url={CLDR_BASE_URL}",
+                f"locales={LOCALES}",
+                f"count={len(rows)}",
+                "",
+            ]
+        ),
+        encoding="utf-8",
+    )
+
+
+def pick_emoji() -> str | None:
+    with DATA_FILE.open(encoding="utf-8") as data:
+        result = subprocess.run(
+            ["fuzzel", "--match-mode", "fzf", "--dmenu"],
+            stdin=data,
+            stdout=subprocess.PIPE,
+            text=True,
+            check=False,
+        )
+
+    if result.returncode != 0:
+        return None
+
+    return result.stdout.split(maxsplit=1)[0] if result.stdout.strip() else None
+
+
+def copy_emoji(emoji: str) -> None:
+    subprocess.run(["wl-copy"], input=emoji, text=True, check=True)
+
+
+def main() -> None:
+    if len(sys.argv) > 1:
+        die("this script does not take arguments")
+
+    for command in ("fuzzel", "wl-copy"):
+        need(command)
+
+    if not DATA_FILE.is_file() or DATA_FILE.stat().st_size == 0:
+        generate_cache()
+
+    emoji = pick_emoji()
+    if emoji:
+        copy_emoji(emoji)
+
+
+if __name__ == "__main__":
+    main()
