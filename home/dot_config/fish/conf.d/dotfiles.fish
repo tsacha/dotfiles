@@ -3,6 +3,7 @@ set -U fish_greeting ""
 set -gx EDITOR nvim
 
 fish_add_path $HOME/.local/bin
+fish_add_path $HOME/.cargo/bin
 
 alias cat="bat -pp --theme-dark=rose-pine --theme-light=rose-pine-dawn"
 alias ls="eza --long --header --git"
