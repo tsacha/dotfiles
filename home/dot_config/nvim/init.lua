@@ -34,6 +34,7 @@ require("plugins.telescope")
 require("plugins.gitsigns")
 require("plugins.neoscroll")
 require("plugins.guess-indent")
+require("plugins.zen-mode")
 
 --- Languages plugins
 require("plugins.helm")
