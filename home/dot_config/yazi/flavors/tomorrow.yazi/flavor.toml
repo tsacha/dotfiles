@@ -1,0 +1,213 @@
+# Local Tomorrow Yazi flavor.
+# Color palette: Tomorrow
+# ---
+# black0      "#ffffff" bg
+# black1      "#efefef" bg-2
+# black2      "#d6d6d6" ui
+# black3      "#c8c8c8" ui-2
+# black4      "#8e908c" tx-3
+# black5      "#969896" tx-2
+# white       "#4d4d4c" tx
+# surface     "#b4b7b4" ui-3
+# red         "#c82829" re
+# orange      "#f5871f" or
+# yellow      "#eab700" ye
+# green       "#718c00" gr
+# cyan        "#3e999f" cy
+# blue        "#4271ae" bl
+# magenta     "#8959a8" ma
+
+[app]
+overall = { bg = "#ffffff" } # bg
+
+[mgr]
+cwd = { fg = "#3e999f", bold = true } # cy
+hovered = { fg = "#ffffff", bg = "#3e999f", bold = true } # bg, cy
+
+# Find
+find_keyword = { fg = "#eab700", bold = true, italic = true, underline = true } # ye
+find_position = { fg = "#8959a8", bg = "reset", bold = true, italic = true } # ma
+symlink_target = { italic = true }
+
+# Marker
+marker_copied = { fg = "#718c00", bg = "#718c00" } # gr, gr
+marker_cut = { fg = "#c82829", bg = "#c82829" } # re, re
+marker_marked = { fg = "#3e999f", bg = "#3e999f" } # cy, cy
+marker_selected = { fg = "#eab700", bg = "#eab700" } # ye, ye
+
+# Count
+count_copied = { fg = "#ffffff", bg = "#718c00", bold = true } # bg, gr
+count_cut = { fg = "#ffffff", bg = "#c82829", bold = true } # bg, re
+count_selected = { fg = "#4d4d4c", bg = "#eab700", bold = true } # tx, ye
+
+# Border
+border_symbol = "│"
+border_style = { fg = "#d6d6d6" } # ui
+syntect_theme = ""
+
+[indicator]
+parent = { underline = true }
+current = { fg = "#4d4d4c", bg = "#d6d6d6" } # tx, ui
+preview = { underline = true }
+padding = { open = "█", close = "█" }
+
+[tabs]
+active = { fg = "#ffffff", bg = "#3e999f", bold = true } # bg, cy
+inactive = { fg = "#3e999f", bg = "#efefef" } # cy, bg-2
+sep_inner = { open = "", close = "" }
+sep_outer = { open = "", close = "" }
+
+[mode]
+# Normal mode
+normal_main = { fg = "#ffffff", bg = "#3e999f", bold = true } # bg, cy
+normal_alt = { fg = "#ffffff", bg = "#4d4d4c", bold = true } # bg, tx
+
+# Select mode
+select_main = { fg = "#ffffff", bg = "#c82829", bold = true } # bg, re
+select_alt = { fg = "#ffffff", bg = "#4d4d4c", bold = true } # bg, tx
+
+# Unset mode
+unset_main = { fg = "#ffffff", bg = "#c82829", bold = true } # bg, re
+unset_alt = { fg = "#ffffff", bg = "#4d4d4c", bold = true } # bg, tx
+
+[status]
+overall = { fg = "#4d4d4c" } # tx
+
+# Permissions
+perm_type = { fg = "#4271ae" } # bl
+perm_read = { fg = "#eab700" } # ye
+perm_write = { fg = "#c82829" } # re
+perm_exec = { fg = "#718c00" } # gr
+perm_sep = { fg = "#969896" } # tx-2
+
+# Progress
+progress_label = { fg = "#4d4d4c", bold = true } # tx
+progress_normal = { fg = "#3e999f", bg = "#efefef" } # cy, bg-2
+progress_error = { fg = "#c82829", bg = "#efefef" } # re, bg-2
+
+[which]
+cols = 3
+mask = { bg = "#efefef" } # bg-2
+cand = { fg = "#3e999f", bold = true } # cy
+rest = { fg = "#969896", italic = true } # tx-2
+desc = { fg = "#eab700" } # ye
+separator = " "
+separator_style = { }
+
+[confirm]
+border = { fg = "#c8c8c8" } # ui-2
+title = { fg = "#c82829", bold = true } # re
+body = { fg = "#4d4d4c" } # tx
+list = { fg = "#4d4d4c" } # tx
+btn_yes = { fg = "#ffffff", bg = "#3e999f", bold = true } # bg, cy
+btn_no = { fg = "#ffffff", bg = "#4d4d4c", bold = true } # bg, tx
+
+[spot]
+border = { fg = "#c8c8c8" } # ui-2
+title = { fg = "#3e999f", bold = true } # cy
+tbl_col = { fg = "#3e999f" } # cy
+tbl_cell = { fg = "#4d4d4c", bg = "#eab700", bold = true } # tx, ye
+
+[notify]
+# Notification title
+title_info = { fg = "#4271ae" } # bl
+title_warn = { fg = "#f5871f" } # or
+title_error = { fg = "#c82829" } # re
+
+[pick]
+border = { fg = "#3e999f", bold = true } # cy
+active = { fg = "#8959a8", bold = true } # ma
+inactive = { fg = "#969896" } # tx-2
+
+[input]
+border = { fg = "#3e999f" } # cy
+title = { fg = "#4d4d4c", bold = true } # tx
+value = { fg = "#4d4d4c" } # tx
+selected = { reversed = true } # tx, bg
+
+[cmp]
+border = { fg = "#3e999f", bold = true } # cy
+active = { fg = "#ffffff", bg = "#4d4d4c", bold = true } # bg, tx
+inactive = { fg = "#969896" } # tx-2
+
+[tasks]
+border = { fg = "#3e999f" } # cy
+title = { fg = "#4d4d4c", bold = true } # tx
+hovered = { fg = "#8959a8", bold = true, reversed = true } # ma
+
+[help]
+on = { fg = "#4271ae" } # bl
+run = { fg = "#3e999f" } # cy
+desc = { fg = "#eab700", italic = true } # ye
+hovered = { reversed = true, bold = true }
+footer = { fg = "#ffffff", bg = "#4d4d4c", bold = true } # bg, tx
+
+[filetype]
+rules = [
+  # Images
+  { mime = "image/*", fg = "#8959a8" }, # ma
+
+  # Media
+  { mime = "{audio,video}/*", fg = "#eab700" }, # ye
+
+  # Archives
+  { mime = "application/{zip,rar,7z*,tar,gzip,xz,zstd,bzip*,lzma,compress,archive,cpio,arj,xar,ms-cab*}", fg = "#c82829" }, # re
+
+  # Documents
+  { mime = "application/{pdf,doc,rtf}", fg = "#f5871f" }, # or
+
+  # Empty files
+  { mime = "inode/empty", fg = "#8e908c" }, # tx-3
+
+  # Special files
+  { url = "*", is = "orphan", fg = "#ffffff", bg = "#c82829" }, # bg, re
+  { url = "*/", is = "orphan", fg = "#ffffff", bg = "#c82829" }, # bg, re
+  { url = "*", is = "link", fg = "#3e999f" }, # cy
+  { url = "*/", is = "link", fg = "#3e999f" }, # cy
+  { url = "*", is = "block", fg = "#4d4d4c" }, # tx
+  { url = "*", is = "char", fg = "#4d4d4c" }, # tx
+  { url = "*", is = "fifo", fg = "#8959a8" }, # ma
+  { url = "*", is = "sock", fg = "#8959a8" }, # ma
+  { url = "*", is = "sticky", fg = "#4d4d4c" }, # tx
+  { url = "*", is = "dummy", fg = "#ffffff", bg = "#c82829" }, # bg, re
+  { url = "*/", is = "dummy", fg = "#ffffff", bg = "#c82829" }, # bg, re
+
+  # Fallback
+  { url = "*/", fg = "#3e999f" }, # cy
+  { url = "*", is = "exec", fg = "#718c00" }, # gr
+  { url = "*", fg = "#4d4d4c" } # tx
+]
+
+[icon]
+dirs = [
+  { name = ".config", text = "", fg = "#3e999f" }, # cy
+  { name = ".git", text = "", fg = "#3e999f" }, # cy
+  { name = ".github", text = "", fg = "#3e999f" }, # cy
+  { name = ".npm", text = "", fg = "#3e999f" }, # cy
+  { name = "Desktop", text = "", fg = "#3e999f" }, # cy
+  { name = "Development", text = "", fg = "#3e999f" }, # cy
+  { name = "Documents", text = "", fg = "#3e999f" }, # cy
+  { name = "Downloads", text = "", fg = "#3e999f" }, # cy
+  { name = "Library", text = "", fg = "#3e999f" }, # cy
+  { name = "Movies", text = "", fg = "#3e999f" }, # cy
+  { name = "Music", text = "", fg = "#3e999f" }, # cy
+  { name = "Pictures", text = "", fg = "#3e999f" }, # cy
+  { name = "Public", text = "", fg = "#3e999f" }, # cy
+  { name = "Videos", text = "", fg = "#3e999f" } # cy
+]
+conds = [
+  # Special files
+  { if = "orphan", text = "", fg = "#c82829" }, # re
+  { if = "link", text = "", fg = "#3e999f" }, # cy
+  { if = "block", text = "", fg = "#4d4d4c" }, # tx
+  { if = "char", text = "", fg = "#4d4d4c" }, # tx
+  { if = "fifo", text = "", fg = "#8959a8" }, # ma
+  { if = "sock", text = "", fg = "#8959a8" }, # ma
+  { if = "sticky", text = "", fg = "#4d4d4c" }, # tx
+  { if = "dummy", text = "", fg = "#c82829" }, # re
+
+  # Fallback
+  { if = "dir", text = "", fg = "#3e999f" }, # cy
+  { if = "exec", text = "", fg = "#718c00" }, # gr
+  { if = "!dir", text = "", fg = "#4d4d4c" } # tx
+]

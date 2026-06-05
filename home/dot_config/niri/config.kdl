@@ -1,18 +1,4 @@
 /* vim: set filetype=kdl : */
-{{ $color := "light" }}
-{{ if eq .chezmoi.os "darwin" -}}
-{{ if eq (output "osascript" "-e" "tell app \"System Events\" to tell appearance preferences to get dark mode" | trim) "false" -}}
-{{ $color = "light" }}
-{{ else if eq (output "osascript" "-e" "tell app \"System Events\" to tell appearance preferences to get dark mode" | trim) "true" -}}
-{{ $color = "dark" }}
-{{ end -}}
-{{ else -}}
-{{ if eq (output "gsettings" "get" "org.gnome.desktop.interface" "color-scheme" | trim) "'prefer-light'" -}}
-{{ $color = "light" }}
-{{ else if eq (output "gsettings" "get" "org.gnome.desktop.interface" "color-scheme" | trim) "'prefer-dark'" -}}
-{{ $color = "dark" }}
-{{ end -}}
-{{ end -}}
 
 environment {
     XDG_CURRENT_DESKTOP "gnome"
@@ -56,41 +42,7 @@ output "DP-6" {
     focus-at-startup
 }
 
-layout {
-    gaps 4
-    center-focused-column "always"
-
-    preset-column-widths {
-        proportion 0.5
-        proportion 0.66667
-        proportion 0.8
-    }
-
-    default-column-width { proportion 0.8; }
-    focus-ring {
-        width 1
-
-{{ if eq $color "light" }}
-        active-color "#56949f"
-        inactive-color "#56949f"
-{{ else }}
-        active-color "#9ccfd8"
-        inactive-color "#9ccfd8"
-{{ end }}
-    }
-
-    border {
-        width 1
-
-{{ if eq $color "light" }}
-        active-color "#907aa9"
-        inactive-color "#907aa9"
-{{ else }}
-        active-color "#c4a7e7"
-        inactive-color "#c4a7e7"
-{{ end }}
-    }
-}
+include "layout.kdl"
 
 screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
 animations {

@@ -1,0 +1,28 @@
+{{- $scheme := includeTemplate "color-scheme" . | trim -}}
+{{- $palette := includeTemplate "tomorrow-palette" . | fromYaml -}}
+{{- $c := index $palette $scheme }}
+layout {
+    gaps 4
+    center-focused-column "always"
+
+    preset-column-widths {
+        proportion 0.5
+        proportion 0.66667
+        proportion 0.8
+    }
+
+    default-column-width { proportion 0.8; }
+    focus-ring {
+        width 1
+
+        active-color "{{ $c.blue }}"
+        inactive-color "{{ $c.blue }}"
+    }
+
+    border {
+        width 1
+
+        active-color "{{ $c.magenta }}"
+        inactive-color "{{ $c.magenta }}"
+    }
+}

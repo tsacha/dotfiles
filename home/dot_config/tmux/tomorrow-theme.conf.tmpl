@@ -1,0 +1,20 @@
+{{- $scheme := includeTemplate "color-scheme" . | trim -}}
+{{- $palette := includeTemplate "tomorrow-palette" . | fromYaml -}}
+{{- $c := index $palette $scheme -}}
+{{- $displayPanes := $c.black5 -}}
+{{- if eq $scheme "light" }}{{ $displayPanes = $c.black4 }}{{ end }}
+set-option -g status-style bg={{ $c.black1 }},fg={{ $c.white }}
+set -g status-right "#[fg={{ $c.magenta }}]%H:%M #[fg=default]· #[fg={{ $c.blue }}]%d %b "
+set -g window-status-current-style fg={{ $c.black1 }},bg={{ $c.green }},bold
+set -g window-status-current-format "#[fg={{ $c.black1 }},bg={{ $c.green }},bold] #W #[default]"
+set -g window-status-format " #W "
+set -g window-status-activity-style fg={{ $c.yellow }}
+set -g window-status-bell-style fg={{ $c.magenta }}
+set -g pane-border-style fg={{ $c.black2 }}
+set -g pane-active-border-style fg={{ $c.green }}
+set -g message-style bg={{ $c.black1 }},fg={{ $c.green }}
+set -g message-command-style bg={{ $c.black1 }},fg={{ $c.blue }}
+set -g display-panes-active-colour "{{ $c.green }}"
+set -g display-panes-colour "{{ $displayPanes }}"
+set -g clock-mode-colour "{{ $c.green }}"
+set -g mode-style bg={{ $c.black2 }},fg={{ $c.white }}

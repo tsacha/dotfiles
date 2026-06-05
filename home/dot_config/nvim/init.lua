@@ -1,5 +1,7 @@
+local theme = require("core.theme")
+
 vim.pack.add({
-	{ src = "https://github.com/rose-pine/neovim" },
+	theme.plugin,
 
 	{ src = "https://github.com/neovim/nvim-lspconfig" },
 	{ src = "https://github.com/nvim-treesitter/nvim-treesitter" },
@@ -14,7 +16,7 @@ vim.pack.add({
 	{ src = "https://github.com/saghen/blink.download" },
 })
 
-vim.cmd("colorscheme rose-pine")
+theme.apply()
 
 require("vim._core.ui2").enable({})
 

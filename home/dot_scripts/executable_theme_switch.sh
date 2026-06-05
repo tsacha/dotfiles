@@ -17,26 +17,30 @@ if [ "$(uname)" != "Darwin" ]; then
 			plasma-apply-lookandfeel -a org.kde.breezedark.desktop
 		fi
 	else
-		if [ $(gsettings get org.gnome.desktop.interface color-scheme) == "'prefer-light'" ]; then
+		if [ "$(gsettings get org.gnome.desktop.interface color-scheme)" == "'prefer-light'" ]; then
 			gsettings set org.gnome.desktop.interface color-scheme \'prefer-dark\'
 			gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita-dark'
 			awww query && awww img $HOME/.wallpapers/dark.jpg
-		elif [ $(gsettings get org.gnome.desktop.interface color-scheme) == "'prefer-dark'" ]; then
+		elif [ "$(gsettings get org.gnome.desktop.interface color-scheme)" == "'prefer-dark'" ]; then
 			gsettings set org.gnome.desktop.interface color-scheme \'prefer-light\'
 			gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita'
 			awww query && awww img $HOME/.wallpapers/light.png
-		elif [ $(gsettings get org.gnome.desktop.interface color-scheme) == "'default'" ]; then
+		elif [ "$(gsettings get org.gnome.desktop.interface color-scheme)" == "'default'" ]; then
 			gsettings set org.gnome.desktop.interface color-scheme \'prefer-light\'
 			gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita'
 			awww query && awww img $HOME/.wallpapers/light.png
 		fi
 		$cm apply --force \
 			~/.config/sway/config \
+			~/.config/sway/config.d/tomorrow-colors \
 			~/.config/niri/config.kdl \
+			~/.config/niri/layout.kdl \
 			~/.config/mako/config \
 			~/.config/fuzzel/fuzzel.ini \
-			~/.config/k9s/skins/rosepine.yaml \
-			~/.config/tmux/tmux.conf
+			~/.config/fish/conf.d/tomorrow.fish \
+			~/.config/k9s/skins/tomorrow.yaml \
+			~/.config/tmux/tmux.conf \
+			~/.config/tmux/tomorrow-theme.conf
 		swaymsg reload
 		reload_tmux
 	fi
@@ -44,7 +48,9 @@ else
 	osascript -e 'tell app "System Events" to tell appearance preferences to set dark mode to not dark mode'
 	$cm apply --force \
 		~/.config/k9s/config.yaml \
-		~/.config/k9s/skins/rosepine.yaml \
-		~/.config/tmux/tmux.conf
+		~/.config/fish/conf.d/tomorrow.fish \
+		~/.config/k9s/skins/tomorrow.yaml \
+		~/.config/tmux/tmux.conf \
+		~/.config/tmux/tomorrow-theme.conf
 	reload_tmux
 fi

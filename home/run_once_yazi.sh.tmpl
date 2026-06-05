@@ -1,0 +1,4 @@
+#!/usr/bin/env fish
+{{ range .themes.yazi.packages -}}
+ya pkg add {{ . }}
+{{ end -}}

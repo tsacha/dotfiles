@@ -1,18 +1,3 @@
-{{ $color := "light" }}
-{{ if eq .chezmoi.os "darwin" -}}
-{{ if eq (output "osascript" "-e" "tell app \"System Events\" to tell appearance preferences to get dark mode" | trim) "false" -}}
-{{ $color = "light" }}
-{{ else if eq (output "osascript" "-e" "tell app \"System Events\" to tell appearance preferences to get dark mode" | trim) "true" -}}
-{{ $color = "dark" }}
-{{ end -}}
-{{ else -}}
-{{ if eq (output "gsettings" "get" "org.gnome.desktop.interface" "color-scheme" | trim) "'prefer-light'" -}}
-{{ $color = "light" }}
-{{ else if eq (output "gsettings" "get" "org.gnome.desktop.interface" "color-scheme" | trim) "'prefer-dark'" -}}
-{{ $color = "dark" }}
-{{ end -}}
-{{ end -}}
-
 # Logo key. Use Mod1 for Alt.
 set $mod Mod4
 set $left n
@@ -123,30 +108,14 @@ bindsym $mod+F9 exec $HOME/.scripts/brightness.sh decrease 10
 bindsym $mod+F10 exec $HOME/.scripts/brightness.sh increase 10
 bindsym $mod+F11 exec swaymsg output DP-6 hdr toggle
 
-font pango:Monaspace Neon 12
+font pango:Geist Mono 12
 title_align center
 hide_edge_borders --i3 smart
 smart_gaps on
 gaps outer 0
 gaps inner 0
 
-{{ if eq $color "light" }}
-set $base    #faf4ed
-set $surface #fffaf3
-set $subtle  #797593
-set $text    #575279
-set $love    #b4637a
-set $foam    #56949f
-set $iris    #907aa9
-{{ else }}
-set $base    #191724
-set $surface #1f1d2e
-set $subtle  #908caa
-set $text    #e0def4
-set $love    #eb6f92
-set $foam    #9ccfd8
-set $iris    #c4a7e7
-{{ end }}
+include $HOME/.config/sway/config.d/tomorrow-colors
 
 default_border pixel 1
 
@@ -167,17 +136,17 @@ bar {
     statusline $text
     # workspaces section
     #                    border  backgr. text
-    focused_workspace    $iris $iris $base
-    inactive_workspace   $base $base $iris
+    focused_workspace    $accent $accent $base
+    inactive_workspace   $base $base $accent
     active_workspace     $base $base $text
-    urgent_workspace     $love $love $base
+    urgent_workspace     $critical $critical $base
   }
 }
 
-client.focused          $iris $iris $base $foam $iris
-client.focused_inactive $iris $surface $subtle $iris $iris
-client.unfocused        $base $base $subtle $iris $iris
-client.urgent           $love $love $base $love $love
+client.focused          $accent $accent $base $accent_alt $accent
+client.focused_inactive $accent $surface $subtle $accent $accent
+client.unfocused        $base $base $subtle $accent $accent
+client.urgent           $critical $critical $base $critical $critical
 
 input "type:keyboard" {
   xkb_layout ergol_anglemod
@@ -203,4 +172,3 @@ exec systemctl --user start gpg-agent-ssh.socket
 exec systemctl --user import-environment SSH_AUTH_SOCK
 
 include /etc/sway/config.d/*
-include $HOME/.config/sway/*

@@ -1,0 +1,103 @@
+{{- $scheme := includeTemplate "color-scheme" . | trim -}}
+{{- $palette := includeTemplate "tomorrow-palette" . | fromYaml -}}
+{{- $c := index $palette $scheme }}
+k9s:
+  body:
+    fgColor: '{{ $c.white }}'
+    bgColor: '{{ $c.black0 }}'
+    logoColor: '{{ $c.magenta }}'
+  prompt:
+    fgColor: '{{ $c.white }}'
+    bgColor: '{{ $c.black1 }}'
+    suggestColor: '{{ $c.blue }}'
+  help:
+    fgColor: '{{ $c.white }}'
+    bgColor: '{{ $c.black0 }}'
+    sectionColor: '{{ $c.green }}'
+    keyColor: '{{ $c.blue }}'
+    numKeyColor: '{{ $c.cyan }}'
+  frame:
+    title:
+      fgColor: '{{ $c.green }}'
+      bgColor: '{{ $c.black0 }}'
+      highlightColor: '{{ $c.magenta }}'
+      counterColor: '{{ $c.yellow }}'
+      filterColor: '{{ $c.green }}'
+    border:
+      fgColor: '{{ $c.magenta }}'
+      focusColor: '{{ $c.blue }}'
+    menu:
+      fgColor: '{{ $c.white }}'
+      keyColor: '{{ $c.blue }}'
+      numKeyColor: '{{ $c.cyan }}'
+    crumbs:
+      fgColor: '{{ $c.black0 }}'
+      bgColor: '{{ $c.magenta }}'
+      activeColor: '{{ $c.cyan }}'
+    status:
+      newColor: '{{ $c.blue }}'
+      modifyColor: '{{ $c.blue }}'
+      addColor: '{{ $c.green }}'
+      pendingColor: '{{ $c.red }}'
+      errorColor: '{{ $c.red }}'
+      highlightColor: '{{ $c.cyan }}'
+      killColor: '{{ $c.magenta }}'
+      completedColor: '{{ $c.black5 }}'
+  info:
+    fgColor: '{{ $c.red }}'
+    sectionColor: '{{ $c.white }}'
+  views:
+    table:
+      fgColor: '{{ $c.white }}'
+      bgColor: '{{ $c.black0 }}'
+      cursorFgColor: '{{ $c.black1 }}'
+      cursorBgColor: '{{ $c.black0 }}'
+      markColor: '{{ $c.magenta }}'
+      header:
+        fgColor: '{{ $c.yellow }}'
+        bgColor: '{{ $c.black0 }}'
+        sorterColor: '{{ $c.cyan }}'
+    xray:
+      fgColor: '{{ $c.white }}'
+      bgColor: '{{ $c.black0 }}'
+      cursorColor: '{{ $c.black3 }}'
+      cursorTextColor: '{{ $c.black0 }}'
+      graphicColor: '{{ $c.magenta }}'
+    charts:
+      bgColor: '{{ $c.black0 }}'
+      chartBgColor: '{{ $c.black0 }}'
+      dialBgColor: '{{ $c.black0 }}'
+      defaultDialColors:
+        - '{{ $c.green }}'
+        - '{{ $c.red }}'
+      defaultChartColors:
+        - '{{ $c.green }}'
+        - '{{ $c.red }}'
+      resourceColors:
+        cpu:
+          - '{{ $c.magenta }}'
+          - '{{ $c.blue }}'
+        mem:
+          - '{{ $c.yellow }}'
+          - '{{ $c.red }}'
+    yaml:
+      keyColor: '{{ $c.blue }}'
+      valueColor: '{{ $c.white }}'
+      colonColor: '{{ $c.black5 }}'
+    logs:
+      fgColor: '{{ $c.white }}'
+      bgColor: '{{ $c.black0 }}'
+      indicator:
+        fgColor: '{{ $c.blue }}'
+        bgColor: '{{ $c.black0 }}'
+        toggleOnColor: '{{ $c.green }}'
+        toggleOffColor: '{{ $c.black5 }}'
+  dialog:
+    fgColor: '{{ $c.yellow }}'
+    bgColor: '{{ $c.black4 }}'
+    buttonFgColor: '{{ $c.black0 }}'
+    buttonBgColor: '{{ $c.white }}'
+    buttonFocusFgColor: '{{ $c.black0 }}'
+    buttonFocusBgColor: '{{ $c.magenta }}'
+    labelFgColor: '{{ $c.cyan }}'
+    fieldFgColor: '{{ $c.white }}'

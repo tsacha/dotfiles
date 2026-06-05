@@ -1,0 +1,11 @@
+{{- $color := "light" -}}
+{{- if eq .chezmoi.os "darwin" -}}
+{{- if eq (output "osascript" "-e" "tell app \"System Events\" to tell appearance preferences to get dark mode" | trim) "true" -}}
+{{- $color = "dark" -}}
+{{- end -}}
+{{- else -}}
+{{- if eq (output "gsettings" "get" "org.gnome.desktop.interface" "color-scheme" | trim) "'prefer-dark'" -}}
+{{- $color = "dark" -}}
+{{- end -}}
+{{- end -}}
+{{- $color -}}
