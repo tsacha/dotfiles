@@ -5,6 +5,7 @@ vim.pack.add({
 
 	{ src = "https://github.com/neovim/nvim-lspconfig" },
 	{ src = "https://github.com/nvim-treesitter/nvim-treesitter" },
+	{ src = "https://github.com/rachartier/tiny-inline-diagnostic.nvim" },
 
 	{ src = "https://github.com/saghen/blink.cmp" },
 	{ src = "https://github.com/stevearc/conform.nvim" },
@@ -28,6 +29,7 @@ require("core.yank")
 
 --- Major plugins
 require("plugins.blink")
+require("plugins.tiny-inline-diagnostic")
 require("plugins.treesitter")
 require("plugins.conform")
 require("plugins.telescope")
