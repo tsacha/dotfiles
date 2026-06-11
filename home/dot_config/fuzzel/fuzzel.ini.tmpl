@@ -19,13 +19,13 @@ width = 1
 radius = 24
 
 {{- $scheme := includeTemplate "color-scheme" . | trim -}}
-{{- $palette := includeTemplate "tomorrow-palette" . | fromYaml -}}
+{{- $palette := includeTemplate "ayu-palette" . | fromYaml -}}
 {{- $c := index $palette $scheme }}
 
 [colors]
 background = {{ trimPrefix "#" $c.black0 }}ff
 text = {{ trimPrefix "#" $c.white }}ff
-match = {{ trimPrefix "#" $palette.dark.red }}ff
+match = {{ trimPrefix "#" $c.red }}ff
 border = {{ trimPrefix "#" $c.magenta }}ff
 selection = {{ trimPrefix "#" $c.black2 }}ff
 selection-text = {{ trimPrefix "#" $c.magenta }}ff

@@ -1,5 +1,5 @@
 {{ $scheme := includeTemplate "color-scheme" . | trim }}
-{{ $palette := includeTemplate "tomorrow-palette" . | fromYaml }}
+{{ $palette := includeTemplate "ayu-palette" . | fromYaml }}
 {{ $c := index $palette $scheme }}
 
 background-color={{ $c.black2 }}

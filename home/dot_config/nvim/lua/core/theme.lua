@@ -1,20 +1,14 @@
 local M = {}
 
-M.plugin = { src = "https://github.com/deparr/tairiki.nvim" }
+M.plugin = { src = "https://github.com/shatur/neovim-ayu" }
 
 function M.apply()
 	vim.o.termguicolors = true
-	require("tairiki").setup({
-		palette = vim.o.background == "light" and "light" or "dark",
-		transparent = true,
-		plugins = {
-			gitsigns = true,
-			telescope = true,
-			treesitter = true,
-			semantic_tokens = true,
-		},
+	require("ayu").setup({
+		mirage = true,
 	})
-	vim.cmd.colorscheme("tairiki")
+
+	vim.cmd.colorscheme("ayu")
 end
 
 return M

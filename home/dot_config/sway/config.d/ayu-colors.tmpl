@@ -1,10 +1,10 @@
 {{- $scheme := includeTemplate "color-scheme" . | trim -}}
-{{- $palette := includeTemplate "tomorrow-palette" . | fromYaml -}}
+{{- $palette := includeTemplate "ayu-palette" . | fromYaml -}}
 {{- $c := index $palette $scheme }}
-set $base    {{ $c.black0 }}
-set $surface {{ $c.black1 }}
+set $base    {{ $c.black1 }}
+set $surface {{ $c.black2 }}
 set $subtle  {{ $c.black5 }}
 set $text    {{ $c.white }}
 set $critical {{ $c.red }}
-set $accent_alt {{ $c.blue }}
+set $accent_alt {{ $c.cyan }}
 set $accent  {{ $c.magenta }}

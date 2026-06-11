@@ -115,7 +115,7 @@ smart_gaps on
 gaps outer 0
 gaps inner 0
 
-include $HOME/.config/sway/config.d/tomorrow-colors
+include $HOME/.config/sway/config.d/ayu-colors
 
 default_border pixel 1
 
@@ -144,7 +144,7 @@ bar {
 }
 
 client.focused          $accent $accent $base $accent_alt $accent
-client.focused_inactive $accent $surface $subtle $accent $accent
+client.focused_inactive $accent $base $subtle $accent $accent
 client.unfocused        $base $base $subtle $accent $accent
 client.urgent           $critical $critical $base $critical $critical
 

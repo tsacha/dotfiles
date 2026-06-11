@@ -32,15 +32,15 @@ if [ "$(uname)" != "Darwin" ]; then
 		fi
 		$cm apply --force \
 			~/.config/sway/config \
-			~/.config/sway/config.d/tomorrow-colors \
+			~/.config/sway/config.d/ayu-colors \
 			~/.config/niri/config.kdl \
 			~/.config/niri/layout.kdl \
 			~/.config/mako/config \
 			~/.config/fuzzel/fuzzel.ini \
-			~/.config/fish/conf.d/tomorrow.fish \
-			~/.config/k9s/skins/tomorrow.yaml \
+			~/.config/fish/conf.d/ayu.fish \
+			~/.config/k9s/skins/ayu.yaml \
 			~/.config/tmux/tmux.conf \
-			~/.config/tmux/tomorrow-theme.conf
+			~/.config/tmux/ayu-theme.conf
 		swaymsg reload
 		reload_tmux
 	fi
@@ -48,9 +48,9 @@ else
 	osascript -e 'tell app "System Events" to tell appearance preferences to set dark mode to not dark mode'
 	$cm apply --force \
 		~/.config/k9s/config.yaml \
-		~/.config/fish/conf.d/tomorrow.fish \
-		~/.config/k9s/skins/tomorrow.yaml \
+		~/.config/fish/conf.d/ayu.fish \
+		~/.config/k9s/skins/ayu.yaml \
 		~/.config/tmux/tmux.conf \
-		~/.config/tmux/tomorrow-theme.conf
+		~/.config/tmux/ayu-theme.conf
 	reload_tmux
 fi

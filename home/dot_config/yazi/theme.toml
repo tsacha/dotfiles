@@ -1,6 +1,6 @@
 [flavor]
-dark = "tomorrow-night"
-light = "tomorrow"
+dark = "ayu-mirage"
+light = "ayu-light"
 
 [indicator]
 padding = { open = "▐", close = "▌" }

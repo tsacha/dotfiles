@@ -5,7 +5,7 @@ set -gx EDITOR nvim
 fish_add_path $HOME/.local/bin
 fish_add_path $HOME/.cargo/bin
 
-alias cat="bat -pp --theme-dark=tomorrow-night --theme-light=tomorrow"
+alias cat="bat -pp --theme-dark=ayu-mirage --theme-light=ayu-light"
 alias ls="eza --long --header --git"
 alias ag="ag -f"
 alias cm="chezmoi -S ~/Git/dotfiles -c ~/Git/dotfiles/chezmoi.toml --persistent-state ~/.config/chezmoi/chezmoistate.boltdb"

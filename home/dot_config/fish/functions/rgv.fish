@@ -7,9 +7,9 @@ function rgv
 
     set -l color_scheme (get_color_scheme)
     if test "$color_scheme" = light
-        set -g theme "--theme=tomorrow"
+        set -g theme "--theme=ayu-light"
     else
-        set -g theme "--theme=tomorrow-night"
+        set -g theme "--theme=ayu-mirage"
     end
 
     commandline -j (
