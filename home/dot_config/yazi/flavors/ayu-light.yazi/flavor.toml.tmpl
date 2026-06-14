@@ -1,0 +1,214 @@
+{{- $palette := includeTemplate "ayu-palette" . | fromYaml -}}
+{{- $l := $palette.light -}}
+# Local Ayu Light Yazi flavor.
+# Color palette: Ayu Light (Ghostty source of truth)
+# ---
+# black0      "{{ $l.black0 }}" bg
+# black1      "{{ $l.black0 }}" bg (same)
+# black2      "{{ $l.black2 }}" ui / selected bg
+# black3      "{{ $l.black2 }}" ui-2 (same as black2 for light)
+# black4      "{{ $l.black4 }}" tx-3
+# black5      "{{ $l.black4 }}" tx-2 (same as black4 for light)
+# white       "{{ $l.white }}" tx
+# red         "{{ $l.red }}" re
+# orange      "{{ $l.orange }}" or
+# yellow      "{{ $l.yellow }}" ye
+# green       "{{ $l.green }}" gr
+# cyan        "{{ $l.cyan }}" cy
+# blue        "{{ $l.blue }}" bl
+# magenta     "{{ $l.magenta }}" ma
+
+[app]
+overall = { bg = "{{ $l.black0 }}" } # bg
+
+[mgr]
+cwd = { fg = "{{ $l.cyan }}", bold = true } # cy
+hovered = { fg = "{{ $l.black0 }}", bg = "{{ $l.cyan }}", bold = true } # bg, cy
+
+# Find
+find_keyword = { fg = "{{ $l.yellow }}", bold = true, italic = true, underline = true } # ye
+find_position = { fg = "{{ $l.magenta }}", bg = "reset", bold = true, italic = true } # ma
+symlink_target = { italic = true }
+
+# Marker
+marker_copied = { fg = "{{ $l.green }}", bg = "{{ $l.green }}" } # gr, gr
+marker_cut = { fg = "{{ $l.red }}", bg = "{{ $l.red }}" } # re, re
+marker_marked = { fg = "{{ $l.cyan }}", bg = "{{ $l.cyan }}" } # cy, cy
+marker_selected = { fg = "{{ $l.yellow }}", bg = "{{ $l.yellow }}" } # ye, ye
+
+# Count
+count_copied = { fg = "{{ $l.black0 }}", bg = "{{ $l.green }}", bold = true } # bg, gr
+count_cut = { fg = "{{ $l.black0 }}", bg = "{{ $l.red }}", bold = true } # bg, re
+count_selected = { fg = "{{ $l.white }}", bg = "{{ $l.yellow }}", bold = true } # tx, ye
+
+# Border
+border_symbol = "│"
+border_style = { fg = "{{ $l.black2 }}" } # ui
+syntect_theme = ""
+
+[indicator]
+parent = { underline = true }
+current = { fg = "{{ $l.white }}", bg = "{{ $l.black2 }}" } # tx, ui
+preview = { underline = true }
+padding = { open = "█", close = "█" }
+
+[tabs]
+active = { fg = "{{ $l.black0 }}", bg = "{{ $l.cyan }}", bold = true } # bg, cy
+inactive = { fg = "{{ $l.cyan }}", bg = "{{ $l.black2 }}" } # cy, ui
+sep_inner = { open = "", close = "" }
+sep_outer = { open = "", close = "" }
+
+[mode]
+# Normal mode
+normal_main = { fg = "{{ $l.black0 }}", bg = "{{ $l.cyan }}", bold = true } # bg, cy
+normal_alt = { fg = "{{ $l.black0 }}", bg = "{{ $l.white }}", bold = true } # bg, tx
+
+# Select mode
+select_main = { fg = "{{ $l.black0 }}", bg = "{{ $l.red }}", bold = true } # bg, re
+select_alt = { fg = "{{ $l.black0 }}", bg = "{{ $l.white }}", bold = true } # bg, tx
+
+# Unset mode
+unset_main = { fg = "{{ $l.black0 }}", bg = "{{ $l.red }}", bold = true } # bg, re
+unset_alt = { fg = "{{ $l.black0 }}", bg = "{{ $l.white }}", bold = true } # bg, tx
+
+[status]
+overall = { fg = "{{ $l.white }}" } # tx
+
+# Permissions
+perm_type = { fg = "{{ $l.blue }}" } # bl
+perm_read = { fg = "{{ $l.yellow }}" } # ye
+perm_write = { fg = "{{ $l.red }}" } # re
+perm_exec = { fg = "{{ $l.green }}" } # gr
+perm_sep = { fg = "{{ $l.black4 }}" } # tx-2
+
+# Progress
+progress_label = { fg = "{{ $l.white }}", bold = true } # tx
+progress_normal = { fg = "{{ $l.cyan }}", bg = "{{ $l.black2 }}" } # cy, ui
+progress_error = { fg = "{{ $l.red }}", bg = "{{ $l.black2 }}" } # re, ui
+
+[which]
+cols = 3
+mask = { bg = "{{ $l.black2 }}" } # ui
+cand = { fg = "{{ $l.cyan }}", bold = true } # cy
+rest = { fg = "{{ $l.black4 }}", italic = true } # tx-2
+desc = { fg = "{{ $l.yellow }}" } # ye
+separator = " "
+separator_style = { }
+
+[confirm]
+border = { fg = "{{ $l.black2 }}" } # ui
+title = { fg = "{{ $l.red }}", bold = true } # re
+body = { fg = "{{ $l.white }}" } # tx
+list = { fg = "{{ $l.white }}" } # tx
+btn_yes = { fg = "{{ $l.black0 }}", bg = "{{ $l.cyan }}", bold = true } # bg, cy
+btn_no = { fg = "{{ $l.black0 }}", bg = "{{ $l.white }}", bold = true } # bg, tx
+
+[spot]
+border = { fg = "{{ $l.black2 }}" } # ui
+title = { fg = "{{ $l.cyan }}", bold = true } # cy
+tbl_col = { fg = "{{ $l.cyan }}" } # cy
+tbl_cell = { fg = "{{ $l.white }}", bg = "{{ $l.yellow }}", bold = true } # tx, ye
+
+[notify]
+# Notification title
+title_info = { fg = "{{ $l.blue }}" } # bl
+title_warn = { fg = "{{ $l.orange }}" } # or
+title_error = { fg = "{{ $l.red }}" } # re
+
+[pick]
+border = { fg = "{{ $l.cyan }}", bold = true } # cy
+active = { fg = "{{ $l.magenta }}", bold = true } # ma
+inactive = { fg = "{{ $l.black4 }}" } # tx-2
+
+[input]
+border = { fg = "{{ $l.cyan }}" } # cy
+title = { fg = "{{ $l.white }}", bold = true } # tx
+value = { fg = "{{ $l.white }}" } # tx
+selected = { reversed = true } # tx, bg
+
+[cmp]
+border = { fg = "{{ $l.cyan }}", bold = true } # cy
+active = { fg = "{{ $l.black0 }}", bg = "{{ $l.white }}", bold = true } # bg, tx
+inactive = { fg = "{{ $l.black4 }}" } # tx-2
+
+[tasks]
+border = { fg = "{{ $l.cyan }}" } # cy
+title = { fg = "{{ $l.white }}", bold = true } # tx
+hovered = { fg = "{{ $l.magenta }}", bold = true, reversed = true } # ma
+
+[help]
+on = { fg = "{{ $l.blue }}" } # bl
+run = { fg = "{{ $l.cyan }}" } # cy
+desc = { fg = "{{ $l.yellow }}", italic = true } # ye
+hovered = { reversed = true, bold = true }
+footer = { fg = "{{ $l.black0 }}", bg = "{{ $l.white }}", bold = true } # bg, tx
+
+[filetype]
+rules = [
+  # Images
+  { mime = "image/*", fg = "{{ $l.magenta }}" }, # ma
+
+  # Media
+  { mime = "{audio,video}/*", fg = "{{ $l.yellow }}" }, # ye
+
+  # Archives
+  { mime = "application/{zip,rar,7z*,tar,gzip,xz,zstd,bzip*,lzma,compress,archive,cpio,arj,xar,ms-cab*}", fg = "{{ $l.red }}" }, # re
+
+  # Documents
+  { mime = "application/{pdf,doc,rtf}", fg = "{{ $l.orange }}" }, # or
+
+  # Empty files
+  { mime = "inode/empty", fg = "{{ $l.black4 }}" }, # tx-2
+
+  # Special files
+  { url = "*", is = "orphan", fg = "{{ $l.black0 }}", bg = "{{ $l.red }}" }, # bg, re
+  { url = "*/", is = "orphan", fg = "{{ $l.black0 }}", bg = "{{ $l.red }}" }, # bg, re
+  { url = "*", is = "link", fg = "{{ $l.cyan2 }}" }, # cy
+  { url = "*/", is = "link", fg = "{{ $l.cyan2 }}" }, # cy
+  { url = "*", is = "block", fg = "{{ $l.white }}" }, # tx
+  { url = "*", is = "char", fg = "{{ $l.white }}" }, # tx
+  { url = "*", is = "fifo", fg = "{{ $l.magenta }}" }, # ma
+  { url = "*", is = "sock", fg = "{{ $l.magenta }}" }, # ma
+  { url = "*", is = "sticky", fg = "{{ $l.white }}" }, # tx
+  { url = "*", is = "dummy", fg = "{{ $l.black0 }}", bg = "{{ $l.red }}" }, # bg, re
+  { url = "*/", is = "dummy", fg = "{{ $l.black0 }}", bg = "{{ $l.red }}" }, # bg, re
+
+  # Fallback
+  { url = "*/", fg = "{{ $l.blue2 }}" }, # cy
+  { url = "*", is = "exec", fg = "{{ $l.green2 }}" }, # gr
+  { url = "*", fg = "{{ $l.white }}" } # tx
+]
+
+[icon]
+dirs = [
+  { name = ".config", text = "", fg = "{{ $l.cyan }}" }, # cy
+  { name = ".git", text = "", fg = "{{ $l.cyan }}" }, # cy
+  { name = ".github", text = "", fg = "{{ $l.cyan }}" }, # cy
+  { name = ".npm", text = "", fg = "{{ $l.cyan }}" }, # cy
+  { name = "Desktop", text = "", fg = "{{ $l.cyan }}" }, # cy
+  { name = "Development", text = "", fg = "{{ $l.cyan }}" }, # cy
+  { name = "Documents", text = "", fg = "{{ $l.cyan }}" }, # cy
+  { name = "Downloads", text = "", fg = "{{ $l.cyan }}" }, # cy
+  { name = "Library", text = "", fg = "{{ $l.cyan }}" }, # cy
+  { name = "Movies", text = "", fg = "{{ $l.cyan }}" }, # cy
+  { name = "Music", text = "", fg = "{{ $l.cyan }}" }, # cy
+  { name = "Pictures", text = "", fg = "{{ $l.cyan }}" }, # cy
+  { name = "Public", text = "", fg = "{{ $l.cyan }}" }, # cy
+  { name = "Videos", text = "", fg = "{{ $l.cyan }}" } # cy
+]
+conds = [
+  # Special files
+  { if = "orphan", text = "", fg = "{{ $l.red }}" }, # re
+  { if = "link", text = "", fg = "{{ $l.cyan2 }}" }, # cy
+  { if = "block", text = "", fg = "{{ $l.white }}" }, # tx
+  { if = "char", text = "", fg = "{{ $l.white }}" }, # tx
+  { if = "fifo", text = "", fg = "{{ $l.magenta }}" }, # ma
+  { if = "sock", text = "", fg = "{{ $l.magenta }}" }, # ma
+  { if = "sticky", text = "", fg = "{{ $l.white }}" }, # tx
+  { if = "dummy", text = "", fg = "{{ $l.red }}" }, # re
+
+  # Fallback
+  { if = "dir", text = "", fg = "{{ $l.blue2 }}" }, # cy
+  { if = "exec", text = "", fg = "{{ $l.green2 }}" }, # gr
+  { if = "!dir", text = "", fg = "{{ $l.white }}" } # tx
+]

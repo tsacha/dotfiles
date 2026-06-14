@@ -20,7 +20,7 @@ set -g fish_pager_color_selected_description {{ trimPrefix "#" $c.black2 }}
 set -g fish_pager_color_selected_background --background={{ trimPrefix "#" $c.white }}
 
 {{- if eq $scheme "light" }}
-set -gx FZF_DEFAULT_OPTS "--color=fg:#4d4d4c,bg:#ffffff,hl:#c82829 --color=fg+:#4d4d4c,bg+:#efefef,hl+:#c82829 --color=border:#8959a8,header:#4271ae,gutter:#ffffff --color=spinner:#3e999f,info:#3e999f,separator:#d6d6d6 --color=pointer:#eab700,marker:#718c00,prompt:#eab700"
+set -gx FZF_DEFAULT_OPTS "--color=fg:#5c6166,bg:#f8f9fa,hl:#f07171 --color=fg+:#5c6166,bg+:#ebeef0,hl+:#f07171 --color=border:#a37acc,header:#399ee6,gutter:#f8f9fa --color=spinner:#4cbf99,info:#4cbf99,separator:#ebeef0 --color=pointer:#ffaa33,marker:#86b300,prompt:#ffaa33"
 {{- else }}
-set -gx FZF_DEFAULT_OPTS "--color=fg:#c5c8c6,bg:#1d1f21,hl:#cc6666 --color=fg+:#c5c8c6,bg+:#282a2e,hl+:#cc6666 --color=border:#b294bb,header:#81a2be,gutter:#1d1f21 --color=spinner:#8abeb7,info:#8abeb7,separator:#373b41 --color=pointer:#f0c674,marker:#b5bd68,prompt:#f0c674"
+set -gx FZF_DEFAULT_OPTS "--color=fg:#cccac2,bg:#1f2430,hl:#f28779 --color=fg+:#cccac2,bg+:#2d3340,hl+:#f28779 --color=border:#dfbfff,header:#73d0ff,gutter:#1f2430 --color=spinner:#95e6cb,info:#95e6cb,separator:#242936 --color=pointer:#ffcc66,marker:#d5ff80,prompt:#ffcc66"
 {{- end }}

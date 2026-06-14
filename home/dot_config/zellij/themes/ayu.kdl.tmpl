@@ -1,0 +1,39 @@
+{{- $palette := includeTemplate "ayu-palette" . | fromYaml -}}
+{{- $l := $palette.light -}}
+{{- $d := $palette.dark -}}
+themes {
+    ayu-light {
+        text_unselected { base "{{ $l.white }}"; background "{{ $l.black0 }}"; emphasis_0 "{{ $l.orange }}"; emphasis_1 "{{ $l.cyan }}"; emphasis_2 "{{ $l.green }}"; emphasis_3 "{{ $l.magenta }}"; }
+        text_selected { base "{{ $l.white }}"; background "{{ $l.black2 }}"; emphasis_0 "{{ $l.orange }}"; emphasis_1 "{{ $l.cyan }}"; emphasis_2 "{{ $l.green }}"; emphasis_3 "{{ $l.magenta }}"; }
+        ribbon_selected { base "{{ $l.black0 }}"; background "{{ $l.green }}"; emphasis_0 "{{ $l.red }}"; emphasis_1 "{{ $l.orange }}"; emphasis_2 "{{ $l.magenta }}"; emphasis_3 "{{ $l.cyan }}"; }
+        ribbon_unselected { base "{{ $l.white }}"; background "{{ $l.black2 }}"; emphasis_0 "{{ $l.orange }}"; emphasis_1 "{{ $l.black0 }}"; emphasis_2 "{{ $l.green }}"; emphasis_3 "{{ $l.magenta }}"; }
+        table_title { base "{{ $l.green }}"; background "{{ $l.black2 }}"; emphasis_0 "{{ $l.orange }}"; emphasis_1 "{{ $l.cyan }}"; emphasis_2 "{{ $l.green }}"; emphasis_3 "{{ $l.magenta }}"; }
+        table_cell_selected { base "{{ $l.white }}"; background "{{ $l.black2 }}"; emphasis_0 "{{ $l.orange }}"; emphasis_1 "{{ $l.cyan }}"; emphasis_2 "{{ $l.green }}"; emphasis_3 "{{ $l.magenta }}"; }
+        table_cell_unselected { base "{{ $l.white }}"; background "{{ $l.black0 }}"; emphasis_0 "{{ $l.orange }}"; emphasis_1 "{{ $l.cyan }}"; emphasis_2 "{{ $l.green }}"; emphasis_3 "{{ $l.magenta }}"; }
+        list_selected { base "{{ $l.white }}"; background "{{ $l.black2 }}"; emphasis_0 "{{ $l.red }}"; emphasis_1 "{{ $l.orange }}"; emphasis_2 "{{ $l.cyan }}"; emphasis_3 "{{ $l.magenta }}"; }
+        list_unselected { base "{{ $l.white }}"; background "{{ $l.black0 }}"; emphasis_0 "{{ $l.red }}"; emphasis_1 "{{ $l.orange }}"; emphasis_2 "{{ $l.cyan }}"; emphasis_3 "{{ $l.magenta }}"; }
+        frame_selected { base "{{ $l.green }}"; background "{{ $l.black0 }}"; emphasis_0 "{{ $l.red }}"; emphasis_1 "{{ $l.orange }}"; emphasis_2 "{{ $l.cyan }}"; emphasis_3 "{{ $l.white }}"; }
+        frame_highlight { base "{{ $l.orange }}"; background "{{ $l.black0 }}"; emphasis_0 "{{ $l.red }}"; emphasis_1 "{{ $l.magenta }}"; emphasis_2 "{{ $l.cyan }}"; emphasis_3 "{{ $l.blue }}"; }
+        frame_unselected { base "{{ $l.black4 }}"; background 0; emphasis_0 "{{ $l.orange }}"; emphasis_1 "{{ $l.cyan }}"; emphasis_2 "{{ $l.magenta }}"; emphasis_3 0; }
+        exit_code_success { base "{{ $l.green }}"; background "{{ $l.black0 }}"; emphasis_0 "{{ $l.cyan }}"; emphasis_1 "{{ $l.black0 }}"; emphasis_2 "{{ $l.magenta }}"; emphasis_3 "{{ $l.blue }}"; }
+        exit_code_error { base "{{ $l.red }}"; background "{{ $l.black0 }}"; emphasis_0 "{{ $l.orange }}"; emphasis_1 0 0 0; emphasis_2 0 0 0; emphasis_3 0 0 0; }
+        multiplayer_user_colors { player_1 "{{ $l.magenta }}"; player_2 "{{ $l.blue }}"; player_3 "{{ $l.cyan }}"; player_4 "{{ $l.orange }}"; player_5 "{{ $l.green }}"; player_6 "{{ $l.magenta }}"; player_7 "{{ $l.red }}"; player_8 "{{ $l.yellow }}"; player_9 0 0 0; player_10 0 0 0; }
+    }
+    ayu-mirage {
+        text_unselected { base "{{ $d.white }}"; background "{{ $d.black1 }}"; emphasis_0 "{{ $d.orange }}"; emphasis_1 "{{ $d.cyan }}"; emphasis_2 "{{ $d.green }}"; emphasis_3 "{{ $d.magenta }}"; }
+        text_selected { base "{{ $d.white }}"; background "{{ $d.black3 }}"; emphasis_0 "{{ $d.orange }}"; emphasis_1 "{{ $d.cyan }}"; emphasis_2 "{{ $d.green }}"; emphasis_3 "{{ $d.magenta }}"; }
+        ribbon_selected { base "{{ $d.black1 }}"; background "{{ $d.green }}"; emphasis_0 "{{ $d.red }}"; emphasis_1 "{{ $d.orange }}"; emphasis_2 "{{ $d.magenta }}"; emphasis_3 "{{ $d.white }}"; }
+        ribbon_unselected { base "{{ $d.white }}"; background "{{ $d.black3 }}"; emphasis_0 "{{ $d.orange }}"; emphasis_1 "{{ $d.black2 }}"; emphasis_2 "{{ $d.blue }}"; emphasis_3 "{{ $d.magenta }}"; }
+        table_title { base "{{ $d.green }}"; background "{{ $d.black3 }}"; emphasis_0 "{{ $d.orange }}"; emphasis_1 "{{ $d.cyan }}"; emphasis_2 "{{ $d.green }}"; emphasis_3 "{{ $d.magenta }}"; }
+        table_cell_selected { base "{{ $d.white }}"; background "{{ $d.black3 }}"; emphasis_0 "{{ $d.orange }}"; emphasis_1 "{{ $d.cyan }}"; emphasis_2 "{{ $d.green }}"; emphasis_3 "{{ $d.magenta }}"; }
+        table_cell_unselected { base "{{ $d.white }}"; background "{{ $d.black1 }}"; emphasis_0 "{{ $d.orange }}"; emphasis_1 "{{ $d.cyan }}"; emphasis_2 "{{ $d.green }}"; emphasis_3 "{{ $d.magenta }}"; }
+        list_selected { base "{{ $d.white }}"; background "{{ $d.black3 }}"; emphasis_0 "{{ $d.red }}"; emphasis_1 "{{ $d.orange }}"; emphasis_2 "{{ $d.cyan }}"; emphasis_3 "{{ $d.magenta }}"; }
+        list_unselected { base "{{ $d.white }}"; background "{{ $d.black1 }}"; emphasis_0 "{{ $d.red }}"; emphasis_1 "{{ $d.orange }}"; emphasis_2 "{{ $d.cyan }}"; emphasis_3 "{{ $d.magenta }}"; }
+        frame_selected { base "{{ $d.green }}"; background "{{ $d.black1 }}"; emphasis_0 "{{ $d.red }}"; emphasis_1 "{{ $d.orange }}"; emphasis_2 "{{ $d.cyan }}"; emphasis_3 "{{ $d.white }}"; }
+        frame_highlight { base "{{ $d.orange }}"; background "{{ $d.black1 }}"; emphasis_0 "{{ $d.red }}"; emphasis_1 "{{ $d.magenta }}"; emphasis_2 "{{ $d.cyan }}"; emphasis_3 "{{ $d.blue }}"; }
+        frame_unselected { base "{{ $d.black4 }}"; background 0; emphasis_0 "{{ $d.orange }}"; emphasis_1 "{{ $d.cyan }}"; emphasis_2 "{{ $d.magenta }}"; emphasis_3 0; }
+        exit_code_success { base "{{ $d.green }}"; background "{{ $d.black1 }}"; emphasis_0 "{{ $d.cyan }}"; emphasis_1 "{{ $d.white }}"; emphasis_2 "{{ $d.magenta }}"; emphasis_3 "{{ $d.blue }}"; }
+        exit_code_error { base "{{ $d.red }}"; background "{{ $d.black1 }}"; emphasis_0 "{{ $d.orange }}"; emphasis_1 0 0 0; emphasis_2 0 0 0; emphasis_3 0 0 0; }
+        multiplayer_user_colors { player_1 "{{ $d.magenta }}"; player_2 "{{ $d.blue }}"; player_3 "{{ $d.cyan }}"; player_4 "{{ $d.orange }}"; player_5 "{{ $d.green }}"; player_6 "{{ $d.magenta }}"; player_7 "{{ $d.red }}"; player_8 "{{ $d.yellow }}"; player_9 0 0 0; player_10 0 0 0; }
+    }
+}

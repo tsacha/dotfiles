@@ -1,26 +1,28 @@
+{{- $palette := includeTemplate "ayu-palette" . | fromYaml -}}
+{{- $l := $palette.light -}}
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
   <key>name</key>
-  <string>ayu-mirage</string>
+  <string>ayu-light</string>
   <key>settings</key>
   <array>
     <dict>
       <key>settings</key>
       <dict>
         <key>background</key>
-        <string>#212733</string>
+        <string>{{ $l.black0 }}</string>
         <key>caret</key>
-        <string>#cbccc6</string>
+        <string>{{ $l.white }}</string>
         <key>foreground</key>
-        <string>#cbccc6</string>
+        <string>{{ $l.white }}</string>
         <key>invisibles</key>
-        <string>#303949</string>
+        <string>{{ $l.black4 }}</string>
         <key>lineHighlight</key>
-        <string>#2a3342</string>
+        <string>{{ $l.black2 }}</string>
         <key>selection</key>
-        <string>#242d3d</string>
+        <string>{{ $l.black2 }}</string>
       </dict>
     </dict>
     <dict>
@@ -33,7 +35,7 @@
         <key>fontStyle</key>
         <string>italic</string>
         <key>foreground</key>
-        <string>#5c6773</string>
+        <string>{{ $l.black4 }}</string>
       </dict>
     </dict>
     <dict>
@@ -44,7 +46,7 @@
       <key>settings</key>
       <dict>
         <key>foreground</key>
-        <string>#ffad66</string>
+        <string>{{ $l.yellow }}</string>
       </dict>
     </dict>
     <dict>
@@ -55,7 +57,7 @@
       <key>settings</key>
       <dict>
         <key>foreground</key>
-        <string>#ff8f40</string>
+        <string>{{ $l.orange }}</string>
       </dict>
     </dict>
     <dict>
@@ -66,7 +68,7 @@
       <key>settings</key>
       <dict>
         <key>foreground</key>
-        <string>#f28779</string>
+        <string>{{ $l.red }}</string>
       </dict>
     </dict>
     <dict>
@@ -77,7 +79,7 @@
       <key>settings</key>
       <dict>
         <key>foreground</key>
-        <string>#73d0ff</string>
+        <string>{{ $l.blue }}</string>
       </dict>
     </dict>
     <dict>
@@ -88,7 +90,7 @@
       <key>settings</key>
       <dict>
         <key>foreground</key>
-        <string>#95e6cb</string>
+        <string>{{ $l.cyan }}</string>
       </dict>
     </dict>
     <dict>
@@ -99,7 +101,7 @@
       <key>settings</key>
       <dict>
         <key>foreground</key>
-        <string>#cbccc6</string>
+        <string>{{ $l.white }}</string>
       </dict>
     </dict>
     <dict>
@@ -110,7 +112,7 @@
       <key>settings</key>
       <dict>
         <key>foreground</key>
-        <string>#f28779</string>
+        <string>{{ $l.red }}</string>
       </dict>
     </dict>
   </array>

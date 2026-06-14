@@ -1,1 +1,13 @@
 colorscheme: light:ayu-light,dark:ayu-mirage
+views:
+  nodeclaim:
+    columns:
+      - "Name"
+      - "NodeClass:.metadata.labels['karpenter\\.k8s\\.aws/ec2nodeclass']"
+      - "Family:.metadata.labels['karpenter\\.k8s\\.aws/instance-family']"
+      - "Size:.metadata.labels['karpenter\\.k8s\\.aws/instance-size']"
+      - "CPU:.metadata.labels['karpenter\\.k8s\\.aws/instance-cpu']"
+      - "Memory:.metadata.labels['karpenter\\.k8s\\.aws/instance-memory']"
+      - "Zone:.metadata.labels['topology\\.kubernetes\\.io/zone']"
+      - 'Drifted:.status.conditions[?(@.type=="Drifted")].reason'
+      - "Age"

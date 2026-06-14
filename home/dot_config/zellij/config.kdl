@@ -1,4 +1,3 @@
-theme "ayu-mirage"
 theme_light "ayu-light"
 theme_dark "ayu-mirage"
 simplified_ui true
