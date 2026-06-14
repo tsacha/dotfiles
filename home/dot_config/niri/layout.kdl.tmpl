@@ -1,28 +1,31 @@
 {{- $scheme := includeTemplate "color-scheme" . | trim -}}
 {{- $palette := includeTemplate "ayu-palette" . | fromYaml -}}
 {{- $c := index $palette $scheme }}
+{{- $base := $c.black1 -}}
+{{- $subtle := $c.black5 -}}
+{{- $accentAlt := $c.cyan -}}
+{{- $accent := $c.magenta -}}
 layout {
     gaps 4
-    center-focused-column "always"
 
     preset-column-widths {
         proportion 0.5
-        proportion 0.66667
         proportion 0.8
+        proportion 1.0
     }
 
-    default-column-width { proportion 0.8; }
+    default-column-width { proportion 0.5; }
     focus-ring {
         width 1
 
-        active-color "{{ $c.blue }}"
-        inactive-color "{{ $c.blue }}"
+        active-color "{{ $accent }}"
+        inactive-color "{{ $subtle }}"
     }
 
     border {
         width 1
 
-        active-color "{{ $c.magenta }}"
-        inactive-color "{{ $c.magenta }}"
+        active-color "{{ $accent }}"
+        inactive-color "{{ $base }}"
     }
 }

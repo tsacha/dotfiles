@@ -1,7 +1,7 @@
 /* vim: set filetype=kdl : */
 
 environment {
-    XDG_CURRENT_DESKTOP "gnome"
+    XDG_CURRENT_DESKTOP "niri"
     QT_QPA_PLATFORM "wayland"
     DISPLAY ":0"
 }
@@ -10,6 +10,7 @@ input {
     keyboard {
         xkb {
             layout "ergol_anglemod"
+            options "caps:escape"
         }
         numlock
     }
