@@ -4,7 +4,7 @@
 k9s:
   body:
     fgColor: '{{ $c.white }}'
-    bgColor: '{{ $c.black0 }}'
+    bgColor: '{{ $c.black1 }}'
     logoColor: '{{ $c.magenta }}'
   prompt:
     fgColor: '{{ $c.white }}'
@@ -12,14 +12,14 @@ k9s:
     suggestColor: '{{ $c.blue }}'
   help:
     fgColor: '{{ $c.white }}'
-    bgColor: '{{ $c.black0 }}'
+    bgColor: '{{ $c.black1 }}'
     sectionColor: '{{ $c.green }}'
     keyColor: '{{ $c.blue }}'
     numKeyColor: '{{ $c.cyan }}'
   frame:
     title:
       fgColor: '{{ $c.green }}'
-      bgColor: '{{ $c.black0 }}'
+      bgColor: '{{ $c.black1 }}'
       highlightColor: '{{ $c.magenta }}'
       counterColor: '{{ $c.yellow }}'
       filterColor: '{{ $c.green }}'
@@ -49,24 +49,24 @@ k9s:
   views:
     table:
       fgColor: '{{ $c.white }}'
-      bgColor: '{{ $c.black0 }}'
-      cursorFgColor: '{{ $c.black1 }}'
-      cursorBgColor: '{{ $c.black0 }}'
+      bgColor: '{{ $c.black1 }}'
+      cursorFgColor: '{{ $c.white }}'
+      cursorBgColor: '{{ $c.black2 }}'
       markColor: '{{ $c.magenta }}'
       header:
         fgColor: '{{ $c.yellow }}'
-        bgColor: '{{ $c.black0 }}'
+        bgColor: '{{ $c.black1 }}'
         sorterColor: '{{ $c.cyan }}'
     xray:
       fgColor: '{{ $c.white }}'
-      bgColor: '{{ $c.black0 }}'
+      bgColor: '{{ $c.black1 }}'
       cursorColor: '{{ $c.black3 }}'
       cursorTextColor: '{{ $c.black0 }}'
       graphicColor: '{{ $c.magenta }}'
     charts:
-      bgColor: '{{ $c.black0 }}'
-      chartBgColor: '{{ $c.black0 }}'
-      dialBgColor: '{{ $c.black0 }}'
+      bgColor: '{{ $c.black1 }}'
+      chartBgColor: '{{ $c.black1 }}'
+      dialBgColor: '{{ $c.black1 }}'
       defaultDialColors:
         - '{{ $c.green }}'
         - '{{ $c.red }}'
@@ -86,10 +86,10 @@ k9s:
       colonColor: '{{ $c.black5 }}'
     logs:
       fgColor: '{{ $c.white }}'
-      bgColor: '{{ $c.black0 }}'
+      bgColor: '{{ $c.black1 }}'
       indicator:
         fgColor: '{{ $c.blue }}'
-        bgColor: '{{ $c.black0 }}'
+        bgColor: '{{ $c.black1 }}'
         toggleOnColor: '{{ $c.green }}'
         toggleOffColor: '{{ $c.black5 }}'
   dialog:
