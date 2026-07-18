@@ -1,0 +1,112 @@
+tap "atlassian/acli", trusted: true
+tap "datadog-labs/pack", trusted: true
+tap "hashicorp/tap"
+tap "janosmiko/tap"
+# GitOps Continuous Delivery for Kubernetes
+brew "argocd"
+# Use AWS IAM credentials to authenticate to Kubernetes
+brew "aws-iam-authenticator"
+# Official Amazon AWS command-line interface
+brew "awscli"
+# Microsoft Azure CLI 2.0
+brew "azure-cli"
+# Clone of cat(1) with syntax highlighting and Git integration
+brew "bat"
+# Incredibly fast JavaScript runtime, bundler, test runner, and package manager
+brew "bun"
+# Manage your dotfiles across multiple diverse machines, securely
+brew "chezmoi"
+# Container runtimes on MacOS (and Linux) with minimal setup
+brew "colima"
+# Pack, ship and run any application as a lightweight container
+brew "docker"
+# Isolated development environments using Docker
+brew "docker-compose"
+# Simple command-line tool for creating clusters on Amazon EKS
+brew "eksctl"
+# Modern, maintained replacement for ls
+brew "eza"
+# Simple, fast and user-friendly alternative to find
+brew "fd"
+# User-friendly command-line shell for UNIX-like operating systems
+brew "fish"
+# Plugin manager for the Fish shell
+brew "fisher"
+# Command-line fuzzy finder written in Go
+brew "fzf"
+# GitHub command-line tool
+brew "gh"
+# Passphrase entry dialog utilizing the Assuan protocol
+brew "pinentry"
+# GNU Privacy Guard (OpenPGP)
+brew "gnupg"
+# OpenTelemetry Collector distribution with programmable pipelines
+brew "grafana-alloy"
+# Kubernetes package manager
+brew "helm"
+# Language server for Helm
+brew "helm-ls"
+# Improved top (interactive process viewer)
+brew "htop"
+# User-friendly cURL replacement (command-line HTTP client)
+brew "httpie"
+# Interactive jq
+brew "ijq"
+# Kubernetes CLI To Manage Your Clusters In Style!
+brew "k9s"
+# Kubernetes command-line interface
+brew "kubernetes-cli"
+# Simple terminal UI for git commands
+brew "lazygit"
+# Provides library functionality for FIDO U2F & FIDO 2.0, including USB
+brew "libfido2"
+# Incremental parsing library
+brew "tree-sitter"
+# Ambitious Vim-fork focused on extensibility and agility
+brew "neovim"
+# Open-source, cross-platform JavaScript runtime environment
+brew "node"
+# OpenBSD freely-licensed SSH connectivity tools
+brew "openssh"
+# Drop-in replacement for Terraform. Infrastructure as Code Tool
+brew "opentofu"
+# Pinentry for GPG on Mac
+brew "pinentry-mac"
+# Search tool like grep and The Silver Searcher
+brew "ripgrep"
+# Terminal multiplexer
+brew "tmux"
+# Parser generator tool
+brew "tree-sitter-cli"
+# Language Server for Yaml Files
+brew "yaml-language-server"
+# Tool for managing your YubiKey configuration
+brew "ykman"
+# Process YAML, JSON, XML, CSV and properties documents from the CLI
+brew "yq"
+# Shell extension to navigate your filesystem faster
+brew "zoxide"
+# Software to interact with Atlassian Cloud from the terminal
+brew "atlassian/acli/acli", trusted: true
+# Go-based command-line wrapper for easy interaction with Datadog APIs
+brew "datadog-labs/pack/pup", trusted: true
+# Consul
+brew "hashicorp/tap/consul", trusted: true
+# Nomad
+brew "hashicorp/tap/nomad", trusted: true
+# Vault
+brew "hashicorp/tap/vault", trusted: true
+# Lightning Fast Kubernetes navigator - keyboard-focused TUI for managing K8s clusters
+brew "janosmiko/tap/lfk", trusted: true
+# Terminal-based AI coding assistant
+cask "claude-code"
+# Web browser
+cask "firefox"
+# Set of tools to manage resources and applications hosted on Google Cloud
+cask "gcloud-cli"
+# Terminal emulator that uses platform-native UI and GPU acceleration
+cask "ghostty"
+# Keyboard customiser
+cask "karabiner-elements"
+# Music streaming service
+cask "spotify"

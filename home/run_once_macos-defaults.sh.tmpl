@@ -1,0 +1,68 @@
+#!/usr/bin/env bash
+{{ if eq .chezmoi.os "darwin" -}}
+set -euo pipefail
+
+defaults write NSGlobalDomain _HIHideMenuBar -bool true
+defaults write NSGlobalDomain com.apple.swipescrolldirection -bool false
+defaults write NSGlobalDomain AppleScrollAnimationEnabled -bool false
+
+for d in com.apple.AppleMultitouchTrackpad com.apple.driver.AppleBluetoothMultitouch.trackpad; do
+	defaults write "$d" TrackpadCornerSecondaryClick -int 2
+	defaults write "$d" TrackpadRightClick -bool false
+	defaults write "$d" Clicking -bool false # tap-to-click disabled
+done
+defaults -currentHost write NSGlobalDomain com.apple.trackpad.enableSecondaryClick -bool false
+defaults -currentHost write NSGlobalDomain com.apple.trackpad.trackpadCornerClickBehavior -int 1
+
+defaults write com.apple.dock orientation -string left
+defaults write com.apple.dock tilesize -int 35
+defaults write com.apple.dock autohide -bool true
+
+defaults write com.apple.WindowManager EnableTiledWindowMargins -bool false
+
+defaults write NSGlobalDomain com.apple.keyboard.fnState -bool true # F1-F12 as standard function keys
+
+defaults write NSGlobalDomain KeyRepeat -int 2
+defaults write NSGlobalDomain InitialKeyRepeat -int 15
+defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
+
+defaults write NSGlobalDomain AppleShowAllExtensions -bool true
+
+defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
+
+# Hot corners: top-left = Mission Control (2), bottom-right = disabled (1)
+defaults write com.apple.dock wvous-tl-corner -int 2
+defaults write com.apple.dock wvous-tl-modifier -int 0
+defaults write com.apple.dock wvous-br-corner -int 1
+defaults write com.apple.dock wvous-br-modifier -int 0
+
+# Ergo-L (angle-mod) keyboard layout
+ergol_layout="/Library/Keyboard Layouts/ergol_angle_mod.keylayout"
+ergol_url="https://github.com/Nuclear-Squid/ergol/releases/download/ergol-v1.0.1/ergol_angle_mod.keylayout"
+if [ ! -f "$ergol_layout" ]; then
+	tmp="$(mktemp)"
+	curl -fsSL -o "$tmp" "$ergol_url"
+	sudo install -m 644 "$tmp" "$ergol_layout"
+	rm -f "$tmp"
+fi
+# Enable and select it as the current layout ("French (Ergo-L)", id 0 in the file).
+# A logout/login may be required for the switch to take full effect.
+defaults write com.apple.HIToolbox AppleEnabledInputSources -array-add \
+	'{ "InputSourceKind" = "Keyboard Layout"; "KeyboardLayout ID" = 0; "KeyboardLayout Name" = "French (Ergo-L)"; }'
+defaults write com.apple.HIToolbox AppleCurrentKeyboardLayoutInputSourceID -string "com.apple.keylayout.French (Ergo-L)"
+
+# Keyboard shortcuts (raw params = [char, keycode, modifier], reproduced verbatim)
+# id 29: screenshot -> clipboard
+defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 29 \
+	'{enabled=1;value={type=standard;parameters=(51,20,1441792);};}'
+# id 31: area capture -> clipboard (Cmd+Shift+S)
+defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 31 \
+	'{enabled=1;value={type=standard;parameters=(115,1,1179648);};}'
+# id 64: Spotlight (rebound)
+defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 64 \
+	'{enabled=1;value={type=standard;parameters=(100,34,1048576);};}'
+
+for app in Finder Dock SystemUIServer WindowManager; do
+	killall "${app}" >/dev/null 2>&1 || true
+done
+{{ end -}}
