@@ -22,6 +22,9 @@ defaults write com.apple.WindowManager EnableTiledWindowMargins -bool false
 
 defaults write NSGlobalDomain com.apple.keyboard.fnState -bool true # F1-F12 as standard function keys
 
+# "Press fn key to" -> Do Nothing (stops fn from cycling input sources / triggering dictation)
+defaults write com.apple.HIToolbox AppleFnUsageType -int 0
+
 defaults write NSGlobalDomain KeyRepeat -int 2
 defaults write NSGlobalDomain InitialKeyRepeat -int 15
 defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
@@ -58,9 +61,13 @@ defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 29 \
 # id 31: area capture -> clipboard (Cmd+Shift+S)
 defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 31 \
 	'{enabled=1;value={type=standard;parameters=(115,1,1179648);};}'
-# id 64: Spotlight (rebound)
+# id 64: Spotlight -> Super+D. On Ergo-L the 'd' sits at the physical QWERTY-I key.
+# params = [char 'd'=100, keycode=34 (physical QWERTY-I), modifier Cmd=1048576]
 defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 64 \
 	'{enabled=1;value={type=standard;parameters=(100,34,1048576);};}'
+
+# Force the WindowServer to re-read symbolichotkeys (killall alone won't; avoids a logout).
+/System/Library/PrivateFrameworks/SystemAdministration.framework/Resources/activateSettings -u || true
 
 for app in Finder Dock SystemUIServer WindowManager; do
 	killall "${app}" >/dev/null 2>&1 || true

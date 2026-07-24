@@ -2,6 +2,8 @@ tap "atlassian/acli", trusted: true
 tap "datadog-labs/pack", trusted: true
 tap "hashicorp/tap"
 tap "janosmiko/tap"
+# Static checker for GitHub Actions workflow files
+brew "actionlint"
 # GitOps Continuous Delivery for Kubernetes
 brew "argocd"
 # Use AWS IAM credentials to authenticate to Kubernetes
@@ -20,6 +22,8 @@ brew "chezmoi"
 brew "colima"
 # Pack, ship and run any application as a lightweight container
 brew "docker"
+# Docker CLI plugin for extended build capabilities with BuildKit
+brew "docker-buildx"
 # Isolated development environments using Docker
 brew "docker-compose"
 # Simple command-line tool for creating clusters on Amazon EKS
@@ -72,12 +76,18 @@ brew "openssh"
 brew "opentofu"
 # Pinentry for GPG on Mac
 brew "pinentry-mac"
+# Object-relational database system
+brew "postgresql@18", link: true
 # Search tool like grep and The Silver Searcher
 brew "ripgrep"
 # Terminal multiplexer
 brew "tmux"
 # Parser generator tool
 brew "tree-sitter-cli"
+# High-performance data structure server that primarily serves key/value workloads
+brew "valkey"
+# Tools for the WireGuard secure network tunnel
+brew "wireguard-tools"
 # Language Server for Yaml Files
 brew "yaml-language-server"
 # Tool for managing your YubiKey configuration
@@ -98,6 +108,8 @@ brew "hashicorp/tap/nomad", trusted: true
 brew "hashicorp/tap/vault", trusted: true
 # Lightning Fast Kubernetes navigator - keyboard-focused TUI for managing K8s clusters
 brew "janosmiko/tap/lfk", trusted: true
+# Anthropic's official Claude AI desktop app
+cask "claude"
 # Terminal-based AI coding assistant
 cask "claude-code"
 # Web browser
@@ -108,5 +120,11 @@ cask "gcloud-cli"
 cask "ghostty"
 # Keyboard customiser
 cask "karabiner-elements"
+# Plugin for AWS CLI to start and end sessions that connect to managed instances
+cask "session-manager-plugin"
 # Music streaming service
 cask "spotify"
+# Open-source code editor
+cask "visual-studio-code"
+vscode "anthropic.claude-code"
+vscode "vscodevim.vim"
