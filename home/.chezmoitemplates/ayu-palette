@@ -1,3 +1,4 @@
+# Theme colors. Reskin = replace the hex here. Exceptions: ghostty, nvim.
 light:
   black0: "#f8f9fa"
   black1: "#f8f9fa"

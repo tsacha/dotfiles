@@ -1,0 +1,6 @@
+#!/usr/bin/env fish
+# Hashes re-run this on any theme change.
+{{ range (glob (joinPath .chezmoi.sourceDir "dot_config/bat/themes/*")) -}}
+# {{ . | include | sha256sum }}
+{{ end -}}
+bat cache --build

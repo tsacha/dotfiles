@@ -1,0 +1,6 @@
+{{- $h := . | trimPrefix "#" | lower -}}
+{{- $d := dict "0" 0 "1" 1 "2" 2 "3" 3 "4" 4 "5" 5 "6" 6 "7" 7 "8" 8 "9" 9 "a" 10 "b" 11 "c" 12 "d" 13 "e" 14 "f" 15 -}}
+{{- $r := add (mul (index $d (substr 0 1 $h)) 16) (index $d (substr 1 2 $h)) -}}
+{{- $g := add (mul (index $d (substr 2 3 $h)) 16) (index $d (substr 3 4 $h)) -}}
+{{- $b := add (mul (index $d (substr 4 5 $h)) 16) (index $d (substr 5 6 $h)) -}}
+{{- printf "%d;%d;%d" $r $g $b -}}

@@ -19,8 +19,34 @@ set -g fish_pager_color_selected_completion {{ trimPrefix "#" $c.black1 }}
 set -g fish_pager_color_selected_description {{ trimPrefix "#" $c.black2 }}
 set -g fish_pager_color_selected_background --background={{ trimPrefix "#" $c.white }}
 
-{{- if eq $scheme "light" }}
-set -gx FZF_DEFAULT_OPTS "--color=fg:#5c6166,bg:#f8f9fa,hl:#f07171 --color=fg+:#5c6166,bg+:#ebeef0,hl+:#f07171 --color=border:#a37acc,header:#399ee6,gutter:#f8f9fa --color=spinner:#4cbf99,info:#4cbf99,separator:#ebeef0 --color=pointer:#ffaa33,marker:#86b300,prompt:#ffaa33"
-{{- else }}
-set -gx FZF_DEFAULT_OPTS "--color=fg:#cccac2,bg:#1f2430,hl:#f28779 --color=fg+:#cccac2,bg+:#2d3340,hl+:#f28779 --color=border:#dfbfff,header:#73d0ff,gutter:#1f2430 --color=spinner:#95e6cb,info:#95e6cb,separator:#242936 --color=pointer:#ffcc66,marker:#d5ff80,prompt:#ffcc66"
-{{- end }}
+{{- $blue := includeTemplate "hex2rgb" $c.blue -}}
+{{- $cyan := includeTemplate "hex2rgb" $c.cyan -}}
+{{- $green := includeTemplate "hex2rgb" $c.green -}}
+{{- $magenta := includeTemplate "hex2rgb" $c.magenta -}}
+{{- $yellow := includeTemplate "hex2rgb" $c.yellow -}}
+{{- $red := includeTemplate "hex2rgb" $c.red -}}
+{{- $orange := includeTemplate "hex2rgb" $c.orange -}}
+{{- $fg := includeTemplate "hex2rgb" $c.white -}}
+{{- $muted := includeTemplate "hex2rgb" $c.black5 }}
+set -gx FZF_DEFAULT_OPTS "\
+--color=fg:{{ $c.white }},bg:{{ $c.black1 }},hl:{{ $c.red }} \
+--color=fg+:{{ $c.white }},bg+:{{ $c.black3 }},hl+:{{ $c.red }} \
+--color=border:{{ $c.magenta }},header:{{ $c.blue }},gutter:{{ $c.black1 }} \
+--color=spinner:{{ $c.cyan }},info:{{ $c.cyan }},separator:{{ $c.black2 }} \
+--color=pointer:{{ $c.orange }},marker:{{ $c.green }},prompt:{{ $c.orange }}"
+{{- $struct := list
+  (dict "c" (printf "1;38;2;%s" $blue)  "k" (list "di" "tw" "ow"))
+  (dict "c" (printf "38;2;%s"   $cyan)  "k" (list "ln"))
+  (dict "c" (printf "1;38;2;%s" $green) "k" (list "ex"))
+  (dict "c" (printf "38;2;%s"   $magenta) "k" (list "so"))
+  (dict "c" (printf "38;2;%s"   $yellow)  "k" (list "pi" "bd" "cd"))
+  (dict "c" (printf "38;2;%s"   $red)     "k" (list "su" "sg" "or" "mi")) -}}
+{{- $exts := list
+  (dict "c" $magenta "e" (list "tar" "tgz" "gz" "zip" "7z" "xz" "zst" "bz2" "rar" "mp4" "mkv" "mov" "webm" "avi"))
+  (dict "c" $yellow  "e" (list "jpg" "jpeg" "png" "gif" "svg" "webp" "ico" "bmp"))
+  (dict "c" $cyan    "e" (list "mp3" "flac" "wav" "ogg" "m4a"))
+  (dict "c" $fg      "e" (list "md" "txt"))
+  (dict "c" $red     "e" (list "pdf" "epub"))
+  (dict "c" $orange  "e" (list "json" "yaml" "yml" "toml" "ini" "conf"))
+  (dict "c" $muted   "e" (list "bak" "tmp" "swp" "log")) }}
+set -gx LS_COLORS "{{ range $s := $struct }}{{ range $s.k }}{{ . }}={{ $s.c }}:{{ end }}{{ end }}{{ range $g := $exts }}{{ range $g.e }}*.{{ . }}=38;2;{{ $g.c }}:{{ end }}{{ end }}*~=38;2;{{ $muted }}"
