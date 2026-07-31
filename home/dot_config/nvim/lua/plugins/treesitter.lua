@@ -34,6 +34,7 @@ local parsers = {
     'toml',
     'tsv',
     'typescript',
+    'typst',
     'vim',
     'vimdoc',
     'xml',

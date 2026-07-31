@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+{{ if eq .chezmoi.os "linux" -}}
+set -euo pipefail
+
+desktop_file=/usr/share/wayland-sessions/sway-custom.desktop
+tmp="$(mktemp)"
+cat > "$tmp" <<'EOF'
+[Desktop Entry]
+Name=Sway (custom)
+Comment=An i3-compatible Wayland compositor
+Exec=env WLR_RENDERER=vulkan SWAY_UNSUPPORTED_GPU=true sway
+Type=Application
+EOF
+sudo install -m 644 "$tmp" "$desktop_file"
+rm -f "$tmp"
+{{ end -}}

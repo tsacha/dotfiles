@@ -4,6 +4,7 @@ vim.lsp.enable({
 	"helm_ls",
 	"lua_ls",
 	"rust_analyzer",
+	"tinymist",
 	"tofu_ls",
 	"yamlls",
 	"zls",
