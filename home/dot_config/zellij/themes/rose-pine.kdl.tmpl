@@ -1,8 +1,8 @@
-{{- $palette := includeTemplate "ayu-palette" . | fromYaml -}}
+{{- $palette := includeTemplate "rose-pine-palette" . | fromYaml -}}
 {{- $l := $palette.light -}}
 {{- $d := $palette.dark -}}
 themes {
-    ayu-light {
+    rose-pine-dawn {
         text_unselected { base "{{ $l.white }}"; background "{{ $l.black0 }}"; emphasis_0 "{{ $l.orange }}"; emphasis_1 "{{ $l.cyan }}"; emphasis_2 "{{ $l.green }}"; emphasis_3 "{{ $l.magenta }}"; }
         text_selected { base "{{ $l.white }}"; background "{{ $l.black2 }}"; emphasis_0 "{{ $l.orange }}"; emphasis_1 "{{ $l.cyan }}"; emphasis_2 "{{ $l.green }}"; emphasis_3 "{{ $l.magenta }}"; }
         ribbon_selected { base "{{ $l.black0 }}"; background "{{ $l.green }}"; emphasis_0 "{{ $l.red }}"; emphasis_1 "{{ $l.orange }}"; emphasis_2 "{{ $l.magenta }}"; emphasis_3 "{{ $l.cyan }}"; }
@@ -19,7 +19,7 @@ themes {
         exit_code_error { base "{{ $l.red }}"; background "{{ $l.black0 }}"; emphasis_0 "{{ $l.orange }}"; emphasis_1 0 0 0; emphasis_2 0 0 0; emphasis_3 0 0 0; }
         multiplayer_user_colors { player_1 "{{ $l.magenta }}"; player_2 "{{ $l.blue }}"; player_3 "{{ $l.cyan }}"; player_4 "{{ $l.orange }}"; player_5 "{{ $l.green }}"; player_6 "{{ $l.magenta }}"; player_7 "{{ $l.red }}"; player_8 "{{ $l.yellow }}"; player_9 0 0 0; player_10 0 0 0; }
     }
-    ayu-mirage {
+    rose-pine {
         text_unselected { base "{{ $d.white }}"; background "{{ $d.black1 }}"; emphasis_0 "{{ $d.orange }}"; emphasis_1 "{{ $d.cyan }}"; emphasis_2 "{{ $d.green }}"; emphasis_3 "{{ $d.magenta }}"; }
         text_selected { base "{{ $d.white }}"; background "{{ $d.black3 }}"; emphasis_0 "{{ $d.orange }}"; emphasis_1 "{{ $d.cyan }}"; emphasis_2 "{{ $d.green }}"; emphasis_3 "{{ $d.magenta }}"; }
         ribbon_selected { base "{{ $d.black1 }}"; background "{{ $d.green }}"; emphasis_0 "{{ $d.red }}"; emphasis_1 "{{ $d.orange }}"; emphasis_2 "{{ $d.magenta }}"; emphasis_3 "{{ $d.white }}"; }

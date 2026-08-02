@@ -1,6 +1,6 @@
 [flavor]
-dark = "ayu-mirage"
-light = "ayu-light"
+dark = "rose-pine"
+light = "rose-pine-dawn"
 
 [indicator]
 padding = { open = "▐", close = "▌" }

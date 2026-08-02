@@ -115,7 +115,7 @@ smart_gaps on
 gaps outer 0
 gaps inner 0
 
-include $HOME/.config/sway/config.d/ayu-colors
+include $HOME/.config/sway/config.d/rose-pine-colors
 
 default_border pixel 1
 

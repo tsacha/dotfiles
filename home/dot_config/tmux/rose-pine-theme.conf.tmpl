@@ -1,5 +1,5 @@
 {{- $scheme := includeTemplate "color-scheme" . | trim -}}
-{{- $palette := includeTemplate "ayu-palette" . | fromYaml -}}
+{{- $palette := includeTemplate "rose-pine-palette" . | fromYaml -}}
 {{- $c := index $palette $scheme -}}
 {{- $displayPanes := $c.black5 -}}
 {{- if eq $scheme "light" }}{{ $displayPanes = $c.black4 }}{{ end }}

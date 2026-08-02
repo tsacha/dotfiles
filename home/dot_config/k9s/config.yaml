@@ -13,7 +13,7 @@ k9s:
     reactive: true
     noIcons: false
     defaultsToFullScreen: true
-    skin: ayu
+    skin: rose-pine
   skipLatestRevCheck: false
   disablePodCounting: false
   shellPod:
