@@ -27,9 +27,11 @@ function fish_right_prompt
     set -l k8s_context (yq '.current-context' $kubeconfig 2>/dev/null)
     test -z "$k8s_context"; or test "$k8s_context" = null; and return
 
-    set -l k8s_ns (yq '.current-context as $curr|"/" + (.contexts[]|select(.name==$curr).context.namespace)' $kubeconfig 2>/dev/null)
-    if string match -q "*default*" "$k8s_ns"
+    set -l k8s_ns (yq '.current-context as $curr|(.contexts[]|select(.name==$curr).context.namespace) // ""' $kubeconfig 2>/dev/null)
+    if test -z "$k8s_ns" -o "$k8s_ns" = default
         set k8s_ns ""
+    else
+        set k8s_ns "/$k8s_ns"
     end
 
     set -l ctx_color 4481d0
