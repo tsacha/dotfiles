@@ -1,4 +1,4 @@
-cmd - return : open -a rio
+cmd - return : open -a ghostty
 shift + cmd - m : open -na emacs
 cmd - f1 : pmset displaysleepnow
 

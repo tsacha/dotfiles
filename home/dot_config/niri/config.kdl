@@ -56,7 +56,7 @@ window-rule {
 }
 
 binds {
-    Mod+T hotkey-overlay-title="Open a Terminal" { spawn "rio"; }
+    Mod+T hotkey-overlay-title="Open a Terminal" { spawn "ghostty"; }
     Mod+D hotkey-overlay-title="Run an Application" { spawn "fuzzel"; }
     Mod+F1 hotkey-overlay-title="Lock the Screen" { spawn "swaylock"; }
     Mod+F2 { show-hotkey-overlay; }

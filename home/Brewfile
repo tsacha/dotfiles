@@ -130,6 +130,7 @@ cask "claude"
 cask "claude-code"
 # Web browser
 cask "firefox"
+cask "font-geist-mono-nerd-font"
 # Set of tools to manage resources and applications hosted on Google Cloud
 cask "gcloud-cli"
 # Terminal emulator that uses platform-native UI and GPU acceleration

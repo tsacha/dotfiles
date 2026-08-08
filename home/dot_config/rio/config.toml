@@ -10,7 +10,10 @@ dark = "rose-pine"
 shape = 'beam'
 
 [fonts]
-family = "Geist Mono"
+# Use the Nerd Font family (static weights only): the plain Geist Mono cask
+# also ships a variable GeistMono[wght].ttf under the same family name, and
+# Rio resolves it at the wrong weight (Ghostty/CoreText doesn't).
+family = "GeistMono Nerd Font"
 size = 22
 
 [navigation]

@@ -4,7 +4,7 @@ set $left n
 set $down j
 set $up k
 set $right r
-set $term rio
+set $term ghostty
 set $menu fuzzel
 
 bindsym $mod+t exec $term
