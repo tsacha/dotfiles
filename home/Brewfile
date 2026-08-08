@@ -117,7 +117,7 @@ cask "firefox"
 # Set of tools to manage resources and applications hosted on Google Cloud
 cask "gcloud-cli"
 # Terminal emulator that uses platform-native UI and GPU acceleration
-cask "ghostty"
+cask "rio"
 # Keyboard customiser
 cask "karabiner-elements"
 # Plugin for AWS CLI to start and end sessions that connect to managed instances

@@ -1,0 +1,57 @@
+{{- $palette := includeTemplate "rose-pine-palette" . | fromYaml -}}
+{{- $l := $palette.light -}}
+# Local Rose Pine Rio theme (dawn / light).
+# Color palette: Rose Pine
+# ---
+# black0      "{{ $l.black0 }}" darkest
+# black1      "{{ $l.black1 }}" bg
+# black2      "{{ $l.black2 }}" ui
+# black3      "{{ $l.black3 }}" ui-selected
+# black4      "{{ $l.black4 }}" tx-3
+# black5      "{{ $l.black5 }}" tx-2
+# white       "{{ $l.white }}" tx
+# red         "{{ $l.red }}" re
+# orange      "{{ $l.orange }}" or
+# yellow      "{{ $l.yellow }}" ye
+# green       "{{ $l.green2 }}" gr
+# cyan        "{{ $l.cyan }}" cy
+# blue        "{{ $l.blue }}" bl
+# magenta     "{{ $l.magenta }}" ma
+
+[colors]
+background = '{{ $l.black1 }}'
+foreground = '{{ $l.white }}'
+selection-background = '{{ $l.black3 }}'
+selection-foreground = '{{ $l.white }}'
+
+cursor = '{{ $l.white }}'
+
+tabs = '{{ $l.black1 }}'
+tabs-active = '{{ $l.black2 }}'
+
+black = '{{ $l.black2 }}'
+red = '{{ $l.red }}'
+green = '{{ $l.green2 }}'
+yellow = '{{ $l.yellow }}'
+blue = '{{ $l.blue }}'
+magenta = '{{ $l.magenta }}'
+cyan = '{{ $l.cyan }}'
+white = '{{ $l.white }}'
+
+dim-black = '{{ $l.black4 }}'
+dim-red = '{{ $l.red }}'
+dim-green = '{{ $l.green2 }}'
+dim-yellow = '{{ $l.yellow }}'
+dim-blue = '{{ $l.blue }}'
+dim-magenta = '{{ $l.magenta }}'
+dim-cyan = '{{ $l.cyan }}'
+dim-white = '{{ $l.white }}'
+
+light-black = '{{ $l.black4 }}'
+light-red = '{{ $l.red }}'
+light-green = '{{ $l.green2 }}'
+light-yellow = '{{ $l.yellow }}'
+light-blue = '{{ $l.blue }}'
+light-magenta = '{{ $l.magenta }}'
+light-cyan = '{{ $l.cyan }}'
+light-white = '{{ $l.white }}'
