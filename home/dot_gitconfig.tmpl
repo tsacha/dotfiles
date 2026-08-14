@@ -6,21 +6,6 @@
     helper = osxkeychain
 {{ end -}}
 
-[alias]
-   wclone = "!f() { \
-       url=$1; \
-       folder=$(basename \"$url\" .git); \
-       git clone --bare \"$url\" \"$folder/.git\"; \
-       cd \"$folder\"; \
-       git config core.bare false; \
-       git config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*'; \
-   }; f"
-   wadd = "!f() { \
-       branch=$1; \
-       git worktree add \"$branch\"; \
-       git -C \"$branch\" branch -u \"origin/$branch\"; \
-   }; f"
-
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f

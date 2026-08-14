@@ -5,6 +5,8 @@ function fzf_project
             begin
                 find $HOME/Git -mindepth 1 -maxdepth 1 -type d
                 find $HOME/Git/Work -mindepth 1 -maxdepth 1 -type d
+                find $HOME/Git -mindepth 2 -maxdepth 2 -type d -path '*__worktrees/*'
+                find $HOME/Git/Work -mindepth 2 -maxdepth 2 -type d -path '*__worktrees/*'
             end | fzf
         )
         if string length -q $dir

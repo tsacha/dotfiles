@@ -54,6 +54,8 @@ brew "go"
 brew "golangci-lint"
 # OpenTelemetry Collector distribution with programmable pipelines
 brew "grafana-alloy"
+# Like cURL, but for gRPC
+brew "grpcurl"
 # Kubernetes package manager
 brew "helm"
 # Language server for Helm
@@ -90,10 +92,20 @@ brew "opentofu"
 brew "pinentry-mac"
 # Object-relational database system
 brew "postgresql@18", link: true
+# Protocol buffers (Google's data interchange format)
+brew "protobuf"
 # Hardware-accelerated GPU terminal emulator powered by WebGPU
 brew "rio-terminal"
 # Search tool like grep and The Silver Searcher
 brew "ripgrep"
+# Safe, concurrent, practical language
+brew "rust"
+# Experimental Rust compiler front-end for IDEs
+brew "rust-analyzer"
+# Rust toolchain installer
+brew "rustup"
+# Smart session manager for the terminal
+brew "sesh"
 # Terminal multiplexer
 brew "tmux"
 # Parser generator tool
@@ -137,6 +149,8 @@ cask "gcloud-cli"
 cask "ghostty"
 # Keyboard customiser
 cask "karabiner-elements"
+# Knowledge base that works on top of a local folder of plain text Markdown files
+cask "obsidian"
 # Plugin for AWS CLI to start and end sessions that connect to managed instances
 cask "session-manager-plugin"
 # Music streaming service
