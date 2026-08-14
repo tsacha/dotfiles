@@ -1,0 +1,6 @@
+# sort_order is top-level: nested under [default_session] it parses but is ignored.
+sort_order = ["config", "tmux", "tmuxinator", "zoxide"]
+
+[[session]]
+name = "scratch"
+path = "~"
