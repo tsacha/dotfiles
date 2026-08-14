@@ -14,11 +14,14 @@ function wd --description 'Purge a worktree, its branch and its tmux session'
         set branch (git branch --show-current)
     end
 
-    string match -q "$dir*" $PWD; and cd $root
+    if test "$PWD" = "$dir"; or string match -q "$dir/*" $PWD
+        cd $root
+    end
 
     git -C $root worktree remove --force $dir || return 1
+    # The session is named after the directory, so a detached worktree loses it too.
+    tmux kill-session -t=(__wt_name (path basename $dir)) 2>/dev/null
     if test -n "$branch"
         git -C $root branch -D $branch
-        tmux kill-session -t=(__wt_name $branch) 2>/dev/null
     end
 end

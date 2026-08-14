@@ -4,12 +4,23 @@ function wl --description 'List the worktrees of the current repo and their tmux
     set -l here
     set -q TMUX; and set here (tmux display-message -p '#{session_path}' 2>/dev/null)
 
-    for dir in (git -C $root worktree list --porcelain | string replace -rf '^worktree ' '')
-        set -l branch (git -C $dir branch --show-current)
-        test -n "$branch"; or set branch '(detached)'
-        set -l mark ' '
-        contains -- $dir $paths; and set mark '●'
-        test "$dir" = "$here"; and set mark '▸'
-        printf '%s %-32s %s\n' $mark $branch (string replace -- $HOME '~' $dir)
+    set -l dir
+    set -l branch
+    # A porcelain record ends on a blank line; the extra '' closes the last one.
+    for line in (git -C $root worktree list --porcelain) ''
+        switch $line
+            case 'worktree *'
+                set dir (string replace 'worktree ' '' -- $line)
+                set branch '(detached)'
+            case 'branch *'
+                set branch (string replace 'branch refs/heads/' '' -- $line)
+            case ''
+                test -n "$dir"; or continue
+                set -l mark ' '
+                contains -- $dir $paths; and set mark '●'
+                test "$dir" = "$here"; and set mark '▸'
+                printf '%s %-32s %s\n' $mark $branch (string replace -- $HOME '~' $dir)
+                set dir ''
+        end
     end
 end

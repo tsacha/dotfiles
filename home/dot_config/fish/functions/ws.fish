@@ -1,10 +1,5 @@
 function ws --description 'Pick a worktree across every project and open its tmux session'
-    set -l dirs (
-        begin
-            find $HOME/Git -mindepth 2 -maxdepth 2 -type d -path '*__worktrees/*'
-            find $HOME/Git/Work -mindepth 2 -maxdepth 2 -type d -path '*__worktrees/*'
-        end | sort
-    )
+    set -l dirs (__wt_dirs)
 
     if not set -q dirs[1]
         echo 'ws: no worktree anywhere' >&2

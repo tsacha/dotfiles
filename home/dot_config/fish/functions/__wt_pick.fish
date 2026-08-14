@@ -3,8 +3,8 @@ function __wt_pick --description 'Pick a branch for a worktree: open PRs on GitH
     set -l rows
 
     if command -q gh; and string match -q '*github.com*' -- (git -C $root remote get-url origin 2>/dev/null)
-        set rows (gh pr list --limit 100 --json number,title,headRefName 2>/dev/null |
-            jq -r '.[] | "#\(.number)  \(.title)\t\(.headRefName)"')
+        set rows (gh pr list --limit 100 --json number,title,headRefName \
+            --template '{{range .}}#{{.number}}  {{.title}}{{"\t"}}{{.headRefName}}{{"\n"}}{{end}}' 2>/dev/null)
     end
 
     if not set -q rows[1]
