@@ -31,6 +31,8 @@ if [ "$(uname)" != "Darwin" ]; then
 			awww query && awww img $HOME/.wallpapers/light.png
 		fi
 		$cm apply --force \
+			~/.gitconfig \
+			~/.config/gitu/config.toml \
 			~/.config/sway/config \
 			~/.config/sway/config.d/rose-pine-colors \
 			~/.config/niri/config.kdl \
@@ -47,6 +49,8 @@ if [ "$(uname)" != "Darwin" ]; then
 else
 	osascript -e 'tell app "System Events" to tell appearance preferences to set dark mode to not dark mode'
 	$cm apply --force \
+		~/.gitconfig \
+		~/.config/gitu/config.toml \
 		~/.config/k9s/config.yaml \
 		~/.config/fish/conf.d/rose-pine.fish \
 		~/.config/k9s/skins/rose-pine.yaml \

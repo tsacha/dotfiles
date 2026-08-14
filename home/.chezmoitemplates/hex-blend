@@ -1,0 +1,10 @@
+{{- /* Mix two hex colors: dict "a" <hex> "b" <hex> "w" <percent of a>. Returns #rrggbb. */ -}}
+{{- $a := splitList ";" (includeTemplate "hex2rgb" .a) -}}
+{{- $b := splitList ";" (includeTemplate "hex2rgb" .b) -}}
+{{- $out := "" -}}
+{{- range $i := until 3 -}}
+{{- $va := atoi (index $a $i) -}}
+{{- $vb := atoi (index $b $i) -}}
+{{- $out = printf "%s%02x" $out (div (add (mul $va $.w) (mul $vb (sub 100 $.w))) 100) -}}
+{{- end -}}
+{{- printf "#%s" $out -}}

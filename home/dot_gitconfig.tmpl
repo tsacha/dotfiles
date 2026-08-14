@@ -1,5 +1,36 @@
+{{- $scheme := includeTemplate "color-scheme" . | trim -}}
+{{- $palette := includeTemplate "rose-pine-palette" . | fromYaml -}}
+{{- $c := index $palette $scheme -}}
 [init]
 	defaultBranch = main
+
+# Not core.pager on purpose; only gdd opts in.
+[delta]
+	navigate = true
+	line-numbers = true
+	hyperlinks = true
+	syntax-theme = {{ if eq $scheme "light" }}rose-pine-dawn{{ else }}rose-pine{{ end }}
+	light = {{ eq $scheme "light" }}
+	minus-style = "syntax {{ includeTemplate "hex-blend" (dict "a" $c.red "b" $c.black1 "w" 18) }}"
+	minus-emph-style = "syntax {{ includeTemplate "hex-blend" (dict "a" $c.red "b" $c.black1 "w" 40) }}"
+	plus-style = "syntax {{ includeTemplate "hex-blend" (dict "a" $c.green "b" $c.black1 "w" 18) }}"
+	plus-emph-style = "syntax {{ includeTemplate "hex-blend" (dict "a" $c.green "b" $c.black1 "w" 40) }}"
+	line-numbers-minus-style = "{{ $c.red }}"
+	line-numbers-plus-style = "{{ $c.green }}"
+	line-numbers-zero-style = "{{ $c.black4 }}"
+	file-style = "bold {{ $c.magenta }}"
+	file-decoration-style = "{{ $c.black3 }} ul"
+	hunk-header-style = "file line-number syntax"
+	hunk-header-decoration-style = "{{ $c.black3 }} box"
+	commit-decoration-style = "{{ $c.black3 }} box"
+	whitespace-error-style = "{{ $c.black1 }} reverse {{ $c.red }}"
+
+[diff]
+	algorithm = histogram
+	renames = true
+
+[log]
+	date = iso
 
 {{ if eq .chezmoi.os "darwin" -}}
 [credential]

@@ -1,0 +1,49 @@
+{{- $scheme := includeTemplate "color-scheme" . | trim -}}
+{{- $palette := includeTemplate "rose-pine-palette" . | fromYaml -}}
+{{- $c := index $palette $scheme -}}
+[style]
+separator = { fg = "{{ $c.black3 }}", mods = "DIM" }
+
+info_msg = { fg = "{{ $c.green }}", mods = "BOLD" }
+error_msg = { fg = "{{ $c.red }}", mods = "BOLD" }
+command = { fg = "{{ $c.blue }}", mods = "BOLD" }
+
+menu.heading = { fg = "{{ $c.blue }}", mods = "BOLD" }
+menu.key = { fg = "{{ $c.magenta }}" }
+menu.active_arg = { fg = "{{ $c.red }}", mods = "BOLD" }
+
+prompt = { fg = "{{ $c.cyan }}", mods = "DIM" }
+
+section_header = { fg = "{{ $c.orange }}", mods = "BOLD" }
+file_header = { fg = "{{ $c.magenta }}" }
+hunk_header = { fg = "{{ $c.blue }}" }
+
+diff_highlight.tag_old = { fg = "{{ $c.red }}", mods = "BOLD" }
+diff_highlight.tag_new = { fg = "{{ $c.blue }}", mods = "BOLD" }
+diff_highlight.changed_old = { fg = "{{ $c.red }}" }
+diff_highlight.changed_new = { fg = "{{ $c.blue }}" }
+
+syntax_highlight.enabled = true
+syntax_highlight.attribute = { fg = "{{ $c.orange }}" }
+syntax_highlight.comment = { fg = "{{ $c.black4 }}" }
+syntax_highlight.function = { fg = "{{ $c.blue }}" }
+syntax_highlight.function_builtin = { fg = "{{ $c.cyan }}" }
+syntax_highlight.keyword = { fg = "{{ $c.magenta }}" }
+syntax_highlight.module = { fg = "{{ $c.cyan }}" }
+syntax_highlight.string = { fg = "{{ $c.orange }}" }
+syntax_highlight.string_special = { fg = "{{ $c.cyan }}" }
+syntax_highlight.type = { fg = "{{ $c.orange }}" }
+syntax_highlight.type_builtin = { fg = "{{ $c.orange }}" }
+
+picker.prompt = { fg = "{{ $c.cyan }}" }
+picker.matched = { fg = "{{ $c.orange }}", mods = "BOLD" }
+
+cursor = { symbol = "▌", fg = "{{ $c.magenta }}" }
+selection_bar = { symbol = "▌", fg = "{{ $c.magenta }}", mods = "DIM" }
+selection_area = { bg = "{{ $c.black2 }}" }
+
+hash = { fg = "{{ $c.orange }}" }
+branch = { fg = "{{ $c.green }}" }
+remote = { fg = "{{ $c.red }}" }
+tag = { fg = "{{ $c.orange }}" }
+author = { fg = "{{ $c.magenta }}" }

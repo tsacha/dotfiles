@@ -11,6 +11,7 @@ awww
 wlsunset
 xwayland-satellite
 
+
 fish
 fisher
 fzf
@@ -20,6 +21,9 @@ eza
 bat
 
 git
+git-delta
+difftastic
+gitu
 age
 less
 jq
