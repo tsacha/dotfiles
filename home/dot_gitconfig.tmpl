@@ -1,5 +1,5 @@
 {{- $scheme := includeTemplate "color-scheme" . | trim -}}
-{{- $palette := includeTemplate "rose-pine-palette" . | fromYaml -}}
+{{- $palette := includeTemplate "theme-palette" . | fromYaml -}}
 {{- $c := index $palette $scheme -}}
 [init]
 	defaultBranch = main
@@ -9,7 +9,7 @@
 	navigate = true
 	line-numbers = true
 	hyperlinks = true
-	syntax-theme = {{ if eq $scheme "light" }}rose-pine-dawn{{ else }}rose-pine{{ end }}
+	syntax-theme = theme-{{ $scheme }}
 	light = {{ eq $scheme "light" }}
 	minus-style = "syntax {{ includeTemplate "hex-blend" (dict "a" $c.red "b" $c.black1 "w" 18) }}"
 	minus-emph-style = "syntax {{ includeTemplate "hex-blend" (dict "a" $c.red "b" $c.black1 "w" 40) }}"
@@ -35,6 +35,9 @@
 {{ if eq .chezmoi.os "darwin" -}}
 [credential]
     helper = osxkeychain
+{{ else if eq (includeTemplate "is-wsl" .) "true" -}}
+[credential]
+	helper = /mnt/c/Program\\ Files/Git/mingw64/bin/git-credential-manager.exe
 {{ end -}}
 
 [filter "lfs"]
@@ -67,6 +70,5 @@
 [url "ssh://git@github.com/tsacha"]
 	insteadOf = https://github.com/tsacha
 
-{{ if stat (joinPath .chezmoi.homeDir ".gitconfig.work") }}
-{{ include (joinPath .chezmoi.homeDir ".gitconfig.work") }}
-{{ end }}
+[include]
+	path = ~/.gitconfig.work

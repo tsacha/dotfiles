@@ -1,5 +1,5 @@
-theme_light "rose-pine-dawn"
-theme_dark "rose-pine"
+theme_light "theme-light"
+theme_dark "theme-dark"
 simplified_ui true
 show_startup_tips false
 show_release_notes false

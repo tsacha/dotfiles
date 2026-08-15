@@ -1,0 +1,174 @@
+#!/usr/bin/env python3
+"""Interactively test the terminal dark/light color-palette VT protocol."""
+
+import os
+import re
+import select
+import sys
+import termios
+import time
+
+
+QUERY = b"\x1b[?996n"
+ENABLE_NOTIFICATIONS = b"\x1b[?2031h"
+DISABLE_NOTIFICATIONS = b"\x1b[?2031l"
+REPLY = re.compile(rb"(?:\x1b\[|\x9b)\?997;([12])n")
+MODE = {b"1": "dark", b"2": "light"}
+
+
+def receive_mode(tty_fd, timeout):
+    """Return (mode, raw reply), or (None, bytes seen) after timeout."""
+    deadline = time.monotonic() + timeout
+    received = bytearray()
+
+    while time.monotonic() < deadline:
+        readable, _, _ = select.select(
+            [tty_fd], [], [], max(0, deadline - time.monotonic())
+        )
+        if not readable:
+            break
+        chunk = os.read(tty_fd, 256)
+        if not chunk:
+            break
+        received.extend(chunk)
+        match = REPLY.search(received)
+        if match:
+            return MODE[match.group(1)], bytes(match.group(0))
+
+    return None, bytes(received)
+
+
+def visible(data):
+    """Render control bytes without letting them affect the terminal."""
+    return repr(data)[1:]
+
+
+def print_environment():
+    print("Detected environment:")
+    found = False
+    for name in ("TERM_PROGRAM", "TERM_PROGRAM_VERSION", "TERM", "COLORTERM"):
+        if value := os.environ.get(name):
+            print(f"  - {name}={value}")
+            found = True
+    for name, label in (
+        ("TMUX", "tmux"),
+        ("ZELLIJ", "Zellij"),
+        ("SSH_CONNECTION", "SSH session"),
+    ):
+        if os.environ.get(name):
+            print(f"  - detected intermediary: {label}")
+            found = True
+    if not found:
+        print("  - no terminal identification variable is available")
+    if os.environ.get("TMUX") or os.environ.get("ZELLIJ") or os.environ.get(
+        "SSH_CONNECTION"
+    ):
+        print(
+            "  Warning: this result measures the entire path between this script "
+            "and the terminal, including intermediaries."
+        )
+
+
+def main():
+    if len(sys.argv) != 1:
+        print("This script does not accept arguments.", file=sys.stderr)
+        return 64
+
+    print("Dark/light theme detection VT protocol test")
+    print("=" * 57)
+    print_environment()
+
+    try:
+        terminal = open("/dev/tty", "r+b", buffering=0)
+    except OSError as error:
+        print("\n❌ Unable to open the controlling terminal (/dev/tty).")
+        print(f"   Details: {error}")
+        print("   Run this script directly inside the terminal to be tested.")
+        return 1
+
+    with terminal:
+        tty_fd = terminal.fileno()
+        original = termios.tcgetattr(tty_fd)
+        test_mode = termios.tcgetattr(tty_fd)
+        test_mode[3] &= ~(termios.ECHO | termios.ICANON)
+        test_mode[6][termios.VMIN] = 0
+        test_mode[6][termios.VTIME] = 0
+        query_supported = False
+        notifications_received = 0
+        current_mode = None
+
+        try:
+            termios.tcsetattr(tty_fd, termios.TCSANOW, test_mode)
+            termios.tcflush(tty_fd, termios.TCIFLUSH)
+
+            print("\nTest 1/2 — query the current theme")
+            print("  Sending: CSI ? 996 n")
+            print(f"  Bytes: {visible(QUERY)}")
+            print("  Expected reply: CSI ? 997 ; 1 n (dark), or ; 2 n (light)")
+            os.write(tty_fd, QUERY)
+            current_mode, raw = receive_mode(tty_fd, 2.0)
+
+            if current_mode is None:
+                print("  ❌ FAILED: no valid reply received within 2 seconds.")
+                if raw:
+                    print(f"  Unexpected bytes received: {visible(raw)}")
+                else:
+                    print("  No bytes received.")
+                print("\nVerdict: the theme query is not supported on this path.")
+                print(
+                    "The terminal itself or an intermediary such as tmux, Zellij, "
+                    "or SSH may be responsible."
+                )
+                return 2
+
+            query_supported = True
+            print(f"  Received: {visible(raw)}")
+            print(f"  ✅ PASSED: the terminal reports {current_mode.upper()} mode.")
+
+            print("\nTest 2/2 — color palette update notifications")
+            print("  Sending: CSI ? 2031 h (enable notifications)")
+            os.write(tty_fd, ENABLE_NOTIFICATIONS)
+            print("  Now change the OS theme or the terminal color palette.")
+            print("  A CSI ? 997 ; 1/2 n reply should arrive after every update.")
+            print("  Press Ctrl-C when the test is complete.\n")
+
+            previous_mode = current_mode
+            while True:
+                mode, raw = receive_mode(tty_fd, 3600)
+                if mode is None:
+                    continue
+                notifications_received += 1
+                changed = "mode changed" if mode != previous_mode else "same mode"
+                print(
+                    f"  ✅ Notification #{notifications_received} : "
+                    f"{mode.upper()} ({changed}), bytes {visible(raw)}",
+                    flush=True,
+                )
+                previous_mode = mode
+        except KeyboardInterrupt:
+            print("\n\nSummary")
+            if not query_supported:
+                print("  ⚠️  Test interrupted before the initial query completed.")
+                return 130
+            print("  ✅ Current theme query: supported")
+            if notifications_received:
+                print(
+                    "  ✅ Palette update notifications: supported "
+                    f"({notifications_received} received)"
+                )
+            else:
+                print("  ⚠️  Palette update notifications: not verified")
+                print("     No notification was observed before Ctrl-C.")
+                print(
+                    "     This does not prove incompatibility if the palette did "
+                    "not actually change."
+                )
+            return 0
+        finally:
+            if query_supported:
+                os.write(tty_fd, DISABLE_NOTIFICATIONS)
+            termios.tcsetattr(tty_fd, termios.TCSANOW, original)
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

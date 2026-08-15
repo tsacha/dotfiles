@@ -1,3 +1,4 @@
+{{- $wsl := eq (includeTemplate "is-wsl" .) "true" -}}
 {{ if eq .chezmoi.os "darwin" -}}
 .bashrc
 .profile
@@ -8,11 +9,56 @@
 .config/sway
 .config/systemd
 .config/fish/conf.d/dotfiles_linux.fish
+.config/fish/conf.d/dotfiles_wsl.fish
 .config/niri
+.scripts/wsl-agent-relay.sh
+AppData
+Wingetfile
+run_onchange_before_winget.ps1
+run_onchange_shortcuts.ps1
+{{ else if eq .chezmoi.os "windows" -}}
+*
+!AppData
+!Documents
+!run_onchange_before_winget.ps1
+!run_onchange_shortcuts.ps1
 {{ else -}}
 .config/kitty
 Library/
 .config/fish/conf.d/dotfiles_darwin.fish
 Brewfile
 .config/karabiner
+AppData
+Wingetfile
+run_onchange_before_winget.ps1
+run_onchange_shortcuts.ps1
+{{ if $wsl -}}
+.config/ghostty
+.config/rio
+.config/sway
+.config/niri
+.config/mako
+.config/fuzzel
+.config/environment.d
+.config/kglobalshortcutsrc
+.config/yubikey-touch-detector
+.local/share/applications
+.config/systemd/user/awww.service
+.config/systemd/user/wlsunset.service
+.config/systemd/user/nvibrant.service
+.config/systemd/user/xwayland-satellite.service
+.config/systemd/user/default.target.wants
+.gnupg/gpg-agent.conf
+.gnupg/scdaemon.conf
+{{ else -}}
+.config/fish/conf.d/dotfiles_wsl.fish
+.config/systemd/user/gpg-agent-relay.service
+.config/systemd/user/gpg-agent-ssh-relay.service
+.config/systemd/user/gpg-agent.service
+.config/systemd/user/gpg-agent.socket
+.config/systemd/user/gpg-agent-ssh.socket
+.config/systemd/user/gpg-agent-extra.socket
+.config/systemd/user/gpg-agent-browser.socket
+.scripts/wsl-agent-relay.sh
+{{ end -}}
 {{ end -}}

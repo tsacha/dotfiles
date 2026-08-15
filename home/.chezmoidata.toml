@@ -1,2 +1,14 @@
 [themes.yazi]
 packages = []
+
+[theme.light]
+name = "rose-pine-dawn"
+title = "Rose Pine Dawn"
+
+[theme.dark]
+name = "rose-pine"
+title = "Rose Pine"
+
+[wsl]
+distribution = "archlinux"
+username = "sacha"

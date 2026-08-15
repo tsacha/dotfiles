@@ -1,3 +1,7 @@
+if vim.fn.has("wsl") == 1 then
+	vim.g.clipboard = "osc52"
+end
+
 --- Keep cursor position after yank
 local keymap_set = vim.keymap.set
 local win_get_cursor = vim.api.nvim_win_get_cursor

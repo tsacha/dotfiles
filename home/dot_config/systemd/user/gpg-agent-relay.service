@@ -1,0 +1,13 @@
+[Unit]
+Description=Relay gpg-agent (commit signing) to the Windows agent
+ConditionVirtualization=wsl
+Conflicts=gpg-agent.service gpg-agent.socket gpg-agent-ssh.socket gpg-agent-extra.socket gpg-agent-browser.socket
+After=gpg-agent.service gpg-agent.socket gpg-agent-ssh.socket gpg-agent-extra.socket gpg-agent-browser.socket
+
+[Service]
+ExecStart=%h/.scripts/wsl-agent-relay.sh gpgconf-agent-socket S.gpg-agent
+Restart=on-failure
+RestartSec=2
+
+[Install]
+WantedBy=default.target

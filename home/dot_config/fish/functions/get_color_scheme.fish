@@ -8,7 +8,13 @@ function get_color_scheme
                 echo "light"
             end
         case Linux
-            if command -q gsettings
+            if set -q WSL_DISTRO_NAME; or set -q WSL_INTEROP
+                if reg.exe query 'HKCU\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize' /v AppsUseLightTheme 2>/dev/null | string match -q '*0x0*'
+                    echo "dark"
+                else
+                    echo "light"
+                end
+            else if command -q gsettings
                 set -l scheme (gsettings get org.gnome.desktop.interface color-scheme | string trim)
                 if test "$scheme" = "'prefer-dark'"
                     echo "dark"

@@ -3,6 +3,14 @@
 {{- if eq (output "osascript" "-e" "tell app \"System Events\" to tell appearance preferences to get dark mode" | trim) "true" -}}
 {{- $color = "dark" -}}
 {{- end -}}
+{{- else if eq .chezmoi.os "windows" -}}
+{{- if contains "0x0" (output "cmd.exe" "/c" "reg query HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize /v AppsUseLightTheme 2>nul || exit 0") -}}
+{{- $color = "dark" -}}
+{{- end -}}
+{{- else if eq (includeTemplate "is-wsl" .) "true" -}}
+{{- if contains "0x0" (output "sh" "-c" "reg.exe query 'HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize' /v AppsUseLightTheme 2>/dev/null || true") -}}
+{{- $color = "dark" -}}
+{{- end -}}
 {{- else -}}
 {{- if eq (output "gsettings" "get" "org.gnome.desktop.interface" "color-scheme" | trim) "'prefer-dark'" -}}
 {{- $color = "dark" -}}

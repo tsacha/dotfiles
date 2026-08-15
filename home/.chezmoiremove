@@ -1,0 +1,17 @@
+{{ if eq .chezmoi.os "windows" -}}
+AppData/Local/rio/themes/rose-pine-dawn.toml
+AppData/Local/rio/themes/rose-pine.toml
+{{ else -}}
+.config/bat/themes/rose-pine-dawn.tmTheme
+.config/bat/themes/rose-pine.tmTheme
+.config/fish/conf.d/rose-pine.fish
+.config/k9s/skins/rose-pine.yaml
+.config/rio/themes/rose-pine-dawn.toml
+.config/rio/themes/rose-pine.toml
+.config/sway/config.d/rose-pine-colors
+.config/systemd/user/gpg-agent-native-disable.service
+.config/tmux/rose-pine-theme.conf
+.config/yazi/flavors/rose-pine-dawn.yazi
+.config/yazi/flavors/rose-pine.yazi
+.config/zellij/themes/rose-pine.kdl
+{{ end -}}
