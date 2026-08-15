@@ -1,0 +1,17 @@
+{{- $scheme := includeTemplate "color-scheme" . | trim -}}
+{{- $palette := includeTemplate "theme-palette" . | fromYaml -}}
+{{- $c := index $palette $scheme -}}
+{{- $displayPanes := $c.black5 -}}
+{{- if eq $scheme "light" }}{{ $displayPanes = $c.black4 }}{{ end }}
+set-option -g status-style bg={{ $c.black1 }},fg={{ $c.white }}
+set -g status-right "#[fg={{ $c.magenta }}]%H:%M #[fg=default]· #[fg={{ $c.blue }}]%d %b "
+set -g pane-border-style fg={{ $c.black2 }}
+set -g pane-active-border-style fg={{ $c.green }}
+set -g message-style bg={{ $c.black1 }},fg={{ $c.green }}
+set -g message-command-style bg={{ $c.black1 }},fg={{ $c.blue }}
+set -g display-panes-active-colour "{{ $c.green }}"
+set -g display-panes-colour "{{ $displayPanes }}"
+set -g clock-mode-colour "{{ $c.green }}"
+set -g mode-style bg={{ $c.black2 }},fg={{ $c.white }}
+# Styles are space-separated: a comma inside #[] breaks the #{?,,} split.
+set -g 'status-format[0]' '#[align=left]#{S:#[range=user|#{session_id}]#{?#{==:#{session_name},#{client_session}},#[fg={{ $c.black1 }} bg={{ $c.magenta }} bold],#[default]} #{session_name} #[norange]#[default]#{W:#[range=user|#{window_id}]#{?#{==:#{session_name},#{client_session}},#{?#{window_active},#[fg={{ $c.black1 }} bg={{ $c.green }} bold],#[default]},#[fg={{ $c.black5 }}]} #{?#{==:#{window_name},#{session_name}},󰜘,#{window_name}} #[norange]#[default]}#{?#{!=:#{session_name},#{@last-session}}, #[fg={{ $c.black4 }}]· ,}}#[align=right]#{T:status-right}'

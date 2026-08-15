@@ -1,0 +1,14 @@
+# Packages installed with Winget
+Git.Git
+GnuPG.GnuPG
+GnuPG.Gpg4win
+Mozilla.Firefox
+raphamorim.rio
+BurntSushi.ripgrep.MSVC
+OpenAI.Codex
+Rustlang.Rustup
+albertony.npiperelay
+contour-terminal.Contour
+twpayne.chezmoi
+Microsoft.PowerToys
+Microsoft.PowerShell

@@ -1,0 +1,12 @@
+{{- $wsl := eq (includeTemplate "is-wsl" .) "true" -}}
+sesh-bin
+basedpyright-bin
+helm-ls-bin
+tofu-ls-bin
+kubecolor
+lfk-bin
+{{ if $wsl }}
+wslu
+{{ else }}
+awww-git
+{{ end -}}

@@ -1,0 +1,19 @@
+{{ if eq .chezmoi.os "windows" -}}
+$ErrorActionPreference = "Stop"
+
+$winget = Get-Command winget -ErrorAction SilentlyContinue
+if ($null -eq $winget) {
+    throw "Winget is required but was not found. Install App Installer from the Microsoft Store first."
+}
+
+$packages = @'
+{{ include "Wingetfile" }}
+'@ -split "\r?\n" | Where-Object { $_ -and -not $_.StartsWith("#") }
+
+foreach ($package in $packages) {
+    & $winget.Source install --id $package --exact --source winget --accept-package-agreements --accept-source-agreements --disable-interactivity
+    if ($LASTEXITCODE -ne 0) {
+        throw "winget install failed for $package with exit code $LASTEXITCODE."
+    }
+}
+{{ end -}}

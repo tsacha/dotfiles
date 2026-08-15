@@ -1,0 +1,32 @@
+{{ if eq .chezmoi.os "windows" -}}
+$ErrorActionPreference = "Stop"
+
+$startMenu = Join-Path ([Environment]::GetFolderPath([Environment+SpecialFolder]::Programs)) "Utilities"
+New-Item -ItemType Directory -Force -Path $startMenu | Out-Null
+$shell = New-Object -ComObject WScript.Shell
+
+function Set-Shortcut {
+    param(
+        [string]$Name,
+        [string]$TargetPath,
+        [string]$Description,
+        [string]$Arguments = "",
+        [string]$IconLocation = ""
+    )
+
+    $shortcut = $shell.CreateShortcut((Join-Path $startMenu "$Name.lnk"))
+    $shortcut.TargetPath = $TargetPath
+    $shortcut.Arguments = $Arguments
+    if ($IconLocation) {
+        $shortcut.IconLocation = $IconLocation
+    }
+    $shortcut.WorkingDirectory = $env:USERPROFILE
+    $shortcut.Description = $Description
+    $shortcut.Save()
+}
+
+# Rio is configured to open the Arch Linux WSL distribution.
+Set-Shortcut -Name "WSL (Rio)" -TargetPath (Get-Command rio.exe -CommandType Application | Select-Object -First 1 -ExpandProperty Source) -IconLocation "$env:SystemRoot\System32\wsl.exe,0" -Description "Ouvrir Arch Linux dans WSL avec Rio"
+Set-Shortcut -Name "PowerShell 7" -TargetPath (Get-Command pwsh.exe -CommandType Application | Select-Object -First 1 -ExpandProperty Source) -Description "Ouvrir PowerShell 7"
+Set-Shortcut -Name "PowerShell 7 (Rio)" -TargetPath (Get-Command rio.exe -CommandType Application | Select-Object -First 1 -ExpandProperty Source) -Arguments "-e pwsh" -IconLocation ((Get-Command pwsh.exe -CommandType Application | Select-Object -First 1 -ExpandProperty Source) + ",0") -Description "Ouvrir PowerShell 7 avec Rio"
+{{ end -}}

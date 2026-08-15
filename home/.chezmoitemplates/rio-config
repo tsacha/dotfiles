@@ -1,0 +1,61 @@
+confirm-before-quit = false
+copy-on-select = true
+option-as-alt = "left"
+{{- $scheme := includeTemplate "color-scheme" . | trim }}
+
+{{ if eq .chezmoi.os "windows" -}}
+theme = "theme-{{ $scheme }}"
+{{ else -}}
+[adaptive-theme]
+light = "theme-light"
+dark = "theme-dark"
+{{- end }}
+
+[cursor]
+shape = 'beam'
+
+[fonts]
+family = "GeistMono Nerd Font"
+size = 22
+
+[navigation]
+unfocused-split-opacity = 1.0
+hide-if-single = true
+
+[window]
+decorations = "Disabled"
+
+[platform.macos.window]
+decorations = "Enabled"
+macos-use-unified-titlebar = true
+mode = "Fullscreen"
+
+[platform.windows.window]
+decorations = "Enabled"
+
+[platform.windows.shell]
+program = "wsl.exe"
+args = ["-d", "{{ .wsl.distribution }}", "--cd", "~"]
+
+[bindings]
+keys = [
+  { key = "h", with = "alt | shift", action = "SplitRight" },
+  { key = "v", with = "alt | shift", action = "SplitDown" },
+
+  { key = "t", with = "alt | shift", action = "CreateTab" },
+  { key = "t", with = "control | shift", action = "CreateTab" },
+
+  # Rio only supports cyclic split navigation.
+  { key = "left", with = "alt | shift", action = "SelectPrevSplit" },
+  { key = "up", with = "alt | shift", action = "SelectPrevSplit" },
+  { key = "right", with = "alt | shift", action = "SelectNextSplit" },
+  { key = "down", with = "alt | shift", action = "SelectNextSplit" },
+
+  { key = "r", with = "alt | shift", action = "IncreaseFontSize" },
+  { key = "n", with = "alt | shift", action = "DecreaseFontSize" },
+
+  { key = "minus", with = "control", action = "None" },
+  { key = "plus", with = "control", action = "None" },
+
+  { key = "enter", with = "shift", esc = "\u001b\u000d" },
+]

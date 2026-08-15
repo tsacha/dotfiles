@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-{{ if eq .chezmoi.os "linux" -}}
+{{ if and (eq .chezmoi.os "linux") (ne (includeTemplate "is-wsl" .) "true") -}}
 set -euo pipefail
 
 desktop_file=/usr/share/wayland-sessions/sway-custom.desktop
