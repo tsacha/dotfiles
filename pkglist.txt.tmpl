@@ -1,8 +1,10 @@
 {{- $wsl := eq (includeTemplate "is-wsl" .) "true" -}}
+{{/* Shell, terminal and command-line tools */}}
 fish
 fisher
 chezmoi
 tmux
+zellij
 fzf
 zoxide
 fd
@@ -18,7 +20,9 @@ go-yq
 ijq
 htop
 httpie
+python
 
+{{/* Git and collaboration */}}
 git
 git-delta
 difftastic
@@ -27,10 +31,13 @@ git-lfs
 age
 github-cli
 
+{{/* Editor, language servers and formatters */}}
 neovim
 base-devel
+tree-sitter
 tree-sitter-cli
 gopls
+golangci-lint
 lua-language-server
 rust-analyzer
 tinymist
@@ -42,37 +49,61 @@ shfmt
 yamlfmt
 prettier
 
+{{/* Languages and runtimes */}}
 go
 rustup
-nodejs
 npm
 bun
 zig
 typst
 
+{{/* Cloud, Kubernetes and containers */}}
 kubectl
 kubie
 k9s
 helm
 krew
+cilium-cli
 opentofu
 go-task
+aws-cli-v2
+docker
 
+{{/* Security and remote access */}}
 gnupg
 openssh
 {{ if $wsl }}
+{{/* WSL integration */}}
 socat
 {{ else }}
+{{/* Hardware security */}}
 yubikey-manager
 libfido2
-pinentry
+yubikey-touch-detector
 
+{{/* Desktop applications and utilities */}}
 firefox
 rio
+obsidian
 fuzzel
 wlsunset
 xwayland-satellite
 pavucontrol
 wl-clipboard
 gnome-themes-extra
+
+{{/* Desktop sessions and Wayland integration */}}
+sway
+swaylock
+mako
+grim
+slurp
+wireplumber
+libpulse
+ddcutil
+xdg-desktop-portal-gnome
+xdg-desktop-portal-wlr
+
+{{/* Appearance */}}
+awww
 {{ end -}}

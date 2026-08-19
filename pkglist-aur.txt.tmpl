@@ -1,12 +1,24 @@
 {{- $wsl := eq (includeTemplate "is-wsl" .) "true" -}}
+{{/* Developer tooling */}}
 sesh-bin
 basedpyright-bin
-helm-ls-bin
 tofu-ls-bin
 kubecolor
 lfk-bin
+helm-ls-bin
+
+{{/* Cloud services */}}
+aws-iam-authenticator-bin
+aws-session-manager-plugin
+claude-code
+google-cloud-cli
+google-cloud-cli-bq
 {{ if $wsl }}
+{{/* WSL integration */}}
 wslu
 {{ else }}
-awww-git
+{{/* Linux desktop */}}
+ghostty-ergol
+nvibrant-bin
+ttf-geist-mono
 {{ end -}}

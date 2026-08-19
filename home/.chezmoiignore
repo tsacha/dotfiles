@@ -46,6 +46,7 @@ run_onchange_shortcuts.ps1
 .config/systemd/user/awww.service
 .config/systemd/user/wlsunset.service
 .config/systemd/user/nvibrant.service
+.config/systemd/user/syncthing.service
 .config/systemd/user/xwayland-satellite.service
 .config/systemd/user/default.target.wants
 .gnupg/gpg-agent.conf

@@ -6,13 +6,12 @@ base, puis vérifier que les hooks de l'initramfs couvrent le chiffrement
 
 ## Dotfiles publics
 
-Installer les prérequis puis cloner et appliquer le dépôt public :
+Installer les prérequis puis cloner le dépôt public :
 
 ```bash
 sudo pacman -Syu --needed git chezmoi fish gnupg pcsclite ccid curl
 mkdir -p ~/Git
 git clone https://github.com/tsacha/dotfiles.git ~/Git/dotfiles
-chezmoi -S ~/Git/dotfiles apply
 ```
 
 ## TPM et démarrage chiffré
@@ -50,13 +49,17 @@ sudo curl -fsSL -o /usr/share/X11/xkb/symbols/ergol_anglemod \
   https://github.com/Nuclear-Squid/ergol/releases/download/ergol-v1.0.2/ergol_angle_mod.xkb_symbols
 ```
 
-## yay
+## Paquets Arch et AUR
 
-Depuis une session utilisateur, installer l'assistant AUR :
+Depuis une session utilisateur, installer les paquets officiels, l'assistant
+AUR, les paquets AUR, puis appliquer les dotfiles :
 
 ```bash
+chezmoi execute-template -S ~/Git/dotfiles --file pkglist.txt.tmpl | sudo pacman -S --needed -
 git clone https://aur.archlinux.org/yay.git /tmp/yay
 (cd /tmp/yay && makepkg -si)
+chezmoi execute-template -S ~/Git/dotfiles --file pkglist-aur.txt.tmpl | yay -S --needed -
+chezmoi -S ~/Git/dotfiles apply
 ```
 
 ## Configuration privée
