@@ -91,6 +91,9 @@ Au premier démarrage, Arch ouvre une session `root` :
 
 ```bash
 pacman -Syu --needed git sudo base-devel chezmoi
+sed -i 's/^#en_US.UTF-8 UTF-8[[:space:]]*$/en_US.UTF-8 UTF-8/' /etc/locale.gen
+locale-gen
+printf 'LANG=en_US.UTF-8\n' > /etc/locale.conf
 useradd -m -G wheel sacha
 passwd sacha
 printf '%s\n' '%wheel ALL=(ALL:ALL) ALL' | install -m 0440 /dev/stdin /etc/sudoers.d/wheel
