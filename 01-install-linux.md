@@ -49,6 +49,15 @@ sudo curl -fsSL -o /usr/share/X11/xkb/symbols/ergol_anglemod \
   https://github.com/Nuclear-Squid/ergol/releases/download/ergol-v1.0.2/ergol_angle_mod.xkb_symbols
 ```
 
+## Imprimante et scanner
+
+Installer CUPS, le support PDF et les outils de numérisation :
+
+```bash
+sudo pacman -S --needed cups cups-pdf sane sane-airscan
+lpadmin -p printer -E -v "ipps://printer.internal/" -m everywhere
+```
+
 ## Paquets Arch et AUR
 
 Depuis une session utilisateur, installer les paquets officiels, l'assistant
