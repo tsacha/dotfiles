@@ -10,6 +10,7 @@ vim.opt.shiftwidth = 4
 vim.opt.autoindent = true
 vim.opt.expandtab = true
 vim.opt.mouse = "a"
+vim.opt.mousescroll = "ver:1,hor:6"
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 vim.opt.signcolumn = "yes"
