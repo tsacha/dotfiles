@@ -22,6 +22,11 @@ reload_tmux() {
 	fi
 }
 
+set_wallpaper() {
+	command -v awww >/dev/null 2>&1 || return 0
+	awww img --transition-type simple --transition-step 4 "$1" >/dev/null 2>&1 || true
+}
+
 apply_theme() {
 	"${cm[@]}" apply --force "${theme_targets[@]}" "$@"
 	reload_tmux
@@ -57,15 +62,15 @@ if [ "$(uname)" != "Darwin" ]; then
 		if [ "$(gsettings get org.gnome.desktop.interface color-scheme)" == "'prefer-light'" ]; then
 			gsettings set org.gnome.desktop.interface color-scheme \'prefer-dark\'
 			gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita-dark'
-			awww query && awww img $HOME/.wallpapers/dark.jpg
+			set_wallpaper "$HOME/.wallpapers/dark.jpg"
 		elif [ "$(gsettings get org.gnome.desktop.interface color-scheme)" == "'prefer-dark'" ]; then
 			gsettings set org.gnome.desktop.interface color-scheme \'prefer-light\'
 			gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita'
-			awww query && awww img $HOME/.wallpapers/light.png
+			set_wallpaper "$HOME/.wallpapers/light.png"
 		elif [ "$(gsettings get org.gnome.desktop.interface color-scheme)" == "'default'" ]; then
 			gsettings set org.gnome.desktop.interface color-scheme \'prefer-light\'
 			gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita'
-			awww query && awww img $HOME/.wallpapers/light.png
+			set_wallpaper "$HOME/.wallpapers/light.png"
 		fi
 		apply_theme \
 			~/.config/sway/config \

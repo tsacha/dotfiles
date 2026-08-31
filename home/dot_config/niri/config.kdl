@@ -6,6 +6,8 @@ environment {
     DISPLAY ":0"
 }
 
+spawn-at-startup "awww-daemon"
+
 input {
     keyboard {
         xkb {

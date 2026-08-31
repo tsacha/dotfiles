@@ -169,6 +169,7 @@ workspace 8 output DP-6
 workspace 9 output DP-6
 workspace 10 output DP-6
 
+exec awww-daemon
 exec systemctl --user start gpg-agent-ssh.socket
 exec systemctl --user import-environment SSH_AUTH_SOCK
 
