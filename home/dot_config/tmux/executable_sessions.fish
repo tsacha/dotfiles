@@ -8,6 +8,12 @@
 set -l names (tmux display-message -p '#{S:#{session_name}
 }')
 set -e names[-1] # display-message -p adds a newline of its own
+
+set -l pinned (contains -i -- scratch $names)
+if set -q pinned[1]
+    set -e names[$pinned[1]]
+    set names scratch $names
+end
 set -l n (count $names)
 test $n -gt 0; or exit 0
 
