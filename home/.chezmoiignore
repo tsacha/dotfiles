@@ -34,7 +34,6 @@ run_onchange_before_winget.ps1
 run_onchange_shortcuts.ps1
 {{ if $wsl -}}
 .config/ghostty
-.config/rio
 .config/sway
 .config/niri
 .config/mako

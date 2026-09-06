@@ -25,8 +25,8 @@ function Set-Shortcut {
     $shortcut.Save()
 }
 
-# Rio is configured to open the Arch Linux WSL distribution.
-Set-Shortcut -Name "WSL (Rio)" -TargetPath (Get-Command rio.exe -CommandType Application | Select-Object -First 1 -ExpandProperty Source) -IconLocation "$env:SystemRoot\System32\wsl.exe,0" -Description "Ouvrir Arch Linux dans WSL avec Rio"
+$windowsTerminal = Get-Command wt.exe -CommandType Application | Select-Object -First 1 -ExpandProperty Source
+Set-Shortcut -Name "WSL (Windows Terminal)" -TargetPath $windowsTerminal -Arguments '-p "Arch Linux"' -IconLocation "$env:SystemRoot\System32\wsl.exe,0" -Description "Ouvrir Arch Linux dans WSL avec Windows Terminal"
 Set-Shortcut -Name "PowerShell 7" -TargetPath (Get-Command pwsh.exe -CommandType Application | Select-Object -First 1 -ExpandProperty Source) -Description "Ouvrir PowerShell 7"
-Set-Shortcut -Name "PowerShell 7 (Rio)" -TargetPath (Get-Command rio.exe -CommandType Application | Select-Object -First 1 -ExpandProperty Source) -Arguments "-e pwsh" -IconLocation ((Get-Command pwsh.exe -CommandType Application | Select-Object -First 1 -ExpandProperty Source) + ",0") -Description "Ouvrir PowerShell 7 avec Rio"
+Set-Shortcut -Name "PowerShell 7 (Windows Terminal)" -TargetPath $windowsTerminal -Arguments '-p "PowerShell 7"' -IconLocation ((Get-Command pwsh.exe -CommandType Application | Select-Object -First 1 -ExpandProperty Source) + ",0") -Description "Ouvrir PowerShell 7 avec Windows Terminal"
 {{ end -}}

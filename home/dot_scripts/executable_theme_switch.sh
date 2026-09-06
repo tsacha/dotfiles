@@ -44,8 +44,6 @@ if [[ -n ${WSL_DISTRO_NAME:-} || -n ${WSL_INTEROP:-} ]]; then
 	reg.exe add "$personalize" /v AppsUseLightTheme /t REG_DWORD /d "$value" /f >/dev/null
 	reg.exe add "$personalize" /v SystemUsesLightTheme /t REG_DWORD /d "$value" /f >/dev/null
 	powershell.exe -NoProfile -Command 'Add-Type -Namespace Win32 -Name UI -MemberDefinition "[DllImport(`"user32.dll`", CharSet=CharSet.Auto)] public static extern IntPtr SendMessageTimeout(IntPtr hWnd, uint Msg, UIntPtr wParam, string lParam, uint fuFlags, uint uTimeout, out UIntPtr lpdwResult);"; $r=[UIntPtr]::Zero; [void][Win32.UI]::SendMessageTimeout([IntPtr]0xFFFF, 0x001A, [UIntPtr]::Zero, "ImmersiveColorSet", 2, 1000, [ref]$r)' >/dev/null 2>&1
-	rio_config="$(wslpath "$(cmd.exe /c 'echo %LOCALAPPDATA%' 2>/dev/null | tr -d '\r')")/rio/config.toml"
-	[ -f "$rio_config" ] && sed -i "s/^theme = .*/theme = \"theme-$scheme\"/" "$rio_config"
 	apply_theme
 	exit 0
 fi

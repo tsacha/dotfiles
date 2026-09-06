@@ -12,7 +12,7 @@ wsl --update
 wsl --install archlinux
 Get-WindowsCapability -Online | Where-Object Name -Like 'OpenSSH.Client*'
 Add-WindowsCapability -Online -Name OpenSSH.Client~~~~0.0.1.0
-winget install --exact --source winget GnuPG.Gpg4win Git.Git albertony.npiperelay raphamorim.rio twpayne.chezmoi
+winget install --exact --source winget GnuPG.Gpg4win Git.Git Microsoft.WindowsTerminal albertony.npiperelay twpayne.chezmoi
 ```
 
 Redémarrer le terminal après `winget` : Git et Gpg4win viennent d'être ajoutés
@@ -21,7 +21,7 @@ au `PATH`.
 ### Police et clavier
 
 Installer GeistMono Nerd Font (les fichiers Nerd Fonts statiques, et non la
-police Geist de Vercel, sont requis par Rio) :
+police Geist de Vercel, sont utilisés par Windows Terminal) :
 
 ```powershell
 Invoke-WebRequest https://github.com/ryanoasis/nerd-fonts/releases/latest/download/GeistMono.zip -OutFile $env:TEMP\GeistMono.zip
@@ -82,7 +82,7 @@ git -C $env:USERPROFILE\Git\dotfiles remote add gh git@github.com:tsacha/dotfile
 chezmoi -S $env:USERPROFILE\Git\dotfiles apply
 ```
 
-Cette application ne pose côté Windows que `AppData` (Rio et GPG). Les
+Cette application ne pose côté Windows que `AppData` (Windows Terminal et GPG). Les
 dotfiles Linux seront appliqués depuis un clone séparé dans WSL.
 
 ## 4. Initialiser Arch dans WSL

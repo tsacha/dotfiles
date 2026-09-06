@@ -98,8 +98,6 @@ brew "pinentry-mac"
 brew "postgresql@18", link: true
 # Protocol buffers (Google's data interchange format)
 brew "protobuf"
-# Hardware-accelerated GPU terminal emulator powered by WebGPU
-brew "rio-terminal"
 # Search tool like grep and The Silver Searcher
 brew "ripgrep"
 # Safe, concurrent, practical language

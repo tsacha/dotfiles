@@ -1,0 +1,211 @@
+{{- $palette := includeTemplate "theme-palette" . | fromYaml -}}
+{{- $light := index $palette "light" -}}
+{{- $dark := index $palette "dark" -}}
+{
+    "$help": "https://aka.ms/terminal-documentation",
+    "$schema": "https://aka.ms/terminal-profiles-schema",
+    "defaultProfile": "PowerShell 7",
+    "disabledProfileSources": [
+        "Windows.Terminal.Azure",
+        "Windows.Terminal.PowershellCore",
+        "Microsoft.WSL"
+    ],
+    "theme": "system",
+    "alwaysShowTabs": true,
+    "showTabsInTitlebar": true,
+    "warning.confirmCloseAllTabs": false,
+    "copyOnSelect": true,
+    "copyFormatting": "none",
+    "profiles": {
+        "defaults": {
+            "colorScheme": {
+                "light": "{{ .theme.light.title }}",
+                "dark": "{{ .theme.dark.title }}"
+            },
+            "cursorShape": "bar",
+            "font": {
+                "face": "GeistMono Nerd Font",
+                "size": 22
+            },
+            "opacity": 100,
+            "padding": "8"
+        },
+        "list": [
+            {
+                "guid": "{7472a2da-bef6-4978-928e-459ef0f3142b}",
+                "name": "Arch Linux",
+                "commandline": "wsl.exe -d {{ .wsl.distribution }} --cd ~",
+                "startingDirectory": "//wsl.localhost/{{ .wsl.distribution }}/home/{{ .wsl.username }}"
+            },
+            {
+                "guid": "{574e775e-4f2a-5b96-ac1e-a2962a402336}",
+                "name": "PowerShell 7",
+                "commandline": "pwsh.exe",
+                "startingDirectory": "%USERPROFILE%"
+            },
+            {
+                "guid": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
+                "name": "Windows PowerShell",
+                "commandline": "%SystemRoot%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+                "hidden": true
+            },
+            {
+                "guid": "{0caa0dad-35be-5f56-a8ff-afceeeaa6101}",
+                "name": "Command Prompt",
+                "commandline": "%SystemRoot%\\System32\\cmd.exe",
+                "hidden": true
+            }
+        ]
+    },
+    "schemes": [
+        {
+            "name": "{{ .theme.light.title }}",
+            "background": "{{ $light.black1 }}",
+            "foreground": "{{ $light.white }}",
+            "selectionBackground": "{{ $light.black3 }}",
+            "cursorColor": "{{ $light.white }}",
+            "black": "{{ $light.black2 }}",
+            "red": "{{ $light.red }}",
+            "green": "{{ $light.green2 }}",
+            "yellow": "{{ $light.yellow }}",
+            "blue": "{{ $light.blue }}",
+            "purple": "{{ $light.magenta }}",
+            "cyan": "{{ $light.cyan }}",
+            "white": "{{ $light.white }}",
+            "brightBlack": "{{ $light.black4 }}",
+            "brightRed": "{{ $light.red }}",
+            "brightGreen": "{{ $light.green2 }}",
+            "brightYellow": "{{ $light.yellow }}",
+            "brightBlue": "{{ $light.blue }}",
+            "brightPurple": "{{ $light.magenta }}",
+            "brightCyan": "{{ $light.cyan }}",
+            "brightWhite": "{{ $light.white }}"
+        },
+        {
+            "name": "{{ .theme.dark.title }}",
+            "background": "{{ $dark.black1 }}",
+            "foreground": "{{ $dark.white }}",
+            "selectionBackground": "{{ $dark.black3 }}",
+            "cursorColor": "{{ $dark.white }}",
+            "black": "{{ $dark.black2 }}",
+            "red": "{{ $dark.red }}",
+            "green": "{{ $dark.green2 }}",
+            "yellow": "{{ $dark.yellow }}",
+            "blue": "{{ $dark.blue }}",
+            "purple": "{{ $dark.magenta }}",
+            "cyan": "{{ $dark.cyan }}",
+            "white": "{{ $dark.white }}",
+            "brightBlack": "{{ $dark.black4 }}",
+            "brightRed": "{{ $dark.red }}",
+            "brightGreen": "{{ $dark.green2 }}",
+            "brightYellow": "{{ $dark.yellow }}",
+            "brightBlue": "{{ $dark.blue }}",
+            "brightPurple": "{{ $dark.magenta }}",
+            "brightCyan": "{{ $dark.cyan }}",
+            "brightWhite": "{{ $dark.white }}"
+        }
+    ],
+    "themes": [],
+    "newTabMenu": [
+        {
+            "type": "remainingProfiles"
+        }
+    ],
+    "actions": [
+        {
+            "command": {
+                "action": "splitPane",
+                "split": "right",
+                "splitMode": "duplicate"
+            },
+            "id": "User.SplitPaneRight"
+        },
+        {
+            "command": {
+                "action": "splitPane",
+                "split": "down",
+                "splitMode": "duplicate"
+            },
+            "id": "User.SplitPaneDown"
+        },
+        {
+            "command": {
+                "action": "adjustFontSize",
+                "delta": 2
+            },
+            "id": "User.IncreaseFontSize"
+        },
+        {
+            "command": {
+                "action": "adjustFontSize",
+                "delta": -2
+            },
+            "id": "User.DecreaseFontSize"
+        },
+        {
+            "command": {
+                "action": "sendInput",
+                "input": "\u001b\r"
+            },
+            "id": "User.SendShiftEnter"
+        }
+    ],
+    "keybindings": [
+        {
+            "id": "User.SplitPaneRight",
+            "keys": "alt+shift+h"
+        },
+        {
+            "id": "User.SplitPaneDown",
+            "keys": "alt+shift+v"
+        },
+        {
+            "id": "Terminal.OpenNewTab",
+            "keys": "alt+shift+t"
+        },
+        {
+            "id": "Terminal.OpenNewTab",
+            "keys": "ctrl+t"
+        },
+        {
+            "id": "Terminal.OpenNewTab",
+            "keys": "ctrl+shift+t"
+        },
+        {
+            "id": "Terminal.MoveFocusLeft",
+            "keys": "alt+shift+left"
+        },
+        {
+            "id": "Terminal.MoveFocusUp",
+            "keys": "alt+shift+up"
+        },
+        {
+            "id": "Terminal.MoveFocusRight",
+            "keys": "alt+shift+right"
+        },
+        {
+            "id": "Terminal.MoveFocusDown",
+            "keys": "alt+shift+down"
+        },
+        {
+            "id": "User.IncreaseFontSize",
+            "keys": "alt+shift+r"
+        },
+        {
+            "id": "User.DecreaseFontSize",
+            "keys": "alt+shift+n"
+        },
+        {
+            "id": "unbound",
+            "keys": "ctrl+minus"
+        },
+        {
+            "id": "unbound",
+            "keys": "ctrl+plus"
+        },
+        {
+            "id": "User.SendShiftEnter",
+            "keys": "shift+enter"
+        }
+    ]
+}
