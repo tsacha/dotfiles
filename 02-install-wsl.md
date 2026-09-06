@@ -69,7 +69,6 @@ gpg --card-status
 gpg --fetch-keys https://keys.openpgp.org/vks/v1/by-fingerprint/50C5DE2634B79DEA87206C8B27165D579CEB4919
 gpg --card-status
 ssh-add -L
-git config --global core.sshCommand C:/Windows/System32/OpenSSH/ssh.exe
 ssh -T git@github.com
 ```
 
@@ -82,8 +81,9 @@ git -C $env:USERPROFILE\Git\dotfiles remote add gh git@github.com:tsacha/dotfile
 chezmoi -S $env:USERPROFILE\Git\dotfiles apply
 ```
 
-Cette application ne pose côté Windows que `AppData` (Windows Terminal et GPG). Les
-dotfiles Linux seront appliqués depuis un clone séparé dans WSL.
+Cette application pose côté Windows la configuration Git partagée et `AppData`
+(Windows Terminal et GPG). Les dotfiles Linux seront appliqués depuis un clone
+séparé dans WSL.
 
 ## 4. Initialiser Arch dans WSL
 

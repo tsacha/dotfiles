@@ -4,6 +4,19 @@
 [init]
 	defaultBranch = main
 
+[user]
+	name = Sacha Trémoureux
+	email = sacha@tremoureux.fr
+	signingKey = 6A01EA34931A2EB4908C9A9EC15EE051D1B589C7!
+
+[core]
+	autocrlf = input
+{{ if eq .chezmoi.os "windows" }}	sshCommand = C:/Windows/System32/OpenSSH/ssh.exe
+
+[gpg]
+	program = C:/Program Files/GnuPG/bin/gpg.exe
+{{ end -}}
+
 # Not core.pager on purpose; only gdd opts in.
 [delta]
 	navigate = true
@@ -34,7 +47,7 @@
 
 {{ if eq .chezmoi.os "darwin" -}}
 [credential]
-    helper = osxkeychain
+	helper = osxkeychain
 {{ else if eq (includeTemplate "is-wsl" .) "true" -}}
 [credential]
 	helper = /mnt/c/Program\\ Files/Git/mingw64/bin/git-credential-manager.exe
@@ -47,7 +60,7 @@
 	required = true
 
 [push]
-    autoSetupRemote = true
+	autoSetupRemote = true
 
 [rerere]
 	enabled = true
@@ -65,7 +78,7 @@
 	gpgsign = true
 
 [merge]
-    conflictStyle = zdiff3
+	conflictStyle = zdiff3
 
 [url "ssh://git@github.com/tsacha"]
 	insteadOf = https://github.com/tsacha
