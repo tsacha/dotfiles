@@ -1,4 +1,3 @@
-# Logo key. Use Mod1 for Alt.
 set $mod Mod4
 set $left n
 set $down j
@@ -151,7 +150,7 @@ client.urgent           $critical $critical $base $critical $critical
 
 input "type:keyboard" {
   xkb_layout ergol_anglemod
-  xkb_options caps:escape
+  xkb_options caps:escape,altwin:swap_alt_win
 }
 output DP-5 mode 1920x1080@143.981003Hz scale 1 pos 0 0
 output DP-6 mode 3440x1440@143.923004Hz scale 1 pos 0 1080 render_bit_depth 10

@@ -12,7 +12,7 @@ input {
     keyboard {
         xkb {
             layout "ergol_anglemod"
-            options "caps:escape"
+            options "caps:escape,altwin:swap_alt_win"
         }
         numlock
     }
