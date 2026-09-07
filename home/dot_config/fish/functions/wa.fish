@@ -31,6 +31,13 @@ function wa --description 'Add a git worktree and open it in a tmux session'
         set dir $root'__worktrees'/$name
 
         git -C $root worktree prune
+
+        if not git -C $root show-ref --verify --quiet refs/heads/$branch
+            and not git -C $root show-ref --verify --quiet refs/remotes/origin/$branch
+            git -C $root fetch --no-tags origin \
+                "+refs/heads/$branch:refs/remotes/origin/$branch" 2>/dev/null
+        end
+
         if git -C $root show-ref --verify --quiet refs/heads/$branch
             git -C $root worktree add $dir $branch || return 1
         else if git -C $root show-ref --verify --quiet refs/remotes/origin/$branch

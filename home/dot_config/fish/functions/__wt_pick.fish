@@ -35,12 +35,15 @@ function __wt_pick --description 'Pick a branch for a worktree: existing worktre
 
     set -l more
 
-    if command -q gh; and string match -q '*github.com*' -- (git -C $root remote get-url origin 2>/dev/null)
-        set more (gh pr list --limit 100 --json number,title,headRefName \
+    set -l origin (git -C $root remote get-url origin 2>/dev/null)
+
+    if command -q gh; and string match -q '*github.com*' -- $origin
+        set more (gh pr list -R $origin --limit 100 --json number,title,headRefName \
             --template '{{range .}}#{{.number}}  {{.title}}{{"\t"}}{{.headRefName}}{{"\n"}}{{end}}' 2>/dev/null)
     end
 
     if not set -q more[1]
+        git -C $root fetch --prune --no-tags origin 2>/dev/null
         set more (git -C $root for-each-ref --sort=-committerdate refs/remotes/origin \
             --format='%(refname:lstrip=3)  (%(committerdate:relative))%09%(refname:lstrip=3)' |
             string match -rv '\tHEAD$')
