@@ -3,6 +3,7 @@
 .bashrc
 .profile
 .config/i3
+.config/kanata
 .config/picom
 .config/rofi
 .config/xfce4
@@ -43,11 +44,13 @@ run_onchange_shortcuts.ps1
 .config/kglobalshortcutsrc
 .config/yubikey-touch-detector
 .local/share/applications
+.config/kanata
 .config/systemd/user/awww.service
 .config/systemd/user/wlsunset.service
 .config/systemd/user/nvibrant.service
 .config/systemd/user/syncthing.service
 .config/systemd/user/xwayland-satellite.service
+.config/systemd/user/kanata.service
 .config/systemd/user/default.target.wants
 .gnupg/gpg-agent.conf
 .gnupg/scdaemon.conf

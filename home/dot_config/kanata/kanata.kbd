@@ -1,0 +1,26 @@
+(defvar
+  ;; Selenium timings: https://onedeadkey.github.io/selenium/
+  ;; tap-preferred, 300 ms - homerow mods and the Nav layer thumb.
+  ;; Hold never triggers early, so raising this does not delay typing:
+  ;; a tap still resolves on release. It only sets how long a mod needs.
+  tap_pref 200
+  ;; hold-preferred, 150 ms - thumb modifiers, which must win over the tap.
+  hold_pref 150
+)
+
+(include defsrc/pc.kbd)
+(include deflayer/base.kbd)
+
+(defcfg
+  ;; Enabled makes kanata process keys that are not defined in defsrc
+  ;; Fixes altgr for Windows (see Arsenik issue #22)
+  process-unmapped-keys yes
+  windows-altgr cancel-lctl-press
+
+  ;; Allowlist: only these devices are grabbed, everything else is left alone
+  linux-dev-names-include (
+    "Logitech K270"
+  )
+)
+
+;; vim: set ft=lisp:

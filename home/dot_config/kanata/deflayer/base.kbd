@@ -1,0 +1,35 @@
+;; Base layer: standard keyboard behavior
+
+(deflayer base
+  •    •     •    •
+  •    •     •    •    •    •         •    •    •    •    •
+  •    q    w    e    r    t         y    u    i    o    p
+  •    a    @ss  @dd  @ff  g         h    @jj  @kk  @ll  ;
+  •    <    z    x    c    v    bspc n    m    ,    .    /
+  •    @lm  @la            _              @ra  @me  •
+)
+(deflayer navigation
+  _    _    _    _
+  _    _    _    _    _    _         _    _    _    _    _
+  _    caps home up   end  pgup      grv  7    8    9    0
+  _    tab  left down rght pgdn      _    4    5    6    -
+  _    _    ins  del  _    _    _    _    1    2    3    =
+  _    _    _              _              _    _    _
+)
+
+(defalias
+  ss (tap-hold $tap_pref $tap_pref s lctrl)
+  dd (tap-hold $tap_pref $tap_pref d lmet)
+  ff (tap-hold $tap_pref $tap_pref f lalt)
+
+  jj (tap-hold $tap_pref $tap_pref j lalt)
+  kk (tap-hold $tap_pref $tap_pref k lmet)
+  ll (tap-hold $tap_pref $tap_pref l rctrl)
+
+  lm (tap-hold-press $hold_pref $hold_pref bspc lshift)
+  la (tap-hold $tap_pref $tap_pref spc (layer-while-held navigation))
+  ra (tap-hold-press $hold_pref $hold_pref ret ralt)
+  me (tap-hold $tap_pref $tap_pref esc (layer-while-held navigation))
+)
+;; vim: set ft=lisp:
+
