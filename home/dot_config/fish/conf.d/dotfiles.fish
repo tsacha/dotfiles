@@ -16,7 +16,6 @@ alias gs="git status"
 abbr --add l ls
 abbr --add n nvim
 abbr --add y yazi
-abbr --add t 'tmux new-session -A -s scratch -c ~'
 abbr --add tf tofu
 abbr --add gu gitu
 abbr --add gdd 'git -c core.pager=delta -c delta.side-by-side=true diff'
