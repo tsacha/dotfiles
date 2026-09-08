@@ -24,6 +24,10 @@ function s --description 'Pick a session, path, or repo to open — repos with n
     set -l sessions (tmux list-sessions -F '#{session_path}' 2>/dev/null)
     if test -d $path/.git; and not contains -- $path $sessions
         wa -C $path
+    else if test -d $path
+        # Not sesh connect: it names the session after the basename too, so two
+        # directories sharing one would fight over the same session.
+        __wt_open $path
     else
         sesh connect $pick
     end

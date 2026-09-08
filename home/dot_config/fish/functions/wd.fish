@@ -18,9 +18,13 @@ function wd --description 'Purge a worktree, its branch and its tmux session'
         cd $root
     end
 
+    # Look the session up by path before the directory goes away: a repo with the
+    # same basename elsewhere may well hold a similar-looking name.
+    set -l session (__wt_session_at $dir)
+
     git -C $root worktree remove --force $dir || return 1
-    # The session is named after the directory, so a detached worktree loses it too.
-    tmux kill-session -t=(__wt_name (path basename $dir)) 2>/dev/null
+    # The session belongs to the directory, so a detached worktree loses it too.
+    set -q session[1]; and tmux kill-session -t=$session 2>/dev/null
     if test -n "$branch"
         git -C $root branch -D $branch
     end
