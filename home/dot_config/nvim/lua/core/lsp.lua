@@ -38,23 +38,29 @@ vim.lsp.config("zls", {
 })
 
 vim.api.nvim_create_autocmd("LspAttach", {
-	desc = "LSP actions",
+	desc = "LSP shortcuts",
 	callback = function(event)
-		local opts = { buffer = event.buf }
 		local telescope = require("telescope.builtin")
 
-		vim.keymap.set("n", "K", "<cmd>lua vim.lsp.buf.hover()<cr>", opts)
+		local function map(key, rhs, desc, mode)
+			vim.keymap.set(mode or "n", "<leader>l" .. key, rhs, { buffer = event.buf, desc = "LSP: " .. desc })
+		end
 
-		vim.keymap.set("n", "<leader>ll", telescope.lsp_document_symbols, {})
-		vim.keymap.set("n", "<leader>ld", telescope.lsp_definitions, {})
-		vim.keymap.set("n", "<leader>lr", telescope.lsp_references, {})
-		vim.keymap.set("n", "<leader>li", telescope.lsp_incoming_calls, {})
-		vim.keymap.set("n", "<leader>lo", telescope.lsp_outgoing_calls, {})
-		vim.keymap.set("n", "<leader>lm", telescope.lsp_implementations, {})
+		-- Keep native key mnemonics under <leader>l; use Telescope for lists.
+		map("r", telescope.lsp_references, "References (Telescope)")
+		map("i", telescope.lsp_implementations, "Implementations (Telescope)")
+		map("t", telescope.lsp_type_definitions, "Type definitions (Telescope)")
+		map("O", telescope.lsp_document_symbols, "Document symbols (Telescope)")
+		map("d", telescope.lsp_definitions, "Definitions (Telescope)")
+		vim.keymap.set("n", "gd", vim.lsp.buf.definition, {
+			buffer = event.buf,
+			desc = "LSP: Go to definition",
+		})
+		map("n", vim.lsp.buf.rename, "Rename")
+		map("a", vim.lsp.buf.code_action, "Code action", { "n", "x" })
 
-		vim.keymap.set("n", "<F2>", "<cmd>lua vim.lsp.buf.rename()<cr>", opts)
-		vim.keymap.set({ "n", "x" }, "<F3>", "<cmd>lua vim.lsp.buf.format({async = true})<cr>", opts)
-		vim.keymap.set("n", "<F4>", "<cmd>lua vim.lsp.buf.code_action()<cr>", opts)
+		map("c", telescope.lsp_incoming_calls, "Incoming calls (Telescope)")
+		map("C", telescope.lsp_outgoing_calls, "Outgoing calls (Telescope)")
 	end,
 })
 
