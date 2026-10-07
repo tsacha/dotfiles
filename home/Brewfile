@@ -100,10 +100,6 @@ brew "postgresql@18", link: true
 brew "protobuf"
 # Search tool like grep and The Silver Searcher
 brew "ripgrep"
-# Safe, concurrent, practical language
-brew "rust"
-# Experimental Rust compiler front-end for IDEs
-brew "rust-analyzer"
 # Rust toolchain installer
 brew "rustup"
 # Smart session manager for the terminal

@@ -3,8 +3,20 @@ function wd --description 'Purge a worktree, its branch and its tmux session'
     set -l branch $argv[1]
     set -l dir
 
-    if string length -q $branch
-        set dir $root'__worktrees'/(__wt_name $branch)
+    if string match -qr '^#?\d+$' -- $branch
+        set dir $root'__worktrees'/(string trim -l -c '#' -- $branch)
+        set branch (git -C $dir branch --show-current) || return 1
+    else if string length -q $branch
+        set -l wt_path
+        for line in (git -C $root worktree list --porcelain)
+            if string match -q 'worktree *' -- $line
+                set wt_path (string sub -s 10 -- $line)
+            else if test "$line" = "branch refs/heads/$branch"
+                set dir $wt_path
+                break
+            end
+        end
+        set -q dir[1]; or set dir $root'__worktrees'/(__wt_name $branch)
     else
         set dir (git rev-parse --show-toplevel) || return 1
         if test "$dir" = "$root"

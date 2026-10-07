@@ -6,6 +6,9 @@ if not contains /opt/homebrew/bin $fish_user_paths
     fish_add_path /opt/homebrew/bin
 end
 
+# rustup is keg-only: its proxies must shadow /opt/homebrew/bin so rust-toolchain.toml is honored.
+fish_add_path /opt/homebrew/opt/rustup/bin
+
 set -l brew_prefix /opt/homebrew
 
 if test -d $brew_prefix/share/fish/completions

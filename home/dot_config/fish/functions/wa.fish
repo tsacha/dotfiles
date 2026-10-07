@@ -10,9 +10,16 @@ function wa --description 'Add a git worktree and open it in a tmux session'
     end
 
     set -l branch $argv[1]
+    set -l pr
     if not string length -q $branch
-        set branch (__wt_pick $root) || return 1
+        set -l picked (__wt_pick $root) || return 1
+        set branch $picked[1]
+        set pr $picked[2]
         string length -q $branch; or return 1
+    else if string match -qr '^#?\d+$' -- $branch
+        set pr (string trim -l -c '#' -- $branch)
+        set branch (gh pr view $pr -R (git -C $root remote get-url origin) \
+            --json headRefName --jq .headRefName) || return 1
     end
 
     set -l dir
@@ -27,7 +34,8 @@ function wa --description 'Add a git worktree and open it in a tmux session'
     end
 
     if not set -q dir[1]
-        set -l name (__wt_name $branch)
+        set -l name $pr
+        string length -q $name; or set name (__wt_name $branch)
         set dir $root'__worktrees'/$name
 
         git -C $root worktree prune
