@@ -1,0 +1,15 @@
+#!/bin/sh
+
+# Kubie 0.28 generates Fish prompt code even when its prompt is disabled.
+# Fish 4 cannot parse that code, so keep only Kubie's pre-command hook.
+if [ "$KUBIE_PROMPT_DISABLE" = 1 ] && [ "$1" = -ilC ]; then
+    shift
+    shift
+    exec "$KUBIE_FISH_BIN" -ilC '
+function kubie_preexec --on-event fish_preexec
+    set -xg KUBECONFIG "$KUBIE_KUBECONFIG"
+end
+' "$@"
+fi
+
+exec "$KUBIE_FISH_BIN" "$@"

@@ -2,6 +2,16 @@ set -gx K9S_CONFIG_DIR $HOME/.config/k9s
 set -gx PATH $PATH $HOME/.krew/bin
 
 abbr --add k kubectl
+abbr --add ku 'kubie ctx'
+
+# Kubie 0.28 passes invalid prompt code to Fish 4 even with its prompt disabled.
+function kubie --wraps kubie
+    set -l kubie_bin (command -v kubie)
+    set -l fish_bin (command -v fish)
+    set -l shim_dir $__fish_config_dir/kubie-fish-shim
+
+    env KUBIE_FISH_BIN=$fish_bin PATH=(string join : $shim_dir $PATH) $kubie_bin $argv
+end
 
 if test -f ~/.config/fish/conf.d/kube_clusters.fish
     source ~/.config/fish/conf.d/kube_clusters.fish
