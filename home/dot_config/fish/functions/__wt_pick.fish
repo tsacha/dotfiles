@@ -150,7 +150,16 @@ function __wt_pick --description 'Pick a branch for a worktree: existing worktre
         set -a rows (printf '%s %s%s\t%s\t%s' $icon $text $reset $b $pr)
     end
 
+    # With a search term, a single match is picked without asking.
+    set -l search
+    set -q argv[2]; and set search --query $argv[2] --exact --select-1 --exit-0
+
     printf '%s\n' $rows | fzf --ansi --no-sort --reverse --height 60% --border \
         --border-label ' worktree ' --prompt '  ' --pointer '▸' \
-        --delimiter \t --with-nth 1 | string split -f2,3 \t
+        --delimiter \t --with-nth 1 $search | string split -f2,3 \t
+    set -l st $pipestatus
+    if test $st[2] -eq 1; and set -q argv[2]
+        echo "wa: no PR or branch matching '$argv[2]'" >&2
+    end
+    test $st[2] -eq 0
 end

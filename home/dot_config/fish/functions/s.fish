@@ -14,7 +14,11 @@ function s --description 'Pick a session, path, or repo to open — repos with n
         end
     end
 
-    set -l pick (printf '%s\n' $names_rows $git_rows $other_rows | fzf --ansi --no-sort --reverse --height 60% \
+    # The tmux popup is already sized; a partial height would leave part of it blank.
+    set -l height 60%
+    set -q S_IN_POPUP; and set height 100%
+
+    set -l pick (printf '%s\n' $names_rows $git_rows $other_rows | fzf --ansi --no-sort --reverse --height $height \
         --border --border-label ' sessions ' --prompt '  ' --pointer '▸')
     test -n "$pick"; or return
 

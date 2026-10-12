@@ -11,15 +11,23 @@ function wa --description 'Add a git worktree and open it in a tmux session'
 
     set -l branch $argv[1]
     set -l pr
-    if not string length -q $branch
-        set -l picked (__wt_pick $root) || return 1
+    set -l query
+    if string match -qr '^#?\d+$' -- $branch
+        # A number is a PR on GitHub, otherwise (or when there is no such PR) a
+        # search term, such as a ticket number found in branch names or PR titles.
+        set query (string trim -l -c '#' -- $branch)
+        set branch
+        set -l remote (git -C $root remote get-url origin 2>/dev/null)
+        if command -q gh; and string match -q '*github.com*' -- $remote
+            set branch (gh pr view $query -R $remote --json headRefName --jq .headRefName 2>/dev/null)
+            and set pr $query
+        end
+    end
+    if not string length -q "$branch"
+        set -l picked (__wt_pick $root $query) || return 1
         set branch $picked[1]
         set pr $picked[2]
         string length -q $branch; or return 1
-    else if string match -qr '^#?\d+$' -- $branch
-        set pr (string trim -l -c '#' -- $branch)
-        set branch (gh pr view $pr -R (git -C $root remote get-url origin) \
-            --json headRefName --jq .headRefName) || return 1
     end
 
     set -l dir
