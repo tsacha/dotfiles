@@ -2,9 +2,17 @@
 {{ $palette := includeTemplate "theme-palette" . | fromYaml }}
 {{ $c := index $palette $scheme }}
 
-background-color={{ $c.black2 }}
+font=Geist Mono 12
+width=420
+height=240
+margin=16
+padding=16
+border-size=1
+border-radius=24
+
+background-color={{ $c.black0 }}
 text-color={{ $c.white }}
-border-color={{ $c.black3 }}
+border-color={{ $c.magenta }}
 progress-color=over {{ $c.green }}
 
 [urgency=high]
