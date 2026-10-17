@@ -25,13 +25,6 @@ function M.apply()
 			DiagnosticVirtualTextInfo   = { bg = "foam", fg = "base", italic = true },
 			DiagnosticVirtualTextHint   = { bg = "iris", fg = "base", italic = true },
 
-			-- render-markdown.nvim
-			RenderMarkdownCode          = { bg = "highlight_low" },
-			RenderMarkdownCodeBorder    = { bg = "highlight_med" },
-			RenderMarkdownCodeInline    = { fg = "foam", bg = "highlight_low" },
-			RenderMarkdownTableHead     = { fg = "highlight_med" },
-			RenderMarkdownTableRow      = { fg = "highlight_med" },
-
 			-- Treesitter markup (markdown, docs, ...)
 			['@markup.heading']         = { fg = "pine", bold = true },
 			['@markup.heading.1']       = { fg = "gold", bold = true },

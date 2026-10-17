@@ -39,7 +39,6 @@ require("plugins.gitsigns")
 require("plugins.neoscroll")
 require("plugins.guess-indent")
 require("plugins.zen-mode")
-require("plugins.render-markdown")
 require("plugins.spider")
 
 --- Languages plugins
