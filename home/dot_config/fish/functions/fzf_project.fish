@@ -1,7 +1,7 @@
 function fzf_project
     set -l dir
     if test "$PWD" = "$HOME"
-        set -l projects (path filter -d -- $HOME/Git/* $HOME/Git/Work/*) (__wt_dirs)
+        set -l projects (path filter -d -- $HOME/Git/* $HOME/Git/Work/*)
         set dir (string join \n $projects | fzf)
         if string length -q $dir
             cd $dir

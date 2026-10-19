@@ -102,8 +102,6 @@ brew "protobuf"
 brew "ripgrep"
 # Rust toolchain installer
 brew "rustup"
-# Smart session manager for the terminal
-brew "sesh"
 # Terminal multiplexer
 brew "tmux"
 # Parser generator tool
@@ -114,6 +112,8 @@ brew "typst"
 brew "valkey"
 # Tools for the WireGuard secure network tunnel
 brew "wireguard-tools"
+# CLI for Git worktree management, designed for parallel AI agent workflows
+brew "worktrunk"
 # Language Server for Yaml Files
 brew "yaml-language-server"
 # Tool for managing your YubiKey configuration
