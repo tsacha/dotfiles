@@ -7,7 +7,7 @@ cm=(
 	--persistent-state "$HOME/.config/chezmoi/chezmoistate.boltdb"
 )
 theme_targets=(
-	"$HOME/.gitconfig"
+	"$HOME/.config/git/config"
 	"$HOME/.config/gitu/config.toml"
 	"$HOME/.config/fish/conf.d/theme.fish"
 	"$HOME/.config/k9s/skins/theme.yaml"

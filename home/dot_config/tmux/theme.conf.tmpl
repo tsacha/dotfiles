@@ -18,8 +18,9 @@ set -g popup-border-style fg={{ $c.magenta }}
 set -g @window-style '#{?#{==:#{session_name},#{client_session}},#{?#{window_active},#[fg={{ $c.black1 }} bg={{ $c.green }} bold],#[default]},#[fg={{ $c.black5 }}]}'
 # The glyph is the one Claude puts in its title (✳, or a spinner while it streams).
 # It re-applies @window-style so the tab background survives its colour.
+# The selected tab keeps its own text colour: no state colour reads on its background.
 # The version-named process guards against a state left behind by a crashed Claude.
-set -g @claude-glyph '#{?#{&&:#{@claude-state},#{m/r:^[0-9.]+$,#{pane_current_command}}},#[fg=#{?#{==:#{@claude-state},working},{{ $c.yellow }},#{?#{==:#{@claude-state},blocked},{{ $c.red }},#{?#{==:#{@claude-state},done},{{ $c.blue }},{{ $c.black4 }}}}}]#{?#{m/r:^[^ ]+ ,#{pane_title}},#{=1:pane_title},●} #{E:@window-style},}'
+set -g @claude-glyph '#{?#{&&:#{@claude-state},#{m/r:^[0-9.]+$,#{pane_current_command}}},#{?#{&&:#{==:#{session_name},#{client_session}},#{window_active}},,#[fg=#{?#{==:#{@claude-state},working},{{ $c.yellow }},#{?#{==:#{@claude-state},blocked},{{ $c.red }},#{?#{==:#{@claude-state},done},{{ $c.blue }},{{ $c.black4 }}}}}]}#{?#{m/r:^[^ ]+ ,#{pane_title}},#{=1:pane_title},●} #{E:@window-style},}'
 # A lone session keeps its label only once renamed from tmux's default number.
 set -g @session-tab '#{?#{&&:#{==:#{server_sessions},1},#{m/r:^[0-9]+$,#{session_name}}},,#[range=user|#{session_id}]#{?#{==:#{session_name},#{client_session}},#[fg={{ $c.black1 }} bg={{ $c.magenta }} bold],#[default]} #{session_name} #[norange]}#[default]#{W:#[range=user|#{window_id}]#{E:@window-style} #{E:@claude-glyph}#{?#{==:#{window_name},#{session_name}},󰜘,#{window_name}} #[norange]#[default]}#{?loop_last_flag,, #[fg={{ $c.black4 }}]· }'
 set -g 'status-format[0]' '#[align=left]#{S:#{E:@session-tab}}#[align=right]#{T:status-right}'

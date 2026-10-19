@@ -19,7 +19,9 @@ run_onchange_before_winget.ps1
 run_onchange_shortcuts.ps1
 {{ else if eq .chezmoi.os "windows" -}}
 *
-!.gitconfig
+!.config
+.config/*
+!.config/git
 !AppData
 !Documents
 !run_onchange_before_winget.ps1

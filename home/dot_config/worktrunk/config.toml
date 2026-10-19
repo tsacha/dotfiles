@@ -1,2 +1,5 @@
 [post-start]
 copy = "wt step copy-ignored"
+
+[list]
+columns = ["branch", "working-diff", "ahead-behind", "ci", "age", "message"]
