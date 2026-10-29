@@ -46,6 +46,8 @@ brew "forgejo-cli"
 brew "fzf"
 # GitHub command-line tool
 brew "gh"
+# Distributed revision control system
+brew "git"
 # Syntax-highlighting pager for git and diff output
 brew "git-delta"
 # Passphrase entry dialog utilizing the Assuan protocol

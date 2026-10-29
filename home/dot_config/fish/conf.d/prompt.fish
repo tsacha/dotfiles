@@ -4,8 +4,13 @@ function fish_prompt
     set_color blue
     echo -n (prompt_pwd)
 
-    set_color yellow
-    echo -n (fish_git_prompt)
+    # fish_git_prompt forks four processes to print just the branch; each exec costs ~6ms under Jamf Protect.
+    set -l branch (command git rev-parse --abbrev-ref HEAD 2>/dev/null)
+    test "$branch" = HEAD; and set branch (command git rev-parse --short HEAD)
+    if test -n "$branch"
+        set_color yellow
+        echo -n " ($branch)"
+    end
 
     if test $last_status -eq 0
         set_color green
@@ -24,10 +29,11 @@ function fish_right_prompt
     end
     test -f "$kubeconfig"; or return
 
-    set -l k8s_context (yq '.current-context' $kubeconfig 2>/dev/null)
+    set -l k8s (yq '.current-context as $curr|$curr, ((.contexts[]|select(.name==$curr).context.namespace) // "")' $kubeconfig 2>/dev/null)
+    set -l k8s_context $k8s[1]
     test -z "$k8s_context"; or test "$k8s_context" = null; and return
 
-    set -l k8s_ns (yq '.current-context as $curr|(.contexts[]|select(.name==$curr).context.namespace) // ""' $kubeconfig 2>/dev/null)
+    set -l k8s_ns $k8s[2]
     if test -z "$k8s_ns" -o "$k8s_ns" = default
         set k8s_ns ""
     else

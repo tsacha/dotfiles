@@ -30,7 +30,6 @@ bind ctrl-backspace backward-kill-token
 bind alt-backspace backward-kill-word
 bind \cr __fzf_reverse_isearch
 
-zoxide init fish | source
-command -q wt; and wt config shell init fish | source
+status is-interactive; and zoxide init fish | source
 # tmux masks TERM_PROGRAM, so link detection fails even though tmux.conf forwards OSC 8.
 set -q TMUX; and set -gx FORCE_HYPERLINK 1

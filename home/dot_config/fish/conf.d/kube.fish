@@ -13,7 +13,7 @@ function kubie --wraps kubie
     env KUBIE_FISH_BIN=$fish_bin PATH=(string join : $shim_dir $PATH) $kubie_bin $argv
 end
 
-if test -f ~/.config/fish/conf.d/kube_clusters.fish
+if status is-interactive; and test -f ~/.config/fish/conf.d/kube_clusters.fish
     source ~/.config/fish/conf.d/kube_clusters.fish
     for i in (seq 1 2 (count $__k8s_clusters))
         set -l key $__k8s_clusters[$i]

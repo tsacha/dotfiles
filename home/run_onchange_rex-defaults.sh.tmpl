@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+{{ if eq .chezmoi.os "darwin" -}}
+set -euo pipefail
+
+# Rex keeps its settings in user defaults (init.lua only covers keybinds); keys are beta internals and may move.
+d=com.superlogical.rex
+
+defaults write "$d" Workspace.terminalFontName -string "GeistMono Nerd Font Mono"
+defaults write "$d" Workspace.terminalFontPointSize -float 16
+defaults write "$d" Workspace.terminalFontSmoothing -bool false
+defaults write "$d" Workspace.terminalCopyOnSelect -bool true
+defaults write "$d" Workspace.terminalImproveTextContrast -bool false
+defaults write "$d" Workspace.terminalOptionKeyBehavior -string leftActsAsAlt
+defaults write "$d" Workspace.focusFollowsMouse -bool true
+
+# Rose Pine pair imported from Ghostty's bundled themes; stored whole so the custom-* IDs stay stable across machines.
+themes=$(
+	cat <<'EOF'
+{{ include ".chezmoitemplates/rex-themes.json" }}
+EOF
+)
+defaults write "$d" Workspace.customThemes -data "$(printf '%s' "$themes" | xxd -p | tr -d '\n')"
+defaults write "$d" Workspace.lightThemeID -string custom-2D6CF45E-A2DA-4606-8AA5-7AC379D00BB8
+defaults write "$d" Workspace.darkThemeID -string custom-E278AC3D-0F94-4713-8939-AF1C4B9D523D
+defaults write "$d" Workspace.interfaceStyle -string useTheme
+defaults write "$d" Workspace.usesPaneGlass -bool false
+defaults write "$d" Workspace.animationStyle -string off
+
+defaults write "$d" Workspace.tabStyle -string vertical
+defaults write "$d" Workspace.tabIconColorMode -string always
+defaults write "$d" Workspace.tabIconTintMode -string off
+defaults write "$d" Workspace.sidebarPosition -string right
+defaults write "$d" Workspace.sidebarShowsActivity -bool false
+
+defaults write "$d" Workspace.paneDensity -string compact
+defaults write "$d" Workspace.showsPaneHeaders -bool true
+defaults write "$d" Workspace.inactivePaneFadeMode -string both
+defaults write "$d" Workspace.usesStandardInactiveWindowPaneStyles -bool true
+{{ end -}}

@@ -2,4 +2,4 @@
 copy = "wt step copy-ignored"
 
 [list]
-columns = ["branch", "working-diff", "ahead-behind", "ci", "age", "message"]
+columns = ["branch", "working-diff", "ahead-behind", "age", "message"]
